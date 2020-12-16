@@ -10,15 +10,20 @@
 button {
     margin-top: 50px;
     border: 0;
+    background-color: #F7F3EB;
+}
+
+button:nth-child(1) {
+    margin-right: 20px;
 }
 
 button>a {
-    padding: 20px 50px;
-    margin: 10px;
+    display: inline-block;
+    width: 130px;
+    padding: 15px 40px;
     border: 0;
     border-radius: 40px;
     background-color: #43BFA1;
-    color: #fff;
     color: #fff;
     font-size: 18px;
     transition: background-color .3s linear;
@@ -49,7 +54,6 @@ header>div {
     width: 70%;
     display: flex;
     justify-content: space-around;
-    /* border: 1px solid blue; */
     margin: 0 auto;
 }
 
@@ -63,7 +67,6 @@ header .text_btn {
 }
 
 header .text {
-    /* border: 1px solid red; */
     text-align: center;
 }
 
@@ -86,5 +89,72 @@ header .header_appimg {
     height: 500px;
     background-position: top;
     background-size: 500px;
-    /* border: 1px solid red; */
+}
+
+/* SLIDER SECTION */
+
+#slider {
+    background-color: #62c0a8;
+    padding-top: 100px;
+    position: relative;
+}
+
+#slider>div>.slider_tab {
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+#slider>div>.slider_tab li {
+    border: 1px solid red;
+}
+
+#slider>div>.slider_tab li a {
+    display: block;
+    padding: 10px 50px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    transition: color 0.3s linear;
+}
+
+#slider>div>.slider_tab li a:hover {
+    color: #000;
+}
+
+#slider>div>.slider_img_text {
+    border: 1px solid blue;
+}
+
+#slider>div>.slider_img_text>li:nth-child(2){
+    display:none;
+}
+
+#slider>div>.slider_img_text>li:nth-child(3){
+    display:none;
+}
+
+#slider>div>.slider_img_text>li>div {
+    position: absolute;
+    top: 400px;
+    left: 60%;
+    border: 1px solid red;
+}
+
+#slider>div>.slider_img_text>li>div>h5 {
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    margin-bottom: 30px;
+}
+
+#slider>div>.slider_img_text>li>div>p {
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#slider>div>.slider_img_text>li>img {
+    position: absolute;
+    top: 200px;
+    left: 20%;
 }
