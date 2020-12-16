@@ -1,4 +1,5 @@
 const tabs = document.querySelectorAll(".slider_tab a")
+const sliderLis = document.querySelectorAll(".slider_img_text li")
 const sliderImgs = document.querySelectorAll(".slider_img_text img")
 const sliderText = document.querySelectorAll(".slider_img_text li > div")
 
@@ -16,9 +17,12 @@ function clickWork(e) {
     // 만약 첫번째탭을 눌렀으면 첫번째 li는 display block으로 바꾸고
     // 나머지 li들은 display none으로 바꾼다
 
-    if (tabs[0]) {
-        console.log('첫번째클릭')
-    } else {
-        console.log('다른거클릭')
+    for (let i = 0; i < tabs.length; i++) {
+        if (e.target === tabs[i])
+            sliderLis[i].classList.add('on')
+        else {
+            sliderLis[i].classList.remove('on')
+        }
     }
+
 }
