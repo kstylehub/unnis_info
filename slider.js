@@ -29,8 +29,9 @@ setInterval(function () {
 
     // 만약 class list에 on이 있으면 다음칭구한테 on을 줘라
     for (let i = 0; i < sliderLis.length; i++) {
-        if (sliderLis[i].classList.contains('on')) {
-            sliderLis[i].nextElementSibling.classList.add('on')
-        } 
-    }
+        if(sliderLis[i].classList.contains('on')){
+            sliderLis[i].nextElementSibling.classList.add('on');
+            sliderLis[i].classList.remove('on')
+        }
+    }    
 }, 10000);

@@ -4,7 +4,12 @@
     padding: 0;
     list-style: none;
     text-decoration: none;
-    color: #000;
+    color: #343A40;
+    /* color: #ADB5BD; */
+}
+
+section{
+    padding: 100px 0;
 }
 
 button {
@@ -119,11 +124,10 @@ header .header_appimg {
 /* SLIDER SECTION */
 
 #slider {
-    /* background-color: #F0FEFA; */
     background-color:#43BFA1;
     padding-top: 100px;
     position: relative;
-    height:600px;
+    height:500px;
     border:1px solid red;
     overflow: hidden;
 }
@@ -180,14 +184,41 @@ header .header_appimg {
     top: 200px;
     left: 25%;
     width:300px;
-    /* box-shadow: 1px 1px 50px 1px; */
+}
+
+/* COSMETIC BOX SECTION */
+
+#cosmetic_box > div{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width:70%;
+    margin: 0 auto;
+    border:1px solid red;
+}
+
+#cosmetic_box > ul{
+    margin: 50px auto;
+    width:70%;
+    display:flex;
+    justify-content: space-around;
+}
+
+#cosmetic_box > ul li{
+    text-align: center;
+    /* border:1px solid red; */
+}
+
+#cosmetic_box i{
+    font-size:50px;
+    color:#43BFA1;
+    margin-bottom:50px;
 }
 
 /* CONTACT SECTION*/
 
 #contact{
     background-color:#F7F3EB;
-
 }
 
 #contact>div{
@@ -207,10 +238,20 @@ header .header_appimg {
     margin-top:0;
 }
 
-
 #contact button a{
     display:block;
     width:200px;
     background-color:#43BFA1;
     padding: 20px 40px;
+}
+
+/* FOOTER SECTION */
+
+footer{
+    margin:100px 0;
+}
+
+footer > div{
+    width:70%;
+    margin: 0 auto;
 }
