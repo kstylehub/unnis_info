@@ -1,4 +1,4 @@
-const tabs = document.querySelectorAll(".slider_tab a")
+const tabs = document.querySelectorAll(".slider_tab a i")
 const sliderLis = document.querySelectorAll(".slider_img_text li")
 const sliderImgs = document.querySelectorAll(".slider_img_text img")
 const sliderText = document.querySelectorAll(".slider_img_text li > div")
@@ -17,9 +17,11 @@ function clickWork(e) {
 
     for (let i = 0; i < tabs.length; i++) {
         if (e.target === tabs[i]) {
-            sliderLis[i].classList.add('on')
+            sliderLis[i].classList.add('on');
+            tabs[i].className = "far fa-check-circle"
         } else {
-            sliderLis[i].classList.remove('on')
+            sliderLis[i].classList.remove('on');
+            tabs[i].className = "far fa-circle"
         }
     }
 }
