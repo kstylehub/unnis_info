@@ -70,16 +70,20 @@ h6 {
 }
 
 /* NAV */
+header .nav_wrap {
+    background-color: #fff;
+    width: 100%;
+    position:fixed;
+    top:0;
+    z-index: 1000;
+    box-shadow: 0px -1px 20px -1px #ddd;
+}
+
 header nav {
     width: 90%;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-}
-
-header .nav_wrap {
-    background-color: #43BFA1;
-    width: 100%;
 }
 
 header h1 {
@@ -99,7 +103,7 @@ header nav ul {
 header nav ul li a {
     padding: 20px 30px;
     font-family: 'Roboto', sans-serif;
-    color: #fff;
+    color: #000;
 }
 
 /* HEADER */
@@ -112,7 +116,7 @@ header .app_title {
     width: 70%;
     display: flex;
     justify-content: space-around;
-    margin: 100px auto 0 auto;
+    margin: 200px auto 0 auto;
 }
 
 header .text_btn {
@@ -123,7 +127,7 @@ header .text_btn {
     border: 1px solid blue;
     vertical-align: middle;
     position: relative;
-    width:50%;
+    width: 50%;
 }
 
 header .text {
@@ -132,11 +136,11 @@ header .text {
 }
 
 header .text .title {
-    width:100%;
+    width: 100%;
     font-size: 40px;
     font-family: 'Roboto', sans-serif;
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%);
     animation-name: title_ani;
@@ -150,19 +154,19 @@ header .text .title {
         left: 40%;
     }
 
-    to{
+    to {
         opacity: 1;
     }
 }
 
 header .text .desc {
-    width:100%;
+    width: 100%;
     font-size: 20px;
     margin-top: 30px;
     line-height: 40px;
     font-family: 'Roboto', sans-serif;
     position: absolute;
-    top: 25%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%);
     animation-name: desc_ani;
@@ -176,7 +180,7 @@ header .text .desc {
         left: 60%;
     }
 
-    to{
+    to {
         opacity: 1;
     }
 }
@@ -188,6 +192,50 @@ header .header_appimg {
     height: 500px;
     background-position: top;
     background-size: 500px;
+}
+
+header .app_title .btn {
+    width: 100%;
+}
+
+header .app_title button:nth-child(1) {
+    position: absolute;
+    bottom: 20%;
+    left: 5%;
+    animation-name: btn1_ani;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes btn1_ani {
+    from {
+        opacity: 0;
+        bottom: 15%;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+header .app_title button:nth-child(2) {
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+    animation-name: btn2_ani;
+    animation-duration: 1.8s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes btn2_ani {
+    from {
+        opacity: 0;
+        bottom: 15%;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* SLIDER SECTION */
@@ -274,20 +322,118 @@ header .header_appimg {
     width: 70%;
     display: flex;
     justify-content: space-around;
+    position: relative;
+
 }
 
 #cosmetic_box>ul li {
     text-align: center;
+    border:1px solid red;
+    position: absolute;
+}
+
+#cosmetic_box>ul li.ani {
+    text-align: center;
+    border:1px solid red;  
+    top:0;
+}
+
+#cosmetic_box>ul li.ani:nth-child(1) {
+    animation-name: li_1_ani;
+    animation-duration: 1s;
+    left:0;  
+}
+
+@keyframes li_1_ani{
+    from{
+        opacity: 0;
+        top:70px;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+#cosmetic_box>ul li.ani:nth-child(2) {
+    animation-name: li_2_ani;
+    animation-duration: 2s;
+    left:50%;
+    transform:translate(-50%);
+}
+
+@keyframes li_2_ani{
+    from{
+        opacity: 0;
+        top:70px;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+#cosmetic_box>ul li.ani:nth-child(3) {
+    animation-name: li_3_ani;
+    animation-duration: 3.5s;
+    right:0;
+}
+
+@keyframes li_3_ani{
+    from{
+        opacity: 0;
+        top:70px;
+    }
+
+    to{
+        opacity: 1;
+    }
 }
 
 #cosmetic_box i {
     font-size: 50px;
-    color: #43BFA1;
+    color: #F29774;
     margin-bottom: 50px;
 }
 
-/* CONTACT SECTION*/
+/* CALENDAR */
+#calendar{
+    background-color:#fffdf9;
+}
 
+#calendar > div{
+    width:70%;
+    border:1px solid red;
+    margin: 0 auto;
+}
+
+#calendar > div h4{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#calendar > div img{
+    width:40%;
+}
+
+#calendar .calendar_img_text{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#calendar .calendar_img_text h6{
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#calendar .calendar_img_text p{
+    font-family: 'Roboto', sans-serif;
+    line-height: 30px;
+    font-size:14px;
+}
+
+/* CONTACT SECTION*/
 #contact {
     background-color: #F7F3EB;
 }
@@ -316,8 +462,8 @@ header .header_appimg {
     padding: 20px 40px;
 }
 
-/* FOOTER SECTION */
 
+/* FOOTER SECTION */
 footer {
     margin: 100px 0;
 }
