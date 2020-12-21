@@ -13,7 +13,6 @@ section {
 }
 
 button {
-    margin-top: 50px;
     border: 0;
     background-color: #F7F3EB;
 }
@@ -24,13 +23,14 @@ button:nth-child(1) {
 
 button>a {
     display: inline-block;
-    padding: 15px 40px;
+    padding: 15px 32px;
     border: 0;
     border-radius: 40px;
     background-color: #43BFA1;
     color: #fff;
     font-size: 18px;
     transition: background-color .3s linear;
+    /* border:1px solid red; */
 }
 
 button>a:hover {
@@ -72,8 +72,8 @@ h6 {
 header .nav_wrap {
     background-color: #fff;
     width: 100%;
-    position:fixed;
-    top:0;
+    position: fixed;
+    top: 0;
     z-index: 1000;
     box-shadow: 0px -1px 20px -1px #ddd;
 }
@@ -114,8 +114,9 @@ header {
 header .app_title {
     width: 70%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 150px auto 0 auto;
+    border: 1px solid red;
 }
 
 header .text_btn {
@@ -134,21 +135,21 @@ header .text {
 
 header .text .title {
     width: 100%;
-    font-size: 40px;
+    font-size: 2em;
     font-family: 'Roboto', sans-serif;
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translate(-50%);
     animation-name: title_ani;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
 }
 
 @keyframes title_ani {
     from {
         opacity: 0;
-        left: 40%;
+        left: 30%;
     }
 
     to {
@@ -167,14 +168,15 @@ header .text .desc {
     left: 50%;
     transform: translate(-50%);
     animation-name: desc_ani;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
+    transition: all .2s linear;
 }
 
 @keyframes desc_ani {
     from {
         opacity: 0;
-        left: 60%;
+        left: 70%;
     }
 
     to {
@@ -188,26 +190,39 @@ header .header_appimg {
     width: 50%;
     height: 500px;
     background-position: top;
-    background-size: 500px;
+    background-size: 100%;
+    border: 1px solid red;
 }
 
 header .app_title .btn {
     width: 100%;
+    /* height: 100px; */
+    /* bottom: 20%; */
+    /* position: absolute; */
+    border: 1px solid red;
+    margin-top: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+header .app_title button i {
+    border: 1px solid red;
+    width: 150px
 }
 
 header .app_title button:nth-child(1) {
-    position: absolute;
-    bottom: 20%;
-    left: 5%;
+    position: relative;
     animation-name: btn1_ani;
     animation-duration: 1s;
     animation-timing-function: ease-in;
+    bottom: 0%;
+    transition: all .2s linear;
 }
 
 @keyframes btn1_ani {
     from {
         opacity: 0;
-        bottom: 15%;
+        bottom: -20%;
     }
 
     to {
@@ -216,18 +231,18 @@ header .app_title button:nth-child(1) {
 }
 
 header .app_title button:nth-child(2) {
-    position: absolute;
-    bottom: 20%;
-    right: 5%;
+    position: relative;
     animation-name: btn2_ani;
     animation-duration: 1.8s;
     animation-timing-function: ease-in;
+    bottom: 0%;
+    transition: all .2s linear;
 }
 
 @keyframes btn2_ani {
     from {
         opacity: 0;
-        bottom: 15%;
+        bottom: -20%;
     }
 
     to {
@@ -251,17 +266,13 @@ header .app_title button:nth-child(2) {
     /* border: 1px solid red; */
 }
 
-#slider>div>.slider_tab li {
-    /* border: 1px solid red; */
-}
-
 #slider>div>.slider_tab li a {
     display: block;
     padding: 10px 50px;
     color: #fff;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 900;
     transition: color 0.3s linear;
+    /* border:1px solid red; */
+    padding: 20px;
 }
 
 #slider>div>.slider_tab li a:hover {
@@ -316,8 +327,6 @@ header .app_title button:nth-child(2) {
 #cosmetic_box>ul {
     margin: 50px auto;
     width: 70%;
-    display: flex;
-    justify-content: space-around;
     position: relative;
 }
 
@@ -326,58 +335,66 @@ header .app_title button:nth-child(2) {
     position: absolute;
 }
 
-#cosmetic_box>ul li.ani {
-    top:0;
+#cosmetic_box>ul li:nth-child(1) {
+    top: 0;
+    left: 0;
 }
 
 #cosmetic_box>ul li.ani:nth-child(1) {
     animation-name: li_1_ani;
     animation-duration: 1s;
-    left:0;  
 }
 
-@keyframes li_1_ani{
-    from{
+@keyframes li_1_ani {
+    from {
         opacity: 0;
-        top:70px;
+        top: 70px;
     }
 
-    to{
+    to {
         opacity: 1;
     }
+}
+
+#cosmetic_box>ul li:nth-child(2) {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 #cosmetic_box>ul li.ani:nth-child(2) {
     animation-name: li_2_ani;
     animation-duration: 2s;
-    left:50%;
-    transform:translate(-50%);
 }
 
-@keyframes li_2_ani{
-    from{
+@keyframes li_2_ani {
+    from {
         opacity: 0;
-        top:70px;
+        top: 70px;
     }
 
-    to{
+    to {
         opacity: 1;
     }
 }
 
-#cosmetic_box>ul li.ani:nth-child(3) {
-    animation-name: li_3_ani;
-    animation-duration: 3.5s;
-    right:0;
+#cosmetic_box>ul li:nth-child(3) {
+    top: 0;
+    right: 0;
 }
 
-@keyframes li_3_ani{
-    from{
+#cosmetic_box>ul li.ani:nth-child(3) {
+    animation-name: li_3_ani;
+    animation-duration: 3.2s;
+}
+
+@keyframes li_3_ani {
+    from {
         opacity: 0;
-        top:70px;
+        top: 70px;
     }
 
-    to{
+    to {
         opacity: 1;
     }
 }
@@ -389,40 +406,86 @@ header .app_title button:nth-child(2) {
 }
 
 /* CALENDAR */
-#calendar{
-    background-color:#fffdf9;
+#calendar {
+    background-color: #fffdf9;
 }
 
-#calendar > div{
-    width:70%;
-    border:1px solid red;
+#calendar>div {
+    width: 70%;
+    border: 1px solid red;
     margin: 0 auto;
 }
 
-#calendar > div h4{
+#calendar>div h4 {
     text-align: center;
     margin-bottom: 50px;
 }
 
-#calendar > div img{
-    width:40%;
+#calendar>div img {
+    width: 40%;
 }
 
-#calendar .calendar_img_text{
-    display:flex;
-    justify-content: space-around;
+#calendar .calendar_img_text {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    position: relative;
+    border: 1px solid blue;
 }
 
-#calendar .calendar_img_text h6{
+#calendar .calendar_img_text h6 {
     margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
+    border: 1px solid red;
+    position: absolute;
+    top: 30%;
+    right: 15%;
 }
 
-#calendar .calendar_img_text p{
+#calendar .calendar_img_text h6.ani {
+    animation-name: calendar_title_ani;
+    animation-timing-function: ease;
+    animation-duration: 1s;
+}
+
+@keyframes calendar_title_ani {
+    from {
+        right: 10%;
+        opacity: 0;
+    }
+
+    to {
+        right: 15%;
+        opacity: 1;
+    }
+}
+
+#calendar .calendar_img_text p {
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
-    font-size:14px;
+    font-size: 14px;
+    border: 1px solid red;
+    position: absolute;
+    top: 40%;
+    right: 17%;
+}
+
+#calendar .calendar_img_text p.ani {
+    animation-name: calendar_desc_ani;
+    animation-timing-function: ease;
+    animation-duration: 2s;
+}
+
+@keyframes calendar_desc_ani {
+    from {
+        right: 5%;
+        opacity: 0;
+    }
+
+    to {
+        right: 17%;
+        opacity: 1;
+    }
 }
 
 /* CONTACT SECTION*/
