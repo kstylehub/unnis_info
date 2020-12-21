@@ -1,17 +1,18 @@
-
+/* HEADER */
 header{
     height:100vh;
 }
 
 header .app_title{
     width:90%;
+    vertical-align: middle;
 }
 
-header .text .title{
+header .app_title .text .title{
     font-size: 1.7em;
 }
 
-header .text .desc{
+header .app_title .text .desc{
     font-size: 1.1em;
     line-height: 1.2em;
 }
@@ -24,3 +25,11 @@ button:nth-child(1){
 header .app_title .btn{
     flex-wrap: wrap;
 }
+
+header .header_appimg{
+    background-position: center;
+    background-size:100%;
+}
+
+/* SLIDER SECTION */
+
