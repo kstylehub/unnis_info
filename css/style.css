@@ -190,7 +190,7 @@ header .header_appimg {
     width: 50%;
     height: 700px;
     background-position: center;
-    background-size: 75%;
+    background-size: 80%;
     border: 1px solid red;
 }
 
@@ -254,16 +254,16 @@ header .app_title button:nth-child(2) {
     overflow: hidden;
 }
 
-#slider > div{
-    width:70%;
+#slider>div {
+    width: 70%;
     margin: 0 auto;
-    border:1px solid red;
+    border: 1px solid red;
 }
 
 #slider>div>.slider_tab {
     display: flex;
     justify-content: center;
-    border:1px solid blue;
+    border: 1px solid blue;
 }
 
 #slider>div>.slider_tab li a {
@@ -278,20 +278,16 @@ header .app_title button:nth-child(2) {
 }
 
 #slider>div>.slider_img_text>li {
-    display: none;
-
-
-}
-
-#slider>div>.slider_img_text>li.on {
-    display: block;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 #slider>div>.slider_img_text>li>div {
-    position: absolute;
-    top: 400px;
-    left: 55%;
-    border: 1px solid red;
+    border: 1px solid blue;
+    width: 50%;
+    text-align: center;
 }
 
 #slider>div>.slider_img_text>li>div>h3 {
@@ -301,13 +297,12 @@ header .app_title button:nth-child(2) {
 #slider>div>.slider_img_text>li>div>p {
     font-size: 25px;
     font-family: 'Roboto', sans-serif;
+    line-height: 1.5em;
 }
 
-#slider>div>.slider_img_text>li>img {
-    position: absolute;
-    top: 200px;
-    left: 25%;
+#slider>div>.slider_img_text>li img {
     width: 300px;
+    transition: all 0.3s linear;
 }
 
 /* COSMETIC BOX SECTION */

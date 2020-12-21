@@ -6,10 +6,6 @@ const html = document.querySelector('html');
 const cosmeticLis = document.querySelectorAll('#cosmetic_box li')
 const calendarTexts = document.querySelectorAll('.calendar_text')
 
-console.log(calendarTexts)
-
-console.log(html.scrollTop)
-
 function scrollWork() {
 
     if (html.scrollTop > 1700 && html.scrollTop < 1800) {

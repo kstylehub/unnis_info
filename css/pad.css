@@ -1,6 +1,6 @@
 /* HEADER */
 header{
-    height:100vh;
+    /* height:100vh; */
 }
 
 header .app_title{
@@ -17,13 +17,16 @@ header .app_title .text .desc{
     line-height: 1.2em;
 }
 
-button:nth-child(1){
+header .app_title button:nth-child(1){
     margin-right: 0;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 header .app_title .btn{
     flex-wrap: wrap;
+    border:1px solid red;
+    height:100px;
+    /* align-items: center; */
 }
 
 header .header_appimg{
