@@ -38,7 +38,7 @@ button>a:hover {
 
 i {
     color: #fff;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     font-size: 20px;
 }
 
@@ -257,24 +257,30 @@ header .app_title button:nth-child(2) {
 #slider>div {
     width: 70%;
     margin: 0 auto;
-    border: 1px solid red;
 }
 
 #slider>div>.slider_tab {
     display: flex;
     justify-content: center;
-    border: 1px solid blue;
 }
 
-#slider>div>.slider_tab li a {
+#slider>div>.slider_tab a {
     display: block;
-    padding: 10px 50px;
+    padding: 10px 5px;
+    margin: 0 20px;
     color: #fff;
-    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    transition: color .3s linear;
 }
 
-#slider>div>.slider_tab li a:hover {
+#slider>div>.slider_tab a:hover {
     color: #000;
+}
+
+#slider>div>.slider_tab li.on a {
+    border-bottom: 3px solid #fff;
 }
 
 #slider>div>.slider_img_text>li {
