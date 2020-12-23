@@ -11,18 +11,15 @@ header .app_title .text .title{
 
 header .app_title .text .desc{
     font-size: 1.1em;
-    line-height: 1.2em;
 }
 
 header .app_title button:nth-child(1){
     margin-right: 0;
-    /* margin-bottom: 20px; */
-    border:1px solid red;
+    margin-bottom: 20px;
 }
 
 header .app_title .btn{
     flex-wrap: wrap;
-    border:1px solid red;
     height:100px;
 }
 
@@ -30,6 +27,3 @@ header .header_appimg{
     background-position: center;
     background-size:100%;
 }
-
-/* SLIDER SECTION */
-

@@ -13,17 +13,16 @@ for (let i = 0; i < tabs.length; i++) {
 
 function clickWork(e) {
     e.preventDefault();
-    
+
     // 클릭 하지 않은 애들은 on을 떼라
     for (let i = 0; i < tabs.length; i++) {
         if (tabs[i].classList.contains('on')) {
             tabs[i].classList.remove('on')
-        } 
+        }
     }
-     // 클릭하면 클래스 on을 붙이고 
+    // 클릭하면 클래스 on을 붙이고 
     e.target.parentNode.classList.add('on')
 }
-
 
 // SLIDER CONTENTS
 let tabContent = [{
@@ -55,13 +54,29 @@ for (let i = 0; i < tabContent.length; i++) {
 }
 
 // 자동 슬라이딩
-setInterval(function () {
 
-    // 만약 class list에 on이 있으면 다음칭구한테 on을 줘라
-    for (let i = 0; i < sliderLis.length; i++) {
-        if (sliderLis[i].classList.contains('on')) {
-            sliderLis[i].nextElementSibling.classList.add('on');
-            sliderLis[i].classList.remove('on')
-        }
+let imgIndex = 0;
+
+function changeImg() {
+    tabTitle.textContent = tabContent[imgIndex].tabTitle
+    tabDesc.textContent = tabContent[imgIndex].tabDesc
+    tabImg.src = tabContent[imgIndex].tabImg
+
+    imgIndex++
+    if (imgIndex >= tabContent.length) {
+        imgIndex = 0
     }
-}, 10000);
+}
+
+setInterval(changeImg, 5000)
+
+
+
+// 슬릭 슬라이더 리뷰 섹션
+
+$(document).ready(function(){
+    $('.review_slider_wrap').slick({
+      setting-name: setting-value
+    });
+  });
+      

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    img{
+        width:200px;
+    }
+</style>
+<body>
+
+    <img src="images/review.png" alt="">
+    <p data-content="여기에 글씨를?">글씨?</p>
+
+    <script>
+
+        const myImg = document.querySelector('img')
+        const myP = document.querySelector('p')
+        const imgArr = ['images/review.png','images/todolist.png','images/unnis.png']
+        const pArr = ['images/review.png','images/todolist.png','images/unnis.png']
+        let imgIndex = 0;
+
+        function changeImg(){
+            myImg.setAttribute("src", imgArr[imgIndex])
+            myP.setAttribute("data-content", imgArr[imgIndex])
+            imgIndex++
+            if(imgIndex>=imgArr.length){
+                imgIndex=0
+            }
+        }
+
+        setInterval(changeImg, 3000)
+
+        console.log(myImg)
+
+
+    </script>
+</body>
+</html>
