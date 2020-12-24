@@ -104,34 +104,59 @@ header nav ul li a {
     padding: 20px 30px;
     font-family: 'Roboto', sans-serif;
     color: #000;
+    border: 1px solid red;
+}
+
+/* HEADER NAV hamburger */
+header .nav_wrap .hamburger {
+    display: none;
+    width: 35px;
+    position: relative;
+    cursor: pointer;
+}
+
+header .nav_wrap .hamburger div {
+    width: 100%;
+    height: 4px;
+    background-color: #000;
+    position: absolute;
+    border-radius: 20px;
+}
+
+header .nav_wrap .hamburger div:nth-child(1) {
+    top: 25%;
+}
+
+header .nav_wrap .hamburger div:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+header .nav_wrap .hamburger div:nth-child(3) {
+    bottom: 25%;
 }
 
 /* HEADER */
 header {
-    border: 1px solid red;
     background-color: #F7F3EB;
 }
 
 header .app_title {
     width: 70%;
-    display: flex;
-    justify-content: space-between;
-    margin: 100px auto 0 auto;
-    /* border: 1px solid red; */
-}
-
-header .text_btn {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
+    margin: 54px auto 0 auto;
     position: relative;
-    width: 50%;
+    height: 90vh;
+    border: 1px solid #F7F3EB;
 }
 
 header .text {
     text-align: center;
+    border: 1px solid blue;
+    position: relative;
+    height: 50%;
+    top: 20%;
+    left: 0;
+    width: 50%;
 }
 
 header .text .title {
@@ -146,6 +171,7 @@ header .text .title {
     animation-name: title_ani;
     animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
+    border: 1px solid blue;
 }
 
 @keyframes title_ani {
@@ -162,11 +188,10 @@ header .text .title {
 header .text .desc {
     width: 100%;
     font-size: 20px;
-    margin-top: 30px;
     line-height: 40px;
     font-family: 'Roboto', sans-serif;
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%);
     animation-name: desc_ani;
@@ -174,6 +199,7 @@ header .text .desc {
     animation-timing-function: ease-in-out;
     transition: all .2s linear;
     line-height: 1.5em;
+    border: 1px solid blue;
 }
 
 @keyframes desc_ani {
@@ -188,19 +214,25 @@ header .text .desc {
 }
 
 header .header_appimg {
-    background-image: url("../images/unnis.png");
-    background-repeat: no-repeat;
     width: 50%;
-    height: 700px;
-    background-position: center;
-    background-size: 80%;
+    height: 100%;
     border: 1px solid red;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url('../images/unnis.png');
+    background-position: center;
+    background-size: 85%;
+    background-repeat: no-repeat;
 }
 
 header .app_title .btn {
-    width: 100%;
-    margin-top: 30%;
+    position: absolute;
+    left: 0;
+    bottom: 20%;
+    width: 50%;
     display: flex;
+    height: 30%;
     justify-content: center;
 }
 
@@ -501,8 +533,8 @@ header .app_title button:nth-child(2) {
 
 /* REVIEW SECTION */
 
-.slick-track{
-    margin-bottom:30px;
+.slick-track {
+    margin-bottom: 30px;
 }
 
 .review_slider_wrap {
@@ -523,9 +555,9 @@ header .app_title button:nth-child(2) {
     width: 100%;
 }
 
-.review_slider_wrap .review_img_text>div h6{
+.review_slider_wrap .review_img_text>div h6 {
     padding: 20px 20px 0;
-    font-size:16px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -533,7 +565,7 @@ header .app_title button:nth-child(2) {
     width: 200px;
     padding: 0px 20px 20px;
     line-height: 1.5em;
-    font-size:14px;
+    font-size: 14px;
 }
 
 /* CONTACT SECTION*/

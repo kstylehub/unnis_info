@@ -21,6 +21,7 @@ header .app_title button:nth-child(1){
 header .app_title .btn{
     flex-wrap: wrap;
     height:100px;
+    justify-content: center;
 }
 
 header .header_appimg{

@@ -1,4 +1,77 @@
-/* NAVIGATION */
+section {
+    /* padding: 50px 0; */
+}
 
+/* NAVIGATION */
+header nav ul {
+    display: none;
+}
+
+header .nav_wrap .hamburger {
+    display: block;
+}
 
 /* HEADER */
+
+header .app_title,
+header .text {
+    position: static;
+    width:100%;
+}
+
+header .app_title {
+    /* margin: 0 auto; */
+}
+
+header .text {
+    height: 20%;
+}
+
+header .app_title .text .title{
+    top:15%;
+    font-size: 18px;
+}
+
+header .text .desc {
+    top: 20%;
+}
+
+header .text {
+    width: 90%;
+    margin: 0 auto;
+    height:25%;
+}
+
+header .header_appimg{
+    position:static;
+    width: 60%;
+    margin: 0 auto;
+    height:60%;
+}
+
+header .app_title .btn{
+    position: static;
+    margin: 0 auto;
+    width:100%;
+    border:1px solid red;
+}
+
+header .app_title  button>a{
+    padding:10px 10px;
+}
+
+header .app_title button i{
+    /* width:100px; */
+    font-size:15px;
+}
+
+header .app_title button:nth-child(1){
+    margin-right:2%;
+    margin-bottom: 0;
+}
+
+/* SLIDER */
+
+#slider>div {
+    width: 90%;
+}
