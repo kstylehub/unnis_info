@@ -1,3 +1,28 @@
+#slider>div,
+#cosmetic_box>div,
+#calendar>div,
+#contact>div,
+footer>div,
+#cosmetic_box>ul {
+    width: 90%;
+}
+
+h3 {
+    font-size: 40px;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 15px;
+}
+
 /* HEADER */
 
 header .app_title{
@@ -27,4 +52,10 @@ header .app_title .btn{
 header .header_appimg{
     background-position: center;
     background-size:100%;
+}
+
+/* CALENDAR */
+
+#calendar .calendar_img_text h6 {
+    top: 10%;
 }

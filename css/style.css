@@ -63,7 +63,7 @@ h5 {
 }
 
 h6 {
-    font-size: 20px;
+    font-size: 22px;
     font-family: 'Roboto', sans-serif;
     margin-bottom: 10px;
     line-height: 1.5em;
@@ -283,10 +283,7 @@ header .app_title button:nth-child(2) {
 /* SLIDER SECTION */
 #slider {
     background-color: #43BFA1;
-    padding-top: 100px;
     position: relative;
-    height: 700px;
-    overflow: hidden;
 }
 
 #slider>div {
@@ -318,26 +315,26 @@ header .app_title button:nth-child(2) {
     border-bottom: 3px solid #fff;
 }
 
-#slider>div>.slider_img_text>li {
+#slider>div>.slider_img_text>div {
     margin-top: 50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-#slider>div>.slider_img_text>li>div {
+#slider>div>.slider_img_text>div>div {
     border: 1px solid blue;
     width: 50%;
     text-align: center;
 }
 
-#slider>div>.slider_img_text>li>div>h3 {
+#slider>div>.slider_img_text>div>div>h3 {
     margin-bottom: 30px;
     border: 1px solid #fff;
     color: #F7F3EB;
 }
 
-#slider>div>.slider_img_text>li>div>p {
+#slider>div>.slider_img_text>div>div>p {
     height: 100px;
     font-size: 25px;
     font-family: 'Roboto', sans-serif;
@@ -345,8 +342,8 @@ header .app_title button:nth-child(2) {
     color: #F7F3EB;
 }
 
-#slider>div>.slider_img_text>li img {
-    width: 300px;
+#slider>div>.slider_img_text>div img {
+    width: 50%;
     transition: all 0.3s linear;
 }
 
@@ -377,6 +374,8 @@ header .app_title button:nth-child(2) {
 #cosmetic_box>ul li {
     text-align: center;
     position: absolute;
+    border: 1px solid red;
+    width: 33.33%;
 }
 
 #cosmetic_box>ul li:nth-child(1) {
@@ -477,13 +476,23 @@ header .app_title button:nth-child(2) {
     border: 1px solid blue;
 }
 
+#calendar .calendar_img_text>div{
+    border:1px solid red;
+    position:absolute;
+    right:0;
+    width:50%;
+    height:100%;
+}
+
 #calendar .calendar_img_text h6 {
+    width:100%;
     margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
     border: 1px solid red;
     position: absolute;
-    top: 30%;
-    right: 15%;
+    top: 15%;
+    text-align: center;
+    font-weight: 700;
 }
 
 #calendar .calendar_img_text h6.ani {
@@ -494,23 +503,26 @@ header .app_title button:nth-child(2) {
 
 @keyframes calendar_title_ani {
     from {
-        right: 10%;
+        right: -10%;
         opacity: 0;
     }
 
     to {
-        right: 15%;
+        right: 0;
         opacity: 1;
     }
 }
 
 #calendar .calendar_img_text p {
+    width:100%;
+    text-align: center;
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
     font-size: 14px;
     border: 1px solid red;
     position: absolute;
-    right: 18%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #calendar .calendar_img_text p.ani {
@@ -521,12 +533,12 @@ header .app_title button:nth-child(2) {
 
 @keyframes calendar_desc_ani {
     from {
-        right: 5%;
+        right: -10%;
         opacity: 0;
     }
 
     to {
-        right: 18%;
+        right: 0;
         opacity: 1;
     }
 }
@@ -598,7 +610,7 @@ header .app_title button:nth-child(2) {
 
 /* FOOTER SECTION */
 footer {
-    margin: 100px 0;
+    padding: 100px 0;
 }
 
 footer>div {

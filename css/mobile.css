@@ -1,6 +1,24 @@
-section {
-    /* padding: 50px 0; */
+section,
+footer {
+    padding: 70px 0;
 }
+
+h3 {
+    font-size: 40px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 15px;
+}
+
 
 /* NAVIGATION */
 header nav ul {
@@ -16,7 +34,7 @@ header .nav_wrap .hamburger {
 header .app_title,
 header .text {
     position: static;
-    width:100%;
+    width: 100%;
 }
 
 header .app_title {
@@ -27,9 +45,9 @@ header .text {
     height: 20%;
 }
 
-header .app_title .text .title{
-    top:15%;
-    font-size: 18px;
+header .app_title .text .title {
+    top: 15%;
+    font-size: 25px;
 }
 
 header .text .desc {
@@ -39,39 +57,109 @@ header .text .desc {
 header .text {
     width: 90%;
     margin: 0 auto;
-    height:25%;
+    height: 25%;
 }
 
-header .header_appimg{
-    position:static;
+header .header_appimg {
+    position: static;
     width: 60%;
     margin: 0 auto;
-    height:60%;
+    height: 60%;
 }
 
-header .app_title .btn{
+header .app_title .btn {
     position: static;
     margin: 0 auto;
-    width:100%;
-    border:1px solid red;
+    width: 100%;
+    border: 1px solid red;
 }
 
-header .app_title  button>a{
-    padding:10px 10px;
+header .app_title button>a {
+    padding: 10px 10px;
 }
 
-header .app_title button i{
+header .app_title button i {
     /* width:100px; */
-    font-size:15px;
+    font-size: 15px;
 }
 
-header .app_title button:nth-child(1){
-    margin-right:2%;
+header .app_title button:nth-child(1) {
+    margin-right: 2%;
     margin-bottom: 0;
+}
+
+header .app_title .text .desc{
+    font-size:1em;
 }
 
 /* SLIDER */
 
 #slider>div {
     width: 90%;
+}
+
+#slider>div>.slider_img_text>div {
+    flex-flow: column;
+}
+
+#slider>div>.slider_tab a{
+    font-size:14px;
+    line-height: 20px;
+    text-align: center;
+}
+
+#slider>div>.slider_img_text>div>div {
+    width: 90%;
+}
+
+#slider>div>.slider_img_text>div>div:nth-child(2) {
+    margin-top: 50px;
+}
+
+#slider>div>.slider_img_text>div>div>h3 {
+    font-size: 25px;
+}
+
+#slider>div>.slider_img_text>div>div>p {
+    height: 70px;
+    font-size: 18px;
+}
+
+/* CALENDAR */
+
+#calendar {
+    margin-top: 80px;
+}
+
+#calendar .calendar_img_text {
+    flex-flow: column;
+}
+
+#calendar .calendar_img_text>div,
+#calendar .calendar_img_text h6,
+#calendar .calendar_img_text p {
+    position: static;
+}
+
+#calendar>div img {
+    width: 80%;
+}
+
+#calendar .calendar_img_text>div {
+    margin-top: 50px;
+    width: 100%;
+}
+
+#calendar .calendar_img_text p {
+    transform: translate(0);
+}
+
+/* CONTACT */
+
+#contact>div{
+    flex-flow: column;
+}
+
+#contact .cotact_text{
+    margin: 0 0 50px 0;
 }
