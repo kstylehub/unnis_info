@@ -19,7 +19,6 @@ h6 {
     font-size: 15px;
 }
 
-
 /* NAVIGATION */
 header nav ul {
     display: none;
@@ -30,15 +29,10 @@ header .nav_wrap .hamburger {
 }
 
 /* HEADER */
-
 header .app_title,
 header .text {
     position: static;
     width: 100%;
-}
-
-header .app_title {
-    /* margin: 0 auto; */
 }
 
 header .text {
@@ -64,14 +58,13 @@ header .header_appimg {
     position: static;
     width: 60%;
     margin: 0 auto;
-    height: 60%;
+    height: 90vw;
 }
 
 header .app_title .btn {
     position: static;
     margin: 0 auto;
-    width: 100%;
-    border: 1px solid red;
+    /* width: 100%; */
 }
 
 header .app_title button>a {
@@ -79,7 +72,6 @@ header .app_title button>a {
 }
 
 header .app_title button i {
-    /* width:100px; */
     font-size: 15px;
 }
 
@@ -93,7 +85,6 @@ header .app_title .text .desc{
 }
 
 /* SLIDER */
-
 #slider>div {
     width: 90%;
 }
@@ -125,12 +116,17 @@ header .app_title .text .desc{
     font-size: 18px;
 }
 
-/* CALENDAR */
-
-#calendar {
-    margin-top: 80px;
+/* cosmetic_box */
+#cosmetic_box i{
+    font-size: 35px;
+    margin-bottom:20px;
 }
 
+#cosmetic_box p{
+    font-size: 12px;
+}
+
+/* CALENDAR */
 #calendar .calendar_img_text {
     flex-flow: column;
 }
@@ -150,12 +146,15 @@ header .app_title .text .desc{
     width: 100%;
 }
 
+#calendar>div h4{
+    margin-bottom: 30px;
+}
+
 #calendar .calendar_img_text p {
     transform: translate(0);
 }
 
 /* CONTACT */
-
 #contact>div{
     flex-flow: column;
 }

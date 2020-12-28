@@ -58,7 +58,6 @@ h5 {
     font-family: 'Roboto', sans-serif;
     margin-bottom: 10px;
     font-weight: 500;
-    border: 1px solid yellowgreen;
     margin-bottom: 25px;
 }
 
@@ -104,7 +103,6 @@ header nav ul li a {
     padding: 20px 30px;
     font-family: 'Roboto', sans-serif;
     color: #000;
-    border: 1px solid red;
 }
 
 /* HEADER NAV hamburger */
@@ -145,13 +143,12 @@ header .app_title {
     width: 70%;
     margin: 54px auto 0 auto;
     position: relative;
-    height: 90vh;
+    height: 700px;
     border: 1px solid #F7F3EB;
 }
 
 header .text {
     text-align: center;
-    border: 1px solid blue;
     position: relative;
     height: 50%;
     top: 20%;
@@ -171,7 +168,6 @@ header .text .title {
     animation-name: title_ani;
     animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
-    border: 1px solid blue;
 }
 
 @keyframes title_ani {
@@ -199,7 +195,6 @@ header .text .desc {
     animation-timing-function: ease-in-out;
     transition: all .2s linear;
     line-height: 1.5em;
-    border: 1px solid blue;
 }
 
 @keyframes desc_ani {
@@ -216,13 +211,12 @@ header .text .desc {
 header .header_appimg {
     width: 50%;
     height: 100%;
-    border: 1px solid red;
     position: absolute;
     right: 0;
     top: 0;
     background-image: url('../images/unnis.png');
     background-position: center;
-    background-size: 85%;
+    background-size: 70%;
     background-repeat: no-repeat;
 }
 
@@ -358,7 +352,6 @@ header .app_title button:nth-child(2) {
     align-items: center;
     width: 70%;
     margin: 0 auto;
-    border: 1px solid red;
 }
 
 #cosmetic_box>div img {
@@ -374,7 +367,6 @@ header .app_title button:nth-child(2) {
 #cosmetic_box>ul li {
     text-align: center;
     position: absolute;
-    border: 1px solid red;
     width: 33.33%;
 }
 
@@ -448,6 +440,10 @@ header .app_title button:nth-child(2) {
     margin-bottom: 50px;
 }
 
+#cosmetic_box p{
+    line-height: 20px;
+}
+
 /* CALENDAR */
 #calendar {
     background-color: #fffdf9;
@@ -455,7 +451,6 @@ header .app_title button:nth-child(2) {
 
 #calendar>div {
     width: 70%;
-    border: 1px solid red;
     margin: 0 auto;
 }
 
@@ -477,7 +472,6 @@ header .app_title button:nth-child(2) {
 }
 
 #calendar .calendar_img_text>div{
-    border:1px solid red;
     position:absolute;
     right:0;
     width:50%;
@@ -488,7 +482,6 @@ header .app_title button:nth-child(2) {
     width:100%;
     margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
-    border: 1px solid red;
     position: absolute;
     top: 15%;
     text-align: center;
@@ -519,7 +512,6 @@ header .app_title button:nth-child(2) {
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
     font-size: 14px;
-    border: 1px solid red;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -587,7 +579,6 @@ header .app_title button:nth-child(2) {
 
 #contact>div {
     width: 70%;
-    border: 1px solid red;
     display: flex;
     justify-content: space-between;
     align-items: center;

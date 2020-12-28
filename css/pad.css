@@ -24,7 +24,6 @@ h6 {
 }
 
 /* HEADER */
-
 header .app_title{
     width:90%;
     vertical-align: middle;
@@ -55,7 +54,6 @@ header .header_appimg{
 }
 
 /* CALENDAR */
-
 #calendar .calendar_img_text h6 {
     top: 10%;
 }
