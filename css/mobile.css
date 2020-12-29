@@ -21,7 +21,26 @@ h6 {
 
 /* NAVIGATION */
 header nav ul {
-    display: none;
+    transition: all .2s linear;
+    transform: scaleY(0);
+}
+
+header nav ul.on {
+    transform: scaleY(1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 50px;
+    top: 54px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+header nav ul li a {
+    font-size: 14px;
 }
 
 header .nav_wrap .hamburger {
@@ -42,12 +61,12 @@ header .text {
 header .app_title .text .title {
     top: 15%;
     font-size: 25px;
-    width:90%;
+    width: 90%;
 }
 
 header .text .desc {
     top: 23%;
-    width:90%;
+    width: 90%;
 }
 
 header .text {
@@ -80,8 +99,8 @@ header .app_title button:nth-child(1) {
     margin-bottom: 0;
 }
 
-header .app_title .text .desc{
-    font-size:1em;
+header .app_title .text .desc {
+    font-size: 1em;
 }
 
 /* SLIDER */
@@ -93,8 +112,8 @@ header .app_title .text .desc{
     flex-flow: column;
 }
 
-#slider>div>.slider_tab a{
-    font-size:14px;
+#slider>div>.slider_tab a {
+    font-size: 14px;
     line-height: 20px;
     text-align: center;
 }
@@ -117,40 +136,40 @@ header .app_title .text .desc{
 }
 
 /* cosmetic_box */
-#cosmetic_box i{
+#cosmetic_box i {
     font-size: 35px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
-#cosmetic_box p{
+#cosmetic_box p {
     font-size: 12px;
 }
 
-#cosmetic_box>div{
+#cosmetic_box>div {
     flex-flow: column;
 }
 
-#cosmetic_box>ul{
-    height:auto;
-    width:70%;
+#cosmetic_box>ul {
+    height: auto;
+    width: 70%;
 }
 
-#cosmetic_box>ul li{
-    position:static;
-    width:100%;
-    margin-bottom:40px;
+#cosmetic_box>ul li {
+    position: static;
+    width: 100%;
+    margin-bottom: 40px;
 }
 
-#cosmetic_box>ul li:nth-child(2){
-    left:0;
+#cosmetic_box>ul li:nth-child(2) {
+    left: 0;
     transform: none;
 }
 
-#cosmetic_box>ul li:last-child{
-    margin-bottom:0;
+#cosmetic_box>ul li:last-child {
+    margin-bottom: 0;
 }
 
-#cosmetic_box i{
+#cosmetic_box i {
     font-size: 50px;
 }
 
@@ -174,7 +193,7 @@ header .app_title .text .desc{
     width: 100%;
 }
 
-#calendar>div h4{
+#calendar>div h4 {
     margin-bottom: 30px;
 }
 
@@ -183,10 +202,10 @@ header .app_title .text .desc{
 }
 
 /* CONTACT */
-#contact>div{
+#contact>div {
     flex-flow: column;
 }
 
-#contact .cotact_text{
+#contact .cotact_text {
     margin: 0 0 50px 0;
 }

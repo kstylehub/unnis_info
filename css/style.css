@@ -83,6 +83,7 @@ header nav {
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
+    position: relative;
 }
 
 header h1 {
@@ -97,6 +98,13 @@ header h1 img {
 header nav ul {
     display: flex;
     align-items: center;
+    position: absolute;
+    background-color:#fff;
+    right:0;
+}
+
+header nav ul li{
+    padding : 18px 0;
 }
 
 header nav ul li a {
@@ -108,7 +116,7 @@ header nav ul li a {
 /* HEADER NAV hamburger */
 header .nav_wrap .hamburger {
     display: none;
-    width: 35px;
+    width: 30px;
     position: relative;
     cursor: pointer;
 }
@@ -122,16 +130,31 @@ header .nav_wrap .hamburger div {
 }
 
 header .nav_wrap .hamburger div:nth-child(1) {
-    top: 25%;
+    top: 30%;
+    transition: all .3s linear;
+}
+
+header .nav_wrap .hamburger.toggle div:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
 }
 
 header .nav_wrap .hamburger div:nth-child(2) {
     top: 50%;
     transform: translateY(-50%);
+    transition: all .3s linear;
+}
+
+header .nav_wrap .hamburger.toggle div:nth-child(2) {
+    opacity: 0;
 }
 
 header .nav_wrap .hamburger div:nth-child(3) {
-    bottom: 25%;
+    bottom: 30%;
+    transition: all .3s linear;
+}
+
+header .nav_wrap .hamburger.toggle div:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
 }
 
 /* HEADER */
@@ -209,14 +232,14 @@ header .text .desc {
 }
 
 header .header_appimg {
-    width: 50%;
+    width: 30%;
     height: 100%;
     position: absolute;
     right: 0;
     top: 0;
     background-image: url('../images/unnis.png');
     background-position: center;
-    background-size: 70%;
+    background-size: 100%;
     background-repeat: no-repeat;
 }
 
@@ -363,7 +386,7 @@ header .app_title button:nth-child(2) {
     width: 70%;
     position: relative;
     /* border:1px solid blue; */
-    height:150px;
+    height: 150px;
 }
 
 #cosmetic_box>ul li {
@@ -444,7 +467,7 @@ header .app_title button:nth-child(2) {
     margin-bottom: 50px;
 }
 
-#cosmetic_box p{
+#cosmetic_box p {
     line-height: 20px;
 }
 
@@ -476,15 +499,15 @@ header .app_title button:nth-child(2) {
     border: 1px solid blue;
 }
 
-#calendar .calendar_img_text>div{
-    position:absolute;
-    right:0;
-    width:50%;
-    height:100%;
+#calendar .calendar_img_text>div {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
 }
 
 #calendar .calendar_img_text h6 {
-    width:100%;
+    width: 100%;
     margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
     position: absolute;
@@ -512,7 +535,7 @@ header .app_title button:nth-child(2) {
 }
 
 #calendar .calendar_img_text p {
-    width:100%;
+    width: 100%;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
