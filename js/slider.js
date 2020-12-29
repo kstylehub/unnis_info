@@ -26,18 +26,18 @@ function clickWork(e) {
 
 // SLIDER CONTENTS
 let tabContent = [{
-        tabTitle: '1번 누름',
-        tabDesc: '1번 설명 오브젝트에서 가져옴 길게 길게 한번 해볼까',
+        tabTitle: '1 Calendar',
+        tabDesc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry`,
         tabImg: 'images/todolist.png'
     },
     {
-        tabTitle: '2번 누름',
-        tabDesc: '2번 설명',
+        tabTitle: '2 Cosmetic',
+        tabDesc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry`,
         tabImg: 'images/item.png'
     },
     {
-        tabTitle: '3번 누름',
-        tabDesc: '3번 설명',
+        tabTitle: '3 Delivery',
+        tabDesc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry`,
         tabImg: 'images/review.png'
     }
 ]

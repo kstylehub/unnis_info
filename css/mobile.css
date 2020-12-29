@@ -42,10 +42,12 @@ header .text {
 header .app_title .text .title {
     top: 15%;
     font-size: 25px;
+    width:90%;
 }
 
 header .text .desc {
-    top: 20%;
+    top: 23%;
+    width:90%;
 }
 
 header .text {
@@ -64,7 +66,6 @@ header .header_appimg {
 header .app_title .btn {
     position: static;
     margin: 0 auto;
-    /* width: 100%; */
 }
 
 header .app_title button>a {
@@ -76,7 +77,6 @@ header .app_title button i {
 }
 
 header .app_title button:nth-child(1) {
-    margin-right: 2%;
     margin-bottom: 0;
 }
 
@@ -124,6 +124,34 @@ header .app_title .text .desc{
 
 #cosmetic_box p{
     font-size: 12px;
+}
+
+#cosmetic_box>div{
+    flex-flow: column;
+}
+
+#cosmetic_box>ul{
+    height:auto;
+    width:70%;
+}
+
+#cosmetic_box>ul li{
+    position:static;
+    width:100%;
+    margin-bottom:40px;
+}
+
+#cosmetic_box>ul li:nth-child(2){
+    left:0;
+    transform: none;
+}
+
+#cosmetic_box>ul li:last-child{
+    margin-bottom:0;
+}
+
+#cosmetic_box i{
+    font-size: 50px;
 }
 
 /* CALENDAR */
