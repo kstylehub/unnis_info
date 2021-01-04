@@ -1,60 +1,32 @@
 <!DOCTYPE html>
-
-<html lang="ko">
+<html lang="en">
 
 <head>
-
-    <meta charset="UTF-8" />
-    <title>slick test</title>
-    <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css" />
-    <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="http://kenwheeler.github.io/slick/slick/slick.min.js"></script>
-
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
 
-    <div class="slick-items">
-        <div>111</div>
-        <div>222</div>
-        <div>333</div>
-        <div>444</div>
-        <div>555</div>
-    </div>
+    <ul>
+
+    </ul>
+
 </body>
 
-<script type="text/javascript">
-    $(document).ready(function () {
+<script>
+    const ulEl = document.querySelector('ul')
 
-        //alert('123');
+    const text = ['1', '2', '3']
 
-        $('.slick-items').slick({
+    for (let i = 0; i < text.length; i++) {
 
-            autoplay: true,
+        const newLi = document.createElement("li");
+        newLi.textContent = text[i]
 
-            dots: true,
-
-            speed: 300 /* 이미지가 슬라이딩시 걸리는 시간 */ ,
-
-            infinite: true,
-
-            autoplaySpeed: 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */ ,
-
-            arrows: true,
-
-            slidesToShow: 1,
-
-            slidesToScroll: 1,
-
-            fade: false
-
-        });
-
-    });
+        ulEl.appendChild(newLi);
+    }
 </script>
 
 </html>

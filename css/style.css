@@ -594,7 +594,6 @@ header .app_title button:nth-child(2) {
 }
 
 .review_slider_wrap .review_img_text>div p {
-    width: 200px;
     padding: 0px 20px 20px;
     line-height: 1.5em;
     font-size: 14px;
