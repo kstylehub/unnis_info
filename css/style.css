@@ -99,12 +99,12 @@ header nav ul {
     display: flex;
     align-items: center;
     position: absolute;
-    background-color:#fff;
-    right:0;
+    background-color: #fff;
+    right: 0;
 }
 
-header nav ul li{
-    padding : 18px 0;
+header nav ul li {
+    padding: 18px 0;
 }
 
 header nav ul li a {
@@ -628,6 +628,30 @@ header .app_title button:nth-child(2) {
 /* FOOTER SECTION */
 footer {
     padding: 100px 0;
+}
+
+footer>ul {
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+}
+
+footer>ul>li>a {
+    display: block;
+    background-image: url('../images/sns_icon_1.png');
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    background-size: 120px;
+    background-position: -2px -47px;
+}
+
+footer>ul>li:nth-child(2) a {
+    background-position: -41px -47px;
+}
+
+footer>ul>li:nth-child(3) a {
+    background-position: -81px -47px;
 }
 
 footer>div {
