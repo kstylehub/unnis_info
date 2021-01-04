@@ -4,32 +4,32 @@ console.log(reviewWrap)
 const reviewContents = [{
         img: `http://placekitten.com/200/201`,
         pid: `yesol`,
-        desc: `설명 입니다. 설명 입니다.`
+        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
     },
     {
         img: `http://placekitten.com/200/200`,
         pid: `yesol`,
-        desc: `설명 입니다. 설명 입니다.`
+        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
     },
     {
         img: `http://placekitten.com/200/201`,
         pid: `yesol`,
-        desc: `설명 입니다. 설명 입니다.`
+        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
     },
     {
         img: `http://placekitten.com/200/200`,
         pid: `yesol`,
-        desc: `설명 입니다. 설명 입니다.`
+        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
     },
     {
         img: `http://placekitten.com/200/201`,
         pid: `yesol`,
-        desc: `설명 입니다. 설명 입니다.`
+        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
     },
     {
         img: `http://placekitten.com/200/200`,
         pid: `yesol`,
-        desc: `설명 입니다. 설명 입니다.`
+        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
     },
 ];
 

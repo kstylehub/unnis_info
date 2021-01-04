@@ -23,7 +23,6 @@ function scrollWork() {
 }
 
 // navigation
-
 const hamburgerBtn = document.querySelector('.hamburger')
 const navUl = document.querySelector('.nav_wrap ul')
 console.log(navUl)

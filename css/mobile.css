@@ -21,7 +21,6 @@ h6 {
 
 /* NAVIGATION */
 header nav ul {
-    transition: all .2s linear;
     transform: scaleY(0);
 }
 
@@ -37,6 +36,7 @@ header nav ul.on {
     justify-content: center;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    transition: all .2s linear;
 }
 
 header nav ul li a {
@@ -78,7 +78,7 @@ header .text {
 header .header_appimg {
     position: static;
     width: 60%;
-    margin: 0 auto;
+    margin: 30px auto 0 auto;
     height: 90vw;
 }
 
@@ -200,6 +200,8 @@ header .app_title .text .desc {
 #calendar .calendar_img_text p {
     transform: translate(0);
 }
+
+/* REVIEW */
 
 /* CONTACT */
 #contact>div {

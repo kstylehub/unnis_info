@@ -102,6 +102,13 @@ $(document).ready(function () {
                     //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
                     slidesToShow:2 
                 } 
+            },
+            { 
+                breakpoint: 400, //화면 사이즈 768px
+                settings: {	
+                    //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+                    slidesToShow:1
+                } 
             }
         ]
     });

@@ -564,7 +564,6 @@ header .app_title button:nth-child(2) {
 }
 
 /* REVIEW SECTION */
-
 .slick-track {
     margin-bottom: 30px;
 }
@@ -596,7 +595,7 @@ header .app_title button:nth-child(2) {
 .review_slider_wrap .review_img_text>div p {
     padding: 0px 20px 20px;
     line-height: 1.5em;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 /* CONTACT SECTION*/

@@ -57,3 +57,8 @@ header .header_appimg{
 #calendar .calendar_img_text h6 {
     top: 10%;
 }
+
+/* REVIEW */
+.review_slider_wrap{
+    width:90%;
+}
