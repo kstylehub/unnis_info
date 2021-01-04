@@ -10,7 +10,6 @@ for (let i = 0; i < tabs.length; i++) {
     tabs[i].addEventListener('click', clickWork)
 }
 
-
 function clickWork(e) {
     e.preventDefault();
 
@@ -57,7 +56,21 @@ for (let i = 0; i < tabContent.length; i++) {
 
 let imgIndex = 0;
 
+
+
 function changeImg() {
+
+    // classname에 on이 붙어 있으면 온을 차례대로 붙이고 초기화
+
+    // li class에 on이 있으면 다음번에 다음애한테 클래스 온을 붙여라
+    if (tabs[imgIndex].classList.contains('on')) {
+        tabs[imgIndex].nextElementSibling.classList.add('on')
+    } else if (!tabs[imgIndex].classList.contains('on')) {
+        tabs[imgIndex].classList.remove('on')
+    }
+
+
+    // 타이틀, 사진, 설명은 순서대로 변경됨
     tabTitle.textContent = tabContent[imgIndex].tabTitle
     tabDesc.textContent = tabContent[imgIndex].tabDesc
     tabImg.src = tabContent[imgIndex].tabImg
@@ -71,9 +84,7 @@ function changeImg() {
 setInterval(changeImg, 5000)
 
 
-
 // 슬릭 슬라이더 리뷰 섹션
-
 $(document).ready(function () {
 
     //alert('123');
@@ -89,26 +100,26 @@ $(document).ready(function () {
         slidesToScroll: 1,
         fade: false,
         responsive: [ // 반응형 웹 구현 옵션
-            {  
+            {
                 breakpoint: 960, //화면 사이즈 960px
                 settings: {
                     //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-                    slidesToShow:3 
-                } 
+                    slidesToShow: 3
+                }
             },
-            { 
+            {
                 breakpoint: 768, //화면 사이즈 768px
-                settings: {	
+                settings: {
                     //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-                    slidesToShow:2 
-                } 
+                    slidesToShow: 2
+                }
             },
-            { 
+            {
                 breakpoint: 400, //화면 사이즈 768px
-                settings: {	
+                settings: {
                     //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-                    slidesToShow:1
-                } 
+                    slidesToShow: 1
+                }
             }
         ]
     });

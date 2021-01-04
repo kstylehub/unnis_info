@@ -656,7 +656,9 @@ footer>ul>li:nth-child(3) a {
 }
 
 footer>ul>li:nth-child(4) a {
-    background-image: url(../images/icon_unnis\ pick_purple.png);
+    width: 37px;
+    height: 37px;
+    background-image: url('../images/icon_unnis\ pick_purple.png');
     background-size:45px;
     background-repeat: no-repeat;
     background-position: center;
