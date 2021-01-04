@@ -27,6 +27,8 @@ const hamburgerBtn = document.querySelector('.hamburger')
 const navUl = document.querySelector('.nav_wrap ul')
 console.log(navUl)
 
+navUl.classList.remove('on')
+
 hamburgerBtn.addEventListener('click', () => {
 
     // 클릭하면 바뀌고 한번 더 클릭하면 원상태로

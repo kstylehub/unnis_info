@@ -62,3 +62,8 @@ header .header_appimg{
 .review_slider_wrap{
     width:90%;
 }
+
+/* FOOTER */
+footer>ul{
+    width:90%;
+}
