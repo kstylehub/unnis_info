@@ -24,7 +24,7 @@ button>a {
     display: inline-block;
     padding: 15px 15px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: #43BFA1;
     color: #fff;
     font-size: 16px;
@@ -123,6 +123,14 @@ header nav ul li a {
 }
 
 /* HEADER VIDEO */
+#main_video {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
 
 header .filter {
     position: absolute;
@@ -135,14 +143,6 @@ header .filter {
     background-color:rgba(0,0,0,0.5);
 }
 
-#main_video {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
 
 /* HEADER NAV hamburger */
 header .nav_wrap .hamburger {
@@ -201,12 +201,11 @@ header .app_title {
 }
 
 header .text {
-    /* text-align: center; */
     position: relative;
-    height: 50%;
-    top: 20%;
+    height: 30%;
+    top: 0;
     left: 0;
-    width: 50%;
+    border:1px solid red;
 }
 
 header .text h2 {
@@ -257,6 +256,7 @@ header .text .desc {
     transition: all .2s linear;
     line-height: 1.5em;
     color:#fff;
+    display:none;
 }
 
 @keyframes desc_ani {
@@ -273,7 +273,7 @@ header .text .desc {
 header .app_title .btn {
     position: absolute;
     left: 0;
-    bottom: 5%;
+    top: 15%;
     display: flex;
     height: 30%;
 }

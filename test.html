@@ -6,27 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    .video-container {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding-top: 50%;
+    }
+
+    iframe {
+        z-index: 1;
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    h1{
+        position:absolute;
+        z-index: 10;
+        color:#fff;
+        border:1px solid red;
+    }
+</style>
 
 <body>
-
-    <ul>
-
-    </ul>
-
+    <h1>Responsive Video</h1>
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/cdw_LN5f1GU?autoplay=1&amp;mute=1;loop=1;playlist=cdw_LN5f1GU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 </body>
-
-<script>
-    const ulEl = document.querySelector('ul')
-
-    const text = ['1', '2', '3']
-
-    for (let i = 0; i < text.length; i++) {
-
-        const newLi = document.createElement("li");
-        newLi.textContent = text[i]
-
-        ulEl.appendChild(newLi);
-    }
-</script>
 
 </html>
