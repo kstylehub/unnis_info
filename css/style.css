@@ -166,7 +166,7 @@ header .app_title {
     width: 70%;
     margin: 54px auto 0 auto;
     position: relative;
-    height: 700px;
+    height: 90vh;
     border: 1px solid #F7F3EB;
 }
 
@@ -232,15 +232,16 @@ header .text .desc {
 }
 
 header .header_appimg {
-    width: 30%;
+    width: 50%;
     height: 100%;
     position: absolute;
     right: 0;
-    top: 0;
-    background-image: url('../images/unnis.png');
+    top:0;
+    background-image: url('../images/main_visual.png');
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
+    /* border:1px solid red; */
 }
 
 header .app_title .btn {
@@ -361,8 +362,9 @@ header .app_title button:nth-child(2) {
 }
 
 #slider>div>.slider_img_text>div img {
-    width: 50%;
+    width: 70%;
     transition: all 0.3s linear;
+    border:1px solid red;
 }
 
 /* COSMETIC BOX SECTION */

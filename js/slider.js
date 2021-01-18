@@ -27,7 +27,7 @@ function clickWork(e) {
 let tabContent = [{
         tabTitle: '1 Calendar',
         tabDesc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry`,
-        tabImg: 'images/todolist.png'
+        tabImg: 'images/calender.png'
     },
     {
         tabTitle: '2 Cosmetic',
@@ -35,9 +35,14 @@ let tabContent = [{
         tabImg: 'images/item.png'
     },
     {
-        tabTitle: '3 Delivery',
+        tabTitle: '3 todolist',
         tabDesc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry`,
-        tabImg: 'images/review.png'
+        tabImg: 'images/todolist.png'
+    },
+    {
+        tabTitle: '3 recommend',
+        tabDesc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry`,
+        tabImg: 'images/recommend.png'
     }
 ]
 
@@ -56,19 +61,26 @@ for (let i = 0; i < tabContent.length; i++) {
 
 let imgIndex = 0;
 
-
-
 function changeImg() {
 
     // classname에 on이 붙어 있으면 온을 차례대로 붙이고 초기화
 
     // li class에 on이 있으면 다음번에 다음애한테 클래스 온을 붙여라
-    if (tabs[imgIndex].classList.contains('on')) {
-        tabs[imgIndex].nextElementSibling.classList.add('on')
-    } else if (!tabs[imgIndex].classList.contains('on')) {
-        tabs[imgIndex].classList.remove('on')
+    
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('on')
     }
 
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].indexNum = i
+
+            if (tabs[i].classList.contains('on')) {
+
+                const Index = tabs[i].indexNum
+                tabs[Index].className = 'on'
+            }
+        }
+    
 
     // 타이틀, 사진, 설명은 순서대로 변경됨
     tabTitle.textContent = tabContent[imgIndex].tabTitle

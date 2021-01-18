@@ -77,9 +77,9 @@ header .text {
 
 header .header_appimg {
     position: static;
-    width: 60%;
-    margin: 30px auto 0 auto;
-    height: 90vw;
+    width: 80%;
+    margin: 0 auto;
+    height: 80vw;
 }
 
 header .app_title .btn {
