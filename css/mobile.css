@@ -52,6 +52,11 @@ header .nav_wrap .hamburger {
 }
 
 /* HEADER */
+
+header{
+    height:120vh;
+}
+
 header .app_title,
 header .text {
     position: static;
@@ -60,18 +65,18 @@ header .text {
 }
 
 header .text {
-    padding-top:70px;
     border:1px solid red;
+
 }
 
 header .app_title .text .title {
-    top: 30%;
+    top: 15%;
     font-size: 25px;
     width: 90%;
 }
 
 header .text .desc {
-    top: 38%;
+    top: 20%;
     width: 90%;
 }
 
@@ -90,8 +95,18 @@ header .header_appimg {
 }
 
 header .app_title .btn {
-    position: static;
-    margin: 0 auto;
+   /* display:none; */
+}
+
+header .app_title .btn button:nth-child(1){
+    position: fixed;
+    bottom:0;
+    border:1px solid red;
+    left:0;
+}
+
+header .app_title .btn button:nth-child(2){
+    display:none;
 }
 
 header .app_title button>a {
@@ -108,6 +123,18 @@ header .app_title button:nth-child(1) {
 
 header .app_title .text .desc {
     font-size: 1em;
+}
+
+header .app_title img{
+    left:50%;
+    transform: translateX(-50%);
+    top:30%;
+    width:80%;
+}
+
+header #main_video {
+    margin-top: 280px;
+    width: 70%;
 }
 
 /* SLIDER */
