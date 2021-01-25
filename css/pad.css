@@ -30,16 +30,11 @@ header .app_title{
 }
 
 header .app_title .text .title{
-    font-size: 1.7em;
+    font-size: 2.5em;
 }
 
 header .app_title .text .desc{
     font-size: 1.1em;
-}
-
-header .app_title button:nth-child(1){
-    margin-right: 0;
-    margin-bottom: 20px;
 }
 
 header .app_title .btn{

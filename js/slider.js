@@ -64,7 +64,6 @@ let imgIndex = 0;
 function changeImg() {
 
     // classname에 on이 붙어 있으면 온을 차례대로 붙이고 초기화
-
     // li class에 on이 있으면 다음번에 다음애한테 클래스 온을 붙여라
     
     for (let i = 0; i < tabs.length; i++) {
@@ -81,7 +80,6 @@ function changeImg() {
             }
         }
     
-
     // 타이틀, 사진, 설명은 순서대로 변경됨
     tabTitle.textContent = tabContent[imgIndex].tabTitle
     tabDesc.textContent = tabContent[imgIndex].tabDesc

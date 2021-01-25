@@ -195,11 +195,9 @@ header .app_title {
 
 header .text {
     position: relative;
-    width: 80%;
     height: 30%;
     top: 5%;
     left: 0;
-    /* border: 1px solid red; */
 }
 
 header .text h2 {
@@ -396,6 +394,7 @@ header .app_title img {
     width: 70%;
     transition: all 0.3s linear;
     border: 1px solid red;
+    transition:all .3s;
 }
 
 /* COSMETIC BOX SECTION */

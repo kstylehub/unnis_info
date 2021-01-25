@@ -5,37 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <!-- Slick 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
 </head>
+
 <style>
-    .video-container {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding-top: 50%;
+    img {
+        width: 500px;
     }
 
-    iframe {
-        z-index: 1;
-        top: 0;
-        left: 0;
-        position: absolute;
-        width: 100%;
-        height: 100%;
+    .slick-dots li{
+        width:300px;
+        
     }
 
-    h1{
-        position:absolute;
-        z-index: 10;
-        color:#fff;
+    .slick-dots li:nth-child(1) button::before{
         border:1px solid red;
+        content:"첫번째";
+        width:100px;
+    }
+
+    .slick-dots li:nth-child(2) button::before{
+        border:1px solid red;
+        content:"두번째";
+        width:100px;
+    }
+
+    .slick-dots li:nth-child(3) button::before{
+        border:1px solid red;
+        content:"세번째";
+        width:100px;
     }
 </style>
 
 <body>
-    <h1>Responsive Video</h1>
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/cdw_LN5f1GU?autoplay=1&amp;mute=1;loop=1;playlist=cdw_LN5f1GU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div>
+        <div id="fade">
+            <div><img src="images/todolist.png" alt=""></div>
+            <div><img src="images/item.png" alt=""></div>
+            <div><img src="images/calender.png" alt=""></div>
+        </div>
     </div>
+    <script>
+        $(function () {
+            $('#fade').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                dotsClass : "slick-dots"
+            });
+        })
+
+        const fade = document.querySelector('#fade')
+        console.log(fade.childNodes[5])
+
+       
+    </script>
 </body>
 
 </html>
