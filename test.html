@@ -16,6 +16,10 @@
 </head>
 
 <style>
+
+    body{
+        background-color:skyblue;
+    }
     img {
         width: 500px;
     }
@@ -45,13 +49,25 @@
 </style>
 
 <body>
-    <div>
+    <!-- <div style="padding:100px 100px; background-color: skyblue;"> -->
         <div id="fade">
-            <div><img src="images/todolist.png" alt=""></div>
-            <div><img src="images/item.png" alt=""></div>
-            <div><img src="images/calender.png" alt=""></div>
+            <div>
+                <img src="images/todolist.png" alt="">
+                <h3 class="tab_title">첫번째</h3>
+                <p>첫번째 설명</p>
+            </div>
+            <div>
+                <img src="images/item.png" alt="">
+                <h3 class="tab_title">두번째</h3>
+                <p>두번째 설명</p>
+            </div>
+            <div>
+                <img src="images/calender.png" alt="">
+                <h3 class="tab_title">세번째</h3>
+                <p>세번째 설명</p>
+            </div>
         </div>
-    </div>
+    <!-- </div> -->
     <script>
         $(function () {
             $('#fade').slick({
@@ -60,14 +76,14 @@
                 speed: 500,
                 fade: true,
                 cssEase: 'linear',
-                dotsClass : "slick-dots"
+                dotsClass : "slick-dots",
+                class: '다른클래스'
             });
         })
 
         const fade = document.querySelector('#fade')
         console.log(fade.childNodes[5])
-
-       
+  
     </script>
 </body>
 

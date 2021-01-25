@@ -16,6 +16,14 @@
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css" />
+
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <!-- Slick 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
     <script>
         window.GitpleConfig = {
             "appCode": "pjZAb7B5Jr5IqqkiOlSpiuTfuI2z23"
@@ -74,7 +82,7 @@
             <div class="app_title">
                 <div class="text">
                     <h3 class="title">Your Personel Beauty Curator </h3>
-                    <p class="desc">Lorem Ipsum is simply dummy text of <br/>the printing and typesetting industry</p>
+                    <p class="desc">Lorem Ipsum is simply dummy text of <br />the printing and typesetting industry</p>
                 </div>
                 <div class="btn">
                     <button>
@@ -99,33 +107,31 @@
             </div>
         </header>
         <section id="slider">
-            <div>
-                <ul class="slider_tab">
-                    <li class="on">
-                        <a href="">Calendar</a>
-                    </li>
-                    <li>
-                        <a href="">Cosmetic</a>
-                    </li>
-                    <li>
-                        <a href="">Todolist</a>
-                    </li>
-                    <li>
-                        <a href="">Recommend</a>
-                    </li>
-                </ul>
-                <div class="slider_img_text">
-                    <div>
-                        <div>
-                            <img class="tab_img" src="images/todolist.png" alt="">
-                        </div>
-                        <div>
-                            <h3 class="tab_title">default message</h3>
-                            <p class="tab_desc">default description</p>
-                        </div>
+            <div id="main_slider">
+                <div>
+                    <img src="images/todolist.png" alt="">
+                    <div class="slider_text">
+                        <h3 class="tab_title">첫번째 길게 해볼까</h3>
+                        <p>설명도 길게 길게 길게 길게 길게설명도 길게 길게 길게 길게 길게</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="images/item.png" alt="">
+                    <div class="slider_text">
+                        <h3 class="tab_title">두번째</h3>
+                        <p>두번째 설명</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="images/calender.png" alt="">
+                    <div class="slider_text">
+                        <h3 class="tab_title">세번째</h3>
+                        <p>세번째 설명</p>
                     </div>
                 </div>
             </div>
+            <!-- </div> -->
+            <!-- </div> -->
         </section>
         <section id="cosmetic_box">
             <div>
@@ -207,6 +213,21 @@
     <script src="js/slider.js"></script>
     <script src="js/scroll.js"></script>
     <script src="js/review.js"></script>
+
+    <script>
+        $(function () {
+            $('#main_slider').slick({
+                dots: true,
+                infinite: true,
+                autoplaySpeed: 4000,
+                fade: true,
+                cssEase: 'linear',
+                autoplay:true,
+                speed:500,
+                // swipeToSlide:true
+            });
+        })
+    </script>
 
 </body>
 
