@@ -63,8 +63,8 @@ header .text {
     text-align: center;
 }
 
-header .app_title{
-    height:150vh;
+header .app_title {
+    height: 150vh;
 }
 
 header .text {
@@ -102,7 +102,7 @@ header .app_title .btn button:nth-child(1) {
     z-index: 200;
     background-color: #000;
     width: 100%;
-    height:50px;
+    height: 50px;
 }
 
 header .app_title .btn button:nth-child(2) {
@@ -131,76 +131,77 @@ header .app_title img {
     transform: translateX(-50%);
     top: 32%;
     width: 80%;
-    max-width:300px;
-    min-width:250px;
+    max-width: 300px;
+    min-width: 250px;
 }
 
 header #main_video {
     margin-top: 65%;
     width: 70%;
-    position:static;
+    position: static;
     max-width: 500px;
     min-width: 250px;
 }
 
 /* SLIDER */
-#slider{
-    padding-top:120px;
-    padding-bottom:0;
-    height:170vw;
+#slider {
+    padding-top: 120px;
+    padding-bottom: 0;
+    height: 170vw;
 }
 
-#slider .slick-next, #slider .slick-prev{
-    top:35%;
+#slider .slick-next,
+#slider .slick-prev {
+    top: 35%;
     z-index: 100;
 }
 
-#slider .slick-next{
-    right:1%;
+#slider .slick-next {
+    right: 1%;
 }
 
-#slider .slick-prev{
-    left:1%;
+#slider .slick-prev {
+    left: 1%;
 }
 
-#slider .slick-dots{
-    top:-60px;
+#slider .slick-dots {
+    top: -60px;
 }
 
-#slider div.slick-slide{
-    width:100%;
+#slider div.slick-slide {
+    width: 100%;
 }
 
-#slider .slick-slide img{
-    width:80%;
+#slider .slick-slide img {
+    width: 80%;
     margin: 0 auto;
 }
 
-#slider .slick-dots li{
-    width:28%;
+#slider .slick-dots li {
+    width: 28%;
     /* border:1px solid red; */
     text-align: center;
 }
 
-#slider .slick-dots li button:before{
+#slider .slick-dots li button:before {
     font-size: 15px;
 }
 
-#slider .slider_text{
-    width:100%;
-    height:80px;
+#slider .slider_text {
+    width: 100%;
+    height: 80px;
     position: static;
     text-align: center;
-    margin-top:70px;
+    margin-top: 70px;
 }
 
-#slider .slider_text h3{
+#slider .slider_text h3 {
     font-size: 20px;
     margin-bottom: 15px;
     font-weight: 500;
 }
 
-#slider .slider_text p{
+#slider .slider_text p {
     font-size: 13px;
 }
 
@@ -231,6 +232,10 @@ header #main_video {
     width: 80%;
 }
 
+#cosmetic_box>ul::before {
+    margin-bottom: 50px;
+}
+
 #cosmetic_box>ul li {
     position: static;
     width: 100%;
@@ -246,8 +251,8 @@ header #main_video {
     margin-bottom: 0;
 }
 
-#cosmetic_box i {
-    font-size: 50px;
+#cosmetic_box ul img {
+    margin-bottom: 20px;
 }
 
 /* CALENDAR */
