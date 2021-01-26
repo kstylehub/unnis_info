@@ -24,9 +24,14 @@ h6 {
 }
 
 /* HEADER */
+header{
+    height:60vh;
+}
+
 header .app_title{
     width:90%;
     vertical-align: middle;
+    height:60vh;
 }
 
 header .app_title .text .title{

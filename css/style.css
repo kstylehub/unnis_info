@@ -175,7 +175,6 @@ header .nav_wrap .hamburger.toggle div:nth-child(3) {
 /* HEADER */
 header {
     background-color: #F7F3EB;
-    /* border: 1px solid red; */
     height: 100%;
 }
 
@@ -190,7 +189,6 @@ header .app_title {
     height: 100%;
     margin: 0 auto 0 auto;
     padding-top: 100px;
-    border: 1px solid blue;
 }
 
 header .text {
@@ -352,7 +350,7 @@ header .app_title img {
 }
 
 #slider .slick-dots li{
-    width:20%;
+    width:15%;
 }
 
 #slider .slick-dots li button:before{
@@ -367,15 +365,15 @@ header .app_title img {
 }
 
 #slider .slick-dots li:nth-child(1) button:before{
-    content:"첫번째";
+    content:"MISSION";
 }
 
 #slider .slick-dots li:nth-child(2) button:before{
-    content:"두번째";
+    content:"COSMETICS";
 }
 
 #slider .slick-dots li:nth-child(3) button:before{
-    content:"세번째";
+    content:"CALENDER";
 }
 
 #slider .slider_text{
@@ -394,6 +392,7 @@ header .app_title img {
 
 #slider .slider_text p{
     color:#fff;
+    line-height: 23px;
 }
 
 /* COSMETIC BOX SECTION */

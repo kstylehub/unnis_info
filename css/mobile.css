@@ -63,8 +63,11 @@ header .text {
     text-align: center;
 }
 
+header .app_title{
+    height:100%;
+}
+
 header .text {
-    /* border: 1px solid red; */
     width: 100%;
 }
 
@@ -168,6 +171,12 @@ header #main_video {
     margin: 0 auto;
 }
 
+#slider .slick-dots li{
+    width:28%;
+    border:1px solid red;
+    text-align: center;
+}
+
 #slider .slick-dots li button:before{
     font-size: 15px;
 }
@@ -187,7 +196,6 @@ header #main_video {
 }
 
 #slider .slider_text p{
-    line-height: 23px;
     font-size: 13px;
 }
 
