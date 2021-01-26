@@ -24,33 +24,33 @@ h6 {
 }
 
 /* HEADER */
-header{
-    height:60vh;
+header {
+    height: 90vh;
 }
 
-header .app_title{
-    width:90%;
+header .app_title {
+    width: 90%;
     vertical-align: middle;
-    height:60vh;
+    height: 90vh;
 }
 
-header .app_title .text .title{
+header .app_title .text .title {
     font-size: 2.5em;
 }
 
-header .app_title .text .desc{
+header .app_title .text .desc {
     font-size: 1.1em;
 }
 
-header .app_title .btn{
+header .app_title .btn {
     flex-wrap: wrap;
-    height:100px;
+    height: 100px;
     justify-content: center;
 }
 
-header .header_appimg{
+header .header_appimg {
     background-position: center;
-    background-size:100%;
+    background-size: 100%;
 }
 
 /* CALENDAR */
@@ -59,11 +59,11 @@ header .header_appimg{
 }
 
 /* REVIEW */
-.review_slider_wrap{
-    width:90%;
+.review_slider_wrap {
+    width: 90%;
 }
 
 /* FOOTER */
-footer>ul{
-    width:90%;
+footer>ul {
+    width: 90%;
 }

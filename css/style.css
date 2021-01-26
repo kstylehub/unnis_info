@@ -179,8 +179,11 @@ header {
 }
 
 #main_video {
-    margin-top: 6%;
-    width: 55%;
+    position: absolute;
+    bottom: 10%;
+    max-width: 650px;
+    min-width: 480px;
+    width: 50%;
 }
 
 header .app_title {
@@ -189,6 +192,7 @@ header .app_title {
     height: 100%;
     margin: 0 auto 0 auto;
     padding-top: 100px;
+    border: 1px solid red;
 }
 
 header .text {
@@ -245,7 +249,6 @@ header .text .desc {
     transition: all .2s linear;
     line-height: 1.5em;
     color: #ADB5BD;
-    /* display:none; */
 }
 
 @keyframes desc_ani {
@@ -262,7 +265,7 @@ header .text .desc {
 header .app_title .btn {
     position: absolute;
     left: 0;
-    top: 30%;
+    top: 35%;
     display: flex;
     height: 15%;
 }
@@ -319,17 +322,18 @@ header .app_title button:nth-child(2) {
 
 header .app_title img {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45%;
-    right: -5%;
+    width: 42%;
+    max-width: 550px;
+    min-width: 430px;
+    right: -7%;
+    bottom: 8%;
 }
 
 /* SLIDER SECTION */
 #slider {
     background-color: #43BFA1;
     position: relative;
-    padding-top:250px;
+    padding-top: 250px;
 }
 
 #slider>div {
@@ -337,61 +341,61 @@ header .app_title img {
     margin: 0 auto;
 }
 
-#slider div.slick-slide{
-    width:50%;
+#slider div.slick-slide {
+    width: 50%;
 }
 
-#slider .slick-slide img{
-    width:40%;
+#slider .slick-slide img {
+    width: 40%;
 }
 
-#slider .slick-dots{
-    top:-100px;
+#slider .slick-dots {
+    top: -100px;
 }
 
-#slider .slick-dots li{
-    width:15%;
+#slider .slick-dots li {
+    width: 15%;
 }
 
-#slider .slick-dots li button:before{
-    width:100%;
+#slider .slick-dots li button:before {
+    width: 100%;
     font-size: 20px;
-    color:#fff;
+    color: #fff;
     padding-bottom: 10px;
 }
 
-#slider .slick-dots li.slick-active button:before{
-    opacity:1;
+#slider .slick-dots li.slick-active button:before {
+    opacity: 1;
 }
 
-#slider .slick-dots li:nth-child(1) button:before{
-    content:"MISSION";
+#slider .slick-dots li:nth-child(1) button:before {
+    content: "MISSION";
 }
 
-#slider .slick-dots li:nth-child(2) button:before{
-    content:"COSMETICS";
+#slider .slick-dots li:nth-child(2) button:before {
+    content: "COSMETICS";
 }
 
-#slider .slick-dots li:nth-child(3) button:before{
-    content:"CALENDER";
+#slider .slick-dots li:nth-child(3) button:before {
+    content: "CALENDER";
 }
 
-#slider .slider_text{
-    width:50%;
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translateY(-50%);
+#slider .slider_text {
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
     text-align: center;
 }
 
-#slider .slider_text h3{
+#slider .slider_text h3 {
     margin-bottom: 30px;
-    color:#fff;
+    color: #fff;
 }
 
-#slider .slider_text p{
-    color:#fff;
+#slider .slider_text p {
+    color: #fff;
     line-height: 23px;
 }
 
@@ -409,7 +413,6 @@ header .app_title img {
 }
 
 #cosmetic_box>div>div {
-    /* border: 1px solid red; */
     text-align: center;
 }
 
@@ -427,7 +430,15 @@ header .app_title img {
     margin: 50px auto;
     width: 70%;
     position: relative;
-    height: 150px;
+    height: 250px;
+}
+
+#cosmetic_box>ul:before{
+    content: "";
+    width: 100%;
+    height: 1px;
+    display: block;
+    background-color: #ebebeb;
 }
 
 #cosmetic_box>ul li {
@@ -435,10 +446,10 @@ header .app_title img {
     position: absolute;
     width: 33.33%;
     padding: 0 3%;
+    top:50px;
 }
 
 #cosmetic_box>ul li:nth-child(1) {
-    top: 0;
     left: 0;
 }
 
@@ -450,7 +461,7 @@ header .app_title img {
 @keyframes li_1_ani {
     from {
         opacity: 0;
-        top: 70px;
+        top: 130px;
     }
 
     to {
@@ -459,7 +470,6 @@ header .app_title img {
 }
 
 #cosmetic_box>ul li:nth-child(2) {
-    top: 0;
     left: 50%;
     transform: translate(-50%);
 }
@@ -472,7 +482,7 @@ header .app_title img {
 @keyframes li_2_ani {
     from {
         opacity: 0;
-        top: 70px;
+        top: 100px;
     }
 
     to {
@@ -481,7 +491,6 @@ header .app_title img {
 }
 
 #cosmetic_box>ul li:nth-child(3) {
-    top: 0;
     right: 0;
 }
 
@@ -493,7 +502,7 @@ header .app_title img {
 @keyframes li_3_ani {
     from {
         opacity: 0;
-        top: 70px;
+        top: 90px;
     }
 
     to {
@@ -501,14 +510,18 @@ header .app_title img {
     }
 }
 
-#cosmetic_box i {
-    font-size: 50px;
-    color: #F29774;
+#cosmetic_box ul img {
     margin-bottom: 50px;
 }
 
 #cosmetic_box p {
     line-height: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#cosmetic_box .point{
+    color:#F29774;
+    margin-top:10px;
 }
 
 /* CALENDAR */
