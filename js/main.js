@@ -1,3 +1,17 @@
+// 메인 슬릭 슬라이더
+$(function () {
+    $('#main_slider').slick({
+        dots: true,
+        infinite: true,
+        autoplaySpeed: 4000,
+        fade: true,
+        cssEase: 'linear',
+        autoplay: true,
+        speed: 500,
+        // swipeToSlide:true
+    });
+})
+
 // scroll event
 window.addEventListener('scroll', scrollWork, {
     passive: true

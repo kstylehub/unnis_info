@@ -340,7 +340,6 @@ header .app_title img {
 }
 
 #slider div.slick-slide{
-    border:1px solid blue;
     width:50%;
 }
 
@@ -353,7 +352,7 @@ header .app_title img {
 }
 
 #slider .slick-dots li{
-    width:150px;
+    width:20%;
 }
 
 #slider .slick-dots li button:before{
@@ -365,7 +364,6 @@ header .app_title img {
 
 #slider .slick-dots li.slick-active button:before{
     opacity:1;
-    border-bottom:2px solid #fff;
 }
 
 #slider .slick-dots li:nth-child(1) button:before{
@@ -391,6 +389,11 @@ header .app_title img {
 
 #slider .slider_text h3{
     margin-bottom: 30px;
+    color:#fff;
+}
+
+#slider .slider_text p{
+    color:#fff;
 }
 
 /* COSMETIC BOX SECTION */
@@ -407,7 +410,7 @@ header .app_title img {
 }
 
 #cosmetic_box>div>div {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     text-align: center;
 }
 

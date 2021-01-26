@@ -52,7 +52,6 @@ header .nav_wrap .hamburger {
 }
 
 /* HEADER */
-
 header {
     height: 120vh;
 }
@@ -65,9 +64,8 @@ header .text {
 }
 
 header .text {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
-
 }
 
 header .app_title .text .title {
@@ -92,10 +90,6 @@ header .header_appimg {
     margin: 0 auto;
     height: 60vw;
     border: 1px solid red;
-}
-
-header .app_title .btn {
-    /* display:none; */
 }
 
 header .app_title .btn button:nth-child(1) {
@@ -142,41 +136,59 @@ header #main_video {
 }
 
 /* SLIDER */
-#slider>div {
-    width: 90%;
+#slider{
+    padding-top:120px;
+    padding-bottom:0;
+    height:170vw;
 }
 
-#slider>div>.slider_img_text>div {
-    flex-flow: column;
-    margin-top: 30px;
+#slider .slick-next, #slider .slick-prev{
+    top:35%;
+    z-index: 100;
 }
 
-#slider>div>.slider_tab {
-    border: 1px solid red;
+#slider .slick-next{
+    right:1%;
 }
 
-#slider>div>.slider_tab a {
-    font-size: 13px;
-    line-height: 20px;
+#slider .slick-prev{
+    left:1%;
+}
+
+#slider .slick-dots{
+    top:-60px;
+}
+
+#slider div.slick-slide{
+    width:100%;
+}
+
+#slider .slick-slide img{
+    width:80%;
+    margin: 0 auto;
+}
+
+#slider .slick-dots li button:before{
+    font-size: 15px;
+}
+
+#slider .slider_text{
+    width:100%;
+    height:80px;
+    position: static;
     text-align: center;
-    margin: 0 7px;
+    margin-top:70px;
 }
 
-#slider>div>.slider_img_text>div>div {
-    width: 90%;
+#slider .slider_text h3{
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 500;
 }
 
-#slider>div>.slider_img_text>div>div:nth-child(2) {
-    margin-top: 30px;
-}
-
-#slider>div>.slider_img_text>div>div>h3 {
-    font-size: 25px;
-}
-
-#slider>div>.slider_img_text>div>div>p {
-    height: 70px;
-    font-size: 16px;
+#slider .slider_text p{
+    line-height: 23px;
+    font-size: 13px;
 }
 
 /* cosmetic_box */
@@ -226,7 +238,6 @@ header #main_video {
 }
 
 /* CALENDAR */
-
 #calendar {
     padding: 0;
 }
@@ -258,8 +269,6 @@ header #main_video {
     transform: translate(0);
 }
 
-/* REVIEW */
-
 /* CONTACT */
 #contact>div {
     flex-flow: column;
@@ -270,7 +279,6 @@ header #main_video {
 }
 
 /* FOOTER */
-
 footer li {
     font-size: 11px;
 }
