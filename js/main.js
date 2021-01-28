@@ -20,6 +20,9 @@ window.addEventListener('scroll', scrollWork, {
 const html = document.querySelector('html');
 const cosmeticLis = document.querySelectorAll('#cosmetic_box li')
 const calendarTexts = document.querySelectorAll('.calendar_text')
+const stepDivs = document.querySelectorAll('.step_ani')
+
+console.log(stepDivs)
 
 function scrollWork() {
 
@@ -32,6 +35,11 @@ function scrollWork() {
 
         for (i = 0; i < cosmeticLis.length; i++) {
             cosmeticLis[i].classList.add('ani')
+        }
+    } else if (html.scrollTop > 1500 && html.scrollTop < 2000) {
+
+        for (i = 0; i < stepDivs.length; i++) {
+            stepDivs[i].classList.add('step_ani')
         }
     }
 }
@@ -54,3 +62,6 @@ hamburgerBtn.addEventListener('click', () => {
         navUl.classList.remove('on')
     }
 });
+
+// step 애니메이션 스크롤 이벤트
+
