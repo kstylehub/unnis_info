@@ -5,86 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <!-- 제이쿼리 불러오기 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-    <!-- Slick 불러오기 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
 </head>
-
 <style>
-
-    body{
-        background-color:skyblue;
-    }
-    img {
-        width: 500px;
-    }
-
-    .slick-dots li{
-        width:300px;
-        
+    .main {
+        position: relative;
+        border: 1px solid blue;
+        height: 250px;
+        background-color: skyblue;
     }
 
-    .slick-dots li:nth-child(1) button::before{
-        border:1px solid red;
-        content:"첫번째";
-        width:100px;
+    .circle {
+        position: absolute;
+
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        border-radius: 50%;
+        animation-name: test;
+        animation-timing-function: linear;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        /* animation-direction: alternate; */
+        animation-delay: 1s;
+        border: 1px solid red;
     }
 
-    .slick-dots li:nth-child(2) button::before{
-        border:1px solid red;
-        content:"두번째";
-        width:100px;
+    @keyframes test {
+        from {
+            /* transform: scale(1); */
+            opacity: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+
+        }
+
+        to {
+            /* transform: ; */
+            opacity: 0.5;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
     }
 
-    .slick-dots li:nth-child(3) button::before{
-        border:1px solid red;
-        content:"세번째";
-        width:100px;
+    .circle2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        /* border:1px solid red; */
+        border-radius: 50%;
+        border: 1px solid blue;
+        opacity: 0.5;
     }
 </style>
 
 <body>
-    <!-- <div style="padding:100px 100px; background-color: skyblue;"> -->
-        <div id="fade">
-            <div>
-                <img src="images/todolist.png" alt="">
-                <h3 class="tab_title">첫번째</h3>
-                <p>첫번째 설명</p>
-            </div>
-            <div>
-                <img src="images/item.png" alt="">
-                <h3 class="tab_title">두번째</h3>
-                <p>두번째 설명</p>
-            </div>
-            <div>
-                <img src="images/calender.png" alt="">
-                <h3 class="tab_title">세번째</h3>
-                <p>세번째 설명</p>
-            </div>
-        </div>
-    <!-- </div> -->
-    <script>
-        $(function () {
-            $('#fade').slick({
-                dots: true,
-                infinite: true,
-                speed: 500,
-                fade: true,
-                cssEase: 'linear',
-                dotsClass : "slick-dots",
-                class: '다른클래스'
-            });
-        })
 
-        const fade = document.querySelector('#fade')
-        console.log(fade.childNodes[5])
-  
-    </script>
+    <div class="main">
+        <div class="circle"></div>
+        <div class="circle2"></div>
+    </div>
+
 </body>
 
 </html>
