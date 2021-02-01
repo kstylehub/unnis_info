@@ -66,6 +66,7 @@ h4 {
     font-size: 30px;
     font-family: 'Roboto', sans-serif;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 h5 {
@@ -180,7 +181,7 @@ header {
 
 #main_video {
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     max-width: 650px;
     min-width: 480px;
     width: 50%;
@@ -190,9 +191,12 @@ header .app_title {
     position: relative;
     width: 70%;
     height: 100%;
+    max-height: 750px;
     margin: 0 auto 0 auto;
     padding-top: 100px;
     border: 1px solid red;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 header .text {
@@ -214,19 +218,19 @@ header .text .title {
     font-weight: 900;
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translate(-50%);
+    left: 0;
     animation-name: title_ani;
     animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
     font-style: italic;
     color: #343A40;
+    border: 1px solid red;
 }
 
 @keyframes title_ani {
     from {
         opacity: 0;
-        left: 30%;
+        left: -30%;
     }
 
     to {
@@ -324,9 +328,9 @@ header .app_title img {
     position: absolute;
     width: 42%;
     max-width: 550px;
-    min-width: 430px;
+    min-width: 400px;
     right: -7%;
-    bottom: 8%;
+    bottom: 5%;
 }
 
 /* SLIDER SECTION */
@@ -409,7 +413,7 @@ header .app_title img {
     align-items: center;
     width: 70%;
     margin: 0 auto;
-    position:relative;
+    position: relative;
     /* border:1px solid red; */
     padding: 100px 0;
 }
@@ -417,10 +421,10 @@ header .app_title img {
 #cosmetic_box>div>div {
     text-align: center;
     /* border:1px solid red; */
-    width:55%;
+    width: 55%;
 }
 
-#cosmetic_box>div>div h6{
+#cosmetic_box>div>div h6 {
     line-height: 35px;
     /* border:1px solid red; */
 }
@@ -433,8 +437,8 @@ header .app_title img {
 
 #cosmetic_box>div img {
     width: 50%;
-    position:absolute;
-    right:-10%;
+    position: absolute;
+    right: -10%;
 }
 
 #cosmetic_box>ul {
@@ -550,13 +554,11 @@ header .app_title img {
     justify-content: space-between;
     width: 70%;
     margin: 0 auto;
-    /* border: 1px solid red; */
 }
 
 #step ul li {
     /* 기준점 */
     width: 20%;
-    /* border: 1px solid blue; */
     position: relative;
     height: 270px;
 }
@@ -571,6 +573,7 @@ header .app_title img {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+    overflow: hidden;
 }
 
 #step ul li .step_ani {
@@ -641,27 +644,27 @@ header .app_title img {
     position: absolute;
     left: 115%;
     top: 30%;
-    animation-name:arrow_ani;
+    animation-name: arrow_ani;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: ease;
     animation-direction: alternate;
 }
 
-@keyframes arrow_ani{
-    from{
-        transform:scale(1);
-        opacity:0;
+@keyframes arrow_ani {
+    from {
+        transform: scale(1);
+        opacity: 0;
     }
 
-    to{
-        transform:scale(1.2);
-        opacity:1;
+    to {
+        transform: scale(1.2);
+        opacity: 1;
     }
 }
 
 #step ul li:nth-child(4):after {
-    display:none;
+    display: none;
 }
 
 /* CALENDAR */

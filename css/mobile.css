@@ -61,6 +61,8 @@ header .text {
     position: static;
     width: 100%;
     text-align: center;
+    max-height:none;
+    transform:none;
 }
 
 header .app_title {
@@ -74,7 +76,7 @@ header .text {
 header .app_title .text .title {
     top: 15%;
     font-size: 25px;
-    width: 90%;
+    width: 100%;
 }
 
 header .text .desc {
@@ -221,10 +223,13 @@ header #main_video {
 
 #cosmetic_box>div {
     flex-flow: column;
+    padding:0;
+    width:90%;
 }
 
 #cosmetic_box>div img {
     width: 100%;
+    position:static;
 }
 
 #cosmetic_box>ul {
@@ -253,6 +258,40 @@ header #main_video {
 
 #cosmetic_box ul img {
     margin-bottom: 20px;
+}
+
+#cosmetic_box>div>div {
+    width:100%;
+}
+
+#cosmetic_box>div>div h6{
+    line-height: 20px;
+    width:100%;
+}
+
+/* STEP */
+
+#step ul{
+    flex-flow: column;
+    justify-content: center;
+    width:90%;
+}
+
+#step ul li{
+    width:100%;
+}
+
+#step ul li>div{
+    
+    
+}
+
+#step ul li:after{
+    left:50%;
+    top:85%;
+    transform: translateX(-50%);
+    animation: rotate; 
+    background-image: url('../images/arrow.png');
 }
 
 /* CALENDAR */
