@@ -202,7 +202,7 @@ header .app_title {
 header .text {
     position: relative;
     height: 30%;
-    top: 5%;
+    top: 0;
     left: 0;
 }
 
@@ -560,7 +560,7 @@ header .app_title img {
     /* 기준점 */
     width: 20%;
     position: relative;
-    height: 270px;
+    height: 250px;
 }
 
 #step ul li>div {
@@ -625,7 +625,7 @@ header .app_title img {
 
 #step ul li p {
     position: absolute;
-    top: 70%;
+    top: 80%;
     width: 100%;
     text-align: center;
     font-size: 13px;
@@ -875,4 +875,17 @@ footer li {
 footer p {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+}
+
+.top_btn{
+    position: fixed;
+    bottom: 6%;
+    right: 0%;
+    padding:20px;
+    /* border:1px solid red; */
+}
+
+.fa-arrow-circle-up{
+    color: #F29774;
+    font-size: 30px;
 }

@@ -61,8 +61,8 @@ header .text {
     position: static;
     width: 100%;
     text-align: center;
-    max-height:none;
-    transform:none;
+    max-height: none;
+    transform: none;
 }
 
 header .app_title {
@@ -223,13 +223,14 @@ header #main_video {
 
 #cosmetic_box>div {
     flex-flow: column;
-    padding:0;
-    width:90%;
+    padding: 0;
+    width: 90%;
 }
 
 #cosmetic_box>div img {
     width: 100%;
-    position:static;
+    position: static;
+    margin-top:10%;
 }
 
 #cosmetic_box>ul {
@@ -261,36 +262,40 @@ header #main_video {
 }
 
 #cosmetic_box>div>div {
-    width:100%;
+    width: 100%;
 }
 
-#cosmetic_box>div>div h6{
+#cosmetic_box>div>div h6 {
     line-height: 20px;
-    width:100%;
+    width: 100%;
+    font-size: 12px;
 }
 
 /* STEP */
 
-#step ul{
+#step{
+    margin-top:50px;
+}
+
+#step ul {
     flex-flow: column;
     justify-content: center;
-    width:90%;
+    width: 90%;
 }
 
-#step ul li{
-    width:100%;
+#step ul li {
+    width: 100%;
+    height: 220px;
+    margin-bottom: 10%;
 }
 
-#step ul li>div{
-    
-    
-}
+#step ul li>div {}
 
-#step ul li:after{
-    left:50%;
-    top:85%;
+#step ul li:after {
+    left: 50%;
+    top: 100%;
     transform: translateX(-50%);
-    animation: rotate; 
+    animation: rotate;
     background-image: url('../images/arrow.png');
 }
 
@@ -333,6 +338,7 @@ header #main_video {
 
 #contact .cotact_text {
     margin: 0 0 20px 0;
+    text-align: center;
 }
 
 /* FOOTER */
