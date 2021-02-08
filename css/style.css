@@ -191,7 +191,7 @@ header .app_title {
     position: relative;
     width: 70%;
     height: 100%;
-    max-height: 750px;
+    max-height: 800px;
     margin: 0 auto 0 auto;
     padding-top: 100px;
     border: 1px solid red;
@@ -574,11 +574,12 @@ header .app_title img {
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
+    border:1px solid #fff;
 }
 
 #step ul li .step_ani {
     /* 애니메이션 줄 뒷배경 */
-    background-color: #fff;
+    background-color: #F29774;
     animation-name: step_ani;
     animation-timing-function: linear;
     animation-duration: 2s;
