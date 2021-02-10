@@ -282,6 +282,7 @@ header .app_title button i {
 header .app_title button i span {
     color: #fff;
     font-weight: 500;
+    font-family: 'Roboto', sans-serif;
 }
 
 header .app_title button:nth-child(1) {
@@ -574,7 +575,7 @@ header .app_title img {
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
-    border:1px solid #fff;
+    border: 1px solid #fff;
 }
 
 #step ul li .step_ani {
@@ -778,6 +779,8 @@ header .app_title img {
     box-shadow: 1px 2px 10px#dbdbdb;
 }
 
+
+
 .review_slider_wrap .review_img_text>div img {
     display: inline-block;
     width: 100%;
@@ -793,6 +796,8 @@ header .app_title img {
     padding: 0px 20px 20px;
     line-height: 1.5em;
     font-size: 12px;
+    word-break: break-all;
+    
 }
 
 /* CONTACT SECTION*/
@@ -878,15 +883,15 @@ footer p {
     font-size: 14px;
 }
 
-.top_btn{
+.top_btn {
     position: fixed;
     bottom: 6%;
     right: 0%;
-    padding:20px;
+    padding: 20px;
     /* border:1px solid red; */
 }
 
-.fa-arrow-circle-up{
+.fa-arrow-circle-up {
     color: #F29774;
     font-size: 30px;
 }

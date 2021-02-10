@@ -1,35 +1,41 @@
 const reviewWrap = document.querySelector('.review_slider_wrap');
-console.log(reviewWrap)
 
 const reviewContents = [{
-        img: `http://placekitten.com/200/201`,
-        pid: `yesol`,
-        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
+        img: `images/which1.jpg`,
+        pid: `Den**`,
+        desc: `Biasanya, aku selalu ingin membeli banyak produk kosmetik Korea, tentu saja akan lebih menyenangkan jika aku bisa membelinya dengan harga murah setiap bulan. Rasanya seperti mendapatkan hadiah, aku pun menantikannya setiap bulan~ Aku juga bisa langsung mendapatkan produk sample saat mendaftar. Aku ingin segera memakai produknya. 
+        `
     },
     {
-        img: `http://placekitten.com/200/200`,
-        pid: `yesol`,
-        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
+        img: `images/lime1.jpg`,
+        pid: `Fe**`,
+        desc: `Belakangan ini aku tidak memakai banyak riasan karena harus mengenakan masker. Aku takut bedakku luntur, tapi kemudian aku dapat rekomendasi produk cushion yang bagus!
+        Kalau bisa mendapatkan produk yang kubutuhkan setiap bulan seperti ini, aku nggak perlu lagi pusing belanja produk kosmetik. Sangat recommended!`
     },
     {
-        img: `http://placekitten.com/200/201`,
-        pid: `yesol`,
-        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
+        img: `images/which2.jpg`,
+        pid: `Gra**`,
+        desc: `Aku tertarik dengan produk kosmetik Korea, dan saat kudengar ada layanan pengiriman reguler untuk kosmetik korea, tanpa ragu aku pun berlangganan.
+        Aku punya kulit yang sensitif, tapi aku sangat senang karena disini aku bisa mendapatkan produk yang cocok dengan kulitku.
+        Aku sudah mendapatkan paket Ampoule Mask Pack dan itu membuat kulitku tetap lembab.`
     },
     {
-        img: `http://placekitten.com/200/200`,
-        pid: `yesol`,
-        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
+        img: `images/lime2.jpg`,
+        pid: `Jennif**`,
+        desc: `Awalnya, aku memakai app ini untuk mencari tahu skin tone-ku.
+        Tapi kemudian aku sangat senang karena mendapatkan rekomendasi produk yang sesuai dengan skin tone-ku tanpa harus pusing memilih.
+        Cushionnya membuat kulitku tetap lembab, punya kemampuan covering yang bagus dan casenya sangat mewah dan cantik.
+        Aku ingin terus menggunakan lebih banyak lagi produk kosmetik Korea.`
     },
     {
-        img: `http://placekitten.com/200/201`,
-        pid: `yesol`,
-        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
+        img: `images/which3.jpg`,
+        pid: `Katri**`,
+        desc: `Aku sangat senang karena bisa menjadi tester. Aku memiliki kulit yang sangat sensitif, tapi aku jadi sangat yakin saat mendapat rekomendasi dan juga kiriman produk kosmetik yang benar-benar cocok. Aku akan memakai produknya dan kembali untuk memberikan ulasan lainnya! `
     },
     {
-        img: `http://placekitten.com/200/200`,
-        pid: `yesol`,
-        desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
+        img: `images/lime3.jpg`,
+        pid: `Aleis**`,
+        desc: `Aku ini pengembara yang masih belum bisa menemukan cushion terbaik untuk kulitku. Tapi, saat aku tahu bahwa aku akan mendapatkan kiriman cushion yang cocok dengan kulitku, aku jadi penasaran!! Menurutku, manfaat terbesar UNNIS adalah kemampuannya memberi kemudahan akses pembelian dan rekomendasi produk kosmetik Korea yang bagus! Aku mau berlangganan dan menggunakannya terus-menerus. :-)`
     },
 ];
 
@@ -45,12 +51,13 @@ for (let i = 0; i < reviewContents.length; i++) {
     newWDiv.appendChild(newWImg)
     newWDiv.appendChild(newWH6)
     newWDiv.appendChild(newP)
-    
+
     newWrapDiv.classList.add('review_img_text')
 
     newWImg.src = reviewContents[i].img
     newWH6.textContent = reviewContents[i].pid
     newP.textContent = reviewContents[i].desc
+    newP.className = 'review'
 }
 
 // 슬릭 슬라이더 리뷰 섹션
@@ -94,3 +101,17 @@ $(document).ready(function () {
     });
 
 });
+
+// 100자 이상 ...처리 더보기 버튼 활성
+
+const review = document.querySelectorAll('.review')
+
+console.log(review[0].textContent.length)
+
+// 만약 텍스트 글씨수가 100자가 넘으면 ...처리
+
+var content_txt_short = review[0].textContent.substring(0, 100) + "...";
+
+if (review[0].textContent.length > 100) {
+    review[0].style.color = 'red';
+}

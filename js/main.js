@@ -22,8 +22,6 @@ const cosmeticLis = document.querySelectorAll('#cosmetic_box li')
 const calendarTexts = document.querySelectorAll('.calendar_text')
 const stepDivs = document.querySelectorAll('.step')
 
-console.log(stepDivs)
-
 function scrollWork() {
 
     if (html.scrollTop > 1700 && html.scrollTop < 1800) {
@@ -47,7 +45,6 @@ function scrollWork() {
 // navigation
 const hamburgerBtn = document.querySelector('.hamburger')
 const navUl = document.querySelector('.nav_wrap ul')
-console.log(navUl)
 
 navUl.classList.remove('on')
 
