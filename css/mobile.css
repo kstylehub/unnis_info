@@ -100,14 +100,15 @@ header .app_title .btn button:nth-child(1) {
     position: fixed;
     bottom: 0;
     right: 0;
-    left:0;
+    left: 0;
     z-index: 200;
     background-color: #000;
     width: 100%;
     height: 50px;
 }
 
-header .app_title .btn button:nth-child(2) {
+header .app_title .btn button:nth-child(2),
+header .app_title .btn button:nth-child(3) {
     display: none;
 }
 
@@ -230,7 +231,7 @@ header #main_video {
 #cosmetic_box>div img {
     width: 100%;
     position: static;
-    margin-top:10%;
+    margin-top: 10%;
 }
 
 #cosmetic_box>ul {
@@ -273,8 +274,8 @@ header #main_video {
 
 /* STEP */
 
-#step{
-    margin-top:50px;
+#step {
+    margin-top: 50px;
 }
 
 #step ul {
