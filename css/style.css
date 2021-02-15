@@ -797,7 +797,7 @@ header .app_title img {
     line-height: 1.5em;
     font-size: 12px;
     word-break: break-all;
-    
+    font-family: 'Roboto', sans-serif;
 }
 
 /* CONTACT SECTION*/

@@ -58,6 +58,7 @@ for (let i = 0; i < reviewContents.length; i++) {
     newWH6.textContent = reviewContents[i].pid
     newP.textContent = reviewContents[i].desc
     newP.className = 'review'
+    newWDiv.className = 'reviewBox'
 }
 
 // 슬릭 슬라이더 리뷰 섹션
@@ -103,14 +104,24 @@ $(document).ready(function () {
 });
 
 // 100자 이상 ...처리 더보기 버튼 활성
-
 const review = document.querySelectorAll('.review')
-
-console.log(review[0].textContent.length)
+const reviewBox = document.querySelectorAll('.reviewBox')
 
 // 만약 텍스트 글씨수가 100자가 넘으면 ...처리
+const word200 = review[0].textContent.substring(0, 200) + "...";
 
-var content_txt_short = review[0].textContent.substring(0, 100) + "...";
+const newBtn = document.createElement('button')
+console.log(newBtn)
+reviewBox[0].appendChild(newBtn)
+
+const moreBtn = document.querySelectorAll('.reviewBox button')
+console.log(moreBtn)
+
+moreBtn.width = '100px'
+
+moreBtn.textContent = '몰라'
+
+console.log(moreBtn.textContent)
 
 if (review[0].textContent.length > 100) {
     review[0].style.color = 'red';
