@@ -113,9 +113,13 @@ for (let i = 0; i < reviewBox.length; i++) {
     const moreBtn = document.querySelectorAll('.reviewBox div') // more 버튼을 찾음
     moreBtn[i].textContent = 'more'
 
-    if (review[i].textContent.length > 200) {
-        // 글자수가 200이상이면 ...처리
-        const word200 = review[i].textContent.substring(0, 190) + "...";
+    const normalWord = review[i].textContent
+    // 글자수가 200이상이면 ...처리   
+    const word200 = normalWord.substring(0, 190) + "...";
+
+    console.log(normalWord)
+    
+    if (review[i].textContent.length > 200) {      
         review[i].textContent = word200
     } else {
         moreBtn[i].style.display = 'none'
@@ -125,10 +129,17 @@ for (let i = 0; i < reviewBox.length; i++) {
 
         // more버튼을 클릭하면 뒤에 ...이 없어지고 close 버튼이 생김
         if(moreBtn[i].textContent === 'more'){
-            review[i].textContent = review[i].textContent
+            review[i].textContent = normalWord
+            moreBtn[i].textContent = 'close'
+        }else{
+            review[i].textContent = word200
+            moreBtn[i].textContent = 'more'
         }
 
         // close 버튼이 나오는 상황일 경우에 close버튼을 누르면 다시 ...과 more버튼이 생김
     })
+
+    // console.log(review[i].textContent)
 }
+
 
