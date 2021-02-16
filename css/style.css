@@ -22,7 +22,8 @@ button {
     background-color: rgba(0, 0, 0, 0)
 }
 
-button:nth-child(1), button:nth-child(2) {
+button:nth-child(1),
+button:nth-child(2) {
     margin-right: 10px;
 }
 
@@ -194,7 +195,7 @@ header .app_title {
     max-height: 800px;
     margin: 0 auto 0 auto;
     padding-top: 100px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     top: 50%;
     transform: translateY(-50%);
 }
@@ -224,7 +225,7 @@ header .text .title {
     animation-timing-function: ease-in-out;
     font-style: italic;
     color: #343A40;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 @keyframes title_ani {
@@ -286,7 +287,7 @@ header .app_title button i span {
     font-family: 'Roboto', sans-serif;
 }
 
-header .app_title button{
+header .app_title button {
     position: relative;
     animation-timing-function: ease-in;
     bottom: 0%;
@@ -371,50 +372,85 @@ header .app_title img {
 }
 
 #slider .slick-dots {
-    top: -60px;
+    top: -100px;
 }
 
 #slider .slick-dots li {
-    width: 19%;
-    border:1px solid red;
+    width: 15%;
+    /* border: 1px solid #fff; */
+    text-align: center;
+    height: 100px;
 }
 
 #slider .slick-dots li button:before {
     width: 100%;
-    font-size: 20px;
-    color: #fff;
-    padding-bottom: 10px;
+    opacity: 1;
+    content: "";
+    background-size: 50%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    /* border:1px solid blue; */
 }
 
-#slider .slick-dots li.slick-active button:before {
-    opacity: 1;
-}
+/* 슬라이더 타이틀 색 변경 */
 
 #slider .slick-dots li:nth-child(1) button:before {
-    content: "SELF TEST";
+    background-image: url('../images/white_line/test.png');
 }
 
 #slider .slick-dots li:nth-child(2) button:before {
-    content: "AI RECOMMENDATION";
-    word-break: break-all;
+    background-image: url('../images/white_line/ai.png');
 }
 
 #slider .slick-dots li:nth-child(3) button:before {
-    content: "CHAT BOT";
+    background-image: url('../images/white_line/chatbot.png');
 }
 
 #slider .slick-dots li:nth-child(4) button:before {
-    content: "SUBSCRIPTION";
+    background-image: url('../images/white_line/subscription.png');
 }
 
 #slider .slick-dots li:nth-child(5) button:before {
-    content: "EVENT INFO";
+    background-image: url('../images/white_line/event.png');
+}
+
+#slider .slick-dots li.slick-active button:before {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 52%;
+    opacity: 1;
+    /* border:1px solid red; */
+}
+
+#slider .slick-dots li.slick-active:nth-child(1) button:before {
+    background-image: url('../images/yellow_line/test.png');
+}
+
+#slider .slick-dots li.slick-active:nth-child(2) button:before {
+    background-image: url('../images/yellow_line/ai.png');
+}
+
+#slider .slick-dots li.slick-active:nth-child(3) button:before {
+    background-image: url('../images/yellow_line/chatbot.png');
+}
+
+#slider .slick-dots li.slick-active:nth-child(4) button:before {
+    background-image: url('../images/yellow_line/subscription.png');
+}
+
+#slider .slick-dots li.slick-active:nth-child(5) button:before {
+    background-image: url('../images/yellow_line/event.png');
 }
 
 #slider .slider_text {
     width: 50%;
     position: absolute;
-    left: 50%;
+    left: 45%;
     top: 50%;
     transform: translateY(-50%);
     text-align: center;

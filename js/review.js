@@ -64,10 +64,8 @@ for (let i = 0; i < reviewContents.length; i++) {
 // 슬릭 슬라이더 리뷰 섹션
 $(document).ready(function () {
 
-    //alert('123');
-
     $('.review_slider_wrap').slick({
-        autoplay: false,
+        autoplay: true,
         dots: true,
         speed: 300 /* 이미지가 슬라이딩시 걸리는 시간 */ ,
         infinite: true,
@@ -100,7 +98,6 @@ $(document).ready(function () {
             }
         ]
     });
-
 });
 
 // 100자 이상 ...처리 더보기 버튼 활성
@@ -117,29 +114,22 @@ for (let i = 0; i < reviewBox.length; i++) {
     // 글자수가 200이상이면 ...처리   
     const word200 = normalWord.substring(0, 190) + "...";
 
-    console.log(normalWord)
-    
-    if (review[i].textContent.length > 200) {      
+    if (review[i].textContent.length > 200) {
         review[i].textContent = word200
     } else {
         moreBtn[i].style.display = 'none'
     }
 
-    moreBtn[i].addEventListener('click', ()=>{
+    moreBtn[i].addEventListener('click', () => {
 
         // more버튼을 클릭하면 뒤에 ...이 없어지고 close 버튼이 생김
-        if(moreBtn[i].textContent === 'more'){
+        if (moreBtn[i].textContent === 'more') {
             review[i].textContent = normalWord
             moreBtn[i].textContent = 'close'
-        }else{
+        } else {
+            // close 버튼이 나오는 상황일 경우에 close버튼을 누르면 다시 ...과 more버튼이 생김
             review[i].textContent = word200
             moreBtn[i].textContent = 'more'
         }
-
-        // close 버튼이 나오는 상황일 경우에 close버튼을 누르면 다시 ...과 more버튼이 생김
     })
-
-    // console.log(review[i].textContent)
 }
-
-
