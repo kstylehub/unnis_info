@@ -59,6 +59,3 @@ hamburgerBtn.addEventListener('click', () => {
         navUl.classList.remove('on')
     }
 });
-
-// step 애니메이션 스크롤 이벤트
-

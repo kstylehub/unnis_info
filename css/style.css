@@ -195,7 +195,6 @@ header .app_title {
     max-height: 800px;
     margin: 0 auto 0 auto;
     padding-top: 100px;
-    /* border: 1px solid red; */
     top: 50%;
     transform: translateY(-50%);
 }
@@ -225,7 +224,6 @@ header .text .title {
     animation-timing-function: ease-in-out;
     font-style: italic;
     color: #343A40;
-    /* border: 1px solid red; */
 }
 
 @keyframes title_ani {
@@ -254,7 +252,6 @@ header .text .desc {
     transition: all .2s linear;
     line-height: 1.5em;
     color: #ADB5BD;
-    /* word-break: break-all; */
 }
 
 @keyframes desc_ani {
@@ -377,7 +374,6 @@ header .app_title img {
 
 #slider .slick-dots li {
     width: 15%;
-    /* border: 1px solid #fff; */
     text-align: center;
     height: 100px;
 }
@@ -394,7 +390,6 @@ header .app_title img {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    /* border:1px solid blue; */
 }
 
 /* 슬라이더 타이틀 색 변경 */
@@ -424,7 +419,6 @@ header .app_title img {
     background-size: 100%;
     width: 52%;
     opacity: 1;
-    /* border:1px solid red; */
 }
 
 #slider .slick-dots li.slick-active:nth-child(1) button:before {
