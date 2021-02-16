@@ -712,98 +712,6 @@ header .app_title img {
     display: none;
 }
 
-/* CALENDAR */
-#calendar {
-    background-color: #fffdf9;
-    padding: 0 0 100px 0;
-}
-
-#calendar>div {
-    width: 70%;
-    margin: 0 auto;
-}
-
-#calendar>div h4 {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-#calendar>div img {
-    width: 40%;
-}
-
-#calendar .calendar_img_text {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    border: 1px solid blue;
-}
-
-#calendar .calendar_img_text>div {
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 100%;
-}
-
-#calendar .calendar_img_text h6 {
-    width: 100%;
-    margin-bottom: 20px;
-    font-family: 'Roboto', sans-serif;
-    position: absolute;
-    top: 15%;
-    text-align: center;
-    font-weight: 700;
-}
-
-#calendar .calendar_img_text h6.ani {
-    animation-name: calendar_title_ani;
-    animation-timing-function: ease;
-    animation-duration: 1s;
-}
-
-@keyframes calendar_title_ani {
-    from {
-        right: -10%;
-        opacity: 0;
-    }
-
-    to {
-        right: 0;
-        opacity: 1;
-    }
-}
-
-#calendar .calendar_img_text p {
-    width: 100%;
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    line-height: 30px;
-    font-size: 14px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-#calendar .calendar_img_text p.ani {
-    animation-name: calendar_desc_ani;
-    animation-timing-function: ease;
-    animation-duration: 2s;
-}
-
-@keyframes calendar_desc_ani {
-    from {
-        right: -10%;
-        opacity: 0;
-    }
-
-    to {
-        right: 0;
-        opacity: 1;
-    }
-}
-
 /* REVIEW SECTION */
 .slick-track {
     margin-bottom: 30px;
@@ -939,7 +847,6 @@ footer p {
     bottom: 6%;
     right: 0%;
     padding: 20px;
-    /* border:1px solid red; */
 }
 
 .fa-arrow-circle-up {

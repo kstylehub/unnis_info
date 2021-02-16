@@ -302,38 +302,6 @@ header #main_video {
     background-image: url('../images/arrow.png');
 }
 
-/* CALENDAR */
-#calendar {
-    padding: 0;
-}
-
-#calendar .calendar_img_text {
-    flex-flow: column;
-}
-
-#calendar .calendar_img_text>div,
-#calendar .calendar_img_text h6,
-#calendar .calendar_img_text p {
-    position: static;
-}
-
-#calendar>div img {
-    width: 80%;
-}
-
-#calendar .calendar_img_text>div {
-    margin-top: 50px;
-    width: 100%;
-}
-
-#calendar>div h4 {
-    margin-bottom: 30px;
-}
-
-#calendar .calendar_img_text p {
-    transform: translate(0);
-}
-
 /* CONTACT */
 #contact>div {
     flex-flow: column;
