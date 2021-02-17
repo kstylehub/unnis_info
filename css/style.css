@@ -455,11 +455,16 @@ header .app_title img {
     color: #fff;
 }
 
-#slider .slider_text p {
+.slider_text p {
     color: #fff;
     font-size: 18px;
     line-height: 30px;
     font-family: 'Roboto', sans-serif;
+}
+
+#slider .slick-next:before,
+#slider .slick-prev:before {
+    display: none;
 }
 
 /* COSMETIC BOX SECTION */
@@ -474,6 +479,7 @@ header .app_title img {
     margin: 0 auto;
     position: relative;
     padding: 100px 0;
+    overflow: hidden;
 }
 
 #cosmetic_box>div>div {
@@ -786,6 +792,10 @@ header .app_title img {
     padding: 20px 40px;
 }
 
+#contact button>a:hover {
+    background-color: #378f79;
+}
+
 /* FOOTER SECTION */
 footer {
     padding: 100px 0;
@@ -845,7 +855,7 @@ footer p {
 .top_btn {
     position: fixed;
     bottom: 6%;
-    right: 0%;
+    right: 4%;
     padding: 20px;
 }
 

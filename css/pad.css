@@ -26,6 +26,7 @@ h6 {
 /* HEADER */
 header {
     height: 90vh;
+    overflow: hidden;
 }
 
 header .app_title {
@@ -43,14 +44,22 @@ header .app_title .text .desc {
 }
 
 header .app_title .btn {
-    flex-wrap: wrap;
-    height: 100px;
-    justify-content: center;
+    flex-flow: column;
+    height: 160px;
+    justify-content: space-between;
 }
 
-header .header_appimg {
-    background-position: center;
-    background-size: 100%;
+button:nth-child(1),
+button:nth-child(2) {
+    margin-right: 0;
+}
+
+#main_video {
+    min-width: 430px;
+}
+
+header .app_title img {
+    right: -13%;
 }
 
 /* REVIEW */
