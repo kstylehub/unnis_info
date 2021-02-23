@@ -8,7 +8,7 @@ footer>div,
 }
 
 h3 {
-    font-size: 40px;
+    font-size: 35px;
 }
 
 h4 {
@@ -56,10 +56,43 @@ button:nth-child(2) {
 
 #main_video {
     min-width: 430px;
+    bottom: 7%;
 }
 
 header .app_title img {
     right: -13%;
+}
+
+/* cosmetic box */
+#cosmetic_box {
+    padding: 0;
+}
+
+#cosmetic_box>div>div h6 {
+    line-height: 25px;
+}
+
+/* step */
+#step {
+    margin-top: 0;
+}
+
+#step ul {
+    width: 90%;
+}
+
+#step ul li>div {
+    width: 150px;
+    height: 150px;
+}
+
+#step ul li p {
+    top: 70%;
+}
+
+/* contact */
+#contact {
+    padding: 0;
 }
 
 /* REVIEW */
