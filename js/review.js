@@ -16,7 +16,7 @@ const reviewContents = [{
         img: `images/which2.jpg`,
         pid: `Gra**`,
         desc: `Aku tertarik dengan produk kosmetik Korea, dan saat kudengar ada layanan pengiriman reguler untuk kosmetik korea, tanpa ragu aku pun berlangganan.
-        Aku punya kulit yang sensitif, tapi aku sangat senang karena disini aku bisa mendapatkan produk yang cocok dengan kulitku.
+        Aku punya kulit yang sensitif, tapi aku sangat senang karena Di sini aku bisa mendapatkan produk yang cocok dengan kulitku.
         Aku sudah mendapatkan paket Ampoule Mask Pack dan itu membuat kulitku tetap lembab.`
     },
     {

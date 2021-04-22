@@ -121,6 +121,7 @@ header .app_title .btn button:nth-child(3) {
 header .app_title button>a {
     padding: 10px 10px;
     background-color: #000;
+    width:100%;
 }
 
 header .app_title button:nth-child(1) {
@@ -223,14 +224,17 @@ header #main_video {
     margin-bottom: 20px;
 }
 
-#cosmetic_box p {
+#cosmetic_box #step p {
     font-size: 12px;
+    margin-top: 5%;
 }
 
 #cosmetic_box>div {
     flex-flow: column;
     padding: 0;
+    padding-top: 10%;
     width: 90%;
+    /* margin-top: 10%; */
 }
 
 #cosmetic_box>div img {
@@ -305,6 +309,7 @@ header #main_video {
 /* CONTACT */
 #contact>div {
     flex-flow: column;
+    padding: 10% 0;
 }
 
 #contact .cotact_text {
