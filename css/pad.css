@@ -1,106 +1,99 @@
-#slider>div,
-#cosmetic_box>div,
-#calendar>div,
-#contact>div,
-footer>div,
-#cosmetic_box>ul {
-    width: 90%;
+#slider > div,
+#cosmetic_box > div,
+#calendar > div,
+#contact > div,
+footer > div,
+#cosmetic_box > ul,
+#partners {
+	width: 90%;
 }
 
 h3 {
-    font-size: 35px;
+	font-size: 10px;
 }
 
 h4 {
-    font-size: 25px;
+	font-size: 25px;
 }
 
 h5 {
-    font-size: 20px;
+	font-size: 20px;
 }
 
 h6 {
-    font-size: 15px;
+	font-size: 15px;
 }
 
 /* HEADER */
 header {
-    height: 90vh;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 header .app_title {
-    width: 90%;
-    vertical-align: middle;
-    height: 90vh;
+	vertical-align: middle;
 }
 
 header .app_title .text .title {
-    font-size: 2.5em;
+	font-size: 2.5em;
 }
 
 header .app_title .text .desc {
-    font-size: 1.1em;
+	font-size: 1.1em;
 }
 
 header .app_title .btn {
-    flex-flow: column;
-    height: 160px;
-    justify-content: space-between;
+	flex-flow: column;
+	height: 160px;
+	justify-content: space-between;
 }
 
 button:nth-child(1),
 button:nth-child(2) {
-    margin-right: 0;
-}
-
-#main_video {
-    min-width: 430px;
-    bottom: 7%;
+	margin-right: 0;
 }
 
 header .app_title img {
-    right: -13%;
+	right: -13%;
 }
 
 /* cosmetic box */
 #cosmetic_box {
-    padding: 0;
+	padding: 0;
 }
 
-#cosmetic_box>div>div h6 {
-    line-height: 25px;
+#cosmetic_box > div > div h6 {
+	line-height: 25px;
 }
 
 /* step */
 #step {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 #step ul {
-    width: 90%;
+	width: 90%;
 }
 
-#step ul li>div {
-    width: 150px;
-    height: 150px;
+#step ul li > div {
+	width: 150px;
+	height: 150px;
 }
 
 #step ul li p {
-    top: 70%;
+	top: 70%;
 }
 
 /* contact */
 #contact {
-    padding: 0;
+	padding: 0;
 }
 
 /* REVIEW */
 .review_slider_wrap {
-    width: 90%;
+	width: 90%;
 }
 
 /* FOOTER */
-footer>ul {
-    width: 90%;
+footer > ul {
+	width: 90%;
 }
