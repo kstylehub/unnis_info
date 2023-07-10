@@ -1,13 +1,21 @@
-import unnis from '../../assets/unnisBox.png'
+import unnis from "../../assets/unnisBox.png";
+import NavbarPhone from "../MobilePage/NavbarPhone/NavbarPhone";
+import NavigationButtom from "../MobilePage/NavigatonBottom/NavigationBottom";
 
 function Content() {
   return (
-    <div className='content w-full flex flex-col pr-28 pl-14 relative w-6/12 min-h-screen max-w-xs shadow-lg shadow-indigo-500/50 bg-white'>
-        <div className=''>
-            <div>
-                <h1>tesssssss</h1>
-            </div>
+    <div className="content flex flex-col relative min-h-screen lg:w-6/12 md:right-10 lg:w-6/12 w-[100vw] shadow-lg shadow-indigo-500/50 bg-white">
+      <div className="">
+        <div>
+          <NavbarPhone />
         </div>
+        <div>
+          <h1>Content</h1>
+        </div>
+        <div>
+          <NavigationButtom />
+        </div>
+      </div>
     </div>
   );
 }
