@@ -1,5 +1,5 @@
 import React from "react";
-import logoUnnis from "../../assets/favicon.ico";
+import logoUnnis from "../../assets/Grouplogo.svg";
 import andImg from "../../assets/and_img.png";
 import iosImg from "../../assets/ios_img.png";
 import barcode from "../../assets/icon_barcode.png";
@@ -9,7 +9,7 @@ function Info() {
     <div className="content h-full flex flex-col items-center justify-center pr-14 pl-28 gap-y-10 w-screen hidden md:block mt-[50vh]">
       <div className="text-center">
         <div className="pb-2 flex justify-center">
-          <img src={logoUnnis} className="w-16 h-16" alt="Logo" />
+          <img src={logoUnnis} className="w-32 h-32 drop-shadow-2xl" alt="Logo" />
         </div>
         <h4 className="font-bold">UNNIS APP</h4>
       </div>
