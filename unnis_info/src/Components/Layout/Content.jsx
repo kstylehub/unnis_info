@@ -11,7 +11,7 @@ function Content() {
         <div>
           <NavbarPhone />
         </div>
-        <div className="h-full">
+        <div className="h-full overflow-y-auto">
           {/* <Homepage/> */}
           <Subscribe/>
         </div>
