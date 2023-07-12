@@ -10,7 +10,7 @@ function NavigationButtom() {
         style={{ textAlign: "-webkit-center" }}
       >
         <div>
-          <a href="/home">  
+          <a href="/">  
             <div>
               <div className="m-1">
                 <img src={Home} className="w-8 h-8" />

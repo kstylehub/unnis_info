@@ -7,16 +7,15 @@ import Subscribe from "../Components/MobilePage/Subscribe";
 
 const router = createBrowserRouter([
     {
-        path: '/',
         element: <Layout/>,
         children: [
             {
-                path: '/:home',
-                element: <Homepage/>,
+                path: '/',
+                // element: <Homepage/>,
             },
             {
                 path: '/:subscribe',
-                element: <Subscribe/>
+                // element: <Subscribe/>
             }
         ]
     }

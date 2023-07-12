@@ -9,19 +9,17 @@ function Content(props) {
 
   function ContentPage() {
   const params  = useParams();
-  const home = params.home
-
-    if(home === 'home'){
-      return (
-        <Homepage/>
-      )
-    }
-    if(home === 'subscribe') {
+    
+    if(params.subscribe == 'subscribe') {
       return (
         <Subscribe/>
       )
     }
-    return null
+    if(params.home == undefined){
+      return (
+        <Homepage/>
+      )
+    }
   }
   return (
     <div className="content flex flex-col relative min-h-screen lg:w-6/12 md:right-10 lg:w-6/12 w-[100vw] shadow-lg shadow-indigo-500/50 bg-white">
@@ -29,7 +27,7 @@ function Content(props) {
         <div>
           <NavbarPhone />
         </div>
-        <div className="h-full">
+        <div className="h-screen overflow-y-auto">
           <ContentPage/>
         </div>
         <div className="bg-slate-50 pt-2.5 pb-1 px-1.5">

@@ -5,7 +5,7 @@ import Content from "./Content"
 function Home() {
     return (
         <div className="bg-[#4ABFA1] fixed h-full w-full">
-            <div className="flex justify-center items-center h-full w-screen ">
+            <div className="flex justify-center items-center h-screen w-screen ">
                     <Info/>
                     <Content/>
             </div>
