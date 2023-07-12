@@ -4,12 +4,9 @@ function Subscribe() {
   return (
     <>
       <div className="overflow-y-auto">
-        <div>
-          <img bg-cover src={beautyBox} className="w-full h-auto"></img>
-          <button type="button"
-                class="w-full md:w-40 h-14 rounded bg-sky-400 text-xs
-                font-medium uppercase leading-normal
-                text-white shadow-[0_4px_9px_-4px_#3b71ca] w-50">
+        <div class="relative">
+          <img src={beautyBox} alt="Backgrond Image" className="w-full h-auto"></img>
+          <button class="absolute bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-3/4 px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white rounded-full shadow" >
             Daftar Sekarang
           </button>
         </div>
@@ -22,3 +19,4 @@ function Subscribe() {
 }
 
 export default Subscribe;
+// <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
