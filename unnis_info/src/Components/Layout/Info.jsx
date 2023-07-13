@@ -6,7 +6,7 @@ import barcode from "../../assets/icon_barcode.png";
 
 function Info() {
   return (
-    <div className="content h-full flex flex-col items-center justify-center pr-14 pl-28 gap-y-10 w-screen hidden md:block mt-[50vh]">
+    <div className="content h-full flex flex-col items-center justify-center lg:w-[40%] pr-14 pl-28 gap-y-10 w-screen hidden lg:block mt-[50vh]">
       <div className="text-center">
         <div className="pb-2 flex justify-center">
           <img
