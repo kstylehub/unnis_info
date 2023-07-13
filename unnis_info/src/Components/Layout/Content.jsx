@@ -3,7 +3,7 @@ import NavbarPhone from "../MobilePage/NavbarPhone/NavbarPhone";
 import NavigationButtom from "../MobilePage/NavigatonBottom/NavigationBottom";
 import Homepage from "../MobilePage/Homepage/Homepage"
 import Subscribe from "../MobilePage/Subscribe";
-
+import BackToTopButton from "../MobilePage/Subscribe/BackToTop";
 function Content() {
   return (
     <div className="content flex flex-col relative min-h-screen lg:w-6/12 md:right-10 lg:w-6/12 w-[100vw] shadow-lg shadow-indigo-500/50 bg-white">
