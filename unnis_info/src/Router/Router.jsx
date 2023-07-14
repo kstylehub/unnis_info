@@ -10,6 +10,7 @@ import Event from "../Components/MobilePage/ScreenNavBot/Event";
 import ContentNavbar from "../Components/MobilePage/NavbarPhone/contentNavbar";
 import Transaction from "../Components/MobilePage/ScreenNavBot/Transaction";
 import MyPage from "../Components/MobilePage/ScreenNavBot/MyPage";
+import ContentEvent from "../Components/MobilePage/Components/ContentEvent/ContentEvent";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,12 @@ const router = createBrowserRouter([
           {
             path: "/event",
             element: <Event />,
+            children:[
+              {
+                path:"/event",
+                element:<ContentEvent/>
+              }
+            ]
           },
           {
             path: "/transaction",

@@ -58,7 +58,7 @@ function NewPage() {
               <img src={search} className="w-full" />
             </div>
           </div>
-          <div className="flex px-5 w-screen overflow-x-auto pt-3 gap-3 max-w-screen overflow-x-auto">
+          <div className="flex px-5 pt-3 gap-3 max-w-screen overflow-x-auto">
             { loading ? (<BarLoader color="#0000ff"/>) : (
               <CategoryProduct/>
             )
