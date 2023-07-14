@@ -5,26 +5,31 @@ import skincare from "../../../../assets/skincare.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductCategory } from "../../../../Store/Actions/Actions";
+import {BarLoader} from 'react-spinners'
 
 function NewPage() {
   const productCategory = useSelector(
     (state) => state.ReducerProductCategory.productCategory
   );
+  const loading = useSelector((state)=> state.ReducerProductCategory.loading)
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductCategory());
   }, []);
-  const category = []
-  category.push(productCategory.data)
-  console.log(category, "<<<>>>");
-  
+  // const category = []
+  // category.push(productCategory.data)
+  // console.log(category, "<<<>>>");
+  const modal = productCategory?.data ? Object.keys(productCategory?.data) : []
+  console.log(modal, "<< ini modal");
   function CategoryProduct() {
     return (
       <>
-      { category.map((el)=> {
+      { modal.map((el)=> {
         console.log(el, "ini el <<");
+        return (
         <div
-          className="bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center"
+          className="bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4"
           style={{ textAlign: "-webkit-center" }}
         >
           <img src={skincare} className="w-8 h-8" />
@@ -32,6 +37,7 @@ function NewPage() {
             <p>{el}</p>
           </div>
         </div>
+        )
       })
       }
       </>
@@ -52,8 +58,11 @@ function NewPage() {
               <img src={search} className="w-full" />
             </div>
           </div>
-          <div className="flex px-5 w-screen overflow-x-auto pt-3">
-            <CategoryProduct/>
+          <div className="flex px-5 w-screen overflow-x-auto pt-3 gap-3 max-w-screen overflow-x-auto">
+            { loading ? (<BarLoader color="#0000ff"/>) : (
+              <CategoryProduct/>
+            )
+            }
           </div>
           <div></div>
         </div>
