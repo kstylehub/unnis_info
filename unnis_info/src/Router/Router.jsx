@@ -10,6 +10,8 @@ import Event from "../Components/MobilePage/ScreenNavBot/Event";
 import ContentNavbar from "../Components/MobilePage/NavbarPhone/contentNavbar";
 import Transaction from "../Components/MobilePage/ScreenNavBot/Transaction";
 import MyPage from "../Components/MobilePage/ScreenNavBot/MyPage";
+import TransSubs from "../Components/MobilePage/Components/Transaction/Subscription";
+import TransProduct from "../Components/MobilePage/Components/Transaction/ProductPurchase";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,17 @@ const router = createBrowserRouter([
           },
           {
             path: "/transaction",
-            element: <Transaction/>
+            element: <Transaction/>,
+            children: [
+              {
+                path: "/transaction/transsubs",
+                element: <TransSubs />,
+              },
+              {
+                path: "/transaction/transproduct",
+                element: <TransProduct />,
+              },
+            ],
           },
           {
             path: "/my-page",
