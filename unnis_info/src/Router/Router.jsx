@@ -12,6 +12,7 @@ import Transaction from "../Components/MobilePage/ScreenNavBot/Transaction";
 import MyPage from "../Components/MobilePage/ScreenNavBot/MyPage";
 import TransSubs from "../Components/MobilePage/Components/Transaction/Subscription";
 import TransProduct from "../Components/MobilePage/Components/Transaction/ProductPurchase";
+import SkinAnalysis from "../Components/MobilePage/Components/MenuHome/SkinAnalysis";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
           {
             path: "/newProduct",
             element: <NewPage />,
+          },
+          {
+            path: "/skinanalysis",
+            element: <SkinAnalysis />,
           },
         ],
       },

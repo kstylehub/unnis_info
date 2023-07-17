@@ -3,7 +3,7 @@ import Box from "../../../../assets/Box_transaction.png";
 
 function TransProduct () {
     return (
-        <div className="mt-36 flex flex-col justify-center items-center">
+        <div className="lg:mt-36 mt-32 flex flex-col justify-center items-center lg:text-lg text-sm">
             <img
                 src={Box}
                 className="w-5/12 h-auto"

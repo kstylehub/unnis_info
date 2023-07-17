@@ -14,14 +14,12 @@ function Transaction() {
       return {
         border: '1px solid black',
         borderRadius: '9999px',
-        padding: '0.5rem 3.5rem',
         background: 'transparent',
       };
     } else {
       return {
         border: 'none',
         borderRadius: '9999px',
-        padding: '0.5rem 3.5rem',
         background: 'transparent',
       };
     }
@@ -29,12 +27,13 @@ function Transaction() {
 
   return (
     <>
-      <div className="bg-white h-full my-6">
-        <div className="text-xl justify-content-center">
-          <p className="font-bold lg:flex justify-center text-2xl">MY TRANSACTION</p>
-          <div className="lg:flex justify-center my-6">
+      <div className="bg-white h-full w-full py-6 px-2">
+        <div className="justify-center items-center">
+          <p className="font-bold flex justify-center items-center lg:text-2xl text-lg">MY TRANSACTION</p>
+          <div className="flex justify-center lg:py-6 py-4">
             <Link to={"/transaction/transsubs"}>
               <button
+                className="lg:text-lg lg:px-16 py-1 px-10 lg:px-6 text-md"
                 style={getButtonStyle('subs')}
                 onClick={() => handleClick('subs')}
               >
@@ -43,6 +42,7 @@ function Transaction() {
             </Link>
             <Link to={"/transaction/transproduct"}>
               <button
+                className="lg:text-lg lg:px-16 py-1 px-10 text-md lg:px-6"
                 style={getButtonStyle('product')}
                 onClick={() => handleClick('product')}
               >
