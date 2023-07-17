@@ -26,7 +26,7 @@ const listProductValue = {
     error: null,
     loading: true
 }
-export function ReducerListProduct(state = listProductValue) {
+export function ReducerListProduct(state = listProductValue, action) {
     switch (action.type) {
         case PRODUCT.GET_LIST_PRODUCT_START:
             return { ...state, loading: true }

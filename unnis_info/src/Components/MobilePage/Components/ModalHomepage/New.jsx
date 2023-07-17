@@ -17,9 +17,13 @@ import OliveYoung from "../../../../assets/OliveYoung.svg";
 import Sociolla from "../../../../assets/Sociolla.svg";
 import Star from "../../../../assets/Star.svg";
 import Arrow from "../../../../assets/Polygon3.svg";
+import ArrowBot from "../../../../assets/Polygon10.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getListProduct, getProductCategory } from "../../../../Store/Actions/Actions";
+import {
+  getListProduct,
+  getProductCategory,
+} from "../../../../Store/Actions/Actions";
 import {
   BarLoader,
   CircleLoader,
@@ -29,25 +33,28 @@ import {
   RingLoader,
 } from "react-spinners";
 import { Link } from "react-router-dom";
+import ModalCategory from "../ModalCategory/ModalCategory";
+import ModalSort from "../ModalCategory/ModalSort";
 
 function NewPage() {
   const productCategory = useSelector(
     (state) => state.ReducerProductCategory.productCategory
   );
-// const listProduct = useSelector(
-//   (state) => state.ReducerListProduct?.listProduct
-// )
+  const listProduct = useSelector(
+    (state) => state.ReducerListProduct?.listProduct
+  );
 
-const loading = useSelector((state) => state.ReducerProductCategory.loading);
+  const loading = useSelector((state) => state.ReducerProductCategory.loading);
+  const loadingAllProduct = useSelector(
+    (state) => state.ReducerListProduct.loading
+  );
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductCategory());
+    dispatch(getListProduct());
+  }, []);
 
-const dispatch = useDispatch();
-useEffect(() => {
-  dispatch(getProductCategory());
-  // dispatch(getListProduct())
-}, []);
-
-// console.log(listProduct, "<<< ini list product");
   const category = [
     {
       name: "SkinCare",
@@ -83,6 +90,8 @@ useEffect(() => {
     },
   ];
 
+  const allProduct = listProduct.dataProduct;
+
   const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
   function CategoryProduct() {
     return (
@@ -90,6 +99,7 @@ useEffect(() => {
         {category.map((el) => {
           return (
             <div
+              key={el.id}
               className="bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
               style={{ textAlign: "-webkit-center" }}
             >
@@ -105,48 +115,71 @@ useEffect(() => {
   }
 
   function DisplayProduct() {
-    const text = "Hydrating ginger water foam lorem ipsum";
-    const truncatedText = text.length > 30 ? `${text.slice(0, 30)}...` : text;
     return (
       <>
-        <div className="flex justify-between items-center">
-          <div className="text-center items-center justify-center w-[20%]">
-            <h1>1</h1>
-          </div>
-          <div className="w-[20%]">
-            <img src={SkinCare} className="w-15 h-15" />
-          </div>
-          <div className="justify-between w-[80%]">
-            <div className="flex items-center text-[#ADB5BD]">
-              <h1 className="text-xs">GINGER6 </h1>
-              <div className="items-center pl-2">
-                <a href="#">
-                  <img src={Arrow} className="w-2 h-2" />
-                </a>
-              </div>
-            </div>
-            <div className="py-2">
-              <p className="text-sm">{truncatedText}</p>
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex">
-                <img src={Tokopedia} className="w-5 h-5 rounded-full" />
-                <img src={Shopee} className="w-5 h-5 rounded-full" />
-                <img src={UnnisIcon} className="w-5 h-5 rounded-full" />
-                <img src={Sociolla} className="w-5 h-5 rounded-full" />
-                <img src={Istyle} className="w-5 h-5 rounded-full" />
-                <img src={OliveYoung} className="w-5 h-5 rounded-full" />
-              </div>
-              <div className="flex items-center pl-5">
-                <img src={Star} className="w-5 h-5 rounded-full" />
-                <div className="pl-0.5">
-                  <h1 className="text-xs">4.88 33</h1>
+        {allProduct?.map((el, index) => {
+          const text = el.name;
+          const truncatedText =
+            text.length > 30 ? `${text.slice(0, 30)}...` : text;
+          return (
+            <>
+              <div key={el.id} className="flex justify-between items-center">
+                <div className="text-center items-center justify-center w-[10%]">
+                  <h1>{index + 1}</h1>
+                </div>
+                <div className="w-[30%]">
+                  <img src={el.images[0]} className="w-15 h-15" />
+                </div>
+                <div className="justify-between w-[80%]">
+                  <div className="flex items-center text-[#ADB5BD]">
+                    <h1 className="text-xs">{el.brand} </h1>
+                    <div className="items-center pl-2">
+                      <a href="#">
+                        <img src={Arrow} className="w-2 h-2" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="py-2">
+                    <p className="text-sm">{truncatedText}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-x-px">
+                      <Link to={el.tokopediaLink} target="_Blank">
+                        <img src={Tokopedia} className={el.tokopediaLink === "" ? "hidden" : "w-5 h-5 rounded-full" }/>
+                      </Link>
+                      <Link to={el.shopeeLink} target="_Blank">
+                        <img src={Shopee} className={el.shopeeLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                      </Link>
+                      <Link to={el.unnispickLink} target="_Blank">
+                        <img src={UnnisIcon} className={el.unnispickLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                      </Link>
+                      <Link to={el.sociollaLink} target="_Blank">
+                        <img src={Sociolla} className={el.sociollaLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                      </Link>
+                      <Link to={el.iStyleLink} target="_Blank">
+                        <img src={Istyle} className={el.iStyleLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                      </Link>
+                      <Link to={el.oliveYoungLink} target="_Blank">
+                        <img
+                          src={OliveYoung}
+                          className={el.oliveYoungLink === "" ? "hidden" : "w-5 h-5 rounded-full" }
+                        />
+                      </Link>
+                    </div>
+                    <div className="flex items-center pl-5">
+                      <img src={Star} className="w-5 h-5 rounded-full" />
+                      <div className="pl-0.5 flex gap-x-0.5">
+                        <h1 className="text-xs">{el.rating} </h1>
+                        <p className="text-xs text-gray-500">{`(${el.reviewNum})`}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="border mt-2"></div>
+              <div className="border mt-2"></div>
+            </>
+          );
+        })}
       </>
     );
   }
@@ -177,15 +210,17 @@ useEffect(() => {
             )}
           </div>
           <div className="flex justify-between pt-5 px-2">
-            <div className="border rounded p-1">
-              <h1>All</h1>
-            </div>
-            <div className="border rounded p-1">
-              <h1>Sort by</h1>
-            </div>
+              <ModalCategory/>
+              <ModalSort/>
           </div>
         </div>
-        <DisplayProduct />
+        <div className="overflow-y-auto max-h-[calc(100vh-100px)]">
+          {loadingAllProduct ? ( <div className="flex justify-center items-center h-screen">
+            <CircleLoader color="#0000ff" size={30} /> </div>
+          ) : (
+            <DisplayProduct />
+          )}
+        </div>
       </div>
     </>
   );

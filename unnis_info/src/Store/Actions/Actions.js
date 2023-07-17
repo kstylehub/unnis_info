@@ -45,6 +45,7 @@ export const getListProduct = () => async (dispatch) => {
         }
 
         const data = await response.json()
+        console.log(data, "< list prpoduct");
         dispatch({
             type: PRODUCT.GET_LIST_PRODUCT_SUCCESS,
             payload: data
