@@ -13,7 +13,7 @@ import banner2 from "../../../assets/banner2.svg";
 import shuadam from "../../../assets/shuadam.svg";
 import React from "react";
 import OwlCarousel from "react-owl-carousel";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function ContentNavbar () {
     return (
@@ -54,78 +54,94 @@ function ContentNavbar () {
             </div>
           </div>
           <div className="grid grid-cols-4 mt-36 px-8 text-xs">
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Skin} className="w-10 h-10" />
-              <div>
-                <p>Skin Analysis</p>
+            <Link to={"/skinanalysis"}>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Skin} className="w-10 h-10" />
+                <div>
+                  <p>Skin Analysis</p>
+                </div>
               </div>
-            </div>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Package} className="w-10 h-10" />
-              <div>
-                <p>Subscription Packages</p>
+            </Link>
+            <Link to={"/subscribe"}>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Package} className="w-10 h-10" />
+                <div>
+                  <p>Subscription Packages</p>
+                </div>
               </div>
-            </div>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Gift} className="w-10 h-10" />
-              <div>
-                <p>Event</p>
+            </Link>
+            <Link to={"/event"}>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Gift} className="w-10 h-10" />
+                <div>
+                  <p>Event</p>
+                </div>
               </div>
-            </div>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Recycle} className="w-10 h-10" />
-              <div>
-                <p>Recycle</p>
+            </Link>
+            <Link>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Recycle} className="w-10 h-10" />
+                <div>
+                  <p>Recycle</p>
+                </div>
               </div>
-            </div>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Reatured} className="w-10 h-10" />
-              <div>
-                <p>Reatured Products</p>
+            </Link>
+            <Link to={"/newProduct"}>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Reatured} className="w-10 h-10" />
+                <div>
+                  <p>Featured Products</p>
+                </div>
               </div>
-            </div>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Vegan} className="w-10 h-10" />
-              <div>
-                <p>Vegan</p>
+            </Link>
+            <Link to={"/newProduct"}>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Vegan} className="w-10 h-10" />
+                <div>
+                  <p>Vegan</p>
+                </div>
               </div>
-            </div>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Video} className="w-10 h-10" />
-              <div>
-                <p>Video</p>
+            </Link>
+            <Link>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Video} className="w-10 h-10" />
+                <div>
+                  <p>Video</p>
+                </div>
               </div>
-            </div>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Feed} className="w-10 h-10" />
-              <div>
-                <p>Feed</p>
+            </Link>
+            <Link>
+              <div
+                className="text-center p-1"
+                style={{ textAlign: "-webkit-center" }}
+              >
+                <img src={Feed} className="w-10 h-10" />
+                <div>
+                  <p>Feed</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="py-5">
             <OwlCarousel
