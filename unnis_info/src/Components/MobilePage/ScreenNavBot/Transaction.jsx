@@ -14,13 +14,11 @@ function Transaction() {
       return {
         border: '1px solid black',
         borderRadius: '9999px',
-        background: 'transparent',
       };
     } else {
       return {
         border: 'none',
         borderRadius: '9999px',
-        background: 'transparent',
       };
     }
   };
@@ -33,7 +31,7 @@ function Transaction() {
           <div className="flex justify-center lg:py-6 py-4">
             <Link to={"/transaction/transsubs"}>
               <button
-                className="lg:text-lg lg:px-16 py-1 px-10 lg:px-6 text-md"
+                className="lg:text-lg lg:px-16 py-1 px-10 text-md"
                 style={getButtonStyle('subs')}
                 onClick={() => handleClick('subs')}
               >
@@ -42,7 +40,7 @@ function Transaction() {
             </Link>
             <Link to={"/transaction/transproduct"}>
               <button
-                className="lg:text-lg lg:px-16 py-1 px-10 text-md lg:px-6"
+                className="lg:text-lg lg:px-16 py-1 px-10 text-md"
                 style={getButtonStyle('product')}
                 onClick={() => handleClick('product')}
               >
