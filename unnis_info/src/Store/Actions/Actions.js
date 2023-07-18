@@ -31,3 +31,31 @@ export const getProductCategory = () => async (dispatch) => {
         })
     }
 }
+export const getListProduct = () => async (dispatch) => {
+    try {
+        dispatch({type: PRODUCT.GET_LIST_PRODUCT_START})
+        const response = await fetch(`${BASE_URL}/product/listProductByLogin/0_`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        console.log(data, "< list prpoduct");
+        dispatch({
+            type: PRODUCT.GET_LIST_PRODUCT_SUCCESS,
+            payload: data
+        })
+        return data
+    } catch (error) {
+        console.log('error get data', error);
+        dispatch({
+            type: PRODUCT.GET_LIST_PRODUCT_FAILED,
+            payload: error
+        })
+    }
+}
