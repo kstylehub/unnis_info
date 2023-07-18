@@ -39,6 +39,12 @@ const router = createBrowserRouter([
           {
             path: "/event",
             element: <Event />,
+            children:[
+              {
+                path:"/event",
+                element:<ContentEvent/>
+              }
+            ]
           },
           {
             path: "/transaction",
