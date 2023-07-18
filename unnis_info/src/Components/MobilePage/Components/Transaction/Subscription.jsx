@@ -2,7 +2,7 @@ import Box from "../../../../assets/Box_transaction.png";
 
 function TransSubs () {
     return (
-        <div className="lg:mt-36 mt-32 flex flex-col justify-center items-center lg:text-lg text-sm">
+        <div className="mt-24 flex flex-col justify-center items-center text-base">
             <img
                 src={Box}
                 className="w-5/12 h-auto"

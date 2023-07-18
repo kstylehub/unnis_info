@@ -13,6 +13,9 @@ import MyPage from "../Components/MobilePage/ScreenNavBot/MyPage";
 import TransSubs from "../Components/MobilePage/Components/Transaction/Subscription";
 import TransProduct from "../Components/MobilePage/Components/Transaction/ProductPurchase";
 import SkinAnalysis from "../Components/MobilePage/Components/MenuHome/SkinAnalysis";
+import SkinSectionOne from "../Components/MobilePage/Components/SkinAnalysis/skinsectionone";
+import SkinSectionTwo from "../Components/MobilePage/Components/SkinAnalysis/skinsectiontwo";
+import SkinSectionThree from "../Components/MobilePage/Components/SkinAnalysis/skinsectionthree";
 
 const router = createBrowserRouter([
   {
@@ -63,8 +66,24 @@ const router = createBrowserRouter([
             element: <NewPage />,
           },
           {
+            path: "/newProduct",
+            element: <NewPage />,
+          },
+          {
             path: "/skinanalysis",
             element: <SkinAnalysis />,
+          },
+          {
+            path: "/skinsectionone",
+                element: <SkinSectionOne />,
+          },
+          {
+            path: "/skinsectiontwo",
+            element: <SkinSectionTwo />,
+          },
+          {
+            path: "/skinsectionthree",
+            element: <SkinSectionThree />,
           },
         ],
       },
