@@ -99,7 +99,7 @@ function NewPage() {
         {category.map((el) => {
           return (
             <div
-              key={el.id}
+              key={el.name}
               className="bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
               style={{ textAlign: "-webkit-center" }}
             >

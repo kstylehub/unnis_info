@@ -13,6 +13,7 @@ import MyPage from "../Components/MobilePage/ScreenNavBot/MyPage";
 import TransSubs from "../Components/MobilePage/Components/Transaction/Subscription";
 import TransProduct from "../Components/MobilePage/Components/Transaction/ProductPurchase";
 import SkinAnalysis from "../Components/MobilePage/Components/MenuHome/SkinAnalysis";
+import ContentEvent from "../Components/MobilePage/Components/ContentEvent/ContentEvent";
 
 const router = createBrowserRouter([
   {
