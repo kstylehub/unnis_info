@@ -1,7 +1,7 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
 const BASE_URL = 'http://52.74.126.149:9696'
-const {PRODUCT} = ACTIONS_TYPES
+const {PRODUCT, EVENT} = ACTIONS_TYPES
 
 export const getProductCategory = () => async (dispatch) => {
     try {
@@ -55,6 +55,35 @@ export const getListProduct = () => async (dispatch) => {
         console.log('error get data', error);
         dispatch({
             type: PRODUCT.GET_LIST_PRODUCT_FAILED,
+            payload: error
+        })
+    }
+}
+
+export const getEvent = () => async (dispatch) => {
+    try {
+        dispatch({type: EVENT.GET_DATA_EVENT_START})
+        const response = await fetch(`${BASE_URL}/events/listEvent`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok){
+            throw new Error("internal Server error")
+        }
+
+        const data = await response.json()
+        console.log(data, ">>response");
+        dispatch({
+            type: EVENT.GET_DATA_EVENT_SUCCESS,
+            payload: data
+        })
+        return data
+    } catch (error){
+        console.log('error get data',error);
+        dispatch({
+            type: EVENT.GET_DATA_EVENT_FAILED,
             payload: error
         })
     }
