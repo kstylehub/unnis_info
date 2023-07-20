@@ -61,11 +61,11 @@ function SkinSectionOne () {
                     </div>
                 </div>
                 <div className="flex items-center m-6">
-                    <div className="flex items-center text-teal-600 relative">
-                        <div className="text-base text-center rounded-full transition duration-500 w-8 h-8 p-0.5 border-2 border-teal-600">
+                    <div className="flex items-center text-[#4ABFA1] relative">
+                        <div className="text-base text-center rounded-full transition duration-500 w-8 h-8 p-0.5 border-2 border-[#4ABFA1]">
                             1
                         </div>
-                        <div className="absolute top-0 -ml-12 text-center mt-10 w-32 text-xs text-teal-600">Data Diri</div>
+                        <div className="absolute top-0 -ml-12 text-center mt-10 w-32 text-xs text-[#4ABFA1]">Data Diri</div>
                     </div>
                     <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-400"></div>
                     <div className="flex items-center text-gray-400 relative">
@@ -82,7 +82,7 @@ function SkinSectionOne () {
                         <div className="absolute top-0 -ml-12 text-center mt-10 w-32 text-xs text-gray-400">Hasil Analisa</div>
                     </div>
                 </div>
-                <div className="lg:py-12 py-10">
+                <div className="py-12">
                     <div className="flex flex-col text-center justify-center items-center">
                         <p className="font-bold lg:text-xl text-lg">1. Data Diri</p>
                         <div className="font-semibold text-base py-6 text-center">
@@ -138,7 +138,7 @@ function SkinSectionOne () {
                         </div>
                     </div>
                 </div>
-                <Link to={"/skinsectiontwo"}>
+                <Link to={"/skinsectiontwo/pageone"}>
                     <div className="absolute text-center w-full text-lg bottom-0 left-0 py-5 bg-[#4ABFA1] text-white">
                         Lanjut
                     </div>

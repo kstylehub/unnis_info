@@ -17,6 +17,12 @@ import SkinSectionOne from "../Components/MobilePage/Components/SkinAnalysis/ski
 import SkinSectionTwo from "../Components/MobilePage/Components/SkinAnalysis/skinsectiontwo";
 import SkinSectionThree from "../Components/MobilePage/Components/SkinAnalysis/skinsectionthree";
 import ContentEvent from "../Components/MobilePage/Components/ContentEvent/ContentEvent";
+import SkinPageOne from "../Components/MobilePage/Components/SkinAnalysis/skinpageone";
+import SkinPageTwo from "../Components/MobilePage/Components/SkinAnalysis/skinpagetwo";
+import SkinPageThree from "../Components/MobilePage/Components/SkinAnalysis/skinpagethree";
+import SkinPageFive from "../Components/MobilePage/Components/SkinAnalysis/skinpagefive";
+import SkinPageFour from "../Components/MobilePage/Components/SkinAnalysis/skinpagefour";
+import SkinPageSix from "../Components/MobilePage/Components/SkinAnalysis/skinpagesix";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +93,32 @@ const router = createBrowserRouter([
           {
             path: "/skinsectiontwo",
             element: <SkinSectionTwo />,
+            children: [
+              {
+                path: "/skinsectiontwo/pageone",
+                element: <SkinPageOne />,
+              },
+              {
+                path: "/skinsectiontwo/pagetwo",
+                element: <SkinPageTwo />,
+              },
+              {
+                path: "/skinsectiontwo/pagethree",
+                element: <SkinPageThree />,
+              },
+              {
+                path: "/skinsectiontwo/pagefour",
+                element: <SkinPageFour />,
+              },
+              {
+                path: "/skinsectiontwo/pagefive",
+                element: <SkinPageFive />,
+              },
+              {
+                path: "/skinsectiontwo/pagesix",
+                element: <SkinPageSix />,
+              },
+            ],
           },
           {
             path: "/skinsectionthree",
