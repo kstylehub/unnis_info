@@ -14,6 +14,7 @@ import TransSubs from "../Components/MobilePage/Components/Transaction/Subscript
 import TransProduct from "../Components/MobilePage/Components/Transaction/ProductPurchase";
 import SkinAnalysis from "../Components/MobilePage/Components/MenuHome/SkinAnalysis";
 import ContentEvent from "../Components/MobilePage/Components/ContentEvent/ContentEvent";
+import NavbarCategoryHome from "../Components/MobilePage/NavbarPhone/NavbarCategoryHome";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,12 @@ const router = createBrowserRouter([
               {
                 path: "/",
                 element: <ContentNavbar />,
+                children: [
+                  {
+                    path: "/",
+                    element: <NavbarCategoryHome/>
+                  }
+                ]
               },
             ],
           },
