@@ -79,10 +79,6 @@ const router = createBrowserRouter([
             element: <NewPage />,
           },
           {
-            path: "/newProduct",
-            element: <NewPage />,
-          },
-          {
             path: "/skinanalysis",
             element: <SkinAnalysis />,
           },
