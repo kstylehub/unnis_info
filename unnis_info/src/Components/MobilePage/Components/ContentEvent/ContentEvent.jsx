@@ -1,9 +1,7 @@
-import Aloncepict from "../../../../assets/Alonce.jpg";
-import lipTint from "../../../../assets/LipTint.jpg";
-import Tov from "../../../../assets/Tov.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEvent } from "../../../../Store/Actions/Actions";
+import { CircleLoader,RingLoader } from "react-spinners";
 function ContentEvent() {
   const event = useSelector((state) => state.ReducerEventData.event);
   const loading = useSelector((state) => state.ReducerEventData.loading);
@@ -13,7 +11,7 @@ function ContentEvent() {
     dispatch(getEvent());
   }, []);
   const data = event?.dataEvent;
-  console.log(event, ">>> event");
+ 
 
  
 
@@ -61,14 +59,14 @@ function ContentEvent() {
         console.log(selisihHari,'>>> selisihHari');
         return `D-${Math.floor(selisihHari)}`;
       }
-      const formattedSelisihHari = formatSelisihHari(firstDate,lastDate);
 
-      console.log(formattedLastDate, "<<< formateddate");
+      const formattedSelisihHari = formatSelisihHari(firstDate,lastDate);
+      
       return (
         <>
           <a
             href="#"
-            className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300"
+            className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-100"
           >
             <img
               className="w-full border-t-4 border-pink-300"
@@ -89,8 +87,8 @@ function ContentEvent() {
                 </div>
               </div>
             </div>
-          </a>
-        </>
+            </a>
+          </>
       );
     });
   }
