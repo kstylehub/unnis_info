@@ -7,9 +7,9 @@ import barcode from "../../assets/icon_barcode.png";
 
 function Info() {
   return (
-    <div className="content h-full flex bg-[#F7F3EB] flex-col items-center justify-center lg:w-[40%] pr-10 pl-10 gap-y-10 w-screen hidden lg:block pt-[25vh]">
+    <div className="content h-7/12 flex bg-[#F7F3EB] rounded-l-3xl flex-col items-center justify-center lg:w-[40%] pr-12 pl-12 pb-40 pt-36 w-screen hidden lg:block mt-[17vh] mb-[20vh]">
       <div className="text-center">
-        <div className="pb-1 flex justify-center">
+        <div className="flex justify-center">
           <img
             src={logo}
             className="w-6/12"
@@ -17,7 +17,7 @@ function Info() {
           />
         </div>
       </div>
-      <div className="mt-6">
+      <div className="my-6">
         <h6 className="text-center">
           Gak perlu bingung lagi, kecantikanmu akan bertambah!<br></br><br></br>
           <strong>'UNNIS'</strong> akan merekomendasikan produk kosmetik yang
