@@ -13,7 +13,6 @@ function ContentEvent() {
     dispatch(getEvent());
   }, []);
   const data = event?.dataEvent;
-  console.log(event, ">>> event");
 
  
 
@@ -53,17 +52,14 @@ function ContentEvent() {
         const end = new Date(lastDate);
         const selisihMs = end - start;
         const selisihHari = selisihMs / (1000 * 60 * 60 * 24);
-        console.log(selisihHari,'>> selisihHari');
         return selisihHari
       }
       function formatSelisihHari(firstDate, lastDate) {
         const selisihHari = hitungSelisihHari(firstDate, lastDate);
-        console.log(selisihHari,'>>> selisihHari');
         return `D-${Math.floor(selisihHari)}`;
       }
       const formattedSelisihHari = formatSelisihHari(firstDate,lastDate);
 
-      console.log(formattedLastDate, "<<< formateddate");
       return (
         <>
           <a
