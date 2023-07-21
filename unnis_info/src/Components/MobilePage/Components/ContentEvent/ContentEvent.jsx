@@ -1,7 +1,100 @@
 import Aloncepict from "../../../../assets/Alonce.jpg";
 import lipTint from "../../../../assets/LipTint.jpg";
 import Tov from "../../../../assets/Tov.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getEvent } from "../../../../Store/Actions/Actions";
 function ContentEvent() {
+  const event = useSelector((state) => state.ReducerEventData.event);
+  const loading = useSelector((state) => state.ReducerEventData.loading);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEvent());
+  }, []);
+  const data = event?.dataEvent;
+  console.log(event, ">>> event");
+
+ 
+
+  function AllEvent() {
+    return data?.map((el) => {
+      const lastDate = el.endDate;
+      const firstDate = el.startDate;
+      const lastDateObj = new Date(lastDate);
+      const firstDateObj = new Date(firstDate)
+      const lastday = lastDateObj.getDate().toString().padStart(2, "0");
+      const firstday = firstDateObj.getDate().toString().padStart(2, "0");
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Mei",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Des",
+      ];
+      const lastMonth = monthNames[lastDateObj.getMonth()];
+      const firstMonth = monthNames[firstDateObj.getMonth()];
+
+      const lastyear = lastDateObj.getFullYear();
+      const firstyear = firstDateObj.getFullYear();
+
+      const formattedLastDate = `${lastday}-${lastMonth}-${lastyear}`;
+      
+      const formattedFirstDate = `${firstday}-${firstMonth}-${firstyear}`
+      function hitungSelisihHari(firstDate, lastDate) {
+        const start = new Date(firstDate);
+        const end = new Date(lastDate);
+        const selisihMs = end - start;
+        const selisihHari = selisihMs / (1000 * 60 * 60 * 24);
+        console.log(selisihHari,'>> selisihHari');
+        return selisihHari
+      }
+      function formatSelisihHari(firstDate, lastDate) {
+        const selisihHari = hitungSelisihHari(firstDate, lastDate);
+        console.log(selisihHari,'>>> selisihHari');
+        return `D-${Math.floor(selisihHari)}`;
+      }
+      const formattedSelisihHari = formatSelisihHari(firstDate,lastDate);
+
+      console.log(formattedLastDate, "<<< formateddate");
+      return (
+        <>
+          <a
+            href="#"
+            className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300"
+          >
+            <img
+              className="w-full border-t-4 border-pink-300"
+              src={el.thumbnail}
+              alt="Image"
+            ></img>
+            <div className="px-6 py-4 flex-justify space-y-1 border-b-4 border-pink-300">
+              <div className="font-sans text-m mb-1">{el.title}</div>
+              <p className="text-gray-700 text-s w-full">{el.subtitle}</p>
+              <div className="flex space-x-2">
+                <div>
+                  <p className="text-red-600 text-xs px-2 py-1/2 border border-red-600 rounded-full">
+                    {formattedSelisihHari}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-700 text-xs">{formattedFirstDate} ~ {formattedLastDate}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </>
+      );
+    });
+  }
+
   return (
     <div className="max-w-screen space-y-2 overflow-y-auto">
       <div className="flex px-10  py-2 overflow-x-auto min-w-100 w-full space-x-4">
@@ -27,82 +120,7 @@ function ContentEvent() {
         </div>
       </div>
       <div className="">
-        <a
-          href="#"
-          className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300"
-        >
-          <img
-            className="w-full border-t-4 border-pink-300"
-            src={Aloncepict}
-            alt="Image"
-          ></img>
-          <div className="px-6 py-4 flex-justify space-y-1 border-b-4 border-pink-300">
-            <div className="font-sans text-m mb-1">
-              [ALONCE] SALE UP TO 50% OFF
-            </div>
-            <p className="text-gray-700 text-s w-full">
-              Live sale will be Held at 8 August start from 12:00 PM
-            </p>
-            <div className="flex space-x-2">
-              <div>
-                <p className="text-red-600 text-xs px-2 py-1/2 border border-red-600 rounded-full">
-                  D-5
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-700 text-xs">21.11.24 ~ 21.11.30</p>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a
-          href="#"
-          className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300"
-        >
-          <img className="w-full" src={lipTint} alt="Image"></img>
-          <div className="px-6 py-4 flex-justify space-y-1 border-b-4 border-pink-300">
-            <div className="font-sans text-m mb-1">
-              [LIP TINT] 3.3 SALE EVENT
-            </div>
-            <p className="text-gray-700 text-s w-full">
-              Diskon 30% untuk semua produk lip tint di unnis pick
-            </p>
-            <div className="flex space-x-2">
-              <div>
-                <p className="text-red-600 text-xs px-2 py-1/2 border border-red-600 rounded-full">
-                  D-4
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-700 text-xs">21.02.01 ~ 21.02.07</p>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a
-          href="#"
-          className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300"
-        >
-          <img className="w-full" src={Tov} alt="Image"></img>
-          <div className="px-6 py-4 flex-justify space-y-1 border-b-4 border-pink-300">
-            <div className="font-sans text-m mb-1">
-              [TOV] ALL PRODUCT BUY 2 GET 2
-            </div>
-            <p className="text-gray-700 text-s w-full">
-              Diskon 30% untuk semua produk lip tint di unnis pick
-            </p>
-            <div className="flex space-x-2">
-              <div>
-                <p className="text-red-600 text-xs px-2 py-1/2 border border-red-600 rounded-full">
-                  D-3
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-700 text-xs">21.02.01 ~ 21.02.07</p>
-              </div>
-            </div>
-          </div>
-        </a>
+        <AllEvent />
       </div>
     </div>
   );

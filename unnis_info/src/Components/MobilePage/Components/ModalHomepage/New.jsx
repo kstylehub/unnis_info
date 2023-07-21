@@ -48,6 +48,8 @@ function NewPage() {
   const loadingAllProduct = useSelector(
     (state) => state.ReducerListProduct.loading
   );
+  const keyCategories = productCategory.data ? Object.keys(productCategory.data) : [];
+  const nameCategories = keyCategories.map((str) => str.charAt(0).toUpperCase() + str.slice(1));
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -57,35 +59,35 @@ function NewPage() {
 
   const category = [
     {
-      name: "SkinCare",
+      name: nameCategories[0],
       icon: SkinCare,
     },
     {
-      name: "Cleansing",
+      name: nameCategories[1],
       icon: Cleansing,
     },
     {
-      name: "Mask",
+      name: nameCategories[2],
       icon: Mask,
     },
     {
-      name: "Suncare",
+      name: nameCategories[3],
       icon: Suncare,
     },
     {
-      name: "Face",
+      name: nameCategories[4],
       icon: Face,
     },
     {
-      name: "Lip&Eye",
+      name: nameCategories[5],
       icon: Lip,
     },
     {
-      name: "Body",
+      name: nameCategories[6],
       icon: Body,
     },
     {
-      name: "Hair",
+      name: nameCategories[7],
       icon: Hair,
     },
   ];

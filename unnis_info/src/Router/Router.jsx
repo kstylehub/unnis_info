@@ -17,6 +17,7 @@ import SkinSectionOne from "../Components/MobilePage/Components/SkinAnalysis/ski
 import SkinSectionTwo from "../Components/MobilePage/Components/SkinAnalysis/skinsectiontwo";
 import SkinSectionThree from "../Components/MobilePage/Components/SkinAnalysis/skinsectionthree";
 import ContentEvent from "../Components/MobilePage/Components/ContentEvent/ContentEvent";
+import NavbarCategoryHome from "../Components/MobilePage/NavbarPhone/NavbarCategoryHome";
 import SkinPageOne from "../Components/MobilePage/Components/SkinAnalysis/skinpageone";
 import SkinPageTwo from "../Components/MobilePage/Components/SkinAnalysis/skinpagetwo";
 import SkinPageThree from "../Components/MobilePage/Components/SkinAnalysis/skinpagethree";
@@ -39,6 +40,12 @@ const router = createBrowserRouter([
               {
                 path: "/",
                 element: <ContentNavbar />,
+                children: [
+                  {
+                    path: "/",
+                    element: <NavbarCategoryHome/>
+                  }
+                ]
               },
             ],
           },
