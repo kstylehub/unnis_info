@@ -88,10 +88,10 @@ function Feed() {
                     </div>
                 </div>
                 <div className="flex justify-between text-center justify-center py-3">
-                    <a href="">NEW</a>
-                    <a href="">CATEGORY</a>
+                    <a href="/newProduct">NEW</a>
+                    <a href="/newProduct">CATEGORY</a>
                     <a href="">REVIEW</a>
-                    <a href="">EVENT</a>
+                    <a href="/event">EVENT</a>
                     <a href="">FEED</a>
                 </div>    
             </div>
