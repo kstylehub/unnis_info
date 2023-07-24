@@ -39,7 +39,9 @@ function Homepage() {
               <h3>EVENT</h3>
             </div>
             <div>
-              <h3>FEED</h3>
+              <a href="/feed">
+                <h3>FEED</h3>
+              </a>
             </div>
           </div>
         </div>
