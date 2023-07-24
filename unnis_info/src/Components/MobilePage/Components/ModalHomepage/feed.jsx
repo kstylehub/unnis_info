@@ -3,10 +3,26 @@ import back from "../../../../assets/previous.svg";
 import logo from "../../../../assets/logo.png";
 import camera_pink from "../../../../assets/SkinAnalysis/camera_pink.png";
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllFeed } from "../../../../Store/Actions/Actions";
 
 
 function Feed() {
 
+    // Modal 
+    const [showModal, setShowModal] = useState(false); 
+
+    const handleCameraClick = () => {
+        setShowModal(true);
+    }; 
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+
+    // Active Button
     const [clickedButton, setClickedButton] = useState('all');
 
     const handleClick = (button) => {
@@ -26,9 +42,37 @@ function Feed() {
         }
     };
 
+    // Connect database 
+    const feed = useSelector((state) => state.ReducerFeed.dataFeed);
+
+    console.log(feed.data,"dataFeed");
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllFeed());
+    }, []);
+
+    function AllFeed() {
+        const data = feed?.data;
+        return (
+            <>
+            {data?.map((el) => (
+                <Link to={handleCameraClick} key={el.id}
+                    onClick={handleCameraClick}>
+                    <img
+                        className="w-full rounded-3xl py-2 px-3 "
+                        src={el.thumbnail}
+                        alt="Image"
+                    />
+                </Link>
+            ))}
+            </>
+        );
+    }
+
     return (
     <>
-        <div className="pb-2 w-full h-full ">
+        <div className="pb-2 w-full h-full overflow-y-auto">
             <div className="top-0 sticky lg:px-8 px-4 w-full bg-white pt-2">
                 <div className="flex justify-between">
                     <div className="self-center">
@@ -96,17 +140,29 @@ function Feed() {
                     </div>
                 </div>
                 <div>
-                    <a href="/feeddetail">
-                        <div className="mt-2 mb-5 rounded-lg px-3">
-                            <img src="https://wordpressunnis.s3.ap-southeast-1.amazonaws.com/images/feed/thumbnail/629ef844d6e5f05ffff8d2b4.png" className="w-full rounded-xl"/>
-                        </div>
-                    </a> 
-                    <div className="my-5 rounded-lg px-3"><img src="https://wordpressunnis.s3.ap-southeast-1.amazonaws.com/images/feed/thumbnail/629f1454d6e5f05ffff8d2b7.png" className="w-full rounded-xl"/></div>
-                    <div className="my-5 rounded-lg px-3"><img src="https://wordpressunnis.s3.ap-southeast-1.amazonaws.com/images/feed/thumbnail/62a15955d6e5f05ffff8d2ca.png" className="w-full rounded-xl"/></div>
-                    <div className="my-5 rounded-lg px-3"><img src="https://wordpressunnis.s3.ap-southeast-1.amazonaws.com/images/feed/thumbnail/62a15931d6e5f05ffff8d2c9.png" className="w-full rounded-xl"/></div>
+                <AllFeed />   
                 </div>
             </div>
         </div>
+
+        {/* Modal */}
+        {showModal && (
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50">
+                <div className ="rounded-lg bg-white text-center lg:mx-20 mx-16">
+                    <div className="py-8 lg:px-6 px-4">
+                        <h5 className="lg:mb-2 text-sm font-semibold leading-tight">
+                        Fitur ini hanya dapat digunakan pada aplikasi UNNIS
+                        </h5>
+                    </div>
+                    <hr></hr>
+                    <button className="lg:py-4 py-3 inline-block rounded px-6 text-sm text-green-600"
+                        onClick={handleCloseModal}
+                        type="button">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        )}
     </>  
     )
     

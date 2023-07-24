@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import back from "../../../../assets/previous.svg";
 import mark from "../../../../assets/mark.png";
-import camera_pink from "../../../../assets/SkinAnalysis/camera_pink.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getEvent } from "../../../../Store/Actions/Actions";
 import React, { useState } from 'react';
 
 
