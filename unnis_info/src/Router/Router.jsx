@@ -24,6 +24,7 @@ import SkinPageThree from "../Components/MobilePage/Components/SkinAnalysis/skin
 import SkinPageFive from "../Components/MobilePage/Components/SkinAnalysis/skinpagefive";
 import SkinPageFour from "../Components/MobilePage/Components/SkinAnalysis/skinpagefour";
 import SkinPageSix from "../Components/MobilePage/Components/SkinAnalysis/skinpagesix";
+import LoginPage from "../Components/MobilePage/ScreenNavBot/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -79,7 +80,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/my-page",
-            element: <MyPage/>
+            element: <MyPage/>,
+          },
+          {
+            path: "/login",
+            element: <LoginPage/>
           },
           {
             path: "/newProduct",

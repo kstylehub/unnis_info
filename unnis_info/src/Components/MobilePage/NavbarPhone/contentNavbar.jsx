@@ -47,7 +47,7 @@ function ContentNavbar() {
             name.length > 20 ? `${name.slice(0, 20)}...` : name;
           return (
             <div className="" key={el.id}>
-              <div className="border rounded-full py-2 px-4 mx-5">
+              <div className="border rounded-full py-2 px-4 mx-5 max-w-max min-w-fit">
                 <div className="">
                   <img src={el.images[0]} className="w-16 h-14" />
                 </div>
@@ -142,6 +142,22 @@ function ContentNavbar() {
         })}
       </>
     );
+  }
+
+  function ImageCarousel() {
+    const truncatedData = product.dataProduct?.slice(0, 6);
+    return (
+      <>
+        {truncatedData?.map((el) => {
+          return (
+          <>
+            <div className="border rounded-lg shadow min-w-fit w-fit h-[20vh]">
+              <img src={el.images[0]} className="w-[100%] h-[100%]"/>
+            </div>
+          </>
+          )}
+        )}
+      </>)
   }
 
   return (
@@ -326,7 +342,7 @@ function ContentNavbar() {
             </div>
           </OwlCarousel>
         </div>
-        <div className="flex justify-between px-5 font-bold mb-8">
+        <div className="flex justify-between px-5 font-bold">
           <div className="text-md text-[#343A40]">
             <h1>FOR YOU</h1>
           </div>
@@ -337,7 +353,20 @@ function ContentNavbar() {
             </div>
           </Link>
         </div>
-        {/* <div></div>   Tambahkan Carousel */}
+        <div className="py-5">
+          <OwlCarousel
+            className="owl-theme"
+            center={true}
+            loop={true}
+            dots={false}
+            items={3}
+            margin={10}
+            responsive={{600: {items:3}}}
+            
+          >
+            <ImageCarousel/>
+          </OwlCarousel>
+        </div>
         <div className="flex justify-between px-5 py-2 border bg-gray-100 mx-2 rounded-lg drop-shadow-lg mb-8">
           <h1>Skin Analysis Test</h1>
           <Link to={"/skinanalysis"} className="flex items-center">
