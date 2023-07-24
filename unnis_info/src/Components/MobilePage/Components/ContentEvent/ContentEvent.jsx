@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEvent } from "../../../../Store/Actions/Actions";
 import { CircleLoader,RingLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 function ContentEvent() {
   const event = useSelector((state) => state.ReducerEventData.event);
   const loading = useSelector((state) => state.ReducerEventData.loading);
@@ -64,8 +65,8 @@ function ContentEvent() {
       
       return (
         <>
-          <a
-            href="#"
+          <Link
+            to={`/detail-event/${el.id}`}
             className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-100"
           >
             <img
@@ -87,7 +88,7 @@ function ContentEvent() {
                 </div>
               </div>
             </div>
-            </a>
+            </Link>
           </>
       );
     });
@@ -118,7 +119,10 @@ function ContentEvent() {
         </div>
       </div>
       <div className="">
-        <AllEvent />
+      {loading ? ( <div className="flex justify-center items-center h-screen">
+            <CircleLoader color="#0000ff" size={30} /> </div>) : (
+               <AllEvent />
+            )}
       </div>
     </div>
   );

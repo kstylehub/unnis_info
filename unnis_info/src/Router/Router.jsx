@@ -24,7 +24,7 @@ import SkinPageThree from "../Components/MobilePage/Components/SkinAnalysis/skin
 import SkinPageFive from "../Components/MobilePage/Components/SkinAnalysis/skinpagefive";
 import SkinPageFour from "../Components/MobilePage/Components/SkinAnalysis/skinpagefour";
 import SkinPageSix from "../Components/MobilePage/Components/SkinAnalysis/skinpagesix";
-
+import DetailEvent from "../Components/MobilePage/Components/ContentEvent/DetailEvent";
 const router = createBrowserRouter([
   {
     element: <Home />,
@@ -62,6 +62,10 @@ const router = createBrowserRouter([
                 element:<ContentEvent/>
               }
             ]
+          },
+          {
+            path: "/detail-event/:id",
+            element:<DetailEvent/>
           },
           {
             path: "/transaction",
