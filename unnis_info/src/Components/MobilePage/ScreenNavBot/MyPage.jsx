@@ -357,8 +357,8 @@ function MyPage() {
                     </svg>
                   </div>
                 </div>
-                <div className="py-3 px-5 flex items-center justify-between w-full bg-white">
-                  <div className="text-sm">Akun</div>
+                <div className="py-3 px-5 flex items-center justify-between w-full bg-white" onClick={()=>handleLogout()}>
+                  <div className="text-sm">Logout</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
                       class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
