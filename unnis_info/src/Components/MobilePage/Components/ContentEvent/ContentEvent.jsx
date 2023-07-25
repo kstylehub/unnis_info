@@ -4,6 +4,7 @@ import Tov from "../../../../assets/Tov.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEvent } from "../../../../Store/Actions/Actions";
+
 function ContentEvent() {
   const event = useSelector((state) => state.ReducerEventData.event);
   const loading = useSelector((state) => state.ReducerEventData.loading);
