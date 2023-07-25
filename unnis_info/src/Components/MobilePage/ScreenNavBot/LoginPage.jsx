@@ -75,9 +75,11 @@ function LoginPage() {
             <div>
                 <p className="text-slate-400">Don't have an account</p>
             </div>
-            <div>
-                <p className="underline text-orange-500">Sign Up</p>
-            </div>
+            <Link to={"/register"}>
+              <div>
+                  <p className="underline text-orange-500">Sign Up</p>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

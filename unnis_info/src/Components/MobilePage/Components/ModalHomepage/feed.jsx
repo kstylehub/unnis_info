@@ -81,7 +81,7 @@ function Feed() {
                         </Link>
                     </div>
                     <div className="self-center flex justify-center">
-                        <img src={logo} className="w-3/12" /> 
+                        <img src={logo} className="w-4/12" /> 
                     </div>
                     <div className="self-center">
                         <img src={camera_pink} className="w-5/12" /> 
