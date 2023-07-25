@@ -5,27 +5,29 @@ import recycle from "../../../assets/MyPage/recycle.png";
 import { Link } from "react-router-dom";
 import LogoUnnis from "../../../assets/unnis_logo.png";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../Store/Actions/Actions";
 
 function MyPage() {
-  const [accessToken, setAccessToken] = useState(null);
-
-  const handleLoginSuccess = (accessToken) => {
-    setAccessToken(accessToken);
-  };
+  const user = useSelector((state) => state.ReducerUser.dataUser);
 
   function KlikLogin() {
     return (
       <div className="bg-white h-full w-full py-6">
         <div className="flex justify-center">
-            <h1>MY PAGE</h1>
+          <h1>MY PAGE</h1>
         </div>
         <div className="mx-20 mt-24">
           <div className="flex justify-center pb-4">
             <img src={LogoUnnis} alt="Logo Unnis" />
           </div>
-          <div  className="items-center text-center pb-4">
-            <h1 className="pb-4 font-semibold">Kekhawatiran tentang kosmetik sudah berakhir!</h1>
-            <p>Login sekarang dan dapatkan rekomendasi kosmetik khusus untukmu.</p>
+          <div className="items-center text-center pb-4">
+            <h1 className="pb-4 font-semibold">
+              Kekhawatiran tentang kosmetik sudah berakhir!
+            </h1>
+            <p>
+              Login sekarang dan dapatkan rekomendasi kosmetik khusus untukmu.
+            </p>
           </div>
           <div className="text-sm text-center py-2 bg-[#4ABFA1] text-white">
             <Link to={"/login"}>
@@ -38,6 +40,12 @@ function MyPage() {
         </div>
       </div>
     );
+  }
+
+  const dispatch = useDispatch()
+  function handleLogout(){
+      console.log('masul');
+    dispatch(logout())
   }
 
   function Profile() {
@@ -105,13 +113,16 @@ function MyPage() {
             </div>
           </div>
           <div className="flex">
-            <div className="text-sm text-center w-6/12 border-r-2 border-white py-2 bg-[#4ABFA1] text-white">
+            <div className="text-sm text-center w-6/12 border-r-2 border-white py-2 bg-[#4ABFA1] text-white" >
               Kembali
             </div>
 
             <div className="text-sm text-center w-6/12 py-2 bg-[#4ABFA1] text-white">
               Lanjut
             </div>
+            <button className="text-sm text-center w-6/12 py-2 bg-[#4ABFA1] text-white" onClick={()=>handleLogout()}>
+              Logout
+            </button>
           </div>
         </div>
       </>
@@ -119,7 +130,7 @@ function MyPage() {
   }
 
   function LoginPage() {
-    if (accessToken) {
+    if (user) {
       return <Profile />;
     } else {
       return <KlikLogin />;
@@ -137,4 +148,3 @@ function MyPage() {
 }
 
 export default MyPage;
-

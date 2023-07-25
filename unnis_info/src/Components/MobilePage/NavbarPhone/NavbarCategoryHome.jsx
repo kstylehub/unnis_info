@@ -84,7 +84,7 @@ export default function NavbarCategoryHome() {
               text.length > 30 ? `${text.slice(0, 30)}...` : text;
             return (
               <>
-                <div key={el.id} className="flex justify-between items-center">
+                <div key={el.description} className="flex justify-between items-center">
                   <div className="text-center items-center justify-center w-[10%]">
                     <h1>{index + 1}</h1>
                   </div>
