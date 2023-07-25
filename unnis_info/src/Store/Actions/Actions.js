@@ -146,7 +146,6 @@ export const getEvent = () => async (dispatch) => {
         }
 
         const data = await response.json()
-        console.log(data, ">>response");
         dispatch({
             type: EVENT.GET_DATA_EVENT_SUCCESS,
             payload: data

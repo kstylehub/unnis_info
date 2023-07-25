@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllFeed,
   getAllReview,
+  getEvent,
   getTopProduct,
 } from "../../../Store/Actions/Actions";
 
@@ -26,15 +27,16 @@ function ContentNavbar() {
   const product = useSelector((state) => state.ReducerTopProduct.topProduct);
   const allReview = useSelector((state) => state.ReducerReview.dataReview);
   const allFeed = useSelector((state) => state.ReducerFeed.dataFeed);
+  const allEvent = useSelector((state) => state.ReducerEventData.event);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTopProduct());
     dispatch(getAllReview());
     dispatch(getAllFeed());
+    dispatch(getEvent());
   }, []);
 
-  console.log(allFeed, "<< data review");
-  // console.log(product.dataProduct, "<<< top product");
   function TopProduct() {
     const truncatedData = product.dataProduct?.slice(0, 6);
     return (
@@ -45,7 +47,7 @@ function ContentNavbar() {
             name.length > 20 ? `${name.slice(0, 20)}...` : name;
           return (
             <div className="" key={el.id}>
-              <div className="border rounded-full py-2 px-4 mx-5">
+              <div className="border rounded-full py-2 px-4 mx-5 max-w-max min-w-fit">
                 <div className="">
                   <img src={el.images[0]} className="w-16 h-14" />
                 </div>
@@ -67,9 +69,11 @@ function ContentNavbar() {
 
   function BoxReview() {
     const dataReview = allReview?.dataReview;
+    const truncatedData = dataReview?.slice(0, 4);
+
     return (
       <>
-        {dataReview?.map((el) => {
+        {truncatedData?.map((el) => {
           const desc = el.descReviewer;
           const truncatedText =
             desc.length > 50 ? `${desc.slice(0, 50)}...` : desc;
@@ -86,49 +90,41 @@ function ContentNavbar() {
   }
 
   function BoxEvent() {
+    const truncatedData = allEvent?.dataEvent?.slice(0, 4);
     return (
-      <div className="overflow-x-auto">
-        <div className="flex min-w-max">
-          <div className="border mr-5 w-[100%]">
-            <img src={banner1} className="w-[100%]" />
-            <div className="pl-3 my-2">
-              <div>
-                <h1 className="text-slate-800">K-LIFESTYLE SHOWCASE CHAPT.2</h1>
-                <p className="text-xs text-slate-700">
-                  Showcase produk korea terbaik hadir kemabli
-                </p>
-              </div>
-              <div className="flex text-xs my-3">
-                <div className="border rounded-full px-1 border-rose-600 mr-3">
-                  <p className="text-rose-600">D-36</p>
+      <>
+        <div className="overflow-x-auto">
+          <div className="flex w-screen">
+            {truncatedData?.map((el) => {
+              return (
+                <div className="border mr-4 md:w-1/3 sm:w-1/10 lg:w-1/3 min-w-fit">
+                  <img src={banner1} className="w-full" alt="Banner" />
+                  <div className="pl-3 my-2">
+                    <div>
+                      <h1 className="text-slate-800">
+                        K-LIFESTYLE SHOWCASE CHAPT.2
+                      </h1>
+                      <p className="text-xs text-slate-700">
+                        Showcase produk korea terbaik hadir kembali
+                      </p>
+                    </div>
+                    <div className="flex text-xs my-3">
+                      <div className="border rounded-full px-1 border-rose-600 mr-3">
+                        <p className="text-rose-600">D-36</p>
+                      </div>
+                      <div>
+                        <p className="text-slate-700">
+                          25 Aug 2023 ~ 26 Aug 2023
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-slate-700">25 Aug 2023 ~ 26 Aug 2023</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="border w-[100%]">
-            <img src={banner1} className="w-[100%]" />
-            <div className="pl-3 my-2">
-              <div>
-                <h1 className="text-slate-800">K-LIFESTYLE SHOWCASE CHAPT.2</h1>
-                <p className="text-xs text-slate-700">
-                  Showcase produk korea terbaik hadir kemabli
-                </p>
-              </div>
-              <div className="flex text-xs my-3">
-                <div className="border rounded-full px-1 border-rose-600 mr-3">
-                  <p className="text-rose-600">D-36</p>
-                </div>
-                <div>
-                  <p className="text-slate-700">25 Aug 2023 ~ 26 Aug 2023</p>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -148,9 +144,25 @@ function ContentNavbar() {
     );
   }
 
+  function ImageCarousel() {
+    const truncatedData = product.dataProduct?.slice(0, 6);
+    return (
+      <>
+        {truncatedData?.map((el) => {
+          return (
+          <>
+            <div className="border rounded-lg shadow min-w-fit w-fit h-[20vh]">
+              <img src={el.images[0]} className="w-[100%] h-[100%]"/>
+            </div>
+          </>
+          )}
+        )}
+      </>)
+  }
+
   return (
     <>
-      <div className="">
+      <div className="mt-2">
         <div className="h-1/5 bg-[#4ABFA1] pb-10 rounded-t-lg">
           <div className="flex justify-between pl-5 pr-5 pt-5">
             <div className="font-semibold text-white">
@@ -330,26 +342,39 @@ function ContentNavbar() {
             </div>
           </OwlCarousel>
         </div>
-        <div className="flex justify-between px-5 font-bold mb-8">
+        <div className="flex justify-between px-5 font-bold">
           <div className="text-md text-[#343A40]">
             <h1>FOR YOU</h1>
           </div>
-          <div className="flex items-center">
+          <Link to={"/newProduct"} className="flex items-center">
             <p className="text-xs text-[#343A40]">more</p>
             <div className="items-center pl-1">
               <img src={Polygon1} className="w-2 h-2" />
             </div>
-          </div>
+          </Link>
         </div>
-        {/* <div></div>   Tambahkan Carousel */}
+        <div className="py-5">
+          <OwlCarousel
+            className="owl-theme"
+            center={true}
+            loop={true}
+            dots={false}
+            items={3}
+            margin={10}
+            responsive={{600: {items:3}}}
+            
+          >
+            <ImageCarousel/>
+          </OwlCarousel>
+        </div>
         <div className="flex justify-between px-5 py-2 border bg-gray-100 mx-2 rounded-lg drop-shadow-lg mb-8">
           <h1>Skin Analysis Test</h1>
-          <div className="flex items-center">
+          <Link to={"/skinanalysis"} className="flex items-center">
             <h1 className="text-[#4ABFA1]">Analisis sekarang </h1>
             <div className="items-center pl-2">
               <img src={Polygon1} className="w-2 h-2" />
             </div>
-          </div>
+          </Link>
         </div>
         <div className="mb-8">
           <div className="px-5 text-md text-[#343A40]">

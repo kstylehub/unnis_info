@@ -13,7 +13,7 @@ import banner2 from "../../../assets/banner2.svg";
 import shuadam from "../../../assets/shuadam.svg";
 import React from "react";
 import OwlCarousel from "react-owl-carousel";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import NavigationButtom from "../NavigatonBottom/NavigationBottom";
 import NavbarPhone from "../NavbarPhone/NavbarPhone";
 
@@ -25,18 +25,24 @@ function Homepage() {
           <NavbarPhone />
           <div className="flex justify-evenly text-[#343A40] bg-white pt-3">
             <div>
-              <a href="/newProduct">
+              <Link to={"/newProduct"}>
                 <h3>NEW</h3>
-              </a>
+              </Link>
             </div>
             <div>
+              <Link to={"/newProduct"}>
               <h3>CATEGORY</h3>
+              </Link>
             </div>
             <div>
+              <Link>
               <h3>REVIEW</h3>
+              </Link>
             </div>
             <div>
+              <Link>
               <h3>EVENT</h3>
+              </Link>
             </div>
             <div>
               <a href="/feed">
