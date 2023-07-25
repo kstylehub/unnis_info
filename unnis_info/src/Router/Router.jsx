@@ -5,6 +5,8 @@ import Content from "../Components/Layout/Content";
 import Homepage from "../Components/MobilePage/Homepage/Homepage";
 import Subscribe from "../Components/MobilePage/ScreenNavBot/Subscribe";
 import NewPage from "../Components/MobilePage/Components/ModalHomepage/New";
+import Feed from "../Components/MobilePage/Components/ModalHomepage/feed";
+import FeedDetail from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
 import Home from "../Components/Layout/Home";
 import Event from "../Components/MobilePage/ScreenNavBot/Event";
 import ContentNavbar from "../Components/MobilePage/NavbarPhone/contentNavbar";
@@ -131,6 +133,14 @@ const router = createBrowserRouter([
           {
             path: "/skinsectionthree",
             element: <SkinSectionThree />,
+          },
+          {
+            path: "/feed",
+            element: <Feed />,
+          },
+          {
+            path: "/feeddetail",
+            element: <FeedDetail />,
           },
         ],
       },

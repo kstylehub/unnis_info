@@ -45,9 +45,9 @@ function Homepage() {
               </Link>
             </div>
             <div>
-              <Link>
-              <h3>FEED</h3>
-              </Link>
+              <a href="/feed">
+                <h3>FEED</h3>
+              </a>
             </div>
           </div>
         </div>

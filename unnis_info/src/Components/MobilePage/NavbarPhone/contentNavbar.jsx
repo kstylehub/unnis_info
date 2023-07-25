@@ -321,7 +321,7 @@ function ContentNavbar() {
               </div>
             </div>
           </Link>
-          <Link>
+          <Link to={"/feed"}>
             <div
               className="text-center p-1"
               style={{ textAlign: "-webkit-center" }}
