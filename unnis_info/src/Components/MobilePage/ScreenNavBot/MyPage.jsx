@@ -15,13 +15,11 @@ import gift from "../../../assets/MyPage/gift.png";
 import setting from "../../../assets/MyPage/setting.png";
 import toggle from "../../../assets/MyPage/toggle.png";
 import phone from "../../../assets/MyPage/phone.png";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../Store/Actions/Actions";
 
 function MyPage() {
-  const [accessToken, setAccessToken] = useState(null);
-
-  const handleLoginSuccess = (accessToken) => {
-    setAccessToken(accessToken);
-  };
+  const user = useSelector((state) => state.ReducerUser.dataUser);
 
   function KlikLogin() {
     return (
@@ -63,6 +61,11 @@ function MyPage() {
         </div>
       </>
     );
+  }
+
+  const dispatch = useDispatch();
+  function handleLogout() {
+    dispatch(logout());
   }
 
   function Profile() {
@@ -445,7 +448,7 @@ function MyPage() {
   }
 
   function LoginPage() {
-    if (accessToken) {
+    if (user) {
       return <Profile />;
     } else {
       return <KlikLogin />;

@@ -1,7 +1,39 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
 const BASE_URL = 'http://52.74.126.149:9696'
-const {PRODUCT, REVIEW, FEED, EVENT} = ACTIONS_TYPES
+const {PRODUCT, REVIEW, FEED, EVENT, USER} = ACTIONS_TYPES
+
+
+export const logout = () => ({
+    type: USER.LOGIN_GET_LOGOUT
+})
+export const login = (email, password) => async (dispatch) => {
+    try {
+        dispatch({type: USER.LOGIN_GET_START})
+        const response = await fetch(`${BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({email, password})
+        })
+        if(!response.ok){
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        dispatch({
+            type: USER.LOGIN_GET_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log('error login');
+        dispatch({
+            type: USER.LOGIN_GET_FAILED,
+            payload: error
+        })
+    }
+}
 
 export const getProductCategory = () => async (dispatch) => {
     try {

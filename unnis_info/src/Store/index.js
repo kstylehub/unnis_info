@@ -3,8 +3,11 @@ import thunk from "redux-thunk";
 import { ReducerProductCategory, ReducerListProduct, ReducerTopProduct} from "./Reducers/Reducer";
 import {ReducerReview} from "./Reducers/ReducerReview";
 import { ReducerFeed } from "./Reducers/ReducerFeed";
-
 import { ReducerEventData } from "./Reducers/ReducerEvent";
+import { ReducerUser } from "./Reducers/ReducerUser";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
 const rootReducer = combineReducers({
     ReducerProductCategory,
     ReducerListProduct,
@@ -12,8 +15,16 @@ const rootReducer = combineReducers({
     ReducerReview,
     ReducerFeed,
     ReducerEventData,
+    ReducerUser
 })
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const persistConfig = {
+    key: 'root',
+    storage,
+  }
 
-export default store
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
+  const store = createStore(persistedReducer, applyMiddleware(thunk))
+  const persistor = persistStore(store)
+
+export {store, persistor}

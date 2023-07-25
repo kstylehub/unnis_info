@@ -12,7 +12,7 @@ import banner1 from "../../../assets/banner1.svg";
 import banner2 from "../../../assets/banner2.svg";
 import shuadam from "../../../assets/shuadam.svg";
 import invitation from "../../../assets/undangan.svg";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import { Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,7 +97,10 @@ function ContentNavbar() {
           <div className="flex w-screen">
             {truncatedData?.map((el) => {
               return (
-                <div className="border mr-4 md:w-1/3 sm:w-1/10 lg:w-1/3 min-w-fit">
+                <div
+                  className="border mr-4 md:w-1/3 sm:w-1/10 lg:w-1/3 min-w-fit"
+                  key={el.id}
+                >
                   <img src={banner1} className="w-full" alt="Banner" />
                   <div className="pl-3 my-2">
                     <div>
@@ -150,16 +153,69 @@ function ContentNavbar() {
       <>
         {truncatedData?.map((el) => {
           return (
-          <>
-            <div className="border rounded-lg shadow min-w-fit w-fit h-[20vh]">
-              <img src={el.images[0]} className="w-[100%] h-[100%]"/>
-            </div>
-          </>
-          )}
-        )}
-      </>)
+            <>
+              <div
+                className="border rounded-lg shadow min-w-fit w-fit h-[20vh]"
+                key={el.name}
+              >
+                <img src={el.images[0]} className="w-[100%] h-[100%]" />
+              </div>
+            </>
+          );
+        })}
+      </>
+    );
   }
 
+  const [showModal, setShowModal] = useState(false);
+  const user = useSelector((state) => state.ReducerUser.dataUser);
+  const handleShowModal = () => {
+    if (!user) {
+      setShowModal(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+  function ToSkinPage() {
+    return (
+      <>
+        <div
+          className="text-center p-1"
+          style={{ textAlign: "-webkit-center" }}
+          onClick={handleShowModal}
+        >
+          <Link to={user ? "/skinanalysis" : "/"}>
+            <img src={Skin} className="w-10 h-10" alt="Skin Analysis" />
+            <div>
+              <p>Skin Analysis</p>
+            </div>
+          </Link>
+        </div>
+        {showModal && (
+          <div className="absolute max-h-[100vh] top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50 overflow-hidden	 ">
+            <div className="rounded-lg bg-white text-center lg:mx-20 mx-16">
+              <div className="py-8 lg:px-6 px-4">
+                <h5 className="lg:mb-2 text-sm font-semibold leading-tight">
+                  Anda Belum Login
+                </h5>
+                <p>Silahkan login untuk akses menu ini</p>
+              </div>
+              <hr></hr>
+              <button
+                className="lg:py-4 py-3 inline-block rounded px-6 text-sm text-green-600"
+                onClick={handleCloseModal}
+                type="button"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
   return (
     <>
       <div className="mt-2">
@@ -198,17 +254,7 @@ function ContentNavbar() {
           </div>
         </div>
         <div className="grid grid-cols-4 mt-36 px-8 text-xs">
-          <Link to={"/skinanalysis"}>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Skin} className="w-10 h-10" />
-              <div>
-                <p>Skin Analysis</p>
-              </div>
-            </div>
-          </Link>
+          <ToSkinPage />
           <Link to={"/subscribe"}>
             <div
               className="text-center p-1"
@@ -361,10 +407,9 @@ function ContentNavbar() {
             dots={false}
             items={3}
             margin={10}
-            responsive={{600: {items:3}}}
-            
+            responsive={{ 600: { items: 3 } }}
           >
-            <ImageCarousel/>
+            <ImageCarousel />
           </OwlCarousel>
         </div>
         <div className="flex justify-between px-5 py-2 border bg-gray-100 mx-2 rounded-lg drop-shadow-lg mb-8">
@@ -427,6 +472,8 @@ function ContentNavbar() {
           <BoxFeed />
         </div>
       </div>
+
+      
     </>
   );
 }

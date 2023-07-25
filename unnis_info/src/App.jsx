@@ -4,15 +4,18 @@ import router from './Router/Router'
 import {Provider} from 'react-redux'
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import store from './Store';
+import {persistor, store} from './Store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {
 
   return (
     <>
     <Provider store={store}>
-      <RouterProvider router={router}/>
-    </Provider>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate>
+      </Provider>
     </>
   )
 }

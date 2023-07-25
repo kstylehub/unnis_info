@@ -1,16 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../../assets/LG_unnis_green.svg";
 import back from "../../../assets/previous.svg";
 import Google from "../../../assets/IC_google.svg"
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../Store/Actions/Actions";
 
 function LoginPage() {
-    const [form, setForm] = useState()
+    const user = useSelector((state)=> state.ReducerUser.dataUser)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const dispatch = useDispatch()
-    useEffect(()=>{
-        
-    })
+    const navigate = useNavigate()
+
+    function handleSubmit() {
+        dispatch(login(email,password))
+        navigate('/my-page')
+    }
 
   return (
     <>
@@ -27,9 +33,11 @@ function LoginPage() {
             <img src={Logo} className="w-[200px]" />
           </div>
           <div className="">
-            <form>
+            <form onSubmit={handleSubmit}>
               <input
-                type="text"
+                type="email"
+                value={email}
+                onChange={(e)=> setEmail(e.target.value)}
                 placeholder="Email"
                 className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-[#4ABFA1] focus:ring-1 focus:ring-[#4ABFA1]
@@ -40,6 +48,8 @@ function LoginPage() {
               />
               <input
                 type="password"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 placeholder="Password"
                 className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-[#4ABFA1] focus:ring-1 focus:ring-[#4ABFA1]
@@ -51,10 +61,10 @@ function LoginPage() {
               <div className="text-sm text-center py-2 bg-[#4ABFA1] text-white mt-6">
                 <button type="submit">Login</button>
               </div>
+            </form>
               <div className="flex justify-end text-xs text-slate-400 underline mt-4">
                 <p>Forgot Your Password?</p>
               </div>
-            </form>
           </div>
           <div className="flex justify-center mt-8">
             <div className=""></div>
