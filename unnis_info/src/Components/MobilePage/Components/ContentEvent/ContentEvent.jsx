@@ -70,11 +70,11 @@ function ContentEvent() {
             className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-100"
           >
             <img
-              className="w-full border-t-4 border-pink-300"
+              className="w-full border-t-4 border-pink-200"
               src={el.thumbnail}
               alt="Image"
             ></img>
-            <div className="px-6 py-4 flex-justify space-y-1 border-b-4 border-pink-300">
+            <div className="px-6 py-4 flex-justify space-y-1 border-b-4 border-pink-200">
               <div className="font-sans text-m mb-1">{el.title}</div>
               <p className="text-gray-700 text-s w-full">{el.subtitle}</p>
               <div className="flex space-x-2">
