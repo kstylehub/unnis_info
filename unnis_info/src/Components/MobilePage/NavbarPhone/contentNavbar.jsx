@@ -28,6 +28,8 @@ function ContentNavbar() {
   const allReview = useSelector((state) => state.ReducerReview.dataReview);
   const allFeed = useSelector((state) => state.ReducerFeed.dataFeed);
   const allEvent = useSelector((state) => state.ReducerEventData.event);
+  const getUser = useSelector((state) => state.ReducerUser.dataUser);
+  const dataUser = getUser?.dataMember[0];
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -167,6 +169,28 @@ function ContentNavbar() {
     );
   }
 
+  function ForYou() {
+    if (dataUser) {
+      return (
+        <>
+          <OwlCarousel
+            className="owl-theme"
+            center={true}
+            loop={true}
+            dots={false}
+            items={3}
+            margin={10}
+            responsive={{ 600: { items: 3 } }}
+          >
+            <ImageCarousel />
+          </OwlCarousel>
+        </>
+      );
+    } else {
+      return <></>;
+    }
+  }
+
   const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.ReducerUser.dataUser);
   const handleShowModal = () => {
@@ -216,6 +240,79 @@ function ContentNavbar() {
       </>
     );
   }
+
+  function BeautyBoxStatus() {
+    if (dataUser?.statusSub == "active") {
+      return (
+        <>
+          <div className="flex justify-between text-sm mt-2 items-center">
+            <p className="font-semibold text-xs">Layanan Berlangganan</p>
+            <button className="rounded-full border pl-2 pr-2 pt-1 pb-1 text-slate-400 text-xs">
+              History
+            </button>
+          </div>
+          <div className="flex justify-between text-xs mt-2">
+            <p>Periode Berlangganan</p>
+            <div className="border"></div>
+            <p>2022.01.03 - 2022.07.03</p>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <div className="text-center text-sm mt-2">
+          <p>No service subscribed 😭</p>
+          <button className="rounded-full bg-[#4ABFA1] pl-5 pr-5 pt-1 pb-1 text-white">
+            Subscribe to a Service now
+          </button>
+        </div>
+      );
+    }
+  }
+
+  function Lock() {
+    if (!dataUser) {
+      return (
+        <div className="px-4 pt-8 pb-8 rounded-xl shadow-xl bg-white absolute top-[34.5%] lg:top-[34.5%] sm:top-[31.5%] md:top-[31%]  inset-x-8 border z-10 opacity-90 shadow">
+          <div className="text-sm font-semibold mb-2 justify-center text-center">
+            <div className="justify-center items-center flex ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+                color="#4ABFA1"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
+            </div>
+            <div className="text-md mt-2 mb-2 text-center ">
+              <p>
+                Setelah Anda login, kami akan merekomendasikan kosmetik yang
+                cocok untuk anda
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-evenly">
+            <button className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs">
+              Sign up
+            </button>
+            <Link to={"/login"} className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs">
+              Login
+            </Link>
+          </div>
+        </div>
+      );
+    } else {
+      return <></>;
+    }
+  }
   return (
     <>
       <div className="mt-2">
@@ -223,12 +320,14 @@ function ContentNavbar() {
           <div className="flex justify-between pl-5 pr-5 pt-5">
             <div className="font-semibold text-white">
               <h3>Hi👋</h3>
-              <h3>Unni</h3>
+              <h3>{dataUser ? `${dataUser.username}` : "Unnie"}</h3>
             </div>
             <div className="font-light text-sm text-white">
               <p>My coin</p>
               <div className="flex items-center">
-                <p className="text-semibold">0</p>
+                <p className="text-semibold">
+                  {dataUser ? `${dataUser.point}` : "0"}
+                </p>
                 <div className="items-center pl-2">
                   <a href="#">
                     <img src={Polygon} className="w-2 h-2" />
@@ -240,18 +339,16 @@ function ContentNavbar() {
         </div>
         <div className="px-4 pt-4 pb-8 m-5 rounded-xl shadow-xl bg-white absolute top-[150px] inset-x-8">
           <div className="text-sm font-semibold mb-2">
-            <h3>Beauty Bob Status</h3>
+            <h3>Beauty Box Status</h3>
             <div className="text-md font-light">
-              <p>Your subscription plan status : Not Active</p>
+              <p>
+                Your subscription plan status :{" "}
+                {dataUser?.statusSub == "active" ? "Active" : "Not Active"}
+              </p>
             </div>
           </div>
           <div className="border"></div>
-          <div className="text-center text-sm mt-2">
-            <p>No service subscribed 😭</p>
-            <button className="rounded-full bg-[#4ABFA1] pl-5 pr-5 pt-1 pb-1 text-white">
-              Subscribe to a Service now
-            </button>
-          </div>
+          <BeautyBoxStatus />
         </div>
         <div className="grid grid-cols-4 mt-36 px-8 text-xs">
           <ToSkinPage />
@@ -411,6 +508,7 @@ function ContentNavbar() {
           >
             <ImageCarousel />
           </OwlCarousel>
+          <Lock />
         </div>
         <div className="flex justify-between px-5 py-2 border bg-gray-100 mx-2 rounded-lg drop-shadow-lg mb-8">
           <h1>Skin Analysis Test</h1>
@@ -472,8 +570,6 @@ function ContentNavbar() {
           <BoxFeed />
         </div>
       </div>
-
-      
     </>
   );
 }
