@@ -60,7 +60,7 @@ function DetailEvent() {
               <div className="font-sans text-lg mb-1">
                 <h1>{el.title}</h1>
               </div>
-              <div className="text-gray-700 text-m border-b-2 w-auto">
+              <div className="text-gray-700 text-sm border-b-2 w-auto">
                 <h1>{el.subtitle}</h1>
               </div>
               <div className="grid lg: grid-cols-2 border-b-2">
@@ -113,12 +113,12 @@ function DetailEvent() {
                 alt="img"
               ></img>
               <div className="bg-white rounded-none p-4 shadow-md">
-                <h2 className="text-md font-semibold mb-2">Komentar</h2>
+                <h2 className="text-md mb-2">Komentar</h2>
                 <div className="flex items-center gap-4 mb-4">
                   <input
-                    className="flex-1 p-2 rounded-md outline-black"
+                    className="flex flex-col text-start p-10 h-50 w-full border rounded-lg border-black"
                     type="text"
-                    placeholder="Tulis komentar Anda..."
+                    placeholder="Silahkan tinggalkan komentar terkait event ini."
                   ></input>
                 </div>
               </div>
