@@ -56,8 +56,6 @@ function Homepage() {
           <NavigationButtom />
         </div>
       </div>
-
-  
     </>
   );
 }
