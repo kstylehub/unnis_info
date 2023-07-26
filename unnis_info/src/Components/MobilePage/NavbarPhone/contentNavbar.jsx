@@ -194,8 +194,9 @@ function ContentNavbar() {
           </Link>
         </div>
         {showModal && (
-          <div className="absolute max-h-[100vh] top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50 overflow-hidden	 ">
-            <div className="rounded-lg bg-white text-center lg:mx-20 mx-16">
+          <>
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50 overflow-hidden	 "></div>
+            <div className="fixed rounded-lg bg-white text-center max-w-[80%] xl:mx-20 lg:mx-5 md:mx-60 sm:mx-40 xs:mx-5 mx-20 overflow-y-auto z-50">
               <div className="py-8 lg:px-6 px-4">
                 <h5 className="lg:mb-2 text-sm font-semibold leading-tight">
                   Anda Belum Login
@@ -211,7 +212,7 @@ function ContentNavbar() {
                 Ok
               </button>
             </div>
-          </div>
+          </>
         )}
       </>
     );
@@ -472,8 +473,6 @@ function ContentNavbar() {
           <BoxFeed />
         </div>
       </div>
-
-      
     </>
   );
 }

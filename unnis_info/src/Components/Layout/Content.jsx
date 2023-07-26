@@ -21,9 +21,6 @@ function Content(props) {
         <div className="h-screen overflow-y-auto">
           <Outlet/>
         </div>
-        {/* <div className="bg-slate-50 pt-2.5 pb-1 px-1.5">
-          <NavigationButtom />
-        </div> */}
       </div>
     </div>
   );

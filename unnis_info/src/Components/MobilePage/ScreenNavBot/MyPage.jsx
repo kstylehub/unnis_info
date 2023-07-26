@@ -21,6 +21,30 @@ import { logout } from "../../../Store/Actions/Actions";
 function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
 
+  const getDataUser = useSelector((state) => state.ReducerUser.dataUser);
+  const dataUser = getDataUser?.dataMember[0];
+
+  function getBirthDateDescription() {
+    if (dataUser) {
+      if (dataUser.birthDate <= 2010) {
+        return "10-an";
+      } else if (dataUser.birthDate <= 2000) {
+        return "20-an";
+      } else if (dataUser.birthDate <= 1990) {
+        return "30-an";
+      } else if (dataUser.birthDate <= 1980) {
+        return "40-an";
+      } else if (dataUser.birthDate <= 1970) {
+        return "50-an";
+      } else if (dataUser.birthDate <= 1980) {
+        return "60-an";
+      } else {
+        return dataUser.birthDate; 
+      }
+    }
+    return ""; 
+  }
+
   function KlikLogin() {
     return (
       <>
@@ -79,7 +103,7 @@ function MyPage() {
             <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>
             <div className="flex flex-col py-3 px-4">
               <div className="flex flex-row justify-between">
-                <div className="font-bold text-sm">Kode Referral : PPNBTG</div>
+                <div className="font-bold text-sm">Kode Referral : {dataUser.referral}</div>
                 <button className="bg-[#4ABFA1] text-xs font-bold rounded-full py-1 px-3 text-white">
                   Undang Teman
                 </button>
@@ -96,9 +120,11 @@ function MyPage() {
             <div className="flex flex-col py-3 px-4 justify-center items-center">
               <img src={profile} className="w-3/12 pb-1 pl-2 mt-6" />
               <div className="flex flex-row justify-center items-center mt-2">
-                <div className="font-bold text-base mx-1">My Name</div>
+                <div className="font-bold text-base mx-1">
+                {dataUser.username}
+                </div>
               </div>
-              <div className="text-xs mt-1">30-an / netral / right</div>
+              <div className="text-xs mt-1">{getBirthDateDescription()} / {dataUser.skinType} / {dataUser.skinColor}</div>
             </div>
             <div className="flex py-3 mt-1 px-5 flex items-center justify-between w-full bg-gray-200">
               <div className="flex">
