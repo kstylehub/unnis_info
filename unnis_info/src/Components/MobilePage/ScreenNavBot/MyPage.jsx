@@ -139,7 +139,7 @@ function MyPage() {
                   Jelajahi
                 </div>
                 <svg
-                  class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                  className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -147,9 +147,9 @@ function MyPage() {
                 >
                   <path
                     stroke="#4ABFA1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                   />
                 </svg>
@@ -223,9 +223,9 @@ function MyPage() {
                   >
                     <path
                       stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                     />
                   </svg>
@@ -245,7 +245,7 @@ function MyPage() {
                   <div className="text-sm">Keranjang</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -253,9 +253,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -265,7 +265,7 @@ function MyPage() {
                   <div className="text-sm">Berlangganan</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -273,9 +273,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -285,7 +285,7 @@ function MyPage() {
                   <div className="text-sm">Pengiriman</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -293,9 +293,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -317,7 +317,7 @@ function MyPage() {
                   <div className="text-sm">Riwayat Event</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -325,9 +325,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -337,7 +337,7 @@ function MyPage() {
                   <div className="text-sm">Klaim Event</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -345,9 +345,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -368,7 +368,7 @@ function MyPage() {
                   <div className="text-sm">FAQ</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -376,9 +376,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -388,7 +388,7 @@ function MyPage() {
                   <div className="text-sm">Logout</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -396,9 +396,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -419,7 +419,7 @@ function MyPage() {
                   <div className="text-sm">Chat Us</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -427,9 +427,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -439,7 +439,7 @@ function MyPage() {
                   <div className="text-sm">Email Us</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -447,9 +447,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
