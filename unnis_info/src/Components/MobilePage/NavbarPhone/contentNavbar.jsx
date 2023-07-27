@@ -274,7 +274,7 @@ function ContentNavbar() {
   function Lock() {
     if (!dataUser) {
       return (
-        <div className="px-4 pt-8 pb-8 rounded-xl shadow-xl bg-white absolute top-[34.5%] lg:top-[34.5%] sm:top-[31.5%] md:top-[31%]  inset-x-8 border z-10 opacity-90 shadow">
+        <div className="px-4 pt-8 pb-8 rounded-xl shadow-xl bg-white absolute top-[148.5vh] lg:top-[137.5vh] sm:top-[150vh] md:top-[163vh]  inset-x-8 border z-10 opacity-90 shadow">
           <div className="text-sm font-semibold mb-2 justify-center text-center">
             <div className="justify-center items-center flex ">
               <svg
