@@ -3,6 +3,7 @@ import { getEvent } from "../../../../Store/Actions/Actions";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import CommentBox from "./CommentBox";
 function DetailEvent() {
   const { id } = useParams();
 
@@ -112,15 +113,8 @@ function DetailEvent() {
                 src={el.thumbnail}
                 alt="img"
               ></img>
-              <div className="bg-white rounded-none p-4 shadow-md">
-                <h2 className="text-md mb-2">Komentar</h2>
-                <div className="flex items-center gap-4 mb-4">
-                  <input
-                    className="flex flex-col text-start p-10 h-50 w-full border rounded-lg border-black"
-                    type="text"
-                    placeholder="Silahkan tinggalkan komentar terkait event ini."
-                  ></input>
-                </div>
+              <div>
+                <CommentBox/>
               </div>
             </div>
           );
