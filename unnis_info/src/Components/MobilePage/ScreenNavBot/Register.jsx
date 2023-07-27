@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import back from "../../../assets/previous.svg";
 import logo from "../../../assets/logo.png";
 import camera_pink from "../../../assets/SkinAnalysis/camera_pink.png";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllFeed } from "../../../Store/Actions/Actions";
+import { getAllFeed, register } from "../../../Store/Actions/Actions";
 import check from "../../../assets/SkinAnalysis/check.png";
+import ModalMyPage from "../Components/ModalMyPage/ModalMyPage";
 
 
 function Register() {
@@ -21,29 +22,57 @@ function Register() {
     const [pushNotif, setPushNotif] = useState(0)
     const [typeDevice, setTypedevice] = useState("web")
     const [token, setToken] = useState("-")
+    const [selectedCountry, setSelectedCountry] = useState("");
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+    const [cekDataPribadi, setCekDataPribadi] = useState(false)
+    const [cekSyarat, setCekSyarat] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    function handleSubmit() {
-
+    function handleSelectedCountry(val){
+        setSelectedCountry(val)
     }
+
     function togglePasswordVisibility() {
       setIsPasswordVisible((prevState) => !prevState);
     }
 
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
-
+        console.log(name);
         if (checked) {
             if (selectedCheckboxes.length < 5) {
             setSelectedCheckboxes([...selectedCheckboxes, name]);
+            if(name == "syarat"){
+                setCekSyarat(true)
+            }
+            if(name == "pribadi"){
+                setCekDataPribadi(true)
+            }
             }
         } else {
+            setCekDataPribadi(false)
+            setCekSyarat(false)
             setSelectedCheckboxes(selectedCheckboxes.filter((checkbox) => checkbox !== name));
         }
     };
 
-    console.log(email);
+    function handleSubmit(event) {
+        event.preventDefault()
+        const numPhone = `${selectedCountry}${phone}`
+        const dataRegister = {
+            username, email, password, phone:numPhone, photo, smsNotif, emailNotif, pushNotif, typeDevice, token
+        }
+        dispatch(register(dataRegister))
+        navigate("/login")
+    }
+    // console.log(
+    //     {email, username, password, phone: `${selectedCountry}${phone}`}
+    // );
+    // console.log({
+    //     username, email, password, phone, photo, smsNotif, emailNotif, pushNotif, typeDevice, token
+    // });
   return (
     <>
       <div className="pb-2 w-full h-full overflow-y-auto">
@@ -64,7 +93,7 @@ function Register() {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col justify-center text-center py-5 px-4">
-            <div className="text-20px font-bold text-lg pb-6">
+            <div className="text-20px font-bold text-lg pb-10">
                 Buat Akun
             </div>
             <div className="flex w-full flex-col">
@@ -149,43 +178,41 @@ function Register() {
                 </div>
                 <div className="flex justif-center">
                     <div className="relative h-12 w-2/12 min-w-[100px] my-4 mr-2">
-                    <select id="countries" className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="IND">(+62) INDONESIA</option>
-                        <option value="KOR">(+82) KOREA</option>
-                        <option value="VIE">(+84) VIETNAM</option>
-                    </select>
+                        <ModalMyPage handleSelectedCountry={handleSelectedCountry}/>
                     </div>
                     <div className="relative h-12 w-10/12 min-w-[200px] my-4">
                         <input
                         className="placeholder-transparent focus:placeholder-gray-400 peer h-full w-full rounded-[7px] border border-[#4ABFA1] border-t-transparent bg-gray-100 px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-[#4ABFA1] placeholder-shown:border-t-[#4ABFA1] focus:border-2 focus:border-[#4ABFA1] focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                         placeholder="Masukkan nomor handphone anda"
-                        type="tel"
+                        type="text"
+                        value={phone}
+                        onChange={(e)=> setPhone(e.target.value)}
                         />
                         <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-[#4ABFA1] transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-[#4ABFA1] before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-[#4ABFA1] after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-[#4ABFA1] peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-[#4ABFA1] peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-[#4ABFA1] peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-[#4ABFA1] peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                             Nomor Handphone
                         </label>
                     </div>
                 </div>
-            </div> 
+            </div>  
             <div className="h-0.5 my-5 bg-gray-200"></div>
             <div className="flex items-center">
                 <input 
                     className="h-4 w-4 mx-3" 
                     type="checkbox" 
-                    checked>
+                    disabled checked>
                 </input>
                 <div className="font-bold mx-2">
                     Setuju
                 </div>
             </div>
             <div className="h-0.5 mt-5 mb-3 bg-gray-200"></div>
+
             <div className="flex flex-row justify-center items-center px-2 py-2">
                 <div className="w-1/12">
                     <input 
                         className="h-4 w-4" 
                         type="checkbox" 
                         name="syarat"
-                        
                         checked={selectedCheckboxes.includes('syarat')}
                         onChange={handleCheckboxChange}>
                     </input>    
@@ -248,10 +275,10 @@ function Register() {
                     <input 
                         className="h-4 w-4" 
                         type="checkbox" 
-                        checked>
+                        disabled checked>
                     </input>    
                 </div>
-                <div className="flex flex-col px-6 text-left text-base">
+                <div className="flex flex-col text-left text-base px-6">
                     (penting) Saya menyetujui seluruh Syarat dan Ketentuan
                     <div className="flex flex-row pt-3 justify-evenly">
                         <div className="flex flex-row justify-center items-center">
@@ -263,7 +290,7 @@ function Register() {
                                 checked={selectedCheckboxes.includes('email')}
                                 onChange={handleCheckboxChange}>
                             </input>    
-                            <div className="px-3">
+                            <div className="lg:px-3 px-1">
                                 Email
                             </div>
                         </div>
@@ -276,7 +303,7 @@ function Register() {
                                 checked={selectedCheckboxes.includes('notification')}
                                 onChange={handleCheckboxChange}>
                             </input>
-                            <div className="px-3">
+                            <div className="lg:px-3 px-1">
                                 Notification
                             </div>
                         </div>
@@ -289,7 +316,7 @@ function Register() {
                                 checked={selectedCheckboxes.includes('sms')}
                                 onChange={handleCheckboxChange}>
                             </input>
-                            <div className="px-3">
+                            <div className="lg:px-3 px-1">
                                 SMS
                             </div>
                         </div>
@@ -316,7 +343,7 @@ function Register() {
                     </svg>
                   </div>
             </div>
-            <button className="w-full bg-gray-400 text-white font-bold py-4" type="submit">
+            <button disabled={cekDataPribadi && cekSyarat ? false : true} className={cekDataPribadi && cekSyarat ? "w-full bg-[#4ABFA1] text-white font-bold py-4" : "w-full bg-gray-400 text-white font-bold py-4"} type="submit">
                 Setuju & Daftar
             </button>
           </div>

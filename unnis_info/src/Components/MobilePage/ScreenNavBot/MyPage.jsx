@@ -17,6 +17,7 @@ import toggle from "../../../assets/MyPage/toggle.png";
 import phone from "../../../assets/MyPage/phone.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Store/Actions/Actions";
+import ModalMyPage from "../Components/ModalMyPage/ModalMyPage";
 
 function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
@@ -214,7 +215,7 @@ function MyPage() {
                 <div className="text-sm">Voucher</div>
                 <div className="flex flex-row justify-center items-center">
                   <svg
-                    class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                    className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

@@ -7,6 +7,36 @@ const {PRODUCT, REVIEW, FEED, EVENT, USER} = ACTIONS_TYPES
 export const logout = () => ({
     type: USER.LOGIN_GET_LOGOUT
 })
+
+export const register = (dataRegister) => async (dispatch) => {
+    console.log(dataRegister, ">>>>");
+    try {
+        dispatch({type: USER.REGISTER_GET_START})
+        const response = await fetch(`${BASE_URL}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataRegister)
+        })
+        if(!response.ok) {
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        console.log(data, "suksssesss");
+        dispatch({
+            type: USER.REGISTER_GET_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log("error register");
+        dispatch({
+            type: USER.REGISTER_GET_FAILED,
+            payload: error
+        })
+    }
+}
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({type: USER.LOGIN_GET_START})

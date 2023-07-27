@@ -4,7 +4,7 @@ import { ReducerProductCategory, ReducerListProduct, ReducerTopProduct} from "./
 import {ReducerReview} from "./Reducers/ReducerReview";
 import { ReducerFeed } from "./Reducers/ReducerFeed";
 import { ReducerEventData } from "./Reducers/ReducerEvent";
-import { ReducerUser } from "./Reducers/ReducerUser";
+import { ReducerUser, ReducerUserRegister } from "./Reducers/ReducerUser";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
     ReducerReview,
     ReducerFeed,
     ReducerEventData,
-    ReducerUser
+    ReducerUser,
+    ReducerUserRegister
 })
 
 const persistConfig = {
