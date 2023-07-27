@@ -22,17 +22,17 @@ const ModalMyPage = () => {
     {
       name: "Indonesia",
       number: "+62",
-      flag: "https://img.icons8.com/color/48/indonesia-circular.png"
+      flag: "https://img.icons8.com/color/48/indonesia-circular.png",
     },
     {
       name: "Korea(Republic of)",
       number: "+82",
-      flag: "https://img.icons8.com/color/48/south-korea-circular.png"
+      flag: "https://img.icons8.com/color/48/south-korea-circular.png",
     },
     {
       name: "Vietnam",
       number: "+84",
-      flag: "https://img.icons8.com/color/48/vietnam-circular.png"
+      flag: "https://img.icons8.com/color/48/vietnam-circular.png",
     },
   ];
 
@@ -42,7 +42,7 @@ const ModalMyPage = () => {
         {categories.map((el) => {
           return (
             <div className="mb-3" key={el.name}>
-              <label>
+              <label className="flex flex-row justify-start">
                 <input
                   type="radio"
                   value={el.name}
@@ -50,7 +50,11 @@ const ModalMyPage = () => {
                   onChange={handleOptionChange}
                   className="mr-4"
                 />
-                {el.name}
+                <img className="" src={el.flag}></img>
+                <div className="px-3 flex flex-col text-start justify-start">
+                  <div className="">{el.name}</div>
+                  <div className="text-sm text-gray-500">{el.number}</div>
+                </div>
               </label>
             </div>
           );
@@ -62,7 +66,7 @@ const ModalMyPage = () => {
   return (
     <>
       <button
-        className="border rounded-lg p-1 flex text-center items-center gap-x-1"
+        className="border rounded-lg px-1 py-3 flex text-center items-center gap-x-1"
         onClick={handleModalOpen}
       >
         <h1>Country</h1>
@@ -74,7 +78,9 @@ const ModalMyPage = () => {
           <div className="z-100 bg-white rounded-lg p-3 w-screen top-[45%] lg:w-[100%]  relative">
             <div className="z-100 bg-white max-h-[50%] h-[60vh]">
               <div className="flex justify-between items-left mb-2 bg-white">
-                <h2 className="text-base pl-3">Search by country name or dial code</h2>
+                <h2 className="text-base pl-3 py-3">
+                  Search by country name or dial code
+                </h2>
                 <button
                   onClick={handleModalClose}
                   className="text-gray-600 hover:text-gray-800 pr-3"
@@ -83,8 +89,8 @@ const ModalMyPage = () => {
                 </button>
               </div>
               <div className="border mb-4"></div>
-              <div className="modal-content items-left flex overflow-y-auto max-h-[inherit]">
-                <div className="pl-3 h-full">
+              <div className="modal-content items-center overflow-y-auto max-h-[inherit]">
+                <div className="pl-3 h-full ">
                   <Category />
                 </div>
               </div>
