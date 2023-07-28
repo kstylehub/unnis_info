@@ -3,10 +3,10 @@ import Polygon1 from "../../../assets/Polygon2.svg";
 import Skin from "../../../assets/skin.svg";
 import Package from "../../../assets/PackageGreen.svg";
 import Gift from "../../../assets/GiftMenu.svg";
-import Recycle from "../../../assets/Recycle.svg";
+import RecycleImg from "../../../assets/Recycle.svg";
 import Reatured from "../../../assets/ReaturedProduct.svg";
 import Vegan from "../../../assets/VEGAN.svg";
-import Video from "../../../assets/video.svg";
+import VideoImg from "../../../assets/video.svg";
 import Feed from "../../../assets/feed.svg";
 import banner1 from "../../../assets/banner1.svg";
 import banner2 from "../../../assets/banner2.svg";
@@ -22,6 +22,7 @@ import {
   getEvent,
   getTopProduct,
 } from "../../../Store/Actions/Actions";
+import ModalLoginWarn from "../Components/ModalHomepage/ModalLoginWarn";
 
 function ContentNavbar() {
   const product = useSelector((state) => state.ReducerTopProduct.topProduct);
@@ -93,34 +94,83 @@ function ContentNavbar() {
 
   function BoxEvent() {
     const truncatedData = allEvent?.dataEvent?.slice(0, 4);
+
     return (
       <>
         <div className="overflow-x-auto">
-          <div className="flex w-screen">
+          <div className="flex w-full ">
             {truncatedData?.map((el) => {
+              const lastDate = el.endDate;
+              const firstDate = el.startDate;
+              const lastDateObj = new Date(lastDate);
+              const firstDateObj = new Date(firstDate);
+              const lastday = lastDateObj.getDate().toString().padStart(2, "0");
+              const firstday = firstDateObj
+                .getDate()
+                .toString()
+                .padStart(2, "0");
+              const monthNames = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "Mei",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Okt",
+                "Nov",
+                "Des",
+              ];
+              const lastMonth = monthNames[lastDateObj.getMonth()];
+              const firstMonth = monthNames[firstDateObj.getMonth()];
+
+              const lastyear = lastDateObj.getFullYear();
+              const firstyear = firstDateObj.getFullYear();
+
+              const formattedLastDate = `${lastday}-${lastMonth}-${lastyear}`;
+
+              const formattedFirstDate = `${firstday}-${firstMonth}-${firstyear}`;
+              function hitungSelisihHari(firstDate, lastDate) {
+                const start = new Date(firstDate);
+                const end = new Date(lastDate);
+                const selisihMs = end - start;
+                const selisihHari = selisihMs / (1000 * 60 * 60 * 24);
+                return selisihHari;
+              }
+              function formatSelisihHari(firstDate, lastDate) {
+                const selisihHari = hitungSelisihHari(firstDate, lastDate);
+                return `D-${Math.floor(selisihHari)}`;
+              }
+              const formattedSelisihHari = formatSelisihHari(
+                firstDate,
+                lastDate
+              );
+
               return (
                 <div
-                  className="border mr-4 md:w-1/3 sm:w-1/10 lg:w-1/3 min-w-fit"
+                  className=""
                   key={el.id}
                 >
-                  <img src={banner1} className="w-full" alt="Banner" />
-                  <div className="pl-3 my-2">
-                    <div>
-                      <h1 className="text-slate-800">
-                        K-LIFESTYLE SHOWCASE CHAPT.2
-                      </h1>
-                      <p className="text-xs text-slate-700">
-                        Showcase produk korea terbaik hadir kembali
-                      </p>
-                    </div>
-                    <div className="flex text-xs my-3">
-                      <div className="border rounded-full px-1 border-rose-600 mr-3">
-                        <p className="text-rose-600">D-36</p>
-                      </div>
+                  <div className="border sm:w-[60vw] w-[70vw] md:w-[20vw]">
+                    <img src={el.thumbnail} className="w-fit" alt="Banner" />
+                    <div className="pl-3 my-2">
                       <div>
-                        <p className="text-slate-700">
-                          25 Aug 2023 ~ 26 Aug 2023
-                        </p>
+                        <h1 className="text-slate-800">{el.title}</h1>
+                        <p className="text-xs text-slate-700">{el.subtitle}</p>
+                      </div>
+                      <div className="flex text-xs my-3">
+                        <div className="border rounded-full px-1 border-rose-600 mr-3">
+                          <p className="text-rose-600">
+                            {formattedSelisihHari}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-slate-700">
+                            {formattedFirstDate} ~ {formattedLastDate}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -202,6 +252,7 @@ function ContentNavbar() {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
   function ToSkinPage() {
     return (
       <>
@@ -219,27 +270,58 @@ function ContentNavbar() {
         </div>
         {showModal && (
           <>
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50 overflow-hidden	 "></div>
-            <div className="fixed rounded-lg bg-white text-center max-w-[80%] xl:mx-20 lg:mx-5 md:mx-60 sm:mx-40 xs:mx-5 mx-20 overflow-y-auto z-50">
-              <div className="py-8 lg:px-6 px-4">
-                <h5 className="lg:mb-2 text-sm font-semibold leading-tight">
-                  Anda Belum Login
-                </h5>
-                <p>Silahkan login untuk akses menu ini</p>
-              </div>
-              <hr></hr>
-              <button
-                className="lg:py-4 py-3 inline-block rounded px-6 text-sm text-green-600"
-                onClick={handleCloseModal}
-                type="button"
-              >
-                Ok
-              </button>
-            </div>
+            <ModalLoginWarn handleCloseModal={handleCloseModal}/>
           </>
         )}
       </>
     );
+  }
+
+  function Recycle() {
+    return (
+      <>
+         <div
+          className="text-center p-1"
+          style={{ textAlign: "-webkit-center" }}
+          onClick={handleShowModal}
+        >
+          <Link to={"/"}>
+            <img src={RecycleImg} className="w-10 h-10" alt="Skin Analysis" />
+            <div>
+              <p>Recycle</p>
+            </div>
+          </Link>
+        </div>
+        {showModal && (
+          <>
+            <ModalLoginWarn handleCloseModal={handleCloseModal}/>
+          </>
+        )}
+      </>
+    )
+  }
+  function Video() {
+    return (
+      <>
+         <div
+          className="text-center p-1"
+          style={{ textAlign: "-webkit-center" }}
+          onClick={handleShowModal}
+        >
+          <Link to={"/"}>
+            <img src={VideoImg} className="w-10 h-10" alt="Skin Analysis" />
+            <div>
+              <p>Video</p>
+            </div>
+          </Link>
+        </div>
+        {showModal && (
+          <>
+            <ModalLoginWarn handleCloseModal={handleCloseModal}/>
+          </>
+        )}
+      </>
+    )
   }
 
   function BeautyBoxStatus() {
@@ -281,14 +363,14 @@ function ContentNavbar() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 class="w-6 h-6"
                 color="#4ABFA1"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
                 />
               </svg>
@@ -301,10 +383,13 @@ function ContentNavbar() {
             </div>
           </div>
           <div className="flex justify-evenly">
-            <button className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs">
+            <Link to={"/register"} className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs">
               Sign up
-            </button>
-            <Link to={"/login"} className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs">
+            </Link>
+            <Link
+              to={"/login"}
+              className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs"
+            >
               Login
             </Link>
           </div>
@@ -375,17 +460,7 @@ function ContentNavbar() {
               </div>
             </div>
           </Link>
-          <Link>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Recycle} className="w-10 h-10" />
-              <div>
-                <p>Recycle</p>
-              </div>
-            </div>
-          </Link>
+          <Recycle/>
           <Link to={"/newProduct"}>
             <div
               className="text-center p-1"
@@ -408,17 +483,7 @@ function ContentNavbar() {
               </div>
             </div>
           </Link>
-          <Link>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Video} className="w-10 h-10" />
-              <div>
-                <p>Video</p>
-              </div>
-            </div>
-          </Link>
+         <Video/>
           <Link to={"/feed"}>
             <div
               className="text-center p-1"

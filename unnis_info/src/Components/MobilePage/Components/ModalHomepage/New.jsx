@@ -19,7 +19,7 @@ import Star from "../../../../assets/Star.svg";
 import Arrow from "../../../../assets/Polygon3.svg";
 import ArrowBot from "../../../../assets/Polygon10.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getListProduct,
   getProductCategory,
@@ -35,6 +35,7 @@ import {
 import { Link } from "react-router-dom";
 import ModalCategory from "../ModalCategory/ModalCategory";
 import ModalSort from "../ModalCategory/ModalSort";
+import Close from "../../../../assets/Close.svg";
 
 function NewPage() {
   const productCategory = useSelector(
@@ -48,8 +49,14 @@ function NewPage() {
   const loadingAllProduct = useSelector(
     (state) => state.ReducerListProduct.loading
   );
-  const keyCategories = productCategory.data ? Object.keys(productCategory.data) : [];
-  const nameCategories = keyCategories.map((str) => str.charAt(0).toUpperCase() + str.slice(1));
+  const keyCategories = productCategory.data
+    ? Object.keys(productCategory.data)
+    : [];
+  const nameCategories = keyCategories.map(
+    (str) => str.charAt(0).toUpperCase() + str.slice(1)
+  );
+  const [valCategory, setValCategory] = useState("");
+  const [likeCategory, setLikeCategory] = useState("");
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -94,6 +101,15 @@ function NewPage() {
 
   const allProduct = listProduct.dataProduct;
 
+  function sortByCategory(val) {
+    setValCategory(val);
+  }
+
+  function sortByLike(val) {
+    setLikeCategory(val);
+  }
+
+  console.log(valCategory);
   const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
   function CategoryProduct() {
     return (
@@ -147,24 +163,63 @@ function NewPage() {
                   <div className="flex justify-between items-center">
                     <div className="flex gap-x-px">
                       <Link to={el.tokopediaLink} target="_Blank">
-                        <img src={Tokopedia} className={el.tokopediaLink === "" ? "hidden" : "w-5 h-5 rounded-full" }/>
+                        <img
+                          src={Tokopedia}
+                          className={
+                            el.tokopediaLink === ""
+                              ? "hidden"
+                              : "w-5 h-5 rounded-full"
+                          }
+                        />
                       </Link>
                       <Link to={el.shopeeLink} target="_Blank">
-                        <img src={Shopee} className={el.shopeeLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                        <img
+                          src={Shopee}
+                          className={
+                            el.shopeeLink === ""
+                              ? "hidden"
+                              : "w-5 h-5 rounded-full"
+                          }
+                        />
                       </Link>
                       <Link to={el.unnispickLink} target="_Blank">
-                        <img src={UnnisIcon} className={el.unnispickLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                        <img
+                          src={UnnisIcon}
+                          className={
+                            el.unnispickLink === ""
+                              ? "hidden"
+                              : "w-5 h-5 rounded-full"
+                          }
+                        />
                       </Link>
                       <Link to={el.sociollaLink} target="_Blank">
-                        <img src={Sociolla} className={el.sociollaLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                        <img
+                          src={Sociolla}
+                          className={
+                            el.sociollaLink === ""
+                              ? "hidden"
+                              : "w-5 h-5 rounded-full"
+                          }
+                        />
                       </Link>
                       <Link to={el.iStyleLink} target="_Blank">
-                        <img src={Istyle} className={el.iStyleLink === "" ? "hidden" : "w-5 h-5 rounded-full" } />
+                        <img
+                          src={Istyle}
+                          className={
+                            el.iStyleLink === ""
+                              ? "hidden"
+                              : "w-5 h-5 rounded-full"
+                          }
+                        />
                       </Link>
                       <Link to={el.oliveYoungLink} target="_Blank">
                         <img
                           src={OliveYoung}
-                          className={el.oliveYoungLink === "" ? "hidden" : "w-5 h-5 rounded-full" }
+                          className={
+                            el.oliveYoungLink === ""
+                              ? "hidden"
+                              : "w-5 h-5 rounded-full"
+                          }
                         />
                       </Link>
                     </div>
@@ -212,13 +267,28 @@ function NewPage() {
             )}
           </div>
           <div className="flex justify-between pt-5 px-2">
-              <ModalCategory/>
-              <ModalSort/>
+            <div className="flex">
+              {valCategory !== "All" || likeCategory !== "Sort By" ? (
+                <button
+                  type="button"
+                  className="border rounded-lg p-1 flex text-center items-center gap-x-1 mr-1"
+                  onClick={()=>handleCloseButton("All", "Sort By")}
+                >
+                  <img src={Close} className="w-4 h-4" />
+                </button>
+              ) : (
+                ""
+              )}
+              <ModalCategory sortByCategory={sortByCategory} />
+            </div>
+            <ModalSort sortByLike={sortByLike} />
           </div>
         </div>
         <div className="overflow-y-auto max-h-[calc(100vh-100px)]">
-          {loadingAllProduct ? ( <div className="flex justify-center items-center h-screen">
-            <CircleLoader color="#0000ff" size={30} /> </div>
+          {loadingAllProduct ? (
+            <div className="flex justify-center items-center h-screen">
+              <CircleLoader color="#0000ff" size={30} />{" "}
+            </div>
           ) : (
             <DisplayProduct />
           )}

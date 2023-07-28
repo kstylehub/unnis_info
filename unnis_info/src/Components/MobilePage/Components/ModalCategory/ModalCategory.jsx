@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowBot from "../../../../assets/Polygon10.svg";
 import Close from "../../../../assets/Close.svg";
 
-const ModalCategory = () => {
+const ModalCategory = ({sortByCategory, }) => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("All");
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    setShowModal(false)
   };
+  
+  useEffect(() => {
+    sortByCategory(selectedOption)
+  }, []);
+
+  console.log(selectedOption, "<tesss");
 
   const handleModalOpen = () => {
     setShowModal(true);
@@ -74,7 +81,7 @@ const ModalCategory = () => {
         className="border rounded-lg p-1 flex text-center items-center gap-x-1"
         onClick={handleModalOpen}
       >
-        <h1>All</h1>
+        <h1>{selectedOption}</h1>
         <img src={ArrowBot} className="h-3 w-3" />
       </button>
 
