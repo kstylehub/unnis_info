@@ -283,7 +283,7 @@ function Register() {
                     <div className="flex flex-row pt-3 justify-evenly">
                         <div className="flex flex-row justify-center items-center">
                             <input 
-                                className="w-1/12 h-4 w-4" 
+                                className=" h-4 w-4" 
                                 type="checkbox" 
                                 name="email"
                                 
@@ -296,7 +296,7 @@ function Register() {
                         </div>
                         <div className="flex flex-row justify-center items-center">
                             <input 
-                                className="w-1/12 h-4 w-4" 
+                                className=" h-4 w-4" 
                                 type="checkbox" 
                                 name="notification"
                                 
@@ -309,7 +309,7 @@ function Register() {
                         </div>
                         <div className="flex flex-row justify-center items-center">
                             <input 
-                                className="w-1/12 h-4 w-4" 
+                                className=" h-4 w-4" 
                                 type="checkbox" 
                                 name="sms"
                                 
