@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import CommentBox from "./CommentBox";
+
 function DetailEvent() {
   const { id } = useParams();
 
@@ -55,7 +56,7 @@ function DetailEvent() {
 
           return (
             <div
-              className="absolute flex-justify space-y-2 overflow-y-auto w-full"
+              className="absolute flex-justify space-y-2 w-full h-screen overflow-y-auto"
               key={el.id}
             >
               <div className="font-sans text-lg mb-1">
