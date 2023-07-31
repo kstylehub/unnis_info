@@ -5,15 +5,31 @@ const CommentBox = () => {
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState({});
   const [editIndex, setEditIndex] = useState(null);
-  
+  const [selectedCommentIndex, setSelectedCommentIndex] = useState(null);
+
   const commentBoxRef = useRef(null);
 
+
+  useEffect(() => {
+    // Event listener to handle click outside the comment area and cancel editing
+    const handleClickOutside = (event) => {
+      if (commentBoxRef.current && !commentBoxRef.current.contains(event.target)) {
+        handleCancel();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleChange = (event) => {
     const { value } = event.target;
     setComment(value.substring(0, 300));
   };
-  
+
   const handleSubmit = () => {
     if (comment.trim()) {
       if (editIndex !== null) {
@@ -42,6 +58,7 @@ const CommentBox = () => {
   const handleEdit = (index) => {
     setComment(comments[index]);
     setEditIndex(index);
+    setSelectedCommentIndex(index);
   };
 
   const handleDelete = (index) => {
@@ -51,13 +68,15 @@ const CommentBox = () => {
       delete updatedUserComments[index];
       return updatedUserComments;
     });
-    setEditIndex(null);
+    handleCancel();
   };
 
-  const handleCancelEdit = () => {
+  const handleCancel = () => {
     setComment('');
     setEditIndex(null);
+    setSelectedCommentIndex(null);
   };
+
   const commentCount = comments.length;
 
   const getTimeAgo = (date) => {
@@ -69,11 +88,7 @@ const CommentBox = () => {
 
     return diffDays === 0 ? "hari ini" : `${diffDays} hari sebelumnya`;
   };
-  const handleClickOutside = (event) => {
-    if (commentBoxRef.current && !commentBoxRef.current.contains(event.target)) {
-      setEditIndex(null); // Cancel the editing process when clicking outside
-    }
-  };
+ 
   return (
     <div className="">
       <div className="flex justify-start">
@@ -112,7 +127,7 @@ const CommentBox = () => {
                 <p className="text-sm">{c}</p>
                 <p className="text-xs text-gray-500">{getTimeAgo(new Date())}</p>
               </div>
-            {userComments[index] && (
+              {userComments[index] && (
                 <div className="relative">
                   <button
                     className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded"
