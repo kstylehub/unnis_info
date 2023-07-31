@@ -228,14 +228,14 @@ function detailProduct() {
             </div>
           </div>
         </div>
-        <div className="lg:px-8 px-4 py-6 marker:border-b">
+        <div className="lg:px-8 px-4 py-6 border-b">
           <div className="flex w-full pb-5 ">
             <div className="font-bold flex">REVIEW</div>
             <p className="mx-2 text-red-500 font-bold">
               {dataProduct.reviewNum}
             </p>
           </div>
-          <div className="flex justify-center w-full">
+          <div className="flex justify-center w-full py-1">
             <div className="w-5/12 flex flex-col justify-center items-center">
               <p className="text-center font-bold uppercase">Nilai</p>
               <p className="text-4xl text-center font-bold">
@@ -330,7 +330,7 @@ function detailProduct() {
         </div>
 
         {/* Review */}
-        <div className="lg:px-8 px-4 pt-3">
+        <div className="lg:px-8 px-4 pt-4">
           <div className="flex justify-between">
             <div className="flex justify-center items-center">
               <p className="text-sm">Disukai</p>
