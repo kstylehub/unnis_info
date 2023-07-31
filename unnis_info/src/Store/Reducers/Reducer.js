@@ -58,3 +58,22 @@ export function ReducerTopProduct(state = listTopProduct, action) {
             return state;
     }
 }
+
+const allDataProduct = {
+    dataProduct : [],
+    error: null,
+    loading: true
+}
+
+export function ReducerDataProduct(state = allDataProduct, action) {
+    switch (action.type) {
+        case PRODUCT.GET_DATA_PRODUCT_START:
+            return { ...state, loading: true }
+        case PRODUCT.GET_DATA_PRODUCT_FAILED:
+            return { ...state, error: action.payload, loading: false }
+        case PRODUCT.GET_DATA_PRODUCT_SUCCESS:
+            return { ...state, dataProduct: action.payload, loading: false }
+        default:
+            return state;
+    }
+}

@@ -97,6 +97,12 @@ const router = createBrowserRouter([
           {
             path: "/newProduct",
             element: <NewPage />,
+            children: [
+              {
+                path: "/newProduct/:id",
+                element: <DetailProduct />,
+              },
+            ]
           },
           {
             path: "/skinanalysis",

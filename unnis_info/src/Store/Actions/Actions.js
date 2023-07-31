@@ -146,6 +146,35 @@ export const getTopProduct = () => async (dispatch) => {
     }
 }
 
+export const getDataProduct = () => async (dispatch) => {
+    try {
+        console.log('Fetching data...');
+        dispatch({type: PRODUCT.GET_DATA_PRODUCT_START})
+        const response = await fetch(`${BASE_URL}/product/detailProduct`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        console.log('API response:', data);
+        dispatch({
+            type: PRODUCT.GET_DATA_PRODUCT_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log('error get data', error);
+        dispatch({
+            type: PRODUCT.GET_DATA_PRODUCT_FAILED,
+            payload: error
+        })
+    }
+}
+
 export const getAllReview = () => async (dispatch) => {
     try {
         dispatch({type: REVIEW.GET_ALL_REVIEW_START})

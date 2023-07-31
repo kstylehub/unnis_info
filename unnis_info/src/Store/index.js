@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import { ReducerProductCategory, ReducerListProduct, ReducerTopProduct} from "./Reducers/Reducer";
+import { ReducerDataProduct, ReducerProductCategory, ReducerListProduct, ReducerTopProduct} from "./Reducers/Reducer";
 import {ReducerReview} from "./Reducers/ReducerReview";
 import { ReducerFeed } from "./Reducers/ReducerFeed";
 import { ReducerEventData } from "./Reducers/ReducerEvent";
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
     ReducerFeed,
     ReducerEventData,
     ReducerUser,
-    ReducerUserRegister
+    ReducerUserRegister,
+    ReducerDataProduct
 })
 
 const persistConfig = {
