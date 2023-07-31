@@ -49,6 +49,7 @@ function NewPage() {
   const loadingAllProduct = useSelector(
     (state) => state.ReducerListProduct.loading
   );
+
   const keyCategories = productCategory.data
     ? Object.keys(productCategory.data)
     : [];
@@ -101,6 +102,19 @@ function NewPage() {
 
   const allProduct = listProduct.dataProduct;
 
+  const [byCategory, setByCategory] = useState("");
+  const [clikCategory, setClickCategory] = useState("");
+  useEffect(() => {
+    tesSort(allProduct);
+  }, [clikCategory]);
+
+  function tesSort(product) {
+    const byCategory = product.filter((el) => {
+      return el.categories == clikCategory;
+    });
+    setByCategory(byCategory)
+  }
+
   function sortByCategory(val) {
     setValCategory(val);
   }
@@ -109,14 +123,23 @@ function NewPage() {
     setLikeCategory(val);
   }
 
-  console.log(valCategory);
+  function handleCategory(el) {
+    if (!el) return "";
+    const firstLetter = el.charAt(0).toLowerCase();
+    const restOfEl = el.slice(1);
+    const capitalizedEl = firstLetter + restOfEl;
+    setClickCategory(capitalizedEl);
+  }
+  // console.log(byCategory, "<<<");
   const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
   function CategoryProduct() {
     return (
       <>
         {category.map((el) => {
           return (
-            <div
+            <Link
+              to={"#"}
+              onClick={() => handleCategory(el.name)}
               key={el.name}
               className="bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
               style={{ textAlign: "-webkit-center" }}
@@ -125,17 +148,27 @@ function NewPage() {
               <div className="text-center ">
                 <p>{el.name}</p>
               </div>
-            </div>
+            </Link>
           );
         })}
       </>
     );
   }
 
+  function handleShowAll() {
+    setByCategory(allProduct); // Setel byCategory kembali ke semua produk
+    setValCategory("All"); // Setel valCategory ke "All"
+    setLikeCategory("Sort By"); // Setel likeCategory ke "Sort By"
+  }
+
+  console.log(loadingAllProduct);
   function DisplayProduct() {
+    const dataCategory = allProduct ? allProduct : byCategory
+    console.log(dataCategory," <<<data category");
+    console.log(byCategory, "????");
     return (
       <>
-        {allProduct?.map((el, index) => {
+        {dataCategory?.map((el, index) => {
           const text = el.name;
           const truncatedText =
             text.length > 30 ? `${text.slice(0, 30)}...` : text;
@@ -240,6 +273,8 @@ function NewPage() {
       </>
     );
   }
+
+  
   return (
     <>
       <div className="absolute top-0 w-full bg-white px-5">
@@ -272,7 +307,7 @@ function NewPage() {
                 <button
                   type="button"
                   className="border rounded-lg p-1 flex text-center items-center gap-x-1 mr-1"
-                  onClick={()=>handleCloseButton("All", "Sort By")}
+                  onClick={handleShowAll}
                 >
                   <img src={Close} className="w-4 h-4" />
                 </button>

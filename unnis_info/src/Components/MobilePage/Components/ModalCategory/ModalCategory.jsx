@@ -15,8 +15,6 @@ const ModalCategory = ({sortByCategory, }) => {
     sortByCategory(selectedOption)
   }, []);
 
-  console.log(selectedOption, "<tesss");
-
   const handleModalOpen = () => {
     setShowModal(true);
   };
