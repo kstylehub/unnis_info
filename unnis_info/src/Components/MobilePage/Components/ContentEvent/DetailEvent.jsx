@@ -4,21 +4,28 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import CommentBox from "./CommentBox";
-
+import { getCommentEvent } from "../../../../Store/Actions/Actions";
 function DetailEvent() {
   const { id } = useParams();
 
   const event = useSelector((state) => state.ReducerEventData.event);
-
+  const comment = useSelector((state) => state.ReducerCommentEvent.event);
+  
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getEvent());
+    dispatch(getCommentEvent(id));
   }, []);
+
   const data = event?.dataEvent;
+  const dataComment = comment?.dataReview;
+  console.log(dataComment,">>>ini data komen");
 
   const dataDetail = data?.filter((el) => {
     return el.id == id;
   });
+  
 
   function Display() {
     return (
@@ -115,7 +122,51 @@ function DetailEvent() {
                 alt="img"
               ></img>
               <div>
-                <CommentBox/>
+                <CommentBox />
+              </div>
+              <div>
+                <div className="border rounded-lg border-hidden p-2 mt-4">
+                  {dataComment.map((el, index) => (
+                    <div key={index} className="flex items-start flex-col mb-2">
+                      <div className="bg-gray-300 h-10 w-10 rounded-full mb-2"></div>
+                      <div className="flex justify-between w-full">
+                        <div>
+                          <p className="font-bold">User {index + 1}</p>
+                          <p className="text-sm">{el.descReviewer}</p>
+                          {/* <p className="text-xs text-gray-500">
+                            {getTimeAgo(new Date())}
+                          </p> */}
+                        </div>
+                        {/* {userComments[index] && (
+                          <div className="relative">
+                            <button
+                              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded"
+                              onClick={() => handleEdit(index)}
+                            >
+                              Edit
+                            </button>
+                            {selectedCommentIndex === index && (
+                              <div className="absolute top-0 right-8 flex flex-col space-y-2 p-2 bg-white border border-gray-300 rounded-lg shadow">
+                                <button
+                                  className="text-red-500 hover:text-red-600 font-bold"
+                                  onClick={() => handleDelete(index)}
+                                >
+                                  Delete
+                                </button>
+                                <button
+                                  className="text-yellow-500 hover:text-yellow-600 font-bold"
+                                  onClick={() => handleReport(index)}
+                                >
+                                  Report
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        )} */}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           );

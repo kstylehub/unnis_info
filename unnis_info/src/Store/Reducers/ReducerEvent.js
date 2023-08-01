@@ -18,7 +18,28 @@ export function ReducerEventData(
             return {...state, error: action.payload, loading:false }
         case EVENT.GET_DATA_EVENT_SUCCESS:
             return {...state, event: action.payload, loading:false }
-    
+        default:
+            return state;
+    }
+}
+
+const dataComment ={
+    commentEvent:[],
+    error:null,
+    loading:true,
+}
+
+export function ReducerCommentEvent(
+    state=dataComment,
+    action,
+){
+    switch (action.type){
+        case EVENT.GET_DATA_COMMENT_START:
+            return {...state, loading: true }
+        case EVENT.GET_DATA_COMMENT_FAILED:
+            return {...state, error: action.payload, loading:false }
+        case EVENT.GET_DATA_COMMENT_SUCCESS:
+            return {...state, event: action.payload, loading:false }
         default:
             return state;
     }

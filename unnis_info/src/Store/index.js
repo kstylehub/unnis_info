@@ -4,7 +4,7 @@ import { ReducerProductCategory, ReducerListProduct, ReducerTopProduct} from "./
 import {ReducerReview} from "./Reducers/ReducerReview";
 import { ReducerFeed } from "./Reducers/ReducerFeed";
 
-import { ReducerEventData } from "./Reducers/ReducerEvent";
+import { ReducerEventData, ReducerCommentEvent } from "./Reducers/ReducerEvent";
 const rootReducer = combineReducers({
     ReducerProductCategory,
     ReducerListProduct,
@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
     ReducerReview,
     ReducerFeed,
     ReducerEventData,
+    ReducerCommentEvent,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

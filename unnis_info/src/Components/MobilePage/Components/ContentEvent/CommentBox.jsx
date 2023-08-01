@@ -1,4 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommentEvent } from "../../../../Store/Actions/Actions";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const CommentBox = () => {
   const [comment, setComment] = useState("");
@@ -8,7 +12,11 @@ const CommentBox = () => {
   const [selectedCommentIndex, setSelectedCommentIndex] = useState(null);
 
   const commentBoxRef = useRef(null);
+  
+  
 
+  const data = event?.dataEvent;
+ 
 
   useEffect(() => {
     // Event listener to handle click outside the comment area and cancel editing
@@ -30,6 +38,7 @@ const CommentBox = () => {
     setComment(value.substring(0, 300));
   };
 
+ 
   const handleSubmit = () => {
     if (comment.trim()) {
       if (editIndex !== null) {
@@ -68,7 +77,7 @@ const CommentBox = () => {
       delete updatedUserComments[index];
       return updatedUserComments;
     });
-    handleCancel();
+    setSelectedCommentIndex(null);
   };
 
   const handleCancel = () => {
@@ -91,6 +100,7 @@ const CommentBox = () => {
  
   return (
     <div className="">
+      {data}
       <div className="flex justify-start">
         <div className="text-m font-sans mb-4">Komentar</div>
         <div className="text-red-600">{commentCount}</div>
@@ -117,7 +127,7 @@ const CommentBox = () => {
             </p>
           </div>
         </div>
-        <div className="border rounded-lg p-2 mt-4">
+        <div className="border rounded-lg border-hidden p-2 mt-4">
         {comments.map((c, index) => (
           <div key={index} className="flex items-start flex-col mb-2">
             <div className="bg-gray-300 h-10 w-10 rounded-full mb-2"></div>
