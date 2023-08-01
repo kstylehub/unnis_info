@@ -59,19 +59,19 @@ export function ReducerTopProduct(state = listTopProduct, action) {
     }
 }
 
-const allDataProduct = {
+const detailProduct = {
     dataProduct : [],
     error: null,
     loading: true
 }
 
-export function ReducerDataProduct(state = allDataProduct, action) {
+export function ReducerDetailProduct(state = detailProduct, action) {
     switch (action.type) {
-        case PRODUCT.GET_DATA_PRODUCT_START:
+        case PRODUCT.GET_DETAIL_PRODUCT_START:
             return { ...state, loading: true }
-        case PRODUCT.GET_DATA_PRODUCT_FAILED:
+        case PRODUCT.GET_DETAIL_PRODUCT_FAILED:
             return { ...state, error: action.payload, loading: false }
-        case PRODUCT.GET_DATA_PRODUCT_SUCCESS:
+        case PRODUCT.GET_DETAIL_PRODUCT_SUCCESS:
             return { ...state, dataProduct: action.payload, loading: false }
         default:
             return state;

@@ -123,13 +123,13 @@ function NewPage() {
   function DisplayProduct() {
     return (
       <>
-          {allProduct?.map((el, index) => {
-            const text = el.name;
-            const truncatedText =
-              text.length > 30 ? `${text.slice(0, 30)}...` : text;
-            return (
-              <>
-              <Link to={`/detailproduct/${el.id}`}>
+        {allProduct?.map((el, index) => {
+          const text = el.name;
+          const truncatedText =
+            text.length > 30 ? `${text.slice(0, 30)}...` : text;
+          return (
+            <>
+              <Link to={`/newProduct/detailproduct/${el.id}`}>
                 <div key={el.id} className="flex justify-between items-center">
                   <div className="text-center items-center justify-center w-[10%]">
                     <h1>{index + 1}</h1>
@@ -223,10 +223,10 @@ function NewPage() {
                   </div>
                 </div>
                 <div className="border mt-2"></div>
-        </Link>
-              </>
-            );
-          })}
+              </Link>
+            </>
+          );
+        })}
       </>
     );
   }

@@ -87,7 +87,7 @@ function Feed() {
                         <img src={camera_pink} className="w-5/12" /> 
                     </div>
                 </div>
-                <div className="flex justify-between text-center justify-center py-3">
+                <div className="flex justify-between text-center py-3">
                     <a href="/newProduct">NEW</a>
                     <a href="/newProduct">CATEGORY</a>
                     <a href="">REVIEW</a>

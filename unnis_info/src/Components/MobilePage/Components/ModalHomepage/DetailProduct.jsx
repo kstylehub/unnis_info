@@ -1,43 +1,211 @@
 import back from "../../../../assets/previous.svg";
 import logo from "../../../../assets/logo.png";
-import Star from "../../../../assets/Star.svg";
-import Arrow from "../../../../assets/Polygon3.svg";
 import UnnisIcon from "../../../../assets/UnnisPickIcon.svg";
 import Tokopedia from "../../../../assets/tokopedia.svg";
 import Shopee from "../../../../assets/shopee.svg";
-import { getListProduct } from "../../../../Store/Actions/Actions";
-import { getDataProduct } from "../../../../Store/Actions/Actions";
-import { Link } from "react-router-dom";
+import Istyle from "../../../../assets/istyle.svg";
+import OliveYoung from "../../../../assets/OliveYoung.svg";
+import Sociolla from "../../../../assets/Sociolla.svg";
+import { getDetailProduct } from "../../../../Store/Actions/Actions";
+import { Link, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import profile from "../../../../assets/MyPage/profile.png";
 
 function detailProduct() {
-  const listProduct = useSelector(
-    (state) => state.ReducerListProduct?.listProduct
+  const detailProduct = useSelector(
+    (state) => state.ReducerDetailProduct?.dataProduct
   );
 
+  const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getListProduct());
+    const body = {
+      idMember: 5721,
+      idProduct: +id,
+    };
+    dispatch(getDetailProduct(body));
   }, []);
 
-  const dataProduct = listProduct?.dataProduct[0];
-  console.log(dataProduct);
+  // console.log(detailProduct.dataProduct[0].listReview, "<< detail product");
+  console.log(detailProduct.dataProduct[0], "<< detail product");
 
-  // const product = useSelector((state) => state.ReducerDataProduct);
-  // const dispatch = useDispatch();
+  const dataProduct = detailProduct?.dataProduct[0];
+  const formattedPrice = dataProduct.price.toLocaleString("id-ID");
 
-  // console.log(product.data);
-  // useEffect(() => {
-  //   dispatch(getDataProduct());
-  // }, [dispatch]);
+  // Modal
+  const [showModal, setShowModal] = useState(false);
+  const [showModalDesc, setShowModalDesc] = useState(false);
 
-  // const dataProduct = product?.dataProduct; // Correctly access the dataProduct property
+  const handleIngredients = () => {
+    setShowModal(true);
+  };
 
-  // console.log(dataProduct);
+  const handleDescription = () => {
+    setShowModalDesc(true);
+  };
 
+  const closeModalIngredients = () => {
+    setShowModal(false);
+  };
+  const closeModalDescription = () => {
+    setShowModalDesc(false);
+  };
+
+  const dataContainerStyle = {
+    whiteSpace: "pre-wrap",
+  };
+
+  function AllReview() {
+    const data = detailProduct.dataProduct[0].listReview;
+
+    function Birt(birthYear) {
+      if (birthYear == 0) {
+        return "-";
+      } else if (birthYear < 1970) {
+        return "60-an";
+      } else if (birthYear < 1980) {
+        return "50-an";
+      } else if (birthYear < 1990) {
+        return "40-an";
+      } else if (birthYear < 2000) {
+        return "30-an";
+      } else if (birthYear < 2010) {
+        return "20-an";
+      } else if (birthYear < 2020) {
+        return "10-an";
+      } else {
+        return birthYear;
+      }
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const day = date.getDate();
+      const monthIndex = date.getMonth();
+      const year = date.getFullYear();
+
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
+      return `${day} ${months[monthIndex]} ${year}`;
+    }
+
+    return (
+      <>
+        {data?.map((review) => (
+          <>
+            <div className="flex justify-between items-center py-3">
+              <div className="w-2/12">
+                <div className="rounded-full h-14 w-14 bg-gray-800">
+                  {review.imgReviewer !== undefined &&
+                    review.imgReviewer !== "" && (
+                      <img
+                        className="rounded-full object-cover w-full h-full"
+                        src={review.imgReviewer}
+                      ></img>
+                    )}
+                </div>
+              </div>
+
+              <div className="w-10/12 flex flex-col px-4">
+                <p className="text-sm">{review.nameReviewer}</p>
+                <p className="text-sm text-gray-500">
+                  {Birt(review.birthYear)} | {review.skinType || "-"} |{" "}
+                  {review.skinColor || "-"}
+                </p>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <div className="flex justify-evenly  py-2">
+                      <img
+                        className="w-4 h-4 mr-0.5"
+                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
+                        alt="star--v1"
+                      />
+                      <img
+                        className="w-4 h-4 mr-0.5"
+                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
+                        alt="star--v1"
+                      />
+                      <img
+                        className="w-4 h-4 mr-0.5"
+                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
+                        alt="star--v1"
+                      />
+                      <img
+                        className="w-4 h-4 mr-0.5"
+                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
+                        alt="star--v1"
+                      />
+                      <img
+                        className="w-4 h-4 mr-0.5"
+                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
+                        alt="star--v1"
+                      />
+                    </div>
+                    <p className="text-sm mx-3 text-gray-500">
+                      {formatDate(review.dateReview)}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-end">
+                    <img
+                      className="w-4 h-4 mr-1"
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABqUlEQVR4nO2Uu0qDQRCFPwUvIEjwgoKXwgtaqGhlb2FpJ6KlCbESC7FSawsLQaKCRTSIeRpLe8FG8+9ujPEBIgOz8EM2msQIFh5YWJiz58zM7g78o1GUYTCClIWMgzsHGQPpDxjynAIMO0g75QjXQlLOfilehAUHWQv5wLozsPIGK7IPcQxkX2GhZuZe3MBBASYr0OVgTCsSkXtdeQcpiQlHuA4OvEkZBqoMvIiIhxKwsBozWA1xvImF7ZCA9DH/ChO1WmhgTVateAkmtbrzkHtOglIyTeIJurULuZDBmZY32qyBgzE1OKsKGtjR8jaaNYhgUw3SVcESTKlB9hn6GhV/h34DN/II5C6CJAt72qbDCrTXKy5cC0d6drcm0UKvhUslJusUb5M/oWeuniDx5QEDsw5utV3r3xnInSn31sBMPUnJyJj3zzaCTckylLmBLT9GIliiEVhY9jNHWhC/E9nH2iKcZZrBC8zF5tP+I3Q+QId/DA5uCrDITxDBtIVrzfZYl+yvJUYrYGFE5ktsNF8UYZxW4g0SRTixcCqfit/AC/TI+hXxP4tP4mflMT6kErsAAAAASUVORK5CYII="
+                    />
+                    <p className="text-sm"> {review.countLike} likes</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="text-sm">{review.descReviewer}</div>
+            <div className="py-3 flex justify-start gap-1">
+              {review.listImage[0] && (
+                <div className="rounded-lg h-[8em] w-[8em]">
+                  <img
+                    className="rounded-lg object-cover h-full w-full"
+                    src={review.listImage[0]}
+                  />
+                </div>
+              )}
+              {review.listImage[1] && (
+                <div className="rounded-lg h-[8em] w-[8em]">
+                  <img
+                    className="rounded-lg object-cover h-full w-full"
+                    src={review.listImage[1]}
+                  />
+                </div>
+              )}
+              {review.listImage[2] && (
+                <div className="rounded-lg h-[8em] w-[8em]">
+                  <img
+                    className="rounded-lg object-cover h-full w-full"
+                    src={review.listImage[2]}
+                  />
+                </div>
+              )}
+            </div>
+            <div className="text-right text-xs text-red-400 underline pb-5">
+              Laporkan Ulasan
+            </div>
+            <hr></hr>
+          </>
+        ))}
+      </>
+    );
+  }
   return (
     <>
       <div className="w-full h-full overflow-y-auto">
@@ -84,7 +252,7 @@ function detailProduct() {
             </div>
           </div>
           <div className="py-2">
-            <h1 className="font-bold text-2xl">Rp {dataProduct.price}</h1>
+            <h1 className="font-bold text-2xl">Rp. {formattedPrice}</h1>
             <div className="pt-3 flex justify-start items-center">
               <p className="text-gray-400 uppercase mr-3 ">
                 {dataProduct.brand}
@@ -112,15 +280,24 @@ function detailProduct() {
                 : ` `}
             </p>
             <div className="flex justify-start py-4 gap-4">
-              <p className="pt-0.5 pb-1 px-2  border border-gray-400 text-gray-400 rounded-full text-sm">
-                #{dataProduct.keyword[0]}
-              </p>
-              <p className="pt-0.5 pb-1 px-2  border border-gray-400 text-gray-400 rounded-full text-sm">
-                #{dataProduct.keyword[1]}
-              </p>
-              <p className="pt-0.5 pb-1 px-2  border border-gray-400 text-gray-400 rounded-full text-sm">
-                #{dataProduct.keyword[2]}
-              </p>
+              {dataProduct.keyword[0] !== undefined &&
+                dataProduct.keyword[0] !== "" && (
+                  <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-sm">
+                    {"#" + dataProduct.keyword[0]}
+                  </p>
+                )}
+              {dataProduct.keyword[1] !== undefined &&
+                dataProduct.keyword[1] !== "" && (
+                  <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-sm">
+                    {"#" + dataProduct.keyword[1]}
+                  </p>
+                )}
+              {dataProduct.keyword[2] !== undefined &&
+                dataProduct.keyword[2] !== "" && (
+                  <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-sm">
+                    {"#" + dataProduct.keyword[2]}
+                  </p>
+                )}
             </div>
             <p className="text-xs text-gray-400 pb-3">You can buy this at</p>
             <div className="flex gap-2">
@@ -155,6 +332,36 @@ function detailProduct() {
                   }
                 />
               </Link>
+              <Link to={dataProduct.oliveYoungLink} target="_Blank">
+                <img
+                  src={OliveYoung}
+                  className={
+                    dataProduct.oliveYoungLink === ""
+                      ? "hidden"
+                      : "w-8 h-8 rounded-full"
+                  }
+                />
+              </Link>
+              <Link to={dataProduct.sociollaLink} target="_Blank">
+                <img
+                  src={Sociolla}
+                  className={
+                    dataProduct.sociollaLink === ""
+                      ? "hidden"
+                      : "w-8 h-8 rounded-full"
+                  }
+                />
+              </Link>
+              <Link to={dataProduct.styleKoreanLink} target="_Blank">
+                <img
+                  src={Istyle}
+                  className={
+                    dataProduct.styleKoreanLink === ""
+                      ? "hidden"
+                      : "w-8 h-8 rounded-full"
+                  }
+                />
+              </Link>
             </div>
           </div>
         </div>
@@ -170,7 +377,10 @@ function detailProduct() {
             <div className="w-11/12 text-sm flex flex-col justify-between">
               <div className="flex justify-between">
                 <div className="font-bold flex">INGREDIENTS</div>
-                <div className="flex justify-center items-center">
+                <div
+                  className="flex justify-center items-center"
+                  onClick={handleIngredients}
+                >
                   <div className="text-gray-400 mr-3">View All</div>
                   <svg
                     className="w-3 h-3 text-gray-400 dark:text-white"
@@ -189,7 +399,9 @@ function detailProduct() {
                   </svg>
                 </div>
               </div>
-              <p className="pt-2">Lorem ipsum</p>
+              <p className="pt-2 max-h-[5em] overflow-hidden text-ellipsis">
+                {dataProduct.ingredients}
+              </p>
             </div>
           </div>
         </div>
@@ -205,7 +417,10 @@ function detailProduct() {
             <div className="w-11/12 text-sm flex flex-col justify-between">
               <div className="flex justify-between">
                 <div className="font-bold flex">DESCRIPTION</div>
-                <div className="flex justify-center items-center">
+                <div
+                  className="flex justify-center items-center"
+                  onClick={handleDescription}
+                >
                   <div className="text-gray-400 mr-3">View All</div>
                   <svg
                     className="w-3 h-3 text-gray-400 dark:text-white"
@@ -224,10 +439,14 @@ function detailProduct() {
                   </svg>
                 </div>
               </div>
-              <p className="pt-2">Lorem ipsum</p>
+              <p className="pt-2 max-h-[5em] overflow-hidden text-ellipsis">
+                {dataProduct.description}
+              </p>
             </div>
           </div>
         </div>
+
+        {/* Count Review */}
         <div className="lg:px-8 px-4 py-6 border-b">
           <div className="flex w-full pb-5 ">
             <div className="font-bold flex">REVIEW</div>
@@ -239,34 +458,64 @@ function detailProduct() {
             <div className="w-5/12 flex flex-col justify-center items-center">
               <p className="text-center font-bold uppercase">Nilai</p>
               <p className="text-4xl text-center font-bold">
-                {dataProduct.rating}
+                {parseFloat(dataProduct.rating).toFixed(1)}
               </p>
               <div className="flex justify-evenly py-2">
-                <img
-                  className="w-5 h-5 mx-0.5"
-                  src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                  alt="star--v1"
-                />
-                <img
-                  className="w-5 h-5 mx-0.5"
-                  src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                  alt="star--v1"
-                />
-                <img
-                  className="w-5 h-5 mx-0.5"
-                  src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                  alt="star--v1"
-                />
-                <img
-                  className="w-5 h-5 mx-0.5"
-                  src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                  alt="star--v1"
-                />
-                <img
-                  className="w-5 h-5 mx-0.5"
-                  src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                  alt="star--v1"
-                />
+                <svg
+                  class="h-5 w-5 mx-0.5 text-red-700"
+                  viewBox="0 0 24 24"
+                  fill="red"
+                  stroke="red"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <svg
+                  class="h-5 w-5 mx-0.5 text-red-700"
+                  viewBox="0 0 24 24"
+                  fill="red"
+                  stroke="red"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <svg
+                  class="h-5 w-5 mx-0.5 text-red-700"
+                  viewBox="0 0 24 24"
+                  fill="red"
+                  stroke="red"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <svg
+                  class="h-5 w-5 mx-0.5 text-red-700"
+                  viewBox="0 0 24 24"
+                  fill="red"
+                  stroke="red"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <svg
+                  class="h-5 w-5 mx-0.5 text-red-700"
+                  viewBox="0 0 24 24"
+                  fill="red"
+                  stroke="red"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
               </div>
             </div>
             <div className="flex flex-col w-7/12 px-5">
@@ -366,66 +615,7 @@ function detailProduct() {
               />
             </svg>
           </div>
-          <div className="flex justify-between items-center py-3">
-            <div className="w-2/12">
-              <div className="rounded-full h-14 w-14 bg-gray-400"></div>
-            </div>
-
-            <div className="w-10/12 flex flex-col px-4">
-              <p className="text-sm">Name</p>
-              <p className="text-sm text-gray-500">20-an | Oily | Medium</p>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center">
-                  <div className="flex justify-evenly  py-2">
-                    <img
-                      className="w-4 h-4 mr-0.5"
-                      src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                      alt="star--v1"
-                    />
-                    <img
-                      className="w-4 h-4 mr-0.5"
-                      src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                      alt="star--v1"
-                    />
-                    <img
-                      className="w-4 h-4 mr-0.5"
-                      src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                      alt="star--v1"
-                    />
-                    <img
-                      className="w-4 h-4 mr-0.5"
-                      src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                      alt="star--v1"
-                    />
-                    <img
-                      className="w-4 h-4 mr-0.5"
-                      src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                      alt="star--v1"
-                    />
-                  </div>
-                  <p className="text-sm mx-3 text-gray-500">26 July 2022</p>
-                </div>
-
-                <div className="flex items-center justify-end">
-                  <img
-                    className="w-4 h-4 mr-1"
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABqUlEQVR4nO2Uu0qDQRCFPwUvIEjwgoKXwgtaqGhlb2FpJ6KlCbESC7FSawsLQaKCRTSIeRpLe8FG8+9ujPEBIgOz8EM2msQIFh5YWJiz58zM7g78o1GUYTCClIWMgzsHGQPpDxjynAIMO0g75QjXQlLOfilehAUHWQv5wLozsPIGK7IPcQxkX2GhZuZe3MBBASYr0OVgTCsSkXtdeQcpiQlHuA4OvEkZBqoMvIiIhxKwsBozWA1xvImF7ZCA9DH/ChO1WmhgTVateAkmtbrzkHtOglIyTeIJurULuZDBmZY32qyBgzE1OKsKGtjR8jaaNYhgUw3SVcESTKlB9hn6GhV/h34DN/II5C6CJAt72qbDCrTXKy5cC0d6drcm0UKvhUslJusUb5M/oWeuniDx5QEDsw5utV3r3xnInSn31sBMPUnJyJj3zzaCTckylLmBLT9GIliiEVhY9jNHWhC/E9nH2iKcZZrBC8zF5tP+I3Q+QId/DA5uCrDITxDBtIVrzfZYl+yvJUYrYGFE5ktsNF8UYZxW4g0SRTixcCqfit/AC/TI+hXxP4tP4mflMT6kErsAAAAASUVORK5CYII="
-                  />
-                  <p className="text-sm"> 2 likes</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="text-sm">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,
-          </div>
-          <div className="py-3">Gambar</div>
-          <div className="text-right text-xs text-red-400 underline pb-5">
-            Laporkan Ulasan
-          </div>
-          <hr></hr>
+          <AllReview />
         </div>
 
         {/* Edit Review  */}
@@ -455,6 +645,103 @@ function detailProduct() {
           </div>
         </div>
       </div>
+
+      {/* Modal Ingredients*/}
+      {showModal && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex flex-col justify-end">
+          <div className="rounded-t-xl bg-white text-center lg:px-6 px-4">
+            <div className="sticky inset-0 flex justify-between py-5">
+              <div className="font-bold flex">INGREDIENTS</div>
+
+              <svg
+                onClick={closeModalIngredients}
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </div>
+            <hr></hr>
+            <h5
+              style={dataContainerStyle}
+              className="lg:mb-2 text-sm text-left py-4"
+            >
+              {dataProduct.ingredients}
+            </h5>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Description*/}
+      {showModalDesc && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex flex-col justify-end">
+          <div className="rounded-t-xl bg-white text-center overflow-auto max-h-[30em]">
+            <div className="sticky inset-0 flex justify-between py-5 lg:px-6 px-4 bg-white">
+              <div className="font-bold flex">DESCRIPTION</div>
+
+              <svg
+                onClick={closeModalDescription}
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </div>
+            <hr></hr>
+            <h5
+              style={dataContainerStyle}
+              className="lg:px-6 px-4 lg:mb-2 text-sm text-left py-4"
+            >
+              {dataProduct.description}
+            </h5>
+            <hr></hr>
+            <div className="lg:px-6 px-4 py-4">
+              <h1 className="font-bold font-base text-left">VOLUME / HARGA</h1>
+              <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
+                {dataProduct.volume} / Rp. {formattedPrice}
+              </h5>
+            </div>
+            <hr></hr>
+            <div className="lg:px-6 px-4 py-4">
+              <h1 className="font-bold font-base text-left">
+                COUNTRY OF MANUFACTURE
+              </h1>
+              <img
+                className="w-8 h-8 mt-2"
+                src={dataProduct.dataCountry.flag}
+              ></img>
+            </div>
+            <hr></hr>
+            <div className="lg:px-6 px-4 py-4">
+              <h1 className="font-bold font-base text-left">HOW TO USE</h1>
+              <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
+                {dataProduct.howuse}
+              </h5>
+            </div>
+            <hr></hr>
+            <div className="lg:px-6 px-4 py-4">
+              <h1 className="font-bold font-base text-left">RECOMMEND FOR</h1>
+              <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
+                {dataProduct.recommend}
+              </h5>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

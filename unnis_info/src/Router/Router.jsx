@@ -98,20 +98,20 @@ const router = createBrowserRouter([
             path: "/newProduct",
             element: <NewPage />,
             children: [
-              {
-                path: "/newProduct/:id",
-                element: <DetailProduct />,
-              },
             ]
+          },
+          {
+            path: "/newProduct/detailproduct/:id",
+            element: <DetailProduct />,
           },
           {
             path: "/skinanalysis",
             element: <SkinAnalysis />,
           },
-          {
-            path: "/detailproduct",
-            element: <DetailProduct />,
-          },
+          // {
+          //   path: "/detailproduct",
+          //   element: <DetailProduct />,
+          // },
           {
             path: "/skinsectionone",
                 element: <SkinSectionOne />,
