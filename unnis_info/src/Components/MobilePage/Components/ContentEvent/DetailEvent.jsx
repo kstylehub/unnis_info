@@ -19,8 +19,8 @@ function DetailEvent() {
   }, []);
 
   const data = event?.dataEvent;
-  const dataComment = comment?.dataReview;
-  console.log(dataComment,">>>ini data komen");
+  const dataComment = comment?.dataReview;               
+  console.log(dataComment, ">>> ini komen");
 
   const dataDetail = data?.filter((el) => {
     return el.id == id;
@@ -126,7 +126,7 @@ function DetailEvent() {
               </div>
               <div>
                 <div className="border rounded-lg border-hidden p-2 mt-4">
-                  {dataComment.map((el, index) => (
+                  {dataComment?.map((el, index)  => (
                     <div key={index} className="flex items-start flex-col mb-2">
                       <div className="bg-gray-300 h-10 w-10 rounded-full mb-2"></div>
                       <div className="flex justify-between w-full">

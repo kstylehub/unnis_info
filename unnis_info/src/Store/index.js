@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { ReducerDetailProduct, ReducerProductCategory, ReducerListProduct, ReducerTopProduct} from "./Reducers/Reducer";
 import {ReducerReview} from "./Reducers/ReducerReview";
 import { ReducerFeed } from "./Reducers/ReducerFeed";
-import { ReducerEventData } from "./Reducers/ReducerEvent";
+import { ReducerEventData, ReducerCommentEvent } from "./Reducers/ReducerEvent";
 import { ReducerUser, ReducerUserRegister } from "./Reducers/ReducerUser";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
     ReducerEventData,
     ReducerUser,
     ReducerUserRegister,
-    ReducerDetailProduct
+    ReducerDetailProduct,
     ReducerCommentEvent,
 })
 

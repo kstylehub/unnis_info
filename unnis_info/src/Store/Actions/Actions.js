@@ -252,18 +252,32 @@ export const getEvent = () => async (dispatch) => {
             payload: error
         })
     }
-    const data = await response.json();
-   
-    dispatch({
-      type: EVENT.GET_DATA_COMMENT_SUCCESS,
-      payload: data,
+};
+
+export const getCommentEvent = () => async (dispatch) => {
+  try {
+    dispatch({ type: EVENT.GET_COMMENT_START });
+    const response = await fetch(`${BASE_URL}/reviewEvent/reviewByEvent`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-    return data;
-  } catch (error) {
-    console.log("error get data", error);
-    dispatch({
-      type: EVENT.GET_DATA_COMMENT_FAILED,
-      payload: error,
-    });
-  }
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+        const data = await response.json()
+        dispatch({
+            type: EVENT.GET_COMMENT_SUCCESS,
+            payload: data
+        })
+        return data
+    } catch (error){
+        console.log('error get data',error);
+        dispatch({
+            type: EVENT.GET_COMMENT_FAILED,
+            payload: error
+        })
+    }
 };
