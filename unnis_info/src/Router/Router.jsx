@@ -5,6 +5,7 @@ import Content from "../Components/Layout/Content";
 import Homepage from "../Components/MobilePage/Homepage/Homepage";
 import Subscribe from "../Components/MobilePage/ScreenNavBot/Subscribe";
 import NewPage from "../Components/MobilePage/Components/ModalHomepage/New";
+import DetailProduct from "../Components/MobilePage/Components/ModalHomepage/detailProduct";
 import Home from "../Components/Layout/Home";
 import Event from "../Components/MobilePage/ScreenNavBot/Event";
 import ContentNavbar from "../Components/MobilePage/NavbarPhone/contentNavbar";
@@ -24,6 +25,10 @@ import SkinPageThree from "../Components/MobilePage/Components/SkinAnalysis/skin
 import SkinPageFive from "../Components/MobilePage/Components/SkinAnalysis/skinpagefive";
 import SkinPageFour from "../Components/MobilePage/Components/SkinAnalysis/skinpagefour";
 import SkinPageSix from "../Components/MobilePage/Components/SkinAnalysis/skinpagesix";
+import LoginPage from "../Components/MobilePage/ScreenNavBot/LoginPage";
+import Register from "../Components/MobilePage/ScreenNavBot/Register";
+import Feed from "../Components/MobilePage/Components/ModalHomepage/feed";
+import FeedDetail from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
 import DetailEvent from "../Components/MobilePage/Components/ContentEvent/DetailEvent";
 const router = createBrowserRouter([
   {
@@ -83,16 +88,34 @@ const router = createBrowserRouter([
           },
           {
             path: "/my-page",
-            element: <MyPage/>
+            element: <MyPage/>,
+          },
+          {
+            path: "/login",
+            element: <LoginPage/>
+          },
+          {
+            path: "/register",
+            element: <Register/>
           },
           {
             path: "/newProduct",
             element: <NewPage />,
+            children: [
+            ]
+          },
+          {
+            path: "/newProduct/detailproduct/:id",
+            element: <DetailProduct />,
           },
           {
             path: "/skinanalysis",
             element: <SkinAnalysis />,
           },
+          // {
+          //   path: "/detailproduct",
+          //   element: <DetailProduct />,
+          // },
           {
             path: "/skinsectionone",
                 element: <SkinSectionOne />,
@@ -130,6 +153,14 @@ const router = createBrowserRouter([
           {
             path: "/skinsectionthree",
             element: <SkinSectionThree />,
+          },
+          {
+            path: "/feed",
+            element: <Feed />,
+          },
+          {
+            path: "/feeddetail",
+            element: <FeedDetail />,
           },
         ],
       },

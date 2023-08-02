@@ -1,7 +1,69 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
 const BASE_URL = "http://52.74.126.149:9696";
-const { PRODUCT, REVIEW, FEED, EVENT } = ACTIONS_TYPES;
+const { PRODUCT, REVIEW, FEED, EVENT, USER } = ACTIONS_TYPES;
+
+
+export const logout = () => ({
+    type: USER.LOGIN_GET_LOGOUT
+})
+
+export const register = (dataRegister) => async (dispatch) => {
+    console.log(dataRegister, ">>>>");
+    try {
+        dispatch({type: USER.REGISTER_GET_START})
+        const response = await fetch(`${BASE_URL}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataRegister)
+        })
+        if(!response.ok) {
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        console.log(data, "suksssesss");
+        dispatch({
+            type: USER.REGISTER_GET_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log("error register");
+        dispatch({
+            type: USER.REGISTER_GET_FAILED,
+            payload: error
+        })
+    }
+}
+export const login = (email, password) => async (dispatch) => {
+    try {
+        dispatch({type: USER.LOGIN_GET_START})
+        const response = await fetch(`${BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({email, password})
+        })
+        if(!response.ok){
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        dispatch({
+            type: USER.LOGIN_GET_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log('error login');
+        dispatch({
+            type: USER.LOGIN_GET_FAILED,
+            payload: error
+        })
+    }
+}
 
 export const getProductCategory = () => async (dispatch) => {
   try {
@@ -84,6 +146,35 @@ export const getTopProduct = () => async (dispatch) => {
   }
 };
 
+export const getDetailProduct = (body) => async (dispatch) => {
+    try {
+        dispatch({type: PRODUCT.GET_DETAIL_PRODUCT_START})
+        const response = await fetch(`${BASE_URL}/product/detailProduct`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body) 
+           
+        })
+        if (!response.ok) {
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        dispatch({
+            type: PRODUCT.GET_DETAIL_PRODUCT_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log('error get data', error);
+        dispatch({
+            type: PRODUCT.GET_DETAIL_PRODUCT_FAILED,
+            payload: error
+        })
+    }
+}
+
 export const getAllReview = () => async (dispatch) => {
   try {
     dispatch({ type: REVIEW.GET_ALL_REVIEW_START });
@@ -148,33 +239,18 @@ export const getEvent = () => async (dispatch) => {
       throw new Error("internal Server error");
     }
 
-    const data = await response.json();
-    console.log(data, ">>response");
-    dispatch({
-      type: EVENT.GET_DATA_EVENT_SUCCESS,
-      payload: data,
-    });
-    return data;
-  } catch (error) {
-    console.log("error get data", error);
-    dispatch({
-      type: EVENT.GET_DATA_EVENT_FAILED,
-      payload: error,
-    });
-  }
-};
-
-export const getCommentEvent = (id) => async (dispatch) => {
-  try {
-    dispatch({ type: EVENT.GET_DATA_COMMENT_START });
-    const response = await fetch(`${BASE_URL}/reviewEvent/reviewByEvent/${id}`, {
-      method: `GET`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("internal Server error");
+        const data = await response.json()
+        dispatch({
+            type: EVENT.GET_DATA_EVENT_SUCCESS,
+            payload: data
+        })
+        return data
+    } catch (error){
+        console.log('error get data',error);
+        dispatch({
+            type: EVENT.GET_DATA_EVENT_FAILED,
+            payload: error
+        })
     }
     const data = await response.json();
    

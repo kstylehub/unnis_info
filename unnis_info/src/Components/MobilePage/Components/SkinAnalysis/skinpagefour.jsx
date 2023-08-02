@@ -19,25 +19,25 @@ function SkinPageFour () {
             </div>
             <div className="flex items-center px-10 mt-5">
                 <div className="flex items-center text-teal-600 relative">
-                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" class="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
+                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" className="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
                     <div className="absolute top-0 -ml-14 text-center mt-6 w-32 text-xs text-black">Tertarik</div>
                 </div>
                 <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-400"></div>
                 <div className="flex items-center relative">
-                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" class="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
+                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" className="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
                 </div>
                 <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-400"></div>
                 <div className="flex items-center relative">
-                    <input checked id="skinpageone" type="radio" value="" name="skinpageone-group" class="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
+                    <input checked id="skinpageone" type="radio" value="" name="skinpageone-group" className="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
                     <div className="absolute top-0 -ml-14 text-center mt-6 w-32 text-xs text-black">Normal</div>
                 </div>
                 <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-400"></div>
                 <div className="flex items-center relative">
-                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" class="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
+                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" className="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
                 </div>
                 <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-400"></div>
                 <div className="flex items-center relative">
-                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" class="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
+                    <input id="skinpageone" type="radio" value="" name="skinpageone-group" className="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
                     <div className="absolute top-0 -ml-14 text-center mt-6 w-32 text-xs text-black">Lembab</div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getListProduct,
@@ -13,7 +13,7 @@ import Sociolla from "../../../assets/Sociolla.svg";
 import Star from "../../../assets/Star.svg";
 import Arrow from "../../../assets/Polygon3.svg";
 import { Link } from "react-router-dom";
-import { CircleLoader } from "react-spinners";
+import { CircleLoader, GridLoader, RingLoader } from "react-spinners";
 
 export default function NavbarCategoryHome() {
   const productCategories = useSelector(
@@ -34,20 +34,25 @@ export default function NavbarCategoryHome() {
   const keyCategories = productCategories.data
     ? Object.keys(productCategories.data)
     : [];
-  const nameCategories = keyCategories.map(
-    (str) => str.charAt(0).toUpperCase() + str.slice(1)
-  );
 
   const allProduct = listProduct.dataProduct;
+  const [product, setProduct] = useState()
+  const [colorText, setColorText] = useState()
 
+  function handleCategory(el) {
+    const sortCategory = allProduct.filter((el1) => el1.categories === el);
+    setProduct(sortCategory);
+    setColorText(el)
+  }
   function Categories() {
     return (
       <>
-        {nameCategories.map((el) => {
+        {keyCategories.map((el) => {
+          const nameCategories = el.charAt(0).toUpperCase() + el.slice(1)
           return (
-            <div key={el}>
-              <h1>{el}</h1>
-            </div>
+            <button onClick={()=>handleCategory(el)} key={el}>
+              <h1 className={el === colorText ? "text-black" : "text-slate-500"}>{nameCategories}</h1>
+            </button>
           );
         })}
       </>
@@ -55,112 +60,62 @@ export default function NavbarCategoryHome() {
   }
 
   function BoxProduct() {
-    const truncatedData = allProduct?.slice(0, 3);
-    return (
-      <>
-        {truncatedData?.map((el, index) => {
-          const text = el.name;
-          const truncatedText =
-            text.length > 30 ? `${text.slice(0, 30)}...` : text;
-          return (
-            <>
-              <div key={el.id} className="flex justify-between items-center">
-                <div className="text-center items-center justify-center w-[10%]">
-                  <h1>{index + 1}</h1>
-                </div>
-                <div className="w-[30%]">
-                  <img src={el.images[0]} className="w-15 h-15" />
-                </div>
-                <div className="justify-between w-[80%]">
-                  <div className="flex items-center text-[#ADB5BD]">
-                    <h1 className="text-xs">{el.brand} </h1>
-                    <div className="items-center pl-2">
-                      <a href="#">
-                        <img src={Arrow} className="w-2 h-2" />
-                      </a>
-                    </div>
+    let truncatedData
+    if(product) {
+      truncatedData = product?.slice(0, 3);
+    }else {
+      truncatedData = allProduct?.slice(0, 3)
+    }
+    if(truncatedData?.length === 0){
+      return (
+        <>
+          <div className="text-center">
+            <h1>Data Not Found</h1>
+          </div>
+        </>
+      )
+    }
+    else {
+      return (
+        <>
+          {truncatedData?.map((el, index) => {
+            const text = el.name;
+            const truncatedText =
+              text.length > 30 ? `${text.slice(0, 30)}...` : text;
+            return (
+              <>
+                <div key={el.description} className="flex justify-between items-center">
+                  <div className="text-center items-center justify-center w-[10%]">
+                    <h1>{index + 1}</h1>
                   </div>
-                  <div className="py-2">
-                    <p className="text-sm">{truncatedText}</p>
+                  <div className="w-[30%]">
+                    <img src={el.images[0]} className="w-15 h-15" />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-x-px">
-                      <Link to={el.tokopediaLink} target="_Blank">
-                        <img
-                          src={Tokopedia}
-                          className={
-                            el.tokopediaLink === ""
-                              ? "hidden"
-                              : "w-5 h-5 rounded-full"
-                          }
-                        />
-                      </Link>
-                      <Link to={el.shopeeLink} target="_Blank">
-                        <img
-                          src={Shopee}
-                          className={
-                            el.shopeeLink === ""
-                              ? "hidden"
-                              : "w-5 h-5 rounded-full"
-                          }
-                        />
-                      </Link>
-                      <Link to={el.unnispickLink} target="_Blank">
-                        <img
-                          src={UnnisIcon}
-                          className={
-                            el.unnispickLink === ""
-                              ? "hidden"
-                              : "w-5 h-5 rounded-full"
-                          }
-                        />
-                      </Link>
-                      <Link to={el.sociollaLink} target="_Blank">
-                        <img
-                          src={Sociolla}
-                          className={
-                            el.sociollaLink === ""
-                              ? "hidden"
-                              : "w-5 h-5 rounded-full"
-                          }
-                        />
-                      </Link>
-                      <Link to={el.iStyleLink} target="_Blank">
-                        <img
-                          src={Istyle}
-                          className={
-                            el.iStyleLink === ""
-                              ? "hidden"
-                              : "w-5 h-5 rounded-full"
-                          }
-                        />
-                      </Link>
-                      <Link to={el.oliveYoungLink} target="_Blank">
-                        <img
-                          src={OliveYoung}
-                          className={
-                            el.oliveYoungLink === ""
-                              ? "hidden"
-                              : "w-5 h-5 rounded-full"
-                          }
-                        />
-                      </Link>
+                  <div className="justify-between w-[80%]">
+                    <div className="flex items-center text-[#ADB5BD]">
+                      <h1 className="text-xs">{el.brand} </h1>
+                      <div className="items-center pl-2">
+                        <a href="#">
+                          <img src={Arrow} className="w-2 h-2" />
+                        </a>
+                      </div>
                     </div>
-                    <div className="flex items-center pl-5">
-                      <img src={Star} className="w-5 h-5 rounded-full" />
-                      <div className="pl-0.5 flex gap-x-0.5">
-                        <h1 className="text-xs">{el.rating} </h1>
-                        <p className="text-xs text-gray-500">{`(${el.reviewNum})`}</p>
+                    <div className="pt-2">
+                      <p className="text-sm">{truncatedText}</p>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-x-px">
+                        <p className="text-xs ">{el.volume} /Rp {el.price}</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </>
-          );
-        })}
-      </>
-    );
+              </>
+            );
+          })}
+        </>
+      );
+    }
   }
 
   return (
@@ -171,15 +126,15 @@ export default function NavbarCategoryHome() {
       <div className="border rounded-lg px-5 pt-5 mx-5 mt-5 shadow-lg">
         {loadingAllProduct ? (
           <div className="flex justify-center items-center">
-            <CircleLoader color="#0000ff" size={30} />{" "}
+            <RingLoader color="#0000ff" size={30} />{" "}
           </div>
         ) : (
           <BoxProduct />
         )}
         <div className="border mt-2"></div>
-        <div className="text-center m-3 text-sm">
+        <Link to={"/newProduct"} className="text-center m-3 text-sm">
           <h1>View All</h1>
-        </div>
+        </Link>
       </div>
     </>
   );
