@@ -33,7 +33,7 @@ function detailProduct() {
   const dataProduct = detailProduct?.dataProduct[0];
   const formattedPrice = dataProduct.price.toLocaleString("id-ID");
 
-  // Modal
+  // Modal Ingredients and Description
   const [showModal, setShowModal] = useState(false);
   const [showModalDesc, setShowModalDesc] = useState(false);
 
@@ -56,8 +56,56 @@ function detailProduct() {
     whiteSpace: "pre-wrap",
   };
 
+  function AllReview1() {
+    const data = detailProduct?.dataProduct[0]?.listReview;
+    const valueReviewDistribution = data?.reduce((acc, review) => {
+      const value = review.valueReview || 0;
+      acc[value] = (acc[value] || 0) + 1;
+      return acc;
+    }, {});
+    const maxCount = Math.max(...Object.values(valueReviewDistribution));
+
+    return (
+      <div className="flex flex-col w-7/12 px-5">
+        {[5, 4, 3, 2, 1].map((value) => (
+          <div className="flex justify-evenly items-center" key={value}>
+            <div className="flex w-2/12">
+              <svg
+                className="w-5 h-5 "
+                viewBox="0 0 24 24"
+                fill="red"
+                stroke="red"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              <p className="mx-1 text-sm">{value}</p>
+            </div>
+            <div className="mx-1 w-9/12 h-2 bg-gray-200 rounded-full ">
+              {valueReviewDistribution[value] > 0 && (
+                <div
+                  className="bg-red-500 h-2 rounded-full dark:bg-red-500"
+                  style={{
+                    width: `${
+                      (valueReviewDistribution[value] / maxCount) * 100
+                    }%`,
+                  }}
+                ></div>
+              )}
+            </div>
+            <div className="w-1/12 mx-1 text-sm">
+              {valueReviewDistribution[value] || 0}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   function AllReview() {
-    const data = detailProduct.dataProduct[0].listReview;
+    const data = detailProduct?.dataProduct[0]?.listReview;
 
     function Birt(birthYear) {
       if (birthYear == 0) {
@@ -103,10 +151,52 @@ function detailProduct() {
       return `${day} ${months[monthIndex]} ${year}`;
     }
 
+    function StarReview({ rating }) {
+      const maxRating = 5;
+      const ratingInRange = Math.max(0, Math.min(rating, maxRating)); // Ensure rating is between 0 and 5
+      const filledStars = Math.floor(ratingInRange);
+      const remainingStars = maxRating - filledStars;
+
+      return (
+        <>
+          <div className="flex justify-evenly py-2">
+            {[...Array(filledStars)].map((_, index) => (
+              <svg
+                key={index}
+                className="w-4 h-4 mr-0.5"
+                viewBox="0 0 24 24"
+                fill="red"
+                stroke="red"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+            {[...Array(remainingStars)].map((_, index) => (
+              <svg
+                key={index}
+                className="w-4 h-4 mr-0.5"
+                viewBox="0 0 24 24"
+                fill="gray"
+                stroke="gray"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+          </div>
+        </>
+      );
+    }
+
     return (
       <>
         {data?.map((review) => (
-          <>
+          <React.Fragment key={review.id}>
             <div className="flex justify-between items-center py-3">
               <div className="w-2/12">
                 <div className="rounded-full h-14 w-14 bg-gray-800">
@@ -128,33 +218,7 @@ function detailProduct() {
                 </p>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
-                    <div className="flex justify-evenly  py-2">
-                      <img
-                        className="w-4 h-4 mr-0.5"
-                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                        alt="star--v1"
-                      />
-                      <img
-                        className="w-4 h-4 mr-0.5"
-                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                        alt="star--v1"
-                      />
-                      <img
-                        className="w-4 h-4 mr-0.5"
-                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                        alt="star--v1"
-                      />
-                      <img
-                        className="w-4 h-4 mr-0.5"
-                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                        alt="star--v1"
-                      />
-                      <img
-                        className="w-4 h-4 mr-0.5"
-                        src="https://img.icons8.com/material-rounded/24/star--v1.png"
-                        alt="star--v1"
-                      />
-                    </div>
+                    <StarReview rating={review.valueReview} />
                     <p className="text-sm mx-3 text-gray-500">
                       {formatDate(review.dateReview)}
                     </p>
@@ -170,7 +234,9 @@ function detailProduct() {
                 </div>
               </div>
             </div>
-            <div className="text-sm">{review.descReviewer}</div>
+            <div style={dataContainerStyle} className="text-sm">
+              {review.descReviewer}
+            </div>
             <div className="py-3 flex justify-start gap-1">
               {review.listImage[0] && (
                 <div className="rounded-lg h-[8em] w-[8em]">
@@ -201,11 +267,59 @@ function detailProduct() {
               Laporkan Ulasan
             </div>
             <hr></hr>
-          </>
+          </React.Fragment>
         ))}
       </>
     );
   }
+
+  function StarAll() {
+    const rating = detailProduct.dataProduct[0].rating;
+    const maxRating = 5;
+    const filledStars = Math.floor(rating);
+    const remainingStars = maxRating - filledStars;
+    return (
+      <>
+        <div className="w-5/12 flex flex-col justify-center items-center">
+          <p className="text-center font-bold uppercase">Nilai</p>
+          <p className="text-4xl text-center font-bold">
+            {parseFloat(dataProduct.rating).toFixed(1)}
+          </p>
+          <div className="flex justify-evenly py-2">
+            {[...Array(filledStars)].map((_, index) => (
+              <svg
+                key={index}
+                className="h-5 w-5 mx-0.5 text-red-700"
+                viewBox="0 0 24 24"
+                fill="red"
+                stroke="red"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+            {[...Array(remainingStars)].map((_, index) => (
+              <svg
+                key={index}
+                className="h-5 w-5 mx-0.5 text-red-700"
+                viewBox="0 0 24 24"
+                fill="gray"
+                stroke="gray"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <div className="w-full h-full overflow-y-auto">
@@ -455,70 +569,9 @@ function detailProduct() {
             </p>
           </div>
           <div className="flex justify-center w-full py-1">
-            <div className="w-5/12 flex flex-col justify-center items-center">
-              <p className="text-center font-bold uppercase">Nilai</p>
-              <p className="text-4xl text-center font-bold">
-                {parseFloat(dataProduct.rating).toFixed(1)}
-              </p>
-              <div className="flex justify-evenly py-2">
-                <svg
-                  class="h-5 w-5 mx-0.5 text-red-700"
-                  viewBox="0 0 24 24"
-                  fill="red"
-                  stroke="red"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-                <svg
-                  class="h-5 w-5 mx-0.5 text-red-700"
-                  viewBox="0 0 24 24"
-                  fill="red"
-                  stroke="red"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-                <svg
-                  class="h-5 w-5 mx-0.5 text-red-700"
-                  viewBox="0 0 24 24"
-                  fill="red"
-                  stroke="red"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-                <svg
-                  class="h-5 w-5 mx-0.5 text-red-700"
-                  viewBox="0 0 24 24"
-                  fill="red"
-                  stroke="red"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-                <svg
-                  class="h-5 w-5 mx-0.5 text-red-700"
-                  viewBox="0 0 24 24"
-                  fill="red"
-                  stroke="red"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              </div>
-            </div>
-            <div className="flex flex-col w-7/12 px-5">
+            <StarAll />
+            <AllReview1 />
+            {/* <div className="flex flex-col w-7/12 px-5">
               <div className="flex justify-evenly items-center">
                 <img
                   className="w-4 h-4 mx-1"
@@ -574,7 +627,7 @@ function detailProduct() {
                 </div>
                 <p className="mx-1 text-sm">27</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -584,7 +637,7 @@ function detailProduct() {
             <div className="flex justify-center items-center">
               <p className="text-sm">Disukai</p>
               <svg
-                class="w-3 h-3 mx-3 text-gray-500 dark:text-white"
+                className="w-3 h-3 mx-3 text-gray-500 dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -600,7 +653,7 @@ function detailProduct() {
               </svg>
             </div>
             <svg
-              class="w-5 h-5 text-gray-800 dark:text-white"
+              className="w-5 h-5 text-gray-800 dark:text-white"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
