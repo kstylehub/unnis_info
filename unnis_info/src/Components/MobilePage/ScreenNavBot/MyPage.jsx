@@ -127,7 +127,7 @@ function MyPage() {
               </div>
               <div className="text-xs mt-1">{getBirthDateDescription()} / {dataUser.skinType} / {dataUser.skinColor}</div>
             </div>
-            <div className="flex py-3 mt-1 px-5 flex items-center justify-between w-full bg-gray-200">
+            <div className="flex py-3 mt-1 px-5 items-center justify-between w-full bg-gray-200">
               <div className="flex">
                 <img src={recycle} className="w-7 h-6" />
                 <div className="text-[#4ABFA1] text-sm font-bold mx-2">
@@ -139,7 +139,7 @@ function MyPage() {
                   Jelajahi
                 </div>
                 <svg
-                  class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                  className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -147,9 +147,9 @@ function MyPage() {
                 >
                   <path
                     stroke="#4ABFA1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                   />
                 </svg>
@@ -159,7 +159,7 @@ function MyPage() {
               <div className="text-sm bg-white py-3 mr-0.5 text-center w-6/12 border-r border-white text-black">
                 Alamatku
               </div>
-              <div className="text-sm bg-white py-3 text-center w-6/12 py-2 text-black">
+              <div className="text-sm bg-white py-3 text-center w-6/12  text-black">
                 Check-in
               </div>
             </div>
@@ -211,7 +211,7 @@ function MyPage() {
                 </div>
               </div>
               <hr></hr>
-              <div className="flex py-3 px-5 flex items-center justify-between w-full bg-white">
+              <div className="flex py-3 px-5 items-center justify-between w-full bg-white">
                 <div className="text-sm">Voucher</div>
                 <div className="flex flex-row justify-center items-center">
                   <svg
@@ -223,9 +223,9 @@ function MyPage() {
                   >
                     <path
                       stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                     />
                   </svg>
@@ -245,7 +245,7 @@ function MyPage() {
                   <div className="text-sm">Keranjang</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -253,9 +253,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -265,7 +265,7 @@ function MyPage() {
                   <div className="text-sm">Berlangganan</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -273,9 +273,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -285,7 +285,7 @@ function MyPage() {
                   <div className="text-sm">Pengiriman</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -293,9 +293,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -317,7 +317,7 @@ function MyPage() {
                   <div className="text-sm">Riwayat Event</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -325,9 +325,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -337,7 +337,7 @@ function MyPage() {
                   <div className="text-sm">Klaim Event</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -345,9 +345,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -368,7 +368,7 @@ function MyPage() {
                   <div className="text-sm">FAQ</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -376,9 +376,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -388,7 +388,7 @@ function MyPage() {
                   <div className="text-sm">Logout</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -396,9 +396,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -419,7 +419,7 @@ function MyPage() {
                   <div className="text-sm">Chat Us</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -427,9 +427,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
@@ -439,7 +439,7 @@ function MyPage() {
                   <div className="text-sm">Email Us</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
-                      class="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -447,9 +447,9 @@ function MyPage() {
                     >
                       <path
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                       />
                     </svg>
