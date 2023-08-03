@@ -33,7 +33,7 @@ function detailProduct() {
   // console.log(detailProduct.dataProduct[0].listReview, "<< detail product");
   // console.log(detailProduct.dataProduct[0], "<< detail product");
 
-  const dataProduct = detailProduct?.dataProduct[0];
+  const dataProduct = detailProduct?.dataProduct?.[0];
   const formattedPrice = dataProduct.price.toLocaleString("id-ID");
 
   // Modal Ingredients and Description
