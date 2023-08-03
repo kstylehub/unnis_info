@@ -13,29 +13,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function detailProduct() {
+  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [showModalDesc, setShowModalDesc] = useState(false);
   const detailProduct = useSelector(
     (state) => state.ReducerDetailProduct?.dataProduct
   );
-
   const { id } = useParams();
-  const dispatch = useDispatch();
+
+  console.log(id," <<<< this id product");
   useEffect(() => {
     const body = {
       idMember: 5721,
       idProduct: +id,
     };
     dispatch(getDetailProduct(body));
-  }, []);
+  }, [id]);
 
   // console.log(detailProduct.dataProduct[0].listReview, "<< detail product");
-  console.log(detailProduct.dataProduct[0], "<< detail product");
+  // console.log(detailProduct?.dataProduct[0], "<< detail product");
 
   const dataProduct = detailProduct?.dataProduct[0];
-  const formattedPrice = dataProduct.price.toLocaleString("id-ID");
+  const formattedPrice = detailProduct?.dataProduct[0]?.price.toLocaleString("id-ID");
 
   // Modal Ingredients and Description
-  const [showModal, setShowModal] = useState(false);
-  const [showModalDesc, setShowModalDesc] = useState(false);
+  
 
   const handleIngredients = () => {
     setShowModal(true);
