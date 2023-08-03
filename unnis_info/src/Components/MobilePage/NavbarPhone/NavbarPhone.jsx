@@ -1,19 +1,27 @@
+import { Link, useNavigate } from "react-router-dom";
 import LogoUnnis from "../../../assets/unnis_logo.png";
+import SearchProduct from "../Components/SearchProduct/SearchProduct";
 
 function NavbarPhone() {
+
+  const navigate = useNavigate()
+  function handleModal(){
+    navigate('/search')
+  }
+
+
   return (
     <>
       <div className=" grid grid-cols-3 flex mt-3 items-center">
         <div className="justify-center items-center">
           <img src={LogoUnnis} className="w-24" />
         </div>
-        <div className="flex">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Search..."
+          onClick={handleModal}
+          className="w-full border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        />
         <div className="flex justify-evenly">
           <div>
             <svg

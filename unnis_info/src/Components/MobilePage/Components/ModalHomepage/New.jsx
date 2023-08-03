@@ -33,7 +33,7 @@ import {
   RingLoader,
 } from "react-spinners";
 import { Link } from "react-router-dom";
-import ModalCategory from "../ModalCategory/ModalCategory";
+// import ModalCategory from "../ModalCategory/ModalCategory";
 import ModalSort from "../ModalCategory/ModalSort";
 import Close from "../../../../assets/Close.svg";
 
@@ -56,8 +56,10 @@ function NewPage() {
   const nameCategories = keyCategories.map(
     (str) => str.charAt(0).toUpperCase() + str.slice(1)
   );
+
   const [valCategory, setValCategory] = useState("");
   const [likeCategory, setLikeCategory] = useState("");
+  const [btnActive, setBtnActive] = useState("");
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -87,7 +89,7 @@ function NewPage() {
       icon: Face,
     },
     {
-      name: nameCategories[5],
+      name: nameCategories[5].replace("eye", "&eye"),
       icon: Lip,
     },
     {
@@ -102,21 +104,30 @@ function NewPage() {
 
   const allProduct = listProduct.dataProduct;
 
-  const [byCategory, setByCategory] = useState("");
+  const [byCategory, setByCategory] = useState([]);
   const [clikCategory, setClickCategory] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("All");
   useEffect(() => {
-    tesSort(allProduct);
-  }, [clikCategory]);
+    SortCategory(allProduct);
+    SortCategory2(allProduct)
+  }, [clikCategory, selectedOption]);
 
-  function tesSort(product) {
+  function SortCategory(product) {
     const byCategory = product.filter((el) => {
       return el.categories == clikCategory;
     });
-    setByCategory(byCategory)
+    setByCategory(byCategory);
   }
 
-  function sortByCategory(val) {
-    setValCategory(val);
+  function SortCategory2(product) {
+    const byCategory = product.filter((el) => {
+      const firstLetter = selectedOption.charAt(0).toLowerCase();
+      const restOfEl = selectedOption.slice(1);
+      const capitalizedEl = firstLetter + restOfEl;
+      return el.categories == capitalizedEl;
+    });
+    setByCategory(byCategory);
   }
 
   function sortByLike(val) {
@@ -129,8 +140,9 @@ function NewPage() {
     const restOfEl = el.slice(1);
     const capitalizedEl = firstLetter + restOfEl;
     setClickCategory(capitalizedEl);
+    setBtnActive(el);
+    setSelectedOption(el);
   }
-  // console.log(byCategory, "<<<");
   const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
   function CategoryProduct() {
     return (
@@ -141,7 +153,11 @@ function NewPage() {
               to={"#"}
               onClick={() => handleCategory(el.name)}
               key={el.name}
-              className="bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
+              className={
+                btnActive == el.name
+                  ? "bg-teal-100 rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
+                  : "bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
+              }
               style={{ textAlign: "-webkit-center" }}
             >
               <img src={el.icon} className="w-8 h-8" />
@@ -156,16 +172,13 @@ function NewPage() {
   }
 
   function handleShowAll() {
-    setByCategory(allProduct); // Setel byCategory kembali ke semua produk
-    setValCategory("All"); // Setel valCategory ke "All"
-    setLikeCategory("Sort By"); // Setel likeCategory ke "Sort By"
+    setSelectedOption("All");
+    setBtnActive("");
+    setByCategory([]);
   }
 
-  console.log(loadingAllProduct);
   function DisplayProduct() {
-    const dataCategory = allProduct ? allProduct : byCategory
-    console.log(dataCategory," <<<data category");
-    console.log(byCategory, "????");
+    const dataCategory = byCategory.length == 0 ? allProduct : byCategory;
     return (
       <>
         {dataCategory?.map((el, index) => {
@@ -274,7 +287,81 @@ function NewPage() {
     );
   }
 
-  
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+    setShowModal(false);
+    setBtnActive(event.target.value);
+  };
+
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  function Category() {
+    return (
+      <>
+        {category.map((el) => {
+          return (
+            <div className="mb-5" key={el.name}>
+              <label>
+                <input
+                  type="radio"
+                  value={el.name}
+                  checked={selectedOption === el.name}
+                  onChange={handleOptionChange}
+                  className="mr-4"
+                />
+                {el.name}
+              </label>
+            </div>
+          );
+        })}
+      </>
+    );
+  }
+
+  function ModalCategory() {
+    return (
+      <>
+        <button
+          className="border rounded-lg p-1 flex text-center items-center gap-x-1"
+          onClick={handleModalOpen}
+        >
+          <h1>{selectedOption}</h1>
+          <img src={ArrowBot} className="h-3 w-3" />
+        </button>
+
+        {showModal && (
+          <div className="fixed lg:left-[55%] inset-0 flex items-center justify-center bg-black opacity-90 lg:w-[30%] w-[100vw] shadow-lg shadow-indigo-500/50">
+            <div className="z-100 bg-white rounded-lg p-3 w-screen top-[45%] lg:w-[100%]  relative">
+              <div className="z-100 bg-white max-h-[50%] h-[60vh]">
+                <div className="flex justify-between items-center mb-2 bg-white">
+                  <h2 className="text-xl font-bold pl-3">Category Product</h2>
+                  <button
+                    onClick={handleModalClose}
+                    className="text-gray-600 hover:text-gray-800 pr-3"
+                  >
+                    <img src={Close} className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="border mb-4"></div>
+                <div className="modal-content flex overflow-y-auto max-h-[inherit]">
+                  <div className="pl-3 h-full">
+                    <Category />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <>
       <div className="absolute top-0 w-full bg-white px-5">
@@ -303,7 +390,7 @@ function NewPage() {
           </div>
           <div className="flex justify-between pt-5 px-2">
             <div className="flex">
-              {valCategory !== "All" || likeCategory !== "Sort By" ? (
+              {selectedOption !== "All" ? (
                 <button
                   type="button"
                   className="border rounded-lg p-1 flex text-center items-center gap-x-1 mr-1"
@@ -314,7 +401,7 @@ function NewPage() {
               ) : (
                 ""
               )}
-              <ModalCategory sortByCategory={sortByCategory} />
+              <ModalCategory />
             </div>
             <ModalSort sortByLike={sortByLike} />
           </div>

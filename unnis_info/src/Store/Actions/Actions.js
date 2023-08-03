@@ -9,7 +9,6 @@ export const logout = () => ({
 })
 
 export const register = (dataRegister) => async (dispatch) => {
-    console.log(dataRegister, ">>>>");
     try {
         dispatch({type: USER.REGISTER_GET_START})
         const response = await fetch(`${BASE_URL}/auth/register`, {

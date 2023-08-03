@@ -28,6 +28,7 @@ import SkinPageFour from "../Components/MobilePage/Components/SkinAnalysis/skinp
 import SkinPageSix from "../Components/MobilePage/Components/SkinAnalysis/skinpagesix";
 import LoginPage from "../Components/MobilePage/ScreenNavBot/LoginPage";
 import Register from "../Components/MobilePage/ScreenNavBot/Register";
+import SearchProduct from "../Components/MobilePage/Components/SearchProduct/SearchProduct";
 
 const router = createBrowserRouter([
   {
@@ -147,6 +148,10 @@ const router = createBrowserRouter([
             path: "/feeddetail",
             element: <FeedDetail />,
           },
+          {
+            path: "/search",
+            element: <SearchProduct/>
+          }
         ],
       },
     ],
