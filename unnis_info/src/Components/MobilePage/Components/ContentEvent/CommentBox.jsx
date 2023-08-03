@@ -13,10 +13,8 @@ const CommentBox = () => {
 
   const commentBoxRef = useRef(null);
   
-  
-
   const data = event?.dataEvent;
- 
+  const dataComment = comment?.dataReview;
 
   useEffect(() => {
     // Event listener to handle click outside the comment area and cancel editing

@@ -5,12 +5,13 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import CommentBox from "./CommentBox";
 import { getCommentEvent } from "../../../../Store/Actions/Actions";
+import gambar_default from "../../../../assets/defaultimg.png";
 function DetailEvent() {
   const { id } = useParams();
 
   const event = useSelector((state) => state.ReducerEventData.event);
   const comment = useSelector((state) => state.ReducerCommentEvent.event);
-  
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,14 +20,23 @@ function DetailEvent() {
   }, []);
 
   const data = event?.dataEvent;
-  const dataComment = comment?.dataReview;               
+  const dataComment = comment?.dataReview;
   console.log(dataComment, ">>> ini komen");
 
   const dataDetail = data?.filter((el) => {
     return el.id == id;
   });
-  
 
+  const getTimeAgo = (date) => {
+    const now = new Date();
+    const commentDate = new Date(date);
+
+    const diffTime = Math.abs(now - commentDate);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays === 0 ? "hari ini" : `${diffDays} hari sebelumnya`;
+  };
+  
   function Display() {
     return (
       <>
@@ -126,16 +136,29 @@ function DetailEvent() {
               </div>
               <div>
                 <div className="border rounded-lg border-hidden p-2 mt-4">
-                  {dataComment?.map((el, index)  => (
-                    <div key={index} className="flex items-start flex-col mb-2">
-                      <div className="bg-gray-300 h-10 w-10 rounded-full mb-2"></div>
-                      <div className="flex justify-between w-full">
-                        <div>
-                          <p className="font-bold">User {index + 1}</p>
-                          <p className="text-sm">{el.descReviewer}</p>
-                          {/* <p className="text-xs text-gray-500">
+                  {dataComment?.map((el) => (
+                    <div className=" flex-col-2 border-b-2 space-y-1">
+                      <div
+                        key={el.nameReviewer}
+                        className="flex items-start flex-col mb-2"
+                      >
+                        <div className="bg-gray-300 h-10 w-10 rounded-full mb-2">
+                          <img
+                            src={gambar_default}
+                            classname="h-10 w-10 rounded-full mb-2 "
+                          />
+                        </div>
+                        <div className="flex justify-between w-full">
+                          <div>
+                            <p className="font-md">{el.nameReviewer}</p>
+                            <p className="text-xs">
+                              {el.birthyear}|{el.skinType}|{el.skinColor}
+                            </p>
+                            <p className="text-sm">{el.descReviewer}</p>
+                          </div>
+                          <p className="text-xs text-gray-500">
                             {getTimeAgo(new Date())}
-                          </p> */}
+                          </p>
                         </div>
                         {/* {userComments[index] && (
                           <div className="relative">

@@ -254,10 +254,10 @@ export const getEvent = () => async (dispatch) => {
     }
 };
 
-export const getCommentEvent = () => async (dispatch) => {
+export const getCommentEvent = (id) => async (dispatch) => {
   try {
-    dispatch({ type: EVENT.GET_COMMENT_START });
-    const response = await fetch(`${BASE_URL}/reviewEvent/reviewByEvent`, {
+    dispatch({ type: EVENT.GET_DATA_COMMENT_START });
+    const response = await fetch(`${BASE_URL}/reviewEvent/reviewByEvent/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -268,15 +268,16 @@ export const getCommentEvent = () => async (dispatch) => {
     }
 
         const data = await response.json()
+      
         dispatch({
-            type: EVENT.GET_COMMENT_SUCCESS,
+            type: EVENT.GET_DATA_COMMENT_SUCCESS,
             payload: data
         })
         return data
     } catch (error){
         console.log('error get data',error);
         dispatch({
-            type: EVENT.GET_COMMENT_FAILED,
+            type: EVENT.GET_DATA_COMMENT_FAILED,
             payload: error
         })
     }
