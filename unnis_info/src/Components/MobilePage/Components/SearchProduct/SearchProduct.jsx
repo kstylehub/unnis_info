@@ -43,7 +43,7 @@ function SearchProduct() {
       el.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
-  }, [allProduct, searchTerm]);
+  }, [searchTerm]);
 
   function DisplayProduct() {
     if (!filteredProducts || filteredProducts.length === 0) {

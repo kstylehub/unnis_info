@@ -20,28 +20,28 @@ function detailProduct() {
   const detailProduct = useSelector(
     (state) => state.ReducerDetailProduct.dataProduct
   );
+  const user = useSelector((state) => state.ReducerUser.dataUser);
 
   const loading = useSelector((state) => state.ReducerDetailProduct.loading);
   const { id } = useParams();
-
-  console.log(+id," <<<< this id product");
+  const idMember = user.dataMember?.[0].id;
   useEffect(() => {
     const body = {
-      idMember: 5721,
+      idMember: idMember,
       idProduct: +id,
     };
     dispatch(getDetailProduct(body));
-  }, [id, detailProduct]);
+  }, [id]);
 
   // console.log(detailProduct.dataProduct[0].listReview, "<< detail product");
   // console.log(detailProduct.dataProduct[0], "<< detail product");
 
-  console.log(detailProduct," <<<<");
+  console.log(detailProduct, " <<<<");
   const dataProduct = detailProduct?.dataProduct?.[0];
-  const formattedPrice = detailProduct?.dataProduct?.[0].price.toLocaleString("id-ID");
+  const formattedPrice =
+    detailProduct?.dataProduct?.[0].price.toLocaleString("id-ID");
 
   // Modal Ingredients and Description
-  
 
   const handleIngredients = () => {
     setShowModal(true);
@@ -327,7 +327,6 @@ function detailProduct() {
   }
 
   function Display() {
-
     return (
       <>
         <div className="w-full h-full overflow-y-auto">
