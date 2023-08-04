@@ -36,7 +36,7 @@ function detailProduct() {
   // console.log(detailProduct.dataProduct[0].listReview, "<< detail product");
   // console.log(detailProduct.dataProduct[0], "<< detail product");
 
-  console.log(detailProduct, " <<<<");
+  // console.log(detailProduct, " <<<<");
   const dataProduct = detailProduct?.dataProduct?.[0];
   const formattedPrice =
     detailProduct?.dataProduct?.[0].price.toLocaleString("id-ID");
@@ -159,7 +159,7 @@ function detailProduct() {
 
     function StarReview({ rating }) {
       const maxRating = 5;
-      const ratingInRange = Math.max(0, Math.min(rating, maxRating)); // Ensure rating is between 0 and 5
+      const ratingInRange = Math.max(0, Math.min(rating, maxRating)); 
       const filledStars = Math.floor(ratingInRange);
       const remainingStars = maxRating - filledStars;
 
@@ -578,63 +578,6 @@ function detailProduct() {
             <div className="flex justify-center w-full py-1">
               <StarAll />
               <AllReview1 />
-              {/* <div className="flex flex-col w-7/12 px-5">
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">5</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">4</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">3</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">2</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">1</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-            </div> */}
             </div>
           </div>
 

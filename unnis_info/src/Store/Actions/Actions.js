@@ -147,7 +147,7 @@ export const getTopProduct = () => async (dispatch) => {
 
 export const getDetailProduct = (body) => async (dispatch) => {
     try {
-        console.log(body, "<<< masuk action");
+        // console.log(body, "<<< masuk action");
         dispatch({type: PRODUCT.GET_DETAIL_PRODUCT_START})
         const response = await fetch(`${BASE_URL}/product/detailProduct`, {
             method: 'POST',
