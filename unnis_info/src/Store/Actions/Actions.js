@@ -9,7 +9,7 @@ export const logout = () => ({
 })
 
 export const register = (dataRegister) => async (dispatch) => {
-    console.log(dataRegister, ">>>>");
+
     try {
         dispatch({type: USER.REGISTER_GET_START})
         const response = await fetch(`${BASE_URL}/auth/register`, {
@@ -282,3 +282,33 @@ export const getCommentEvent = (id) => async (dispatch) => {
         })
     }
 };
+
+export const postCommentEvent = (body) => async (dispatch) => {
+  try{
+    console.log(body," <<< body action");
+    dispatch({type: EVENT.POST_COMMENT_START})
+        const response = await fetch(`${BASE_URL}/reviewEvent/insertReview`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        if(!response.ok) {
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        console.log(data, "success");
+        dispatch({
+            type: EVENT.POST_COMMENT_SUCCES,
+            payload: data
+        })
+    } catch (error) {
+        console.log("error register");
+        dispatch({
+            type: EVENT.POST_COMMENT_FAILED,
+            payload: error
+        })
+  }
+}

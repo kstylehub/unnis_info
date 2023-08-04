@@ -44,3 +44,25 @@ export function ReducerCommentEvent(
             return state;
     }
 }
+
+const postCommentEvent ={
+    postComment:[],
+    error:null,
+    loading:true,
+}
+
+export function ReducerComment(
+    state=postCommentEvent,
+    action,
+){
+    switch (action.type){
+        case EVENT.POST_COMMENT_START:
+            return {...state, loading: true }
+        case EVENT.POST_COMMENT_FAILED:
+            return {...state, error: action.payload, loading:false }
+        case EVENT.POST_COMMENT_SUCCESS:
+            return {...state, event: action.payload, loading:false }
+        default:
+            return state;
+    }
+}

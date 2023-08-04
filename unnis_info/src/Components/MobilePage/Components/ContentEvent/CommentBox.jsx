@@ -1,21 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCommentEvent } from "../../../../Store/Actions/Actions";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import React, { useState, useRef, useEffect, useSelector } from "react";
+import { postCommentEvent } from "../../../../Store/Actions/Actions";
+import { getEvent } from "../../../../Store/Actions/Actions";
+import { useDispatch } from "react-redux";
 
-const CommentBox = () => {
+function CommentBox () {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState({});
   const [editIndex, setEditIndex] = useState(null);
   const [selectedCommentIndex, setSelectedCommentIndex] = useState(null);
+  
+  const event = useSelector((state) => state.ReducerEventData.event);
+  console.log(event, ">> ini event");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEvent());
+  }, []);
 
   const commentBoxRef = useRef(null);
   
   const data = event?.dataEvent;
   const dataComment = comment?.dataReview;
-
+ 
   useEffect(() => {
     // Event listener to handle click outside the comment area and cancel editing
     const handleClickOutside = (event) => {
@@ -36,7 +42,12 @@ const CommentBox = () => {
     setComment(value.substring(0, 300));
   };
 
- 
+//  useEffect(() => {
+//   const body = {
+//     idEvent:
+//   }
+//   dispatch(postCommentEvent())
+//  })
   const handleSubmit = () => {
     if (comment.trim()) {
       if (editIndex !== null) {
@@ -97,12 +108,8 @@ const CommentBox = () => {
   };
  
   return (
-    <div className="">
+    <>
       {data}
-      <div className="flex justify-start">
-        <div className="text-m font-sans mb-4">Komentar</div>
-        <div className="text-red-600">{commentCount}</div>
-      </div>
       <div className="bg-white shadow p-4 w-full ">
         <div className=" relative border border-black">
           <textarea
@@ -168,7 +175,7 @@ const CommentBox = () => {
         ))}
       </div>
       </div>
-    </div>
+    </>                
   );
 };
 
