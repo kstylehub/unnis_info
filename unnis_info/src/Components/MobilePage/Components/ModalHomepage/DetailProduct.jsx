@@ -33,10 +33,6 @@ function detailProduct() {
     dispatch(getDetailProduct(body));
   }, [id]);
 
-  // console.log(detailProduct.dataProduct[0].listReview, "<< detail product");
-  // console.log(detailProduct.dataProduct[0], "<< detail product");
-
-  console.log(detailProduct, " <<<<");
   const dataProduct = detailProduct?.dataProduct?.[0];
   const formattedPrice =
     detailProduct?.dataProduct?.[0].price.toLocaleString("id-ID");

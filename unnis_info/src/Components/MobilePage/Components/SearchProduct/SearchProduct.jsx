@@ -34,7 +34,7 @@ function SearchProduct() {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-  console.log(filteredProducts);
+
   useEffect(() => {
     dispatch(getListProduct());
   }, []);

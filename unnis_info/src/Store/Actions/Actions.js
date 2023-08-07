@@ -64,6 +64,34 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
+export const getAllProduct = (body) => async (dispatch) => {
+    try {
+        dispatch({type: PRODUCT.GET_ALL_PRODUCT_START})
+        const response = await fetch(`${BASE_URL}/product/listProductPage`, {
+            method: 'POST',
+            headers : {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        if(!response.ok){
+            throw new Error('Internal server error')
+        }
+
+        const data = await response.json()
+        dispatch({
+            type: PRODUCT.GET_ALL_PRODUCT_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        console.log('error get all data product');
+        dispatch({
+            type: PRODUCT.GET_ALL_PRODUCT_FAILED,
+            payload: error
+        })
+    }
+}
+
 export const getProductCategory = () => async (dispatch) => {
     try {
         dispatch({type: PRODUCT.GET_PRODUCT_CATEGORY_START})
@@ -147,7 +175,6 @@ export const getTopProduct = () => async (dispatch) => {
 
 export const getDetailProduct = (body) => async (dispatch) => {
     try {
-        console.log(body, "<<< masuk action");
         dispatch({type: PRODUCT.GET_DETAIL_PRODUCT_START})
         const response = await fetch(`${BASE_URL}/product/detailProduct`, {
             method: 'POST',
