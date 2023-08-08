@@ -66,31 +66,33 @@ export const login = (email, password) => async (dispatch) => {
 
 export const getAllProduct = (body) => async (dispatch) => {
     try {
-        dispatch({type: PRODUCT.GET_ALL_PRODUCT_START})
+        dispatch({type: PRODUCT.GET_ALL_PRODUCT_START});
         const response = await fetch(`${BASE_URL}/product/listProductPage`, {
             method: 'POST',
-            headers : {
+            headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
-        })
-        if(!response.ok){
-            throw new Error('Internal server error')
+        });
+        if (!response.ok) {
+            throw new Error('Internal server error');
         }
 
-        const data = await response.json()
+        const data = await response.json();
         dispatch({
             type: PRODUCT.GET_ALL_PRODUCT_SUCCESS,
             payload: data
-        })
+        });
+        return data; // Return the entire data object for use in countPage()
     } catch (error) {
-        console.log('error get all data product');
+        console.log('error get all data product:', error);
         dispatch({
             type: PRODUCT.GET_ALL_PRODUCT_FAILED,
             payload: error
-        })
+        });
     }
 }
+
 
 export const getProductCategory = () => async (dispatch) => {
     try {
