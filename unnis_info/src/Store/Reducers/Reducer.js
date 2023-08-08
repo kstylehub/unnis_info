@@ -78,10 +78,7 @@ export function ReducerDetailProduct(state = detailProduct, action) {
 }
 
 const allProduct = {
-  allProduct: {
-    dataProduct: [],
-    nextPageData: []
-  },
+  dataProduct: [],
   error: null,
   loading: true,
 };
@@ -93,7 +90,11 @@ export function ReducerAllProduct(state = allProduct, action) {
     case PRODUCT.GET_ALL_PRODUCT_FAILED:
       return { ...state, loading: false, error: action.payload };
     case PRODUCT.GET_ALL_PRODUCT_SUCCESS:
-      return { ...state, loading: false, allProduct:{dataProduct : action.payload.dataProduct, nextPageData: action.payload.nextPageData} };
+      return {
+        ...state,
+        loading: false,
+        dataProduct: action.payload,
+      };
     default:
       return state;
   }

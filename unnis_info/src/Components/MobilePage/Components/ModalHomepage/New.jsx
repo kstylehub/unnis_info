@@ -34,20 +34,23 @@ import Close from "../../../../assets/Close.svg";
 function NewPage() {
   const dispatch = useDispatch();
   const [nextPage, setNextPage] = useState(1);
+  const [valCategory, setValCategory] = useState("");
+  const [likeCategory, setLikeCategory] = useState("");
+  const [btnActive, setBtnActive] = useState("");
+  const [clikCategory, setClickCategory] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("All");
+  const [reload, setReload] = useState(false);
+  const [combinedData, setCombinedData] = useState([]);
+  const [totalLoadedItems, setTotalLoadedItems] = useState(0);
+  const [isDataEnd, setIsDataEnd] = useState(false); 
   const productCategory = useSelector(
     (state) => state.ReducerProductCategory.productCategory
   );
-  const [reload, setReload] = useState(false);
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
-  const loadingAllProduct = useSelector(
-    (state) => state.ReducerListProduct.loading
-  );
-
-  const allProductPage = useSelector(
-    (state) => state.ReducerAllProduct.allProduct.dataProduct
-  );
-
+  const loadingAllProduct = useSelector((state) => state.ReducerListProduct.loading);
+  const allProductPage = useSelector((state) => state.ReducerAllProduct.allProduct.dataProduct);
   const keyCategories = productCategory.data
     ? Object.keys(productCategory.data)
     : [];
@@ -90,20 +93,33 @@ function NewPage() {
     },
   ];
 
-  const [valCategory, setValCategory] = useState("");
-  const [likeCategory, setLikeCategory] = useState("");
-  const [btnActive, setBtnActive] = useState("");
-  const [clikCategory, setClickCategory] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("All");
-  const [combinedData, setCombinedData] = useState([]);
- console.log(combinedData, " <<< combine");
+  async function countPage() {
+    const newNextPage = nextPage + 1;
+    setReload(true);
+  
+    const response = await dispatch(getAllProduct({ ...requestBody, page: newNextPage }));
+    console.log(response," <<< reeee");
+    if (response) {
+      const newPageData = response.dataProduct;
+      if (newPageData.length === 0 || newNextPage == null) {
+        setIsDataEnd(true);
+      }else {
+        setCombinedData((prevCombinedData) => [...prevCombinedData, ...newPageData]);
+        setTotalLoadedItems(prevTotal => prevTotal + newPageData.length);
+        setNextPage(newNextPage); 
+      }
+    }
+  
+    setReload(false);
+  }
+  
+
   useEffect(() => {
-    // Set combinedData with initial data
     if (allProductPage) {
+      setTotalLoadedItems(allProductPage.length);
       setCombinedData(allProductPage);
     }
-  }, [combinedData]);
+  }, [allProductPage]);
 
   const requestBody = {
     idMember: 0,
@@ -122,32 +138,17 @@ function NewPage() {
     setTimeout(() => {
       setReload(false);
     }, 3000);
-  }, [nextPage, selectedOption, clikCategory, combinedData]);
-  
- function countPage() {
-    setNextPage((prevNextPage) => prevNextPage + 1);
-    window.scrollTo(0, 0);
-    setReload(true);
-    dispatch(getAllProduct({ ...requestBody, page: nextPage + 1}));
+  }, [ selectedOption, clikCategory,nextPage]);
 
-    if (allProductPage.length > 0) {
-      setCombinedData((prevCombinedData) => [
-        ...prevCombinedData,
-        ...(allProductPage || []),
-      ]);
-    }
-    setReload(false);
-  }
-
-
-  console.log(selectedOption, clikCategory, nextPage, "<< selected ");
-  console.log(allProductPage, "<<< ppppp");
+  console.log({combinedData, allProductPage}, " <<< combine"); // <<<<<<<<<<<<<<<<<<
+  console.log(selectedOption, clikCategory, nextPage, "<< selected "); // <<<<<<<<<
+  // console.log(allProductPage, "<<< ppppp"); // <<<<<<<<<<<<<<
 
   function sortByLike(val) {
     setLikeCategory(val);
   }
 
-  function handleCategory(el) {
+  async function handleCategory(el) {
     if (!el) return "";
     const firstLetter = el.charAt(0).toLowerCase();
     const restOfEl = el.slice(1);
@@ -156,6 +157,15 @@ function NewPage() {
     setNextPage(1);
     setBtnActive(el);
     setSelectedOption(el);
+    const response = await dispatch(getAllProduct({ ...requestBody, category: lowerLizedEl }));
+    if(response) {
+      const newPageData = response.dataProduct;
+      if (newPageData.length === 0 || newPageData == null) {
+        setIsDataEnd(true);
+      }else {
+      setCombinedData(newPageData)
+      }
+    }
   }
   const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
   function CategoryProduct() {
@@ -193,7 +203,7 @@ function NewPage() {
   function DisplayProduct() {
     return (
       <>
-        {allProductPage?.map((el, index) => {
+        {combinedData?.map((el, index) => {
           const text = el.name;
           const truncatedText =
             text.length > 30 ? `${text.slice(0, 30)}...` : text;
@@ -298,7 +308,7 @@ function NewPage() {
           );
         })}
 
-        {combinedData?.length < 30 || combinedData == null ? (
+        {combinedData.length < 30 || combinedData == null || isDataEnd == true? (
           <></>
         ) : reload ? (
           <div className="flex justify-center items-center">
