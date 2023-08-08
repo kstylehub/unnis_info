@@ -27,7 +27,7 @@ function SkinPageFive () {
                 </div>
                 <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-400"></div>
                 <div className="flex items-center relative">
-                    <input checked id="skinpageone3" type="radio" value="" name="skinpageone-group" className="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
+                    <input defaultChecked id="skinpageone3" type="radio" value="" name="skinpageone-group" className="accent-teal-600 w-4 h-4 bg-[#4ABFA1] border-gray-400 "></input>
                     <div className="absolute top-0 -ml-14 text-center mt-6 w-32 text-xs text-black">Normal</div>
                 </div>
                 <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-400"></div>

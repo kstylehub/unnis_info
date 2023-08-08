@@ -19,7 +19,7 @@ import Star from "../../../../assets/Star.svg";
 import Arrow from "../../../../assets/Polygon3.svg";
 import ArrowBot from "../../../../assets/Polygon10.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getListProduct,
   getProductCategory,
@@ -33,8 +33,9 @@ import {
   RingLoader,
 } from "react-spinners";
 import { Link } from "react-router-dom";
-import ModalCategory from "../ModalCategory/ModalCategory";
+// import ModalCategory from "../ModalCategory/ModalCategory";
 import ModalSort from "../ModalCategory/ModalSort";
+import Close from "../../../../assets/Close.svg";
 
 function NewPage() {
   const productCategory = useSelector(
@@ -48,11 +49,20 @@ function NewPage() {
   const loadingAllProduct = useSelector(
     (state) => state.ReducerListProduct.loading
   );
+
   const keyCategories = productCategory.data
+   
     ? Object.keys(productCategory.data)
+   
     : [];
   const nameCategories = keyCategories.map(
+    
     (str) => str.charAt(0).toUpperCase() + str.slice(1)
+  );
+
+  const [valCategory, setValCategory] = useState("");
+  const [likeCategory, setLikeCategory] = useState("");
+  const [btnActive, setBtnActive] = useState(""
   );
 
   const dispatch = useDispatch();
@@ -83,7 +93,7 @@ function NewPage() {
       icon: Face,
     },
     {
-      name: nameCategories[5],
+      name: nameCategories[5].replace("eye", "&eye"),
       icon: Lip,
     },
     {
@@ -98,32 +108,84 @@ function NewPage() {
 
   const allProduct = listProduct.dataProduct;
 
+  const [byCategory, setByCategory] = useState([]);
+  const [clikCategory, setClickCategory] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("All");
+  useEffect(() => {
+    SortCategory(allProduct);
+    SortCategory2(allProduct)
+  }, [clikCategory, selectedOption]);
+
+  function SortCategory(product) {
+    const byCategory = product.filter((el) => {
+      return el.categories == clikCategory;
+    });
+    setByCategory(byCategory);
+  }
+
+  function SortCategory2(product) {
+    const byCategory = product.filter((el) => {
+      const firstLetter = selectedOption.charAt(0).toLowerCase();
+      const restOfEl = selectedOption.slice(1);
+      const capitalizedEl = firstLetter + restOfEl;
+      return el.categories == capitalizedEl;
+    });
+    setByCategory(byCategory);
+  }
+
+  function sortByLike(val) {
+    setLikeCategory(val);
+  }
+
+  function handleCategory(el) {
+    if (!el) return "";
+    const firstLetter = el.charAt(0).toLowerCase();
+    const restOfEl = el.slice(1);
+    const capitalizedEl = firstLetter + restOfEl;
+    setClickCategory(capitalizedEl);
+    setBtnActive(el);
+    setSelectedOption(el);
+  }
   const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
   function CategoryProduct() {
     return (
       <>
         {category.map((el) => {
           return (
-            <div
+            <Link
+              to={"#"}
+              onClick={() => handleCategory(el.name)}
               key={el.name}
-              className="bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
+              className={
+                btnActive == el.name
+                  ? "bg-teal-100 rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
+                  : "bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
+              }
               style={{ textAlign: "-webkit-center" }}
             >
               <img src={el.icon} className="w-8 h-8" />
               <div className="text-center ">
                 <p>{el.name}</p>
               </div>
-            </div>
+            </Link>
           );
         })}
       </>
     );
   }
 
+  function handleShowAll() {
+    setSelectedOption("All");
+    setBtnActive("");
+    setByCategory([]);
+  }
+
   function DisplayProduct() {
+    const dataCategory = byCategory.length == 0 ? allProduct : byCategory;
     return (
       <>
-        {allProduct?.map((el, index) => {
+        {dataCategory?.map((el, index) => {
           const text = el.name;
           const truncatedText =
             text.length > 30 ? `${text.slice(0, 30)}...` : text;
@@ -230,6 +292,82 @@ function NewPage() {
       </>
     );
   }
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+    setShowModal(false);
+    setBtnActive(event.target.value);
+  };
+
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  function Category() {
+    return (
+      <>
+        {category.map((el) => {
+          return (
+            <div className="mb-5" key={el.name}>
+              <label>
+                <input
+                  type="radio"
+                  value={el.name}
+                  checked={selectedOption === el.name}
+                  onChange={handleOptionChange}
+                  className="mr-4"
+                />
+                {el.name}
+              </label>
+            </div>
+          );
+        })}
+      </>
+    );
+  }
+
+  function ModalCategory() {
+    return (
+      <>
+        <button
+          className="border rounded-lg p-1 flex text-center items-center gap-x-1"
+          onClick={handleModalOpen}
+        >
+          <h1>{selectedOption}</h1>
+          <img src={ArrowBot} className="h-3 w-3" />
+        </button>
+
+        {showModal && (
+          <div className="fixed lg:left-[55%] inset-0 flex items-center justify-center bg-black opacity-90 lg:w-[30%] w-[100vw] shadow-lg shadow-indigo-500/50">
+            <div className="z-100 bg-white rounded-lg p-3 w-screen top-[45%] lg:w-[100%]  relative">
+              <div className="z-100 bg-white max-h-[50%] h-[60vh]">
+                <div className="flex justify-between items-center mb-2 bg-white">
+                  <h2 className="text-xl font-bold pl-3">Category Product</h2>
+                  <button
+                    onClick={handleModalClose}
+                    className="text-gray-600 hover:text-gray-800 pr-3"
+                  >
+                    <img src={Close} className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="border mb-4"></div>
+                <div className="modal-content flex overflow-y-auto max-h-[inherit]">
+                  <div className="pl-3 h-full">
+                    <Category />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <>
       <div className="absolute top-0 w-full bg-white px-5">
@@ -257,8 +395,21 @@ function NewPage() {
             )}
           </div>
           <div className="flex justify-between pt-5 px-2">
-            <ModalCategory />
-            <ModalSort />
+            <div className="flex">
+              {selectedOption !== "All" ? (
+                <button
+                  type="button"
+                  className="border rounded-lg p-1 flex text-center items-center gap-x-1 mr-1"
+                  onClick={handleShowAll}
+                >
+                  <img src={Close} className="w-4 h-4" />
+                </button>
+              ) : (
+                ""
+              )}
+              <ModalCategory />
+            </div>
+            <ModalSort sortByLike={sortByLike} />
           </div>
         </div>
         <div className="overflow-y-auto max-h-[calc(100vh-100px)]">

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowBot from "../../../../assets/Polygon10.svg";
 import Close from "../../../../assets/Close.svg";
 
-const ModalSort = () => {
+const ModalSort = ({sortByLike}) => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-
+  const [selectedOption, setSelectedOption] = useState("Sort By");
+  useEffect(()=>{
+    sortByLike(selectedOption)
+  },[selectedOption, sortByLike])
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    setShowModal(false)
   };
 
   const handleModalOpen = () => {
@@ -59,7 +62,7 @@ const ModalSort = () => {
         className="border rounded-lg p-1 flex text-center items-center gap-x-1"
         onClick={handleModalOpen}
       >
-        <h1>Sort By</h1>
+        <h1>{selectedOption}</h1>
         <img src={ArrowBot} className="h-3 w-3" />
       </button>
 
