@@ -24,7 +24,7 @@ function detailProduct() {
 
   const loading = useSelector((state) => state.ReducerDetailProduct.loading);
   const { id } = useParams();
-  const idMember = user.dataMember?.[0].id;
+  const idMember = user.dataMember[0].id;
   useEffect(() => {
     const body = {
       idMember: idMember,
@@ -39,7 +39,7 @@ function detailProduct() {
   // console.log(detailProduct, " <<<<");
   const dataProduct = detailProduct?.dataProduct?.[0];
   const formattedPrice =
-    detailProduct?.dataProduct?.[0].price.toLocaleString("id-ID");
+    detailProduct.dataProduct?.[0].price.toLocaleString("id-ID");
 
   // Modal Ingredients and Description
 

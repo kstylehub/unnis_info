@@ -47,10 +47,12 @@ function NewPage() {
   const productCategory = useSelector(
     (state) => state.ReducerProductCategory.productCategory
   );
+  const user = useSelector((state) => state.ReducerUser.dataUser);
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
   const loadingAllProduct = useSelector((state) => state.ReducerListProduct.loading);
-  const allProductPage = useSelector((state) => state.ReducerAllProduct.dataProduct);
+  const allProductPage = useSelector((state) => state.ReducerAllProduct?.dataProduct.dataProduct);
+  console.log(allProductPage," <<< all");
   const keyCategories = productCategory.data
     ? Object.keys(productCategory.data)
     : [];
@@ -209,7 +211,8 @@ function NewPage() {
             text.length > 30 ? `${text.slice(0, 30)}...` : text;
           return (
             <>
-              <Link to={`/newProduct/detailproduct/${el.id}`}>
+              {/* <Link to={`/newProduct/detailproduct/${el.id}`} > */}
+              <Link to={user ? `/newProduct/detailproduct/${el.id}`: `/login`} >
                 <div key={el.id} className="flex justify-between items-center">
                   <div className="text-center items-center justify-center w-[10%]">
                     <h1>{index + 1}</h1>
