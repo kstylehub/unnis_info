@@ -21,55 +21,42 @@ import ArrowBot from "../../../../assets/Polygon10.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
+  getAllProduct,
   getListProduct,
   getProductCategory,
 } from "../../../../Store/Actions/Actions";
-import {
-  BarLoader,
-  CircleLoader,
-  DotLoader,
-  PacmanLoader,
-  PuffLoader,
-  RingLoader,
-} from "react-spinners";
+import { CircleLoader, RingLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 // import ModalCategory from "../ModalCategory/ModalCategory";
 import ModalSort from "../ModalCategory/ModalSort";
 import Close from "../../../../assets/Close.svg";
 
 function NewPage() {
+  const dispatch = useDispatch();
+  const [nextPage, setNextPage] = useState(1);
+  const [valCategory, setValCategory] = useState("");
+  const [likeCategory, setLikeCategory] = useState("");
+  const [btnActive, setBtnActive] = useState("");
+  const [clikCategory, setClickCategory] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("All");
+  const [reload, setReload] = useState(false);
+  const [combinedData, setCombinedData] = useState([]);
+  const [totalLoadedItems, setTotalLoadedItems] = useState(0);
+  const [isDataEnd, setIsDataEnd] = useState(false); 
   const productCategory = useSelector(
     (state) => state.ReducerProductCategory.productCategory
   );
-  const listProduct = useSelector(
-    (state) => state.ReducerListProduct?.listProduct
-  );
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
-  const loadingAllProduct = useSelector(
-    (state) => state.ReducerListProduct.loading
-  );
-
+  const loadingAllProduct = useSelector((state) => state.ReducerListProduct.loading);
+  const allProductPage = useSelector((state) => state.ReducerAllProduct.dataProduct);
   const keyCategories = productCategory.data
-   
     ? Object.keys(productCategory.data)
-   
     : [];
   const nameCategories = keyCategories.map(
-    
     (str) => str.charAt(0).toUpperCase() + str.slice(1)
   );
-
-  const [valCategory, setValCategory] = useState("");
-  const [likeCategory, setLikeCategory] = useState("");
-  const [btnActive, setBtnActive] = useState(""
-  );
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getProductCategory());
-    dispatch(getListProduct());
-  }, []);
 
   const category = [
     {
@@ -106,46 +93,79 @@ function NewPage() {
     },
   ];
 
-  const allProduct = listProduct.dataProduct;
+  async function countPage() {
+    const newNextPage = nextPage + 1;
+    setReload(true);
+  
+    const response = await dispatch(getAllProduct({ ...requestBody, page: newNextPage }));
+    console.log(response," <<< reeee");
+    if (response) {
+      const newPageData = response.dataProduct;
+      if (newPageData.length === 0 || newNextPage == null) {
+        setIsDataEnd(true);
+      }else {
+        setCombinedData((prevCombinedData) => [...prevCombinedData, ...newPageData]);
+        setTotalLoadedItems(prevTotal => prevTotal + newPageData.length);
+        setNextPage(newNextPage); 
+      }
+    }
+  
+    setReload(false);
+  }
+  
 
-  const [byCategory, setByCategory] = useState([]);
-  const [clikCategory, setClickCategory] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("All");
   useEffect(() => {
-    SortCategory(allProduct);
-    SortCategory2(allProduct)
-  }, [clikCategory, selectedOption]);
+    if (allProductPage) {
+      setTotalLoadedItems(allProductPage.length);
+      setCombinedData(allProductPage);
+    }
+  }, [allProductPage]);
 
-  function SortCategory(product) {
-    const byCategory = product.filter((el) => {
-      return el.categories == clikCategory;
-    });
-    setByCategory(byCategory);
-  }
+  const requestBody = {
+    idMember: 0,
+    limit: 30,
+    page: nextPage,
+    category: selectedOption == "All" ? "" : clikCategory,
+  };
 
-  function SortCategory2(product) {
-    const byCategory = product.filter((el) => {
-      const firstLetter = selectedOption.charAt(0).toLowerCase();
-      const restOfEl = selectedOption.slice(1);
-      const capitalizedEl = firstLetter + restOfEl;
-      return el.categories == capitalizedEl;
-    });
-    setByCategory(byCategory);
-  }
+  useEffect(() => {
+    dispatch(getProductCategory());
+    dispatch(getListProduct());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllProduct(requestBody));
+    setTimeout(() => {
+      setReload(false);
+    }, 3000);
+  }, [ selectedOption, clikCategory,nextPage]);
+
+  console.log({combinedData, allProductPage}, " <<< combine"); // <<<<<<<<<<<<<<<<<<
+  console.log(selectedOption, clikCategory, nextPage, "<< selected "); // <<<<<<<<<
+  // console.log(allProductPage, "<<< ppppp"); // <<<<<<<<<<<<<<
 
   function sortByLike(val) {
     setLikeCategory(val);
   }
 
-  function handleCategory(el) {
+  async function handleCategory(el) {
     if (!el) return "";
     const firstLetter = el.charAt(0).toLowerCase();
     const restOfEl = el.slice(1);
-    const capitalizedEl = firstLetter + restOfEl;
-    setClickCategory(capitalizedEl);
+    const lowerLizedEl = firstLetter + restOfEl;
+    setClickCategory(lowerLizedEl);
+    setNextPage(1);
     setBtnActive(el);
     setSelectedOption(el);
+    const response = await dispatch(getAllProduct({ ...requestBody, category: lowerLizedEl }));
+    if(response) {
+      const newPageData = response.dataProduct;
+      if (newPageData.length === 0 || newPageData == null) {
+        setIsDataEnd(true);
+      }else {
+      setCombinedData(newPageData)
+      }
+    }
   }
   const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
   function CategoryProduct() {
@@ -178,14 +198,12 @@ function NewPage() {
   function handleShowAll() {
     setSelectedOption("All");
     setBtnActive("");
-    setByCategory([]);
   }
 
   function DisplayProduct() {
-    const dataCategory = byCategory.length == 0 ? allProduct : byCategory;
     return (
       <>
-        {dataCategory?.map((el, index) => {
+        {combinedData?.map((el, index) => {
           const text = el.name;
           const truncatedText =
             text.length > 30 ? `${text.slice(0, 30)}...` : text;
@@ -289,14 +307,37 @@ function NewPage() {
             </>
           );
         })}
+
+        {combinedData.length < 30 || combinedData == null || isDataEnd == true? (
+          <></>
+        ) : reload ? (
+          <div className="flex justify-center items-center">
+            <CircleLoader color="#0000ff" size={30} />
+          </div>
+        ) : (
+          <div
+            className="justify-center items-center text-center"
+            onClick={countPage}
+          >
+            <button>Load More</button>
+          </div>
+        )}
+        <div className="pb-36"></div>
       </>
     );
   }
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    const el = event.target.value;
+    if (!el) return "";
+    const firstLetter = el.charAt(0).toLowerCase();
+    const restOfEl = el.slice(1);
+    const lowerLizedEl = firstLetter + restOfEl;
+    setClickCategory(lowerLizedEl);
+    setSelectedOption(el);
     setShowModal(false);
-    setBtnActive(event.target.value);
+    setBtnActive(el);
+    setNextPage(1);
   };
 
   const handleModalOpen = () => {
@@ -381,9 +422,9 @@ function NewPage() {
             <div className="self-center">
               <img src={Logo} className="w-full" />
             </div>
-            <div className="self-center">
+            <Link to={"/search"} className="self-center">
               <img src={search} className="w-full" />
-            </div>
+            </Link>
           </div>
           <div className="flex justify-center">
             {loading ? (
@@ -418,7 +459,9 @@ function NewPage() {
               <CircleLoader color="#0000ff" size={30} />{" "}
             </div>
           ) : (
-            <DisplayProduct />
+            <>
+              <DisplayProduct />
+            </>
           )}
         </div>
       </div>
