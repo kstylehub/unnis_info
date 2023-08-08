@@ -21,55 +21,39 @@ import ArrowBot from "../../../../assets/Polygon10.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
+  getAllProduct,
   getListProduct,
   getProductCategory,
 } from "../../../../Store/Actions/Actions";
-import {
-  BarLoader,
-  CircleLoader,
-  DotLoader,
-  PacmanLoader,
-  PuffLoader,
-  RingLoader,
-} from "react-spinners";
+import { CircleLoader, RingLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 // import ModalCategory from "../ModalCategory/ModalCategory";
 import ModalSort from "../ModalCategory/ModalSort";
 import Close from "../../../../assets/Close.svg";
 
 function NewPage() {
+  const dispatch = useDispatch();
+  const [nextPage, setNextPage] = useState(1);
   const productCategory = useSelector(
     (state) => state.ReducerProductCategory.productCategory
   );
-  const listProduct = useSelector(
-    (state) => state.ReducerListProduct?.listProduct
-  );
+  const [reload, setReload] = useState(false);
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
   const loadingAllProduct = useSelector(
     (state) => state.ReducerListProduct.loading
   );
 
+  const allProductPage = useSelector(
+    (state) => state.ReducerAllProduct.allProduct.dataProduct
+  );
+
   const keyCategories = productCategory.data
-   
     ? Object.keys(productCategory.data)
-   
     : [];
   const nameCategories = keyCategories.map(
-    
     (str) => str.charAt(0).toUpperCase() + str.slice(1)
   );
-
-  const [valCategory, setValCategory] = useState("");
-  const [likeCategory, setLikeCategory] = useState("");
-  const [btnActive, setBtnActive] = useState(""
-  );
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getProductCategory());
-    dispatch(getListProduct());
-  }, []);
 
   const category = [
     {
@@ -106,33 +90,58 @@ function NewPage() {
     },
   ];
 
-  const allProduct = listProduct.dataProduct;
-
-  const [byCategory, setByCategory] = useState([]);
+  const [valCategory, setValCategory] = useState("");
+  const [likeCategory, setLikeCategory] = useState("");
+  const [btnActive, setBtnActive] = useState("");
   const [clikCategory, setClickCategory] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("All");
+  const [combinedData, setCombinedData] = useState([]);
+ console.log(combinedData, " <<< combine");
   useEffect(() => {
-    SortCategory(allProduct);
-    SortCategory2(allProduct)
-  }, [clikCategory, selectedOption]);
+    // Set combinedData with initial data
+    if (allProductPage) {
+      setCombinedData(allProductPage);
+    }
+  }, [combinedData]);
 
-  function SortCategory(product) {
-    const byCategory = product.filter((el) => {
-      return el.categories == clikCategory;
-    });
-    setByCategory(byCategory);
+  const requestBody = {
+    idMember: 0,
+    limit: 30,
+    page: nextPage,
+    category: selectedOption == "All" ? "" : clikCategory,
+  };
+
+  useEffect(() => {
+    dispatch(getProductCategory());
+    dispatch(getListProduct());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllProduct(requestBody));
+    setTimeout(() => {
+      setReload(false);
+    }, 3000);
+  }, [nextPage, selectedOption, clikCategory, combinedData]);
+  
+ function countPage() {
+    setNextPage((prevNextPage) => prevNextPage + 1);
+    window.scrollTo(0, 0);
+    setReload(true);
+    dispatch(getAllProduct({ ...requestBody, page: nextPage + 1}));
+
+    if (allProductPage.length > 0) {
+      setCombinedData((prevCombinedData) => [
+        ...prevCombinedData,
+        ...(allProductPage || []),
+      ]);
+    }
+    setReload(false);
   }
 
-  function SortCategory2(product) {
-    const byCategory = product.filter((el) => {
-      const firstLetter = selectedOption.charAt(0).toLowerCase();
-      const restOfEl = selectedOption.slice(1);
-      const capitalizedEl = firstLetter + restOfEl;
-      return el.categories == capitalizedEl;
-    });
-    setByCategory(byCategory);
-  }
+
+  console.log(selectedOption, clikCategory, nextPage, "<< selected ");
+  console.log(allProductPage, "<<< ppppp");
 
   function sortByLike(val) {
     setLikeCategory(val);
@@ -142,8 +151,9 @@ function NewPage() {
     if (!el) return "";
     const firstLetter = el.charAt(0).toLowerCase();
     const restOfEl = el.slice(1);
-    const capitalizedEl = firstLetter + restOfEl;
-    setClickCategory(capitalizedEl);
+    const lowerLizedEl = firstLetter + restOfEl;
+    setClickCategory(lowerLizedEl);
+    setNextPage(1);
     setBtnActive(el);
     setSelectedOption(el);
   }
@@ -178,14 +188,12 @@ function NewPage() {
   function handleShowAll() {
     setSelectedOption("All");
     setBtnActive("");
-    setByCategory([]);
   }
 
   function DisplayProduct() {
-    const dataCategory = byCategory.length == 0 ? allProduct : byCategory;
     return (
       <>
-        {dataCategory?.map((el, index) => {
+        {allProductPage?.map((el, index) => {
           const text = el.name;
           const truncatedText =
             text.length > 30 ? `${text.slice(0, 30)}...` : text;
@@ -289,14 +297,37 @@ function NewPage() {
             </>
           );
         })}
+
+        {combinedData?.length < 30 || combinedData == null ? (
+          <></>
+        ) : reload ? (
+          <div className="flex justify-center items-center">
+            <CircleLoader color="#0000ff" size={30} />
+          </div>
+        ) : (
+          <div
+            className="justify-center items-center text-center"
+            onClick={countPage}
+          >
+            <button>Load More</button>
+          </div>
+        )}
+        <div className="pb-36"></div>
       </>
     );
   }
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    const el = event.target.value;
+    if (!el) return "";
+    const firstLetter = el.charAt(0).toLowerCase();
+    const restOfEl = el.slice(1);
+    const lowerLizedEl = firstLetter + restOfEl;
+    setClickCategory(lowerLizedEl);
+    setSelectedOption(el);
     setShowModal(false);
-    setBtnActive(event.target.value);
+    setBtnActive(el);
+    setNextPage(1);
   };
 
   const handleModalOpen = () => {
@@ -381,9 +412,9 @@ function NewPage() {
             <div className="self-center">
               <img src={Logo} className="w-full" />
             </div>
-            <div className="self-center">
+            <Link to={"/search"} className="self-center">
               <img src={search} className="w-full" />
-            </div>
+            </Link>
           </div>
           <div className="flex justify-center">
             {loading ? (
@@ -418,7 +449,9 @@ function NewPage() {
               <CircleLoader color="#0000ff" size={30} />{" "}
             </div>
           ) : (
-            <DisplayProduct />
+            <>
+              <DisplayProduct />
+            </>
           )}
         </div>
       </div>
