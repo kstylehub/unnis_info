@@ -50,7 +50,7 @@ function NewPage() {
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
   const loadingAllProduct = useSelector((state) => state.ReducerListProduct.loading);
-  const allProductPage = useSelector((state) => state.ReducerAllProduct.allProduct.dataProduct);
+  const allProductPage = useSelector((state) => state.ReducerAllProduct.dataProduct.dataProduct);
   const keyCategories = productCategory.data
     ? Object.keys(productCategory.data)
     : [];
