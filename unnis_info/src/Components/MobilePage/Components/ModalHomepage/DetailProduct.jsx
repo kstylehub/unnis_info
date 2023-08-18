@@ -34,7 +34,7 @@ function detailProduct() {
   }, [id]);
 
   // console.log(detailProduct.dataProduct[0].listReview, "<< detail product");
-  // console.log(detailProduct.dataProduct[0], "<< detail product");
+  console.log(detailProduct.dataProduct[0], "<< detail product");
 
   // console.log(detailProduct, " <<<<");
   const dataProduct = detailProduct?.dataProduct?.[0];
@@ -398,7 +398,7 @@ function detailProduct() {
               <p className="text-red-500 text-sm">
                 {dataProduct.stock === 0
                   ? "Produk tidak tersedia. Stock habis"
-                  : ` `}
+                  : "Stock : " + dataProduct.stock}
               </p>
               <div className="flex justify-start py-4 gap-4">
                 {dataProduct.keyword[0] !== undefined &&
@@ -725,9 +725,9 @@ function detailProduct() {
             </h5>
             <hr></hr>
             <div className="lg:px-6 px-4 py-4">
-              <h1 className="font-bold font-base text-left">VOLUME / HARGA</h1>
+              <h1 className="font-bold font-base text-left">VOLUME / BERAT</h1>
               <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
-                {dataProduct.volume} / Rp. {formattedPrice}
+                {dataProduct.volume} / {dataProduct.weight}kg 
               </h5>
             </div>
             <hr></hr>
