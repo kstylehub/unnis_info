@@ -23,8 +23,9 @@ function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
 
   const getDataUser = useSelector((state) => state.ReducerUser.dataUser);
-  const dataUser = getDataUser?.dataMember[0];
 
+  const dataUser = getDataUser?.dataMember[0];
+  console.log(dataUser);
   function getBirthDateDescription() {
     if (dataUser) {
       if (dataUser.birthDate <= 2010) {
@@ -40,10 +41,10 @@ function MyPage() {
       } else if (dataUser.birthDate <= 1980) {
         return "60-an";
       } else {
-        return dataUser.birthDate; 
+        return dataUser.birthDate;
       }
     }
-    return ""; 
+    return "";
   }
 
   function KlikLogin() {
@@ -104,7 +105,9 @@ function MyPage() {
             <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>
             <div className="flex flex-col py-3 px-4">
               <div className="flex flex-row justify-between">
-                <div className="font-bold text-sm">Kode Referral : {dataUser.referral}</div>
+                <div className="font-bold text-sm">
+                  Kode Referral : {dataUser.referral}
+                </div>
                 <button className="bg-[#4ABFA1] text-xs font-bold rounded-full py-1 px-3 text-white">
                   Undang Teman
                 </button>
@@ -119,13 +122,21 @@ function MyPage() {
             </div>
             <hr className=""></hr>
             <div className="flex flex-col py-3 px-4 justify-center items-center">
-              <img src={profile} className="w-3/12 pb-1 pl-2 mt-6" />
+              <div className="flex justify-center rounded-full bg-cover my-2">
+                <img
+                  src={dataUser.photoProfile}
+                  className="rounded-full object-cover w-3/12"
+                />
+              </div>
               <div className="flex flex-row justify-center items-center mt-2">
                 <div className="font-bold text-base mx-1">
-                {dataUser.username}
+                  {dataUser.username}
                 </div>
               </div>
-              <div className="text-xs mt-1">{getBirthDateDescription()} / {dataUser.skinType} / {dataUser.skinColor}</div>
+              <div className="text-xs mt-1">
+                {getBirthDateDescription()} / {dataUser.skinType} /{" "}
+                {dataUser.skinColor}
+              </div>
             </div>
             <div className="flex py-3 mt-1 px-5 items-center justify-between w-full bg-gray-200">
               <div className="flex">
@@ -384,7 +395,10 @@ function MyPage() {
                     </svg>
                   </div>
                 </div>
-                <div className="py-3 px-5 flex items-center justify-between w-full bg-white" onClick={()=>handleLogout()}>
+                <div
+                  className="py-3 px-5 flex items-center justify-between w-full bg-white"
+                  onClick={() => handleLogout()}
+                >
                   <div className="text-sm">Logout</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
