@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getEvent } from "../../../../Store/Actions/Actions";
 import { CircleLoader,RingLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+
 function ContentEvent() {
   const event = useSelector((state) => state.ReducerEventData.event);
   const loading = useSelector((state) => state.ReducerEventData.loading);
