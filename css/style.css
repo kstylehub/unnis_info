@@ -702,22 +702,30 @@ a:hover .fa-brands {
 	text-decoration: underline;
 }
 
-/* partners */
-#partners {
+/* partners, MOU_ID, MOU_KR */
+#partners,
+#MOU_ID,
+#MOU_KR {
 	width: 70%;
 	margin: 0 auto;
 }
 
-#partners h4 {
+#partners h4,
+#MOU_ID h4,
+#MOU_KR h4 {
 	text-align: center;
 }
 
-#partners ul {
+#partners ul,
+#MOU_ID ul,
+#MOU_KR ul {
 	display: flex;
 	justify-content: space-between;
 }
 
-#partners ul img {
+#partners ul img,
+#MOU_ID ul img,
+#MOU_KR ul img {
 	width: 100%;
 }
 
