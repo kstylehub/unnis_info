@@ -708,24 +708,26 @@ a:hover .fa-brands {
 
 .release_subtitle{
 	text-align: left;
-	font: size 14px;
+	font: size 24px;
 	color: black;
 	font-weight:bold;
-	padding-left: 10px;
+	padding-left:5%;
 }
 
 .release-text{
 	text-align: left;
-	font: size 20px;
+	font: size 30px;
 	color: black;
 	font-weight: bolder;
+	padding-left: 5%;
 }
 
 .disc-list{
 	list-style-type: disc;
-	padding-left: 15px;
+	padding-left: 5%;
 	padding-top: 5px;
-	font-size: 14px;
+	padding-right: 5%;
+	font-size: 20px;
 }
 
 .release_title{
@@ -733,7 +735,8 @@ a:hover .fa-brands {
 	font-size: 24px;
 	color: #000;
 	font-weight: bolder;
-	padding-top: 5px;
+	padding-top: 10px;
+	padding-left: 5%;
 }
 
 /* partners, MOU_ID, MOU_KR */
