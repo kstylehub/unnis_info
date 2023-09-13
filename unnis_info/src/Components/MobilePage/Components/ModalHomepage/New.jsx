@@ -98,7 +98,6 @@ function NewPage() {
     setReload(true);
   
     const response = await dispatch(getAllProduct({ ...requestBody, page: newNextPage }));
-    console.log(response," <<< reeee");
     if (response) {
       const newPageData = response.dataProduct;
       if (newPageData.length === 0 || newNextPage == null) {
@@ -139,10 +138,6 @@ function NewPage() {
       setReload(false);
     }, 3000);
   }, [ selectedOption, clikCategory,nextPage]);
-
-  console.log({combinedData, allProductPage}, " <<< combine"); // <<<<<<<<<<<<<<<<<<
-  console.log(selectedOption, clikCategory, nextPage, "<< selected "); // <<<<<<<<<
-  // console.log(allProductPage, "<<< ppppp"); // <<<<<<<<<<<<<<
 
   function sortByLike(val) {
     setLikeCategory(val);
@@ -327,7 +322,7 @@ function NewPage() {
     );
   }
 
-  const handleOptionChange = (event) => {
+   const handleOptionChange = async (event) => {
     const el = event.target.value;
     if (!el) return "";
     const firstLetter = el.charAt(0).toLowerCase();
@@ -338,6 +333,15 @@ function NewPage() {
     setShowModal(false);
     setBtnActive(el);
     setNextPage(1);
+    const response = await dispatch(getAllProduct({ ...requestBody, category: lowerLizedEl }));
+    if(response) {
+      const newPageData = response.dataProduct;
+      if (newPageData.length === 0 || newPageData == null) {
+        setIsDataEnd(true);
+      }else {
+      setCombinedData(newPageData)
+      }
+    }
   };
 
   const handleModalOpen = () => {

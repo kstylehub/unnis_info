@@ -1,11 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import Info from "../Components/Layout/Info";
-import Layout from "../Components/Layout/index";
 import Content from "../Components/Layout/Content";
 import Homepage from "../Components/MobilePage/Homepage/Homepage";
 import Subscribe from "../Components/MobilePage/ScreenNavBot/Subscribe";
 import NewPage from "../Components/MobilePage/Components/ModalHomepage/New";
-import DetailProduct from "../Components/MobilePage/Components/ModalHomepage/detailProduct";
+import DetailProduct from "../Components/MobilePage/Components/ModalHomepage/DetailProduct";
 import Home from "../Components/Layout/Home";
 import Event from "../Components/MobilePage/ScreenNavBot/Event";
 import ContentNavbar from "../Components/MobilePage/NavbarPhone/contentNavbar";

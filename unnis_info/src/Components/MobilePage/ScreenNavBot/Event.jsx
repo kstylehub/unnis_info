@@ -1,6 +1,6 @@
 import NavigationButtom from "../NavigatonBottom/NavigationBottom"
 import NavbarPhone from "../NavbarPhone/NavbarPhone"
-import { Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 
 function Event () {
     return (
@@ -10,21 +10,29 @@ function Event () {
           <NavbarPhone />
           <div className="flex justify-evenly text-[#343A40] bg-white pt-3">
             <div>
-              <a href="/newProduct">
+              <Link to={"/newProduct"}>
                 <h3>NEW</h3>
-              </a>
+              </Link>
             </div>
             <div>
+              <Link to={"/newProduct"}>
               <h3>CATEGORY</h3>
+              </Link>
             </div>
             <div>
+              <Link>
               <h3>REVIEW</h3>
+              </Link>
             </div>
             <div>
+              <Link>
               <h3>EVENT</h3>
+              </Link>
             </div>
             <div>
-              <h3>FEED</h3>
+              <a href="/feed">
+                <h3>FEED</h3>
+              </a>
             </div>
           </div>
         </div>
