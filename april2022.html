@@ -82,7 +82,10 @@
 <link
 			href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
 			rel="stylesheet"
-		/>  </head>
+		/>  
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+  </head>
 
   <body>
     <div id="wrap">
@@ -102,16 +105,13 @@
             </ul>
           </nav>
         </div>
-        <div class="app_title banner">
-          <p class="releasenotes">Release Notes & Roadmap</p>
-          <p class="undernotetext">
-            Stay up to date with the latest features, updates, and more.
-          </p>
-        </div>
+      <div class="absolute top-10 h-full w-full">
+          <img src="images/unnis_web_top.png">
+      </div>
       </header>
-      <div class="flex flex-row">
+      <div class="text_release flex flex-row">
         <div id="sidebar">
-          <aside id="sidebar-multi-level-sidebar" class="absolute top-50 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-100" aria-label="Sidebar">
+          <aside id="sidebar-multi-level-sidebar" class="absolute top-96 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " aria-label="Sidebar">
             <div class="h-full px-3 py-4 overflow-y-auto">
               <li>
                 <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dropdown-button" aria-controls="dropdown-example">
@@ -180,10 +180,11 @@
             </div>
           </aside>
         </div>
-        <div id="content" class="absolute top-50 left-72 z-40 ">
-          <div class="border-8 py-5">
+        <div id="content" class="absolute top-96 left-72 z-40 ">
+           <div class="border-8 border-opacity-100 border-black border-b-8">
+
             <div class="text-2xl font-bold space-y-5 text-green-500"">v2.3.0 (android) - 13 April 2022</div>
-            <div class="text-2xl font-bold px-5">New Features:</div>
+            <div class="text-2xl font-bold px-5 py-5">New Features:</div>
             <ul class="list-disc px-20">
                 <li class="list-disc"> Check in attendance</li>
                 <li class="list-disc"> Filter in event page</li>
@@ -191,14 +192,14 @@
                 <li class="list-disc"> Add favorite feed</li>
             </ul>
           </div>
-          <div class="text-2xl font-bold px-5">Updates:</div>
+          <div class="text-2xl font-bold px-5 py-5">Updates:</div>
           <ul class="list-disc px-20">
             <li class="list-disc"> Sign in with apple account</li>
             <li class="list-disc"> Add point if share invitation</li>
             <li class="list-disc"> Add share invitation via WhatsApp</li>
             <li class="list-disc"> Add quideline</li>
         </ul>
-        <div class="text-2xl font-bold px-5">Bug Fixes:</div>
+        <div class="text-2xl font-bold px-5 py-5">Bug Fixes:</div>
         <ul class="list-disc px-20">
       </ul>
         </div>

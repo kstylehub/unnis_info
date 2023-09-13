@@ -757,7 +757,10 @@ a:hover .fa-brands {
 	padding-top: 10px;
 	padding-left: 5%;
 }
-
+.text_release{
+	font-family: 'Noto Sans KR', sans-serif;
+	color: #000;
+}
 /* body {
     margin: 0px;
     padding: 0px;
