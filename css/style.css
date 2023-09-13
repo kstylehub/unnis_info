@@ -703,60 +703,6 @@ a:hover .fa-brands {
 }
 
 /* Release Notes */
-#releaseNotes {
-	background-color: #ffbf80;
-}
-
-.release_subtitle{
-	text-align: left;
-	font: size 24px;
-	color: black;
-	font-weight:bold;
-	padding-left:9%;
-}
-
-.release-text-top{
-	text-align: left;
-	font: size 30px;
-	color: black;
-	font-weight: bolder;
-	padding-left: 7%;
-}
-
-.release-text{
-	text-align: left;
-	font: size 30px;
-	color: black;
-	font-weight: bolder;
-	padding-top: 2%;
-	padding-left: 7%;
-}
-
-.disc-list{
-	list-style-type: disc;
-	padding-left: 10%;
-	padding-top: 5px;
-	padding-right: 5%;
-	font-size: 20px;
-	text-align: left;
-}
-
-.disc-list-text{
-	list-style: disc;
-	list-style-type: disc;
-	padding-top: 5px;
-	padding-right: 5%;
-	font-size: 20px;
-}
-
-.release_title{
-	text-align: left;
-	font-size: 24px;
-	color: #000;
-	font-weight: bolder;
-	padding-top: 10px;
-	padding-left: 5%;
-}
 .text_release{
 	font-family: 'Noto Sans KR', sans-serif;
 	color: #000;
@@ -773,7 +719,7 @@ a:hover .fa-brands {
     color: rgba(0, 0, 0, 0.87);
 } */
 
-.marginlefting {
+/* .marginlefting {
     margin-left: 60px !important;
   }
   
@@ -818,33 +764,15 @@ a:hover .fa-brands {
   }
   
   ul.no-bullets {
-    list-style-type: none; /* Remove bullets */
-    padding: 10px; /* Remove padding */
-    margin: 0; /* Remove margins */
+    list-style-type: none;
+    padding: 10px;
+    margin: 0; 
   }
   
   ul.no-bullets li {
-    padding: 5px; /* Remove padding */
-  }
+    padding: 5px; 
+  } */
   
-
-  .banner{
-	background-image: linear-gradient( #66B5F6,#BFE299);
-	padding: 100px;
-  }
-  .releasenotes{
-	text-align: left;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	font-size: 50px;
-	color: #fff;
-  }
-
-  .undernotetext{
-	text-align: left;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	font-size: 30px;
-	color: #fff;
-  }
 /* partners, MOU_ID, MOU_KR */
 #partners,
 #MOU_ID,
