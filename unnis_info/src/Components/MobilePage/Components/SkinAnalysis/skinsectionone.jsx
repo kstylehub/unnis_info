@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import back from "../../../../assets/previous.svg";
 import camera from "../../../../assets/SkinAnalysis/camera_pink.png";
-import skin from "../../../../assets/SkinAnalysis/skin_Section_one.png";
+import skin from "../../../../assets/SkinAnalysis/skin_section_one.png";
 import React, { useState } from 'react';
 
 function SkinSectionOne () {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Box from "../../../../assets/Box_transaction.png";
+import Box from "../../../../assets/box_transaction.png";
 
 function TransProduct () {
     return (
