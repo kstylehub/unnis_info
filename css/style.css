@@ -907,7 +907,7 @@ footer .footer_sns a {
 .footer_sns > div:nth-child(4) a {
 	width: 37px;
 	height: 37px;
-	background-image: url("../images/icon_unnis\ pick_purple.png");
+	background-image: url("../images/logo_shopee.png");
 	background-size: 45px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -917,16 +917,6 @@ footer .footer_sns a {
 .footer_sns > div:nth-child(5) a {
 	width: 37px;
 	height: 37px;
-	background-image: url("../images/logo_shopee.png");
-	background-size: 45px;
-	background-repeat: no-repeat;
-	background-position: center;
-	border-radius: 10px;
-}
-
-.footer_sns > div:nth-child(6) a {
-	width: 37px;
-	height: 37px;
 	background-image: url("../images/logoTokped.png");
 	background-size: 45px;
 	background-repeat: no-repeat;
@@ -934,7 +924,7 @@ footer .footer_sns a {
 	border-radius: 10px;
 }
 
-.footer_sns > div:nth-child(7) a {
+.footer_sns > div:nth-child(6) a {
 	width: 37px;
 	height: 37px;
 	background-image: url("../images/Linkedin_logo.png");
