@@ -14,7 +14,8 @@ function DetailEvent() {
   const event = useSelector((state) => state.ReducerEventData.event);
   const comment = useSelector((state) => state.ReducerCommentEvent.event);
   const user = useSelector((state) => state.ReducerUser.dataUser);
-  const idMember = user.dataMember[0].id;
+  const idMember = user[0].id;
+  console.log(user,">>>> ini user");
   const dispatch = useDispatch();
 
   useEffect(() => {

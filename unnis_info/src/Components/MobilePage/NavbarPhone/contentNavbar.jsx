@@ -30,7 +30,7 @@ function ContentNavbar() {
   const allFeed = useSelector((state) => state.ReducerFeed.dataFeed);
   const allEvent = useSelector((state) => state.ReducerEventData.event);
   const getUser = useSelector((state) => state.ReducerUser.dataUser);
-  const dataUser = getUser?.dataMember[0];
+  const dataUser = getUser?.dataMember;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -356,7 +356,7 @@ function ContentNavbar() {
   function Lock() {
     if (!dataUser) {
       return (
-        <div className="px-4 pt-8 pb-8 rounded-xl shadow-xl bg-white absolute top-[148.5vh] lg:top-[137.5vh] sm:top-[150vh] md:top-[163vh]  inset-x-8 border z-10 opacity-90 shadow">
+        <div className="px-4 pt-8 pb-8 rounded-xl shadow bg-white absolute top-[148.5vh] lg:top-[137.5vh] sm:top-[150vh] md:top-[163vh]  inset-x-8 border z-10 opacity-90 shadow">
           <div className="text-sm font-semibold mb-2 justify-center text-center">
             <div className="justify-center items-center flex ">
               <svg
