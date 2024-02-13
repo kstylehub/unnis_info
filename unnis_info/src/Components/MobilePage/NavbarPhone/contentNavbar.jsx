@@ -30,7 +30,7 @@ function ContentNavbar() {
   const allFeed = useSelector((state) => state.ReducerFeed.dataFeed);
   const allEvent = useSelector((state) => state.ReducerEventData.event);
   const getUser = useSelector((state) => state.ReducerUser.dataUser);
-  const dataUser = getUser?.dataMember[0];
+  const dataUser = getUser?.dataMember?.[0];
 
   const dispatch = useDispatch();
   useEffect(() => {

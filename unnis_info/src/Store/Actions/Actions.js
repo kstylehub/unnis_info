@@ -1,6 +1,6 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
-const BASE_URL = 'http://52.74.126.149:9696'
+const BASE_URL = 'http://3.35.189.96:9696'
 const {PRODUCT, REVIEW, FEED, EVENT, USER} = ACTIONS_TYPES
 
 

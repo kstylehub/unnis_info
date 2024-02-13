@@ -23,7 +23,7 @@ function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
 
   const getDataUser = useSelector((state) => state.ReducerUser.dataUser);
-  const dataUser = getDataUser?.dataMember[0];
+  const dataUser = getDataUser?.dataMember?.[0];
 
   function getBirthDateDescription() {
     if (dataUser) {
@@ -104,7 +104,7 @@ function MyPage() {
             <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>
             <div className="flex flex-col py-3 px-4">
               <div className="flex flex-row justify-between">
-                <div className="font-bold text-sm">Kode Referral : {dataUser.referral}</div>
+                <div className="font-bold text-sm">Kode Referral : TEST123</div>
                 <button className="bg-[#4ABFA1] text-xs font-bold rounded-full py-1 px-3 text-white">
                   Undang Teman
                 </button>
@@ -122,10 +122,10 @@ function MyPage() {
               <img src={profile} className="w-3/12 pb-1 pl-2 mt-6" />
               <div className="flex flex-row justify-center items-center mt-2">
                 <div className="font-bold text-base mx-1">
-                {dataUser.username}
+                username
                 </div>
               </div>
-              <div className="text-xs mt-1">{getBirthDateDescription()} / {dataUser.skinType} / {dataUser.skinColor}</div>
+              <div className="text-xs mt-1">{getBirthDateDescription()} Birth date / Skin type / Skin color</div>
             </div>
             <div className="flex py-3 mt-1 px-5 items-center justify-between w-full bg-gray-200">
               <div className="flex">
@@ -170,7 +170,7 @@ function MyPage() {
                 </div>
                 <div className="text-xs">Ulasan Saya</div>
                 <div className="text-[#4ABFA1] text-sm flex justify-center">
-                  1
+                  0
                 </div>
               </div>
               <div className="flex flex-col w-3/12 justify-center item-center bg-white py-2">
@@ -181,7 +181,7 @@ function MyPage() {
                   Postingan <br></br>Favorit
                 </div>
                 <div className="text-[#4ABFA1] text-sm flex justify-center ">
-                  1
+                  0
                 </div>
               </div>
               <div className="flex flex-col w-3/12 justify-center item-center bg-white ml-1 py-2">
@@ -190,7 +190,7 @@ function MyPage() {
                 </div>
                 <div className="text-xs">Coin</div>
                 <div className="text-[#4ABFA1] text-sm flex justify-center">
-                  1
+                  0
                 </div>
               </div>
               <div className="flex flex-col w-3/12 justify-center item-center bg-white ml-1 py-2">
@@ -199,7 +199,7 @@ function MyPage() {
                 </div>
                 <div className="text-xs">Likes</div>
                 <div className="text-[#4ABFA1] text-sm flex justify-center">
-                  1
+                  0
                 </div>
               </div>
             </div>
