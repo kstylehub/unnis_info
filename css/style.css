@@ -579,6 +579,66 @@ header .app_title img {
 	width: 35%;
 }
 
+/* service5 */
+#service5 .slick-slide img {
+	width: 35%;
+	margin-left: 5%;
+	margin-top: 5%;
+}
+
+#service5 {
+	position: relative;
+}
+
+#service5 .service5_back {
+	background-color: #edf8f5;
+	width: 100%;
+	position: absolute;
+	height: 60%;
+	top: 200px;
+}
+
+#service5 .slider_text {
+	width: 50%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+#service5 .slider_text h3 {
+	margin-bottom: 30px;
+}
+
+/* service7 */
+#service7 .slick-slide img {
+	width: 30%;
+	margin-left: 5%;
+	margin-top: 5%;
+}
+
+#service7 {
+	position: relative;
+}
+
+#service7 .service7_back {
+	background-color: #edf8f5;
+	width: 100%;
+	position: absolute;
+	height: 60%;
+	top: 200px;
+}
+
+#service7 .slider_text {
+	width: 50%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+#service7 .slider_text h3 {
+	margin-bottom: 30px;
+}
+
 /* COSMETIC BOX SECTION */
 #cosmetic_box {
 	background-color: #43bfa1;
