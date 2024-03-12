@@ -845,27 +845,33 @@ a:hover .fa-brands {
 /* partners, MOU_ID, MOU_KR */
 #partners,
 #MOU_ID,
-#MOU_KR {
+#MOU_KR,
+#INVEST {
 	width: 70%;
 	margin: 0 auto;
 }
 
+
+
 #partners h4,
 #MOU_ID h4,
-#MOU_KR h4 {
+#MOU_KR h4,
+#INVEST h4 {
 	text-align: center;
 }
 
 #partners ul,
 #MOU_ID ul,
-#MOU_KR ul {
+#MOU_KR ul,
+#INVEST ul {
 	display: flex;
 	justify-content: space-between;
 }
 
 #partners ul img,
 #MOU_ID ul img,
-#MOU_KR ul img {
+#MOU_KR ul img,
+#INVEST ul img {
 	width: 100%;
 }
 
