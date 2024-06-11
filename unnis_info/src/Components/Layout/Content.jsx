@@ -13,7 +13,7 @@ function Content(props) {
 
   const navigation = useLocation()
   return (
-    <div className="content flex flex-col relative min-h-screen lg:w-[30%]  lg:w-6/12 w-[100vw] shadow-lg shadow-indigo-500/50 bg-white">
+    <div className="content flex flex-col relative min-h-screen lg:w-[27%] w-[100vw] shadow-lg shadow-indigo-500/50 bg-white">
       <div className="flex flex-col h-screen justify-between">
         {/* <div>
           <NavbarPhone />

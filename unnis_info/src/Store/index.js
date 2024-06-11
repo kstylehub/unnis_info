@@ -7,6 +7,7 @@ import { ReducerEventData } from "./Reducers/ReducerEvent";
 import { ReducerUser, ReducerUserRegister } from "./Reducers/ReducerUser";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { ReducerActiveBanner } from "./Reducers/ReducerBanner";
 
 const rootReducer = combineReducers({
     ReducerProductCategory,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     ReducerUser,
     ReducerUserRegister,
     ReducerDetailProduct,
-    ReducerAllProduct
+    ReducerAllProduct,
+    ReducerActiveBanner
 })
 
 const persistConfig = {

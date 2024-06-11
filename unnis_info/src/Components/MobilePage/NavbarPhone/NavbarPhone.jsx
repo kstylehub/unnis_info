@@ -3,26 +3,42 @@ import LogoUnnis from "../../../assets/unnis_logo.png";
 import SearchProduct from "../Components/SearchProduct/SearchProduct";
 
 function NavbarPhone() {
-
-  const navigate = useNavigate()
-  function handleModal(){
-    navigate('/search')
+  const navigate = useNavigate();
+  function handleModal() {
+    navigate("/search");
   }
-
 
   return (
     <>
-      <div className=" grid grid-cols-3 flex mt-3 items-center">
-        <div className="justify-center items-center">
-          <img src={LogoUnnis} className="w-24" />
+      <div className=" flex justify-center items-center">
+        <div className="justify-center items-center w-3/12 p-1">
+          <img src={LogoUnnis} className="w-12/12" />
         </div>
-        <input
-          type="text"
-          placeholder="Search..."
-          onClick={handleModal}
-          className="w-full border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-        />
-        <div className="flex justify-evenly">
+        <div className="w-6/12 relative">
+          <input
+            type="text"
+            placeholder="Subscription service.."
+            onClick={handleModal}
+            className="w-full border border-gray-500 text-sm rounded shadow-sm py-2 px-2" // Adjust padding for the icon
+          />
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+            <svg
+              className="w-6 h-6 text-gray-500 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="2"
+                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className="w-3/12 flex justify-center gap-4">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"

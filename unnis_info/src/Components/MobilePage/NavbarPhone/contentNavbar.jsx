@@ -11,12 +11,15 @@ import Feed from "../../../assets/feed.svg";
 import banner1 from "../../../assets/banner1.svg";
 import banner2 from "../../../assets/banner2.svg";
 import shuadam from "../../../assets/shuadam.svg";
+import Bg_top from "../../../assets/Homepage/top_bg.png";
+import coin from "../../../assets/Homepage/coin.png";
 import invitation from "../../../assets/undangan.svg";
 import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import { Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getActiveBanner,
   getAllFeed,
   getAllReview,
   getEvent,
@@ -30,6 +33,7 @@ function ContentNavbar() {
   const allFeed = useSelector((state) => state.ReducerFeed.dataFeed);
   const allEvent = useSelector((state) => state.ReducerEventData.event);
   const getUser = useSelector((state) => state.ReducerUser.dataUser);
+  const allBanner = useSelector((state) => state.ReducerActiveBanner.banner);
   const dataUser = getUser?.dataMember?.[0];
 
   const dispatch = useDispatch();
@@ -38,6 +42,7 @@ function ContentNavbar() {
     dispatch(getAllReview());
     dispatch(getAllFeed());
     dispatch(getEvent());
+    dispatch(getActiveBanner());
   }, []);
 
   function TopProduct() {
@@ -149,10 +154,7 @@ function ContentNavbar() {
               );
 
               return (
-                <div
-                  className=""
-                  key={el.id}
-                >
+                <div className="" key={el.id}>
                   <div className="border sm:w-[60vw] w-[70vw] md:w-[20vw]">
                     <img src={el.thumbnail} className="w-fit" alt="Banner" />
                     <div className="pl-3 my-2">
@@ -270,7 +272,7 @@ function ContentNavbar() {
         </div>
         {showModal && (
           <>
-            <ModalLoginWarn handleCloseModal={handleCloseModal}/>
+            <ModalLoginWarn handleCloseModal={handleCloseModal} />
           </>
         )}
       </>
@@ -280,7 +282,7 @@ function ContentNavbar() {
   function Recycle() {
     return (
       <>
-         <div
+        <div
           className="text-center p-1"
           style={{ textAlign: "-webkit-center" }}
           onClick={handleShowModal}
@@ -294,16 +296,16 @@ function ContentNavbar() {
         </div>
         {showModal && (
           <>
-            <ModalLoginWarn handleCloseModal={handleCloseModal}/>
+            <ModalLoginWarn handleCloseModal={handleCloseModal} />
           </>
         )}
       </>
-    )
+    );
   }
   function Video() {
     return (
       <>
-         <div
+        <div
           className="text-center p-1"
           style={{ textAlign: "-webkit-center" }}
           onClick={handleShowModal}
@@ -317,11 +319,11 @@ function ContentNavbar() {
         </div>
         {showModal && (
           <>
-            <ModalLoginWarn handleCloseModal={handleCloseModal}/>
+            <ModalLoginWarn handleCloseModal={handleCloseModal} />
           </>
         )}
       </>
-    )
+    );
   }
 
   function BeautyBoxStatus() {
@@ -383,7 +385,10 @@ function ContentNavbar() {
             </div>
           </div>
           <div className="flex justify-evenly">
-            <Link to={"/register"} className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs">
+            <Link
+              to={"/register"}
+              className="rounded-full border pl-2 pr-2 pt-1 pb-1 bg-[#4ABFA1] text-white text-xs"
+            >
               Sign up
             </Link>
             <Link
@@ -399,102 +404,80 @@ function ContentNavbar() {
       return <></>;
     }
   }
+
   return (
     <>
       <div className="mt-2">
-        <div className="h-1/5 bg-[#4ABFA1] pb-10 rounded-t-lg">
+        <div
+          className="h-[10vw]"
+          style={{
+            backgroundImage: `url(${Bg_top})`,
+            backgroundSize: "cover", // or 'contain', depending on how you want it to fit
+            backgroundPosition: "center",
+          }}
+        >
           <div className="flex justify-between pl-5 pr-5 pt-5">
-            <div className="font-semibold text-white">
-              <h3>Hi👋</h3>
+            <div className="font-bold text-white flex gap-1">
+              <h3>Hi, </h3>
               <h3>{dataUser ? `${dataUser.username}` : "Unnie"}</h3>
             </div>
-            <div className="font-light text-sm text-white">
-              <p>My coin</p>
-              <div className="flex items-center">
-                <p className="text-semibold">
+            <div className="font-bold text-base text-white">
+              <div className="flex items-center justify-center gap-1">
+                <img src={coin} className="w-4 h-4 flex items-center"></img>
+                <p className="text-bold">
                   {dataUser ? `${dataUser.point}` : "0"}
                 </p>
                 <div className="items-center pl-2">
                   <a href="#">
-                    <img src={Polygon} className="w-2 h-2" />
+                    <img src={Polygon} className="w-4 h-4" />
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="px-4 pt-4 pb-8 m-5 rounded-xl shadow-xl bg-white absolute top-[150px] inset-x-8">
-          <div className="text-sm font-semibold mb-2">
-            <h3>Beauty Box Status</h3>
-            <div className="text-md font-light">
-              <p>
-                Your subscription plan status :{" "}
-                {dataUser?.statusSub == "active" ? "Active" : "Not Active"}
-              </p>
+
+        <OwlCarousel
+          className="absolute top-[8.5vw] px-3.5 "
+          loop
+          autoplay
+          margin={10}
+          items={1}
+        >
+          {allBanner.map((el) => (
+            <div key={el.id}>
+              <img
+                src={el.thumbnail}
+                className="w-full max-h-[12vw] rounded-lg"
+                alt={el.title}
+              />
+            </div>
+          ))}
+        </OwlCarousel>
+
+        <div className="mt-28 pt-2 flex overflow-x-auto ml-5">
+          <div className="flex flex-col justify-center items-center">
+            <div className="p-3 w-12 h-12 border rounded-lg flex justify-center">
+              <svg
+                className=" text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+            <div className="py-1">
+              Category
             </div>
           </div>
-          <div className="border"></div>
-          <BeautyBoxStatus />
-        </div>
-        <div className="grid grid-cols-4 mt-36 px-8 text-xs">
-          <ToSkinPage />
-          <Link to={"/subscribe"}>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Package} className="w-10 h-10" />
-              <div>
-                <p>Subscription Packages</p>
-              </div>
-            </div>
-          </Link>
-          <Link to={"/event"}>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Gift} className="w-10 h-10" />
-              <div>
-                <p>Event</p>
-              </div>
-            </div>
-          </Link>
-          <Recycle/>
-          <Link to={"/newProduct"}>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Reatured} className="w-10 h-10" />
-              <div>
-                <p>Featured Products</p>
-              </div>
-            </div>
-          </Link>
-          <Link to={"/newProduct"}>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Vegan} className="w-10 h-10" />
-              <div>
-                <p>Vegan</p>
-              </div>
-            </div>
-          </Link>
-         <Video/>
-          <Link to={"/feed"}>
-            <div
-              className="text-center p-1"
-              style={{ textAlign: "-webkit-center" }}
-            >
-              <img src={Feed} className="w-10 h-10" />
-              <div>
-                <p>Feed</p>
-              </div>
-            </div>
-          </Link>
         </div>
         <div className="py-5">
           <OwlCarousel

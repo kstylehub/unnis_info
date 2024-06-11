@@ -23,31 +23,26 @@ function Homepage() {
       <div className="bg-white relative">
         <div className="pt-3 pb-1 sticky top-0 z-20 bg-white">
           <NavbarPhone />
-          <div className="flex justify-evenly text-[#343A40] bg-white pt-3">
+          <div className="flex justify-between px-6 text-[#8e9093] bg-white pt-3 text-sm">
             <div>
               <Link to={"/newProduct"}>
-                <h3>NEW</h3>
+                <h3>Event</h3>
               </Link>
             </div>
             <div>
               <Link to={"/newProduct"}>
-              <h3>CATEGORY</h3>
+              <h3>Feed</h3>
               </Link>
             </div>
             <div>
               <Link>
-              <h3>REVIEW</h3>
+              <h3>Subscription</h3>
               </Link>
             </div>
             <div>
               <Link>
-              <h3>EVENT</h3>
+              <h3>Recycle</h3>
               </Link>
-            </div>
-            <div>
-              <a href="/feed">
-                <h3>FEED</h3>
-              </a>
             </div>
           </div>
         </div>

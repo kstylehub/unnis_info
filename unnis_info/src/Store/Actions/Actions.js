@@ -1,7 +1,7 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
-const BASE_URL = 'http://3.35.189.96:9696'
-const {PRODUCT, REVIEW, FEED, EVENT, USER} = ACTIONS_TYPES
+const BASE_URL = 'http://52.74.126.149:9696'
+const {PRODUCT, REVIEW, FEED, EVENT, USER, BANNER} = ACTIONS_TYPES
 
 
 export const logout = () => ({
@@ -275,6 +275,35 @@ export const getEvent = () => async (dispatch) => {
         console.log('error get data',error);
         dispatch({
             type: EVENT.GET_DATA_EVENT_FAILED,
+            payload: error
+        })
+    }
+}
+
+export const getActiveBanner = () => async (dispatch) => {
+    try {
+        dispatch({type: BANNER.GET_DATA_BANNER_START})
+        const response = await fetch(`${BASE_URL}/banner/active/`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok){
+            throw new Error("internal Server error")
+        }
+
+        const data = await response.json()
+        dispatch({
+            type: BANNER.GET_DATA_BANNER_SUCCESS,
+            payload: data
+        })
+        console.log('data',data);
+        return data
+    } catch (error){
+        console.log('error get data',error);
+        dispatch({
+            type: BANNER.GET_DATA_BANNER_FAILED,
             payload: error
         })
     }
