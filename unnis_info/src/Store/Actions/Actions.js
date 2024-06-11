@@ -1,7 +1,7 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
 const BASE_URL = 'http://52.74.126.149:9696'
-const {PRODUCT, REVIEW, FEED, EVENT, USER, BANNER} = ACTIONS_TYPES
+const {PRODUCT, REVIEW, FEED, EVENT, USER, BANNER, INFLUENCER} = ACTIONS_TYPES
 
 
 export const logout = () => ({
@@ -280,6 +280,7 @@ export const getEvent = () => async (dispatch) => {
     }
 }
 
+// BANNER
 export const getActiveBanner = () => async (dispatch) => {
     try {
         dispatch({type: BANNER.GET_DATA_BANNER_START})
@@ -298,12 +299,42 @@ export const getActiveBanner = () => async (dispatch) => {
             type: BANNER.GET_DATA_BANNER_SUCCESS,
             payload: data
         })
-        console.log('data',data);
+       
         return data
     } catch (error){
         console.log('error get data',error);
         dispatch({
             type: BANNER.GET_DATA_BANNER_FAILED,
+            payload: error
+        })
+    }
+}
+
+// INFLUENCER
+export const getAllInfluencer = () => async (dispatch) => {
+    try {
+        dispatch({type: INFLUENCER.GET_DATA_INFLUENCER_START})
+        const response = await fetch(`${BASE_URL}/influencer/getAll/5691`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok){
+            throw new Error("internal Server error")
+        }
+
+        const data = await response.json()
+        dispatch({
+            type: INFLUENCER.GET_DATA_INFLUENCER_SUCCESS,
+            payload: data
+        })
+        console.log('data',data);
+        return data
+    } catch (error){
+        console.log('error get data',error);
+        dispatch({
+            type: INFLUENCER.GET_DATA_INFLUENCER_FAILED,
             payload: error
         })
     }

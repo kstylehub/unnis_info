@@ -1,19 +1,30 @@
 import Polygon from "../../../assets/Polygon5.svg";
 import Polygon1 from "../../../assets/Polygon2.svg";
 import Skin from "../../../assets/skin.svg";
-import Package from "../../../assets/PackageGreen.svg";
-import Gift from "../../../assets/GiftMenu.svg";
 import RecycleImg from "../../../assets/Recycle.svg";
-import Reatured from "../../../assets/ReaturedProduct.svg";
-import Vegan from "../../../assets/VEGAN.svg";
 import VideoImg from "../../../assets/video.svg";
-import Feed from "../../../assets/feed.svg";
-import banner1 from "../../../assets/banner1.svg";
-import banner2 from "../../../assets/banner2.svg";
-import shuadam from "../../../assets/shuadam.svg";
 import Bg_top from "../../../assets/Homepage/top_bg.png";
 import coin from "../../../assets/Homepage/coin.png";
 import invitation from "../../../assets/undangan.svg";
+import Baby from "../../../assets/Homepage/Category Icon/baby.svg";
+import Body from "../../../assets/Homepage/Category Icon/body.svg";
+import Category from "../../../assets/Homepage/Category Icon/category.svg";
+import Cleansing from "../../../assets/Homepage/Category Icon/cleansing.svg";
+import Face from "../../../assets/Homepage/Category Icon/face.svg";
+import Food from "../../../assets/Homepage/Category Icon/food.svg";
+import Hair from "../../../assets/Homepage/Category Icon/hair.svg";
+import Makeup from "../../../assets/Homepage/Category Icon/make_up.svg";
+import Mask from "../../../assets/Homepage/Category Icon/mask.svg";
+import Longbanner1 from "../../../assets/Homepage/Long Banner/Banner1.png";
+import Longbanner2 from "../../../assets/Homepage/Long Banner/Banner2.png";
+import Skinanalysis from "../../../assets/Homepage/Category Icon/skin_analysis.svg";
+import Skincare from "../../../assets/Homepage/Category Icon/skincare.svg";
+import Suncare from "../../../assets/Homepage/Category Icon/suncare.svg";
+import Olive from "../../../assets/Homepage/Market Logo/olive-young.png";
+import Shopee from "../../../assets/Homepage/Market Logo/shopee.jpg";
+import Sociolla from "../../../assets/Homepage/Market Logo/sociolla.jpg";
+import Tokopedia from "../../../assets/Homepage/Market Logo/tokopedia.png";
+import Unnis from "../../../assets/Homepage/Market Logo/unnis.png";
 import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import { Link, Outlet } from "react-router-dom";
@@ -21,6 +32,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getActiveBanner,
   getAllFeed,
+  getAllInfluencer,
   getAllReview,
   getEvent,
   getTopProduct,
@@ -34,6 +46,9 @@ function ContentNavbar() {
   const allEvent = useSelector((state) => state.ReducerEventData.event);
   const getUser = useSelector((state) => state.ReducerUser.dataUser);
   const allBanner = useSelector((state) => state.ReducerActiveBanner.banner);
+  const allInfluencer = useSelector(
+    (state) => state.ReducerAllInfluencer.influencer
+  );
   const dataUser = getUser?.dataMember?.[0];
 
   const dispatch = useDispatch();
@@ -43,8 +58,12 @@ function ContentNavbar() {
     dispatch(getAllFeed());
     dispatch(getEvent());
     dispatch(getActiveBanner());
+    dispatch(getAllInfluencer());
   }, []);
 
+  const productList = Array.isArray(product?.dataProduct)
+    ? product.dataProduct
+    : [];
   function TopProduct() {
     const truncatedData = product.dataProduct?.slice(0, 6);
     return (
@@ -201,47 +220,47 @@ function ContentNavbar() {
     );
   }
 
-  function ImageCarousel() {
-    const truncatedData = product.dataProduct?.slice(0, 6);
-    return (
-      <>
-        {truncatedData?.map((el) => {
-          return (
-            <>
-              <div
-                className="border rounded-lg shadow min-w-fit w-fit h-[20vh]"
-                key={el.name}
-              >
-                <img src={el.images[0]} className="w-[100%] h-[100%]" />
-              </div>
-            </>
-          );
-        })}
-      </>
-    );
-  }
+  // function ImageCarousel() {
+  //   const truncatedData = product.dataProduct?.slice(0, 6);
+  //   return (
+  //     <>
+  //       {truncatedData?.map((el) => {
+  //         return (
+  //           <>
+  //             <div
+  //               className="border rounded-lg shadow min-w-fit w-fit h-[20vh]"
+  //               key={el.name}
+  //             >
+  //               <img src={el.images[0]} className="w-[100%] h-[100%]" />
+  //             </div>
+  //           </>
+  //         );
+  //       })}
+  //     </>
+  //   );
+  // }
 
-  function ForYou() {
-    if (dataUser) {
-      return (
-        <>
-          <OwlCarousel
-            className="owl-theme"
-            center={true}
-            loop={true}
-            dots={false}
-            items={3}
-            margin={10}
-            responsive={{ 600: { items: 3 } }}
-          >
-            <ImageCarousel />
-          </OwlCarousel>
-        </>
-      );
-    } else {
-      return <></>;
-    }
-  }
+  // function ForYou() {
+  //   if (dataUser) {
+  //     return (
+  //       <>
+  //         <OwlCarousel
+  //           className="owl-theme"
+  //           center={true}
+  //           loop={true}
+  //           dots={false}
+  //           items={3}
+  //           margin={10}
+  //           responsive={{ 600: { items: 3 } }}
+  //         >
+  //           <ImageCarousel />
+  //         </OwlCarousel>
+  //       </>
+  //     );
+  //   } else {
+  //     return <></>;
+  //   }
+  // }
 
   const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.ReducerUser.dataUser);
@@ -416,6 +435,7 @@ function ContentNavbar() {
             backgroundPosition: "center",
           }}
         >
+          {/* Hai UNNIS */}
           <div className="flex justify-between pl-5 pr-5 pt-5">
             <div className="font-bold text-white flex gap-1">
               <h3>Hi, </h3>
@@ -436,7 +456,7 @@ function ContentNavbar() {
             </div>
           </div>
         </div>
-
+        {/* Banner Event or Product */}
         <OwlCarousel
           className="absolute top-[8.5vw] px-3.5 "
           loop
@@ -444,62 +464,282 @@ function ContentNavbar() {
           margin={10}
           items={1}
         >
-          {allBanner.map((el) => (
-            <div key={el.id}>
-              <img
-                src={el.thumbnail}
-                className="w-full max-h-[12vw] rounded-lg"
-                alt={el.title}
-              />
+          {allBanner
+            .filter(
+              (el) => el.category !== "influencer"
+            )
+            .map((el) => (
+              <div key={el.id}>
+                <img
+                  src={el.thumbnail}
+                  className="w-full max-h-[12vw] rounded-lg"
+                  alt={el.title}
+                />
+              </div>
+            ))}
+        </OwlCarousel>
+        {/* Category Icon */}
+        <div className="mt-28 pt-2 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
+          {[
+            { src: Category, label: "Category" },
+            { src: Skinanalysis, label: "Skin Analysis" },
+            { src: Skincare, label: "Skincare" },
+            { src: Cleansing, label: "Cleansing" },
+            { src: Mask, label: "Mask" },
+            { src: Suncare, label: "Suncare" },
+            { src: Face, label: "Face" },
+            { src: Makeup, label: "Lip & Eye" },
+            { src: Body, label: "Body" },
+            { src: Hair, label: "Hair" },
+            { src: Baby, label: "Kids & Baby" },
+            { src: Food, label: "Food" },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col justify-center items-center"
+            >
+              <div className="p-2 w-12 h-12 border rounded-lg flex justify-center border-[#4abfa27c]">
+                <img src={item.src} className="w-full h-full" />
+              </div>
+              <div
+                className="py-1 truncate w-16 text-center"
+                style={{ textOverflow: "ellipsis" }}
+              >
+                {item.label}
+              </div>
             </div>
           ))}
-        </OwlCarousel>
-
-        <div className="mt-28 pt-2 flex overflow-x-auto ml-5">
-          <div className="flex flex-col justify-center items-center">
-            <div className="p-3 w-12 h-12 border rounded-lg flex justify-center">
-              <svg
-                className=" text-gray-800 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <div className="py-1">
-              Category
-            </div>
-          </div>
         </div>
-        <div className="py-5">
+        {/* Long Banner */}
+        <div className="pt-5 px-2.5">
           <OwlCarousel
-            className="owl-theme"
-            mergeFit={true}
-            loop={true}
-            margin={0}
             items={1}
-            center={false}
             nav={false}
-            dots={false}
-            autoWidth={false}
+            dots={true}
             autoplay
+            loop={true}
+            mouseDrag={true}
+            className="owl-theme"
           >
-            <div>
-              <img src={banner1} className="" />
+            <div className="px-1">
+              <img
+                src={Longbanner1}
+                className="rounded-lg transform max-w-full max-h-full object-contain"
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
+              />
             </div>
-            <div>
-              <img src={banner2} className="" />
+            <div className="px-1">
+              <img
+                src={Longbanner2}
+                className="rounded-lg transform max-w-full max-h-full object-contain"
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
+              />
             </div>
           </OwlCarousel>
         </div>
+        {/* Category Icon */}
+        <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
+          {allInfluencer.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col justify-center items-center"
+            >
+              <div className="w-16 h-16 rounded-full flex justify-center overflow-hidden">
+                {item.thumbnail ? (
+                  <img
+                    src={item.thumbnail}
+                    className="object-cover w-full h-full"
+                    alt={item.label}
+                  />
+                ) : (
+                  <div className="bg-[#4ABFA1] w-full h-full rounded-full">
+                    <div className="flex justify-center items-center p-4 text-xl text-white font-bold">
+                      {item.name ? item.name.charAt(0) : ""}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div
+                className="py-1 truncate w-16 text-center"
+                style={{ textOverflow: "ellipsis" }}
+              >
+                {item.name ? item.name : "-"}
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* TopProduct */}
+        <div className="flex flex-col px-4 py-4">
+          <div className="flex justify-between pb-1">
+            <div className="font-bold">Top Product</div>
+            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+              <svg
+                className="w-5 h-5 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m9 5 7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+          <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
+            {productList.map((item, index) => (
+              <div key={index} className="border p-3 w-[8.5vw] flex-shrink-0">
+                <div className="flex flex-col">
+                  <div className="flex justify-center items-center p-1">
+                    <div style={{ width: "100px", height: "100px" }}>
+                      {item.images ? (
+                        <img
+                          src={item.images}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      ) : (
+                        <div className="bg-gray-300 w-full h-full flex items-center justify-center">
+                          Image Not Available
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div
+                    className="w-full pt-2 text-sm"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      lineHeight: "1.2",
+                    }}
+                  >
+                    {item.name}
+                  </div>
+
+                  <div className="text-left font-bold">
+                    Rp{" "}
+                    {item.price
+                      .toLocaleString("id-ID", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })
+                      .replace(",", ".")}
+                  </div>
+                  <div className="flex justify-between pt-1 text-sm">
+                    <div className="truncate text-center w-full flex justify-left items-center">
+                      <div className="pe-1">
+                        <svg
+                          className="w-3.5 h-3.5 text-yellow-400 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+                        </svg>
+                      </div>
+                      <div className="">{item.rating}</div>
+                    </div>
+                    <div className="flex justify-end">
+                      {[
+                        {
+                          href: item.unnispickLink,
+                          text: "Unnispick",
+                          icon: Unnis,
+                        },
+                        { href: item.shopeeLink, text: "Shopee", icon: Shopee },
+                        {
+                          href: item.tokopediaLink,
+                          text: "Tokopedia",
+                          icon: Tokopedia,
+                        },
+                        { href: item.iStyleLink, text: "iStyle" },
+                        {
+                          href: item.sociollaLink,
+                          text: "Sociolla",
+                          icon: Sociolla,
+                        },
+                        { href: item.styleKoreanLink, text: "Style Korean" },
+                        {
+                          href: item.oliveYoungLink,
+                          text: "Olive Young",
+                          icon: Olive,
+                        },
+                        { href: item.kalCareLink, text: "Kal Care" },
+                      ]
+                        .filter((link) => link.href)
+                        .slice(0, 3)
+                        .map((link, idx) => (
+                          <a
+                            key={idx}
+                            href={link.href}
+                            className="rounded-full w-5 h-5 ml-1 flex items-center justify-center"
+                          >
+                            <img
+                              src={link.icon}
+                              alt={link.text}
+                              className="bg-cover w-full h-full rounded-full"
+                            />
+                          </a>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Banner Influencer */}
+        <OwlCarousel className="" loop autoplay margin={0} items={1}>
+          {allBanner
+            .filter((el) => el.category === "influencer")
+            .map((el) => (
+              <div key={el.id}>
+                <img
+                  src={el.thumbnail}
+                  className="w-full max-h-[12vw]"
+                  alt={el.title}
+                />
+              </div>
+            ))}
+        </OwlCarousel>
+        {/* Recommended Video */}
+        <div className="flex flex-col px-4 ">
+          <div className="flex justify-between pb-1">
+            <div className="font-bold">Recommended Video</div>
+            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+              <svg
+                className="w-5 h-5 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m9 5 7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+          <div className="">
+
+          </div>
+        </div>
+
         <div className="flex justify-between px-5 font-bold">
           <div className="text-md text-[#343A40]">
             <h1>NEW</h1>
@@ -514,7 +754,7 @@ function ContentNavbar() {
           </Link>
         </div>
         <div className="grid grid-cols-3 mt-4 px-10 pt-6 pb-6 gap-y-6">
-          <TopProduct />
+          {/* <TopProduct /> */}
         </div>
         <div className="py-5">
           <OwlCarousel
@@ -545,20 +785,7 @@ function ContentNavbar() {
             </div>
           </Link>
         </div>
-        <div className="py-5">
-          <OwlCarousel
-            className="owl-theme"
-            center={true}
-            loop={true}
-            dots={false}
-            items={3}
-            margin={10}
-            responsive={{ 600: { items: 3 } }}
-          >
-            <ImageCarousel />
-          </OwlCarousel>
-          <Lock />
-        </div>
+
         <div className="flex justify-between px-5 py-2 border bg-gray-100 mx-2 rounded-lg drop-shadow-lg mb-8">
           <h1>Skin Analysis Test</h1>
           <Link to={"/skinanalysis"} className="flex items-center">

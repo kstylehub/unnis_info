@@ -8,6 +8,7 @@ import { ReducerUser, ReducerUserRegister } from "./Reducers/ReducerUser";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { ReducerActiveBanner } from "./Reducers/ReducerBanner";
+import { ReducerAllInfluencer } from "./Reducers/ReducerInfluencer";
 
 const rootReducer = combineReducers({
     ReducerProductCategory,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     ReducerUserRegister,
     ReducerDetailProduct,
     ReducerAllProduct,
-    ReducerActiveBanner
+    ReducerActiveBanner,
+    ReducerAllInfluencer
 })
 
 const persistConfig = {
