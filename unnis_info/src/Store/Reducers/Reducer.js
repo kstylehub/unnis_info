@@ -99,3 +99,25 @@ export function ReducerAllProduct(state = allProduct, action) {
       return state;
   }
 }
+  const allProductWithPagination = {
+    dataProductWithPagination: [],
+    error: null,
+    loading: true,
+  };
+  
+  export function ReducerProductWithPagination(state = allProductWithPagination, action) {
+    switch (action.type) {
+      case PRODUCT.GET_PAGINATION_PRODUCT_START:
+        return { ...state, loading: true };
+      case PRODUCT.GET_PAGINATION_PRODUCT_FAILED:
+        return { ...state, loading: false, error: action.payload };
+      case PRODUCT.GET_PAGINATION_PRODUCT_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          dataProductWithPagination: action.payload,
+        };
+      default:
+        return state;
+    }
+  }
