@@ -300,6 +300,26 @@ function ContentNavbar() {
     return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
   };
 
+  const options = {
+    loop: true,
+    autoplay: true,
+    margin: 1,
+    items: 2,
+    center: true, // Center the active item
+    dots: false,
+    nav: false,
+    autoplayTimeout: 2000,
+    autoplayHoverPause: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 3,
+      },
+    },
+  };
+
   return (
     <>
       <div className="mt-2">
@@ -652,9 +672,9 @@ function ContentNavbar() {
           <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
             {VideoRecommendation.map((el) => (
               <div key={el.id} className="relative">
-                {el.source.platform == "youtube"? (
+                {el.source.platform == "youtube" ? (
                   <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
-                    <img className="" src={Youtube}/>
+                    <img className="" src={Youtube} />
                   </div>
                 ) : (
                   <div className=""></div>
@@ -726,30 +746,44 @@ function ContentNavbar() {
               </svg>
             </div>
           </div>
-          <div className="pb-5 pt-2 px-2.5">
-            <OwlCarousel
-              items={1}
-              nav={false}
-              dots={false}
-              autoplay
-              loop={true}
-              mouseDrag={true}
-              className="owl-theme"
-            >
-              <div className="px-1">
-                <img
-                  src={Longbanner1}
-                  className="rounded-lg transform max-w-full max-h-full object-contain"
-                  style={{ maxWidth: "100%", maxHeight: "100%" }}
-                />
-              </div>
-              <div className="px-1">
-                <img
-                  src={Longbanner2}
-                  className="rounded-lg transform max-w-full max-h-full object-contain"
-                  style={{ maxWidth: "100%", maxHeight: "100%" }}
-                />
-              </div>
+          <div className="pb-5 pt-2 ps-4 pe-2">
+            <OwlCarousel className="owl-theme" {...options}>
+              {productList.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex justify-center border w-[7.7vw] h-[10vw] shadow-lg"
+                >
+                  <div className="flex flex-col py-2">
+                    <div className="flex justify-center items-center ">
+                      <div style={{ width: "120px", height: "120px" }}>
+                        {item.images !== null ? (
+                          <img
+                            src={item.images}
+                            className="object-contain"
+                            style={{ width: "100%", height: "100%" }}
+                          />
+                        ) : (
+                          <div className="bg-gray-300 w-full h-full flex items-center justify-center">
+                            Image Not Available
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div
+                    className="w-full text-sm text-center p-2"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      lineHeight: "1.3",
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                  </div>
+                </div>
+              ))}
             </OwlCarousel>
           </div>
         </div>
