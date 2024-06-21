@@ -1,28 +1,32 @@
-import Aloncepict from "../../../../assets/Alonce.jpg";
-import lipTint from "../../../../assets/LipTint.jpg";
-import Tov from "../../../../assets/Tov.jpg";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { getEvent } from "../../../../Store/Actions/Actions";
 
 function ContentEvent() {
   const event = useSelector((state) => state.ReducerEventData.event);
   const loading = useSelector((state) => state.ReducerEventData.loading);
-
   const dispatch = useDispatch();
+
+  const [activeButton, setActiveButton] = useState("All");
+
   useEffect(() => {
     dispatch(getEvent());
-  }, []);
+  }, [dispatch]);
+
   const data = event?.dataEvent;
 
- 
+  // Sort the events by end date in descending order
+  const sortedData = data
+    ?.slice()
+    .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
 
   function AllEvent() {
-    return data?.map((el) => {
+    return sortedData?.map((el) => {
       const lastDate = el.endDate;
       const firstDate = el.startDate;
       const lastDateObj = new Date(lastDate);
-      const firstDateObj = new Date(firstDate)
+      const firstDateObj = new Date(firstDate);
+      const currentDate = new Date();
       const lastday = lastDateObj.getDate().toString().padStart(2, "0");
       const firstday = firstDateObj.getDate().toString().padStart(2, "0");
       const monthNames = [
@@ -41,77 +45,113 @@ function ContentEvent() {
       ];
       const lastMonth = monthNames[lastDateObj.getMonth()];
       const firstMonth = monthNames[firstDateObj.getMonth()];
-
       const lastyear = lastDateObj.getFullYear();
       const firstyear = firstDateObj.getFullYear();
-
       const formattedLastDate = `${lastday}-${lastMonth}-${lastyear}`;
-      
-      const formattedFirstDate = `${firstday}-${firstMonth}-${firstyear}`
-      function hitungSelisihHari(firstDate, lastDate) {
-        const start = new Date(firstDate);
-        const end = new Date(lastDate);
-        const selisihMs = end - start;
-        const selisihHari = selisihMs / (1000 * 60 * 60 * 24);
-        return selisihHari
+      const formattedFirstDate = `${firstday}-${firstMonth}-${firstyear}`;
+
+      // Calculate remaining days until event ends
+      function calculateRemainingDays(currentDate, endDate) {
+        const end = new Date(endDate);
+        const diffTime = end - currentDate;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
       }
-      function formatSelisihHari(firstDate, lastDate) {
-        const selisihHari = hitungSelisihHari(firstDate, lastDate);
-        return `D-${Math.floor(selisihHari)}`;
-      }
-      const formattedSelisihHari = formatSelisihHari(firstDate,lastDate);
+
+      const remainingDays = calculateRemainingDays(currentDate, lastDate);
+      const formattedRemainingDays = remainingDays >= 0 ? `Event will end in ${remainingDays} days` : "Event no longer available";
+
+      const eventEnded = currentDate > lastDateObj;
 
       return (
-        <>
-          <a
-            href="#"
-            className="relative max-w rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300"
-          >
-            <img
-              className="w-full border-t-4 border-pink-300"
-              src={el.thumbnail}
-              alt="Image"
-            ></img>
-            <div className="px-6 py-4 flex-justify space-y-1 border-b-4 border-pink-300">
-              <div className="font-sans text-m mb-1">{el.title}</div>
-              <p className="text-gray-700 text-s w-full">{el.subtitle}</p>
-              <div className="flex space-x-2">
-                <div>
+        <div
+          key={el.id}
+          className={`relative max-w rounded overflow-hidden shadow-lg ${eventEnded ? 'opacity-50' : 'hover:shadow-xl'} transition duration-300`}
+        >
+          <div className="relative">
+            <img className="w-full" src={el.thumbnail} alt="Image" />
+            {eventEnded && (
+              <div className="absolute inset-0 bg-[#040404b2] bg-opacity-75 flex items-center justify-center">
+                <span className="text-white text-lg">Event no longer available</span>
+              </div>
+            )}
+          </div>
+          <div className="px-6 py-3 justify-center items-center">
+            <div className="font-sans font-bold uppercase">{el.title}</div>
+            <p
+              className="text-gray-700 text-s w-full text-sm"
+              style={{
+                display: "-webkit-box",
+                WebkitLineClamp: 1,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                lineHeight: "1.4",
+              }}
+            >
+              {el.subtitle}
+            </p>
+            <div className="flex items-center justify-between space-x-2 py-2 text-xs">
+              <div>
+                <p className="text-gray-700">
+                  {formattedFirstDate} ~ {formattedLastDate}
+                </p>
+              </div>
+              <div className="flex">
+                {!eventEnded ? (
                   <p className="text-red-600 text-xs px-2 py-1/2 border border-red-600 rounded-full">
-                    {formattedSelisihHari}
+                    {formattedRemainingDays}
                   </p>
-                </div>
-                <div>
-                  <p className="text-gray-700 text-xs">{formattedFirstDate} ~ {formattedLastDate}</p>
-                </div>
+                ) : " "}
               </div>
             </div>
-          </a>
-        </>
+          </div>
+        </div>
       );
     });
   }
 
+  const handleButtonClick = (button) => {
+    setActiveButton(button);
+  };
+
+  const getButtonStyle = (button) => {
+    return activeButton === button
+      ? "px-4 py-0.5 bg-transparan border border-black rounded-full text-black"
+      : "px-4 py-0.5 bg-transparan border border-gray-400 rounded-full text-[#8e9093]";
+  };
+
   return (
     <div className="max-w-screen space-y-2 overflow-y-auto">
-      <div className="flex px-10  py-2 overflow-x-auto min-w-100 w-full space-x-4">
-        <div>
-          <button className="px-4 bg-transparant hover:bg-slate-300 text-grey-300 border border-black rounded-full">
+      <div className="flex justify-center items-center py-2 overflow-x-auto min-w-100 w-full text-sm space-x-7">
+        <div className="flex justify-center items-center">
+          <button
+            className={getButtonStyle("All")}
+            onClick={() => handleButtonClick("All")}
+          >
             All
           </button>
         </div>
-        <div>
-          <button className="px-4 bg-transparant hover:bg-slate-300 text-grey-300 border border-black rounded-full">
+        <div className="flex justify-center">
+          <button
+            className={getButtonStyle("Unnis")}
+            onClick={() => handleButtonClick("Unnis")}
+          >
             Unnis
           </button>
         </div>
-        <div>
-          <button className="px-4 bg-transparant hover:bg-slate-300 text-grey-300 border border-black rounded-full">
+        <div className="flex justify-center">
+          <button
+            className={getButtonStyle("Supporters")}
+            onClick={() => handleButtonClick("Supporters")}
+          >
             Supporters
           </button>
         </div>
-        <div>
-          <button className="px-4 bg-transparant min-w-max hover:bg-slate-300 text-grey-300 border border-black rounded-full">
+        <div className="flex justify-center">
+          <button
+            className={getButtonStyle("Event Lain")}
+            onClick={() => handleButtonClick("Event Lain")}
+          >
             Event Lain
           </button>
         </div>
@@ -122,4 +162,5 @@ function ContentEvent() {
     </div>
   );
 }
+
 export default ContentEvent;

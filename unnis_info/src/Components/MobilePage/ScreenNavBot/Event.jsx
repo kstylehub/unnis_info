@@ -1,48 +1,60 @@
-import NavigationButtom from "../NavigatonBottom/NavigationBottom"
-import NavbarPhone from "../NavbarPhone/NavbarPhone"
-import { Link, Outlet } from "react-router-dom"
+// import NavigationButtom from "../NavigatonBottom/NavigationBottom";
+// import NavbarPhone from "../NavbarPhone/NavbarPhone";
+import back from "../../../assets/previous.svg";
+import logo from "../../../assets/logo.png";
+import camera_pink from "../../../assets/SkinAnalysis/camera_pink.png";
+import { Link, Outlet } from "react-router-dom";
 
-function Event () {
-    return (
-        <>
-         <div className="bg-white relative">
-        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white">
-          <NavbarPhone />
-          <div className="flex justify-evenly text-[#343A40] bg-white pt-3">
-            <div>
-              <Link to={"/newProduct"}>
-                <h3>NEW</h3>
+function Event() {
+  return (
+    <>
+      <div className="bg-white relative">
+        <div className="pt-2 pb-2 sticky top-0 z-20 bg-white px-4">
+          <div className="flex justify-between px-4">
+            <div className="self-center">
+              <Link to={"/"}>
+                <img src={back} className="w-full" />
               </Link>
             </div>
-            <div>
-              <Link to={"/newProduct"}>
-              <h3>CATEGORY</h3>
+            <div className="self-center flex justify-center">
+              <img src={logo} className="w-4/12" />
+            </div>
+            <div className="self-center">
+              <img src={camera_pink} className="w-5/12" />
+            </div>
+          </div>
+          <div className="flex space-x-16 justify-center text-[#8e9093] bg-white pt-2 text-sm">
+            <div className="flex">
+              <Link to={"/event"}>
+                <h3>Event</h3>
               </Link>
             </div>
-            <div>
-              <Link>
-              <h3>REVIEW</h3>
+            <div className="flex">
+              <Link to={"/feed"}>
+                <h3>Feed</h3>
               </Link>
             </div>
-            <div>
-              <Link>
-              <h3>EVENT</h3>
+            <div className="flex">
+              <Link to={"/subscribe"}>
+                <h3>Subscription</h3>
               </Link>
             </div>
-            <div>
-              <a href="/feed">
-                <h3>FEED</h3>
-              </a>
+            <div className="flex">
+              <Link to={"/recycle"}>
+                <h3>Recycle</h3>
+              </Link>
             </div>
           </div>
         </div>
+        <hr className="pb-2"></hr>
+
         <Outlet />
-        <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+        {/* <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
           <NavigationButtom />
-        </div>
+        </div> */}
       </div>
-        </>
-    )
+    </>
+  );
 }
 
-export default Event
+export default Event;
