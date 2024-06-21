@@ -2,9 +2,13 @@ import beautyBox from "../../../assets/BeautyBox.jpeg";
 import subPict from "../../../assets/Subs.jpg";
 import BackToTopButton from "../Components/Subscribe/BackToTop";
 import React, { useState, useEffect } from "react";
-import NavigationButtom from "../NavigatonBottom/NavigationBottom";
-import NavbarPhone from "../NavbarPhone/NavbarPhone";
+// import NavigationButtom from "../NavigatonBottom/NavigationBottom";
+// import NavbarPhone from "../NavbarPhone/NavbarPhone";
+import back from "../../../assets/previous.svg";
+import camera_pink from "../../../assets/SkinAnalysis/camera_pink.png";
+import logo from "../../../assets/logo.png";
 
+import { Link } from "react-router-dom";
 function Subscribe() {
   const [isVisible, setIsVisible] = useState(true);
 
@@ -24,9 +28,44 @@ function Subscribe() {
   return (
     <>
       <div className="bg-white relative">
-        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white">
-          <NavbarPhone />
+        <div className="top-0 sticky z-10 bg-white lg:px-8 px-4 w-fullshadow-b-3 pt-2 pb-1">
+          <div className="flex justify-between">
+            <div className="self-center">
+              <Link to={"/"}>
+                <img src={back} className="w-full" />
+              </Link>
+            </div>
+            <div className="self-center flex justify-center">
+              <img src={logo} className="w-4/12" />
+            </div>
+            <div className="self-center">
+              <img src={camera_pink} className="w-5/12" />
+            </div>
+          </div>
+          <div className="flex justify-center items-center space-x-16 text-[#8e9093] bg-white text-sm">
+            <div className=" py-2 flex text-center justify-center items-center">
+              <Link to={"/event"}>
+                <h3>Event</h3>
+              </Link>
+            </div>
+            <div className=" py-2 flex text-center justify-center items-center">
+              <Link to={"/feed"}>
+                <h3>Feed</h3>
+              </Link>
+            </div>
+            <div className=" py-2 flex text-center justify-center items-center">
+              <Link to={"/subscribe"}>
+                <h3>Subscription</h3>
+              </Link>
+            </div>
+            <div className=" py-2 flex text-center justify-center items-center">
+              <Link to={"/recycle"}>
+                <h3>Recycle</h3>
+              </Link>
+            </div>
+          </div>
         </div>
+        
         <div className="overflow-y-auto">
           <div className="relative">
             <img src={beautyBox} alt="Backgrond Image" className="w-full" />
@@ -38,17 +77,17 @@ function Subscribe() {
             <img src={subPict} alt="Backgrond Image" className="w-full" />
           </div>
           <div
-              className={`absolute bottom-5 right-5 ${
-                isVisible ? "d-block" : "d-none"
-              }`}
-            >
-              <BackToTopButton />
-            </div>
+            className={`absolute bottom-5 right-5 ${
+              isVisible ? "d-block" : "d-none"
+            }`}
+          >
+            <BackToTopButton />
+          </div>
         </div>
       </div>
-        <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
-          <NavigationButtom />
-        </div>
+      {/* <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+        <NavigationButtom />
+      </div> */}
     </>
   );
 }
