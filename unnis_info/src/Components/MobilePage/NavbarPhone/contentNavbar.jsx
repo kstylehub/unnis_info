@@ -116,11 +116,9 @@ function ContentNavbar() {
               const firstDate = el.startDate;
               const lastDateObj = new Date(lastDate);
               const firstDateObj = new Date(firstDate);
+              const currentDate = new Date();
               const lastday = lastDateObj.getDate().toString().padStart(2, "0");
-              const firstday = firstDateObj
-                .getDate()
-                .toString()
-                .padStart(2, "0");
+              const firstday = firstDateObj.getDate().toString().padStart(2, "0");
               const monthNames = [
                 "Jan",
                 "Feb",
@@ -137,38 +135,31 @@ function ContentNavbar() {
               ];
               const lastMonth = monthNames[lastDateObj.getMonth()];
               const firstMonth = monthNames[firstDateObj.getMonth()];
-
               const lastyear = lastDateObj.getFullYear();
               const firstyear = firstDateObj.getFullYear();
-
               const formattedLastDate = `${lastday}-${lastMonth}-${lastyear}`;
-
               const formattedFirstDate = `${firstday}-${firstMonth}-${firstyear}`;
-              function hitungSelisihHari(firstDate, lastDate) {
-                const start = new Date(firstDate);
-                const end = new Date(lastDate);
-                const selisihMs = end - start;
-                const selisihHari = selisihMs / (1000 * 60 * 60 * 24);
-                return selisihHari;
+        
+              // Calculate remaining days until event ends
+              function calculateRemainingDays(currentDate, endDate) {
+                const end = new Date(endDate);
+                const diffTime = end - currentDate;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays;
               }
-              function formatSelisihHari(firstDate, lastDate) {
-                const selisihHari = hitungSelisihHari(firstDate, lastDate);
-                return `D-${Math.floor(selisihHari)}`;
-              }
-              const formattedSelisihHari = formatSelisihHari(
-                firstDate,
-                lastDate
-              );
-
+        
+              const remainingDays = calculateRemainingDays(currentDate, lastDate);
+              const formattedRemainingDays = remainingDays >= 0 ? `Event will end in ${remainingDays} days` : "Event no longer available";
+      
               return (
                 <div className="" key={el.id}>
                   <div className="border sm:w-[50vw] w-[70vw] md:w-[20vw] h-full">
                     <img src={el.thumbnail} className="w-fit" alt="Banner" />
                     <div className="pl-3 my-2">
                       <div>
-                        <h1 className="text-slate-800 uppercase">{el.title}</h1>
+                        <h1 className="text-slate-800 uppercase font-bold font-sans">{el.title}</h1>
                         <div
-                          className="w-full h-full  text-xs text-slate-700"
+                          className="w-full h-full text-sm text-slate-700"
                           style={{
                             display: "-webkit-box",
                             WebkitLineClamp: 1,
@@ -180,15 +171,15 @@ function ContentNavbar() {
                           {el.subtitle}
                         </div>
                       </div>
-                      <div className="flex text-xs my-2 pb-2">
-                        <div className="border rounded-full px-2 border-rose-600 mr-3">
-                          <p className="text-rose-600">
-                            {formattedSelisihHari}
-                          </p>
-                        </div>
-                        <div>
+                      <div className="flex justify-between text-xs my-2 pb-2">
+                      <div>
                           <p className="text-slate-700">
                             {formattedFirstDate} ~ {formattedLastDate}
+                          </p>
+                        </div>
+                        <div className="border rounded-full px-2 border-rose-600 mr-3">
+                          <p className="text-rose-600">
+                            {formattedRemainingDays}
                           </p>
                         </div>
                       </div>
@@ -751,7 +742,7 @@ function ContentNavbar() {
               {productList.map((item, index) => (
                 <div
                   key={index}
-                  className="flex justify-center border w-[7.7vw] h-[10vw] shadow-lg"
+                  className="flex justify-center border w-[7.7vw] h-[11vw] shadow-lg hover:scale-110"
                 >
                   <div className="flex flex-col py-2">
                     <div className="flex justify-center items-center ">
@@ -770,17 +761,22 @@ function ContentNavbar() {
                       </div>
                     </div>
                     <div
-                    className="w-full text-sm text-center p-2"
-                    style={{
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden",
-                      lineHeight: "1.3",
-                    }}
-                  >
-                    {item.name}
-                  </div>
+                      className="w-full text-xs text-center px-2 pt-2 font-bold"
+                    >
+                      {item.brand}
+                    </div>
+                    <div
+                      className="w-full text-sm text-center px-2 pt-1"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        lineHeight: "1.2",
+                      }}
+                    >
+                      {item.name}
+                    </div>
                   </div>
                 </div>
               ))}

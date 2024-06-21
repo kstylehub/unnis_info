@@ -1,66 +1,76 @@
-import Package from "../../../assets/Package.svg";
-import Gift from "../../../assets/Gift.svg";
-import User from "../../../assets/User.svg";
-import Home from "../../../assets/Home.svg";
-function NavigationButtom() {
-  return (
-    <>
-      <div
-        className="justify-between flex text-xs text-slate-500 "
-        style={{ textAlign: "-webkit-center" }}
-      >
-        <div>
-          <a href="/">
-            <div>
-              <div className="m-1">
-                <img src={Home} className="w-8 h-8" />
-              </div>
-            </div>
-            <div>
-              <h6>HOME</h6>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a href="/subscribe">
-            <img src={Package} className="w-10 h-10" />
-            <h6>SUBSCRIPTION</h6>
-          </a>
-        </div>
-        <div>
-          <a href="/event">
-            <img src={Gift} className="w-10 h-10" />
-            <h6>EVENT</h6>
-          </a>
-        </div>
-        <div>
-          <a href="/transaction/transsubs">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-8 h-8 text-[#868E96] m-1"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-              />
-            </svg>
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Community from "../../../assets/NavigationButtom/community.svg";
+import Video from "../../../assets/NavigationButtom/video.svg";
+import Account from "../../../assets/NavigationButtom/account.svg";
+import Home from "../../../assets/NavigationButtom/home.svg";
+import Products from "../../../assets/NavigationButtom/products.svg";
+import CommunityWhite from "../../../assets/NavigationButtom/community_white.svg";
+import VideoWhite from "../../../assets/NavigationButtom/video_white.svg";
+import AccountWhite from "../../../assets/NavigationButtom/account_white.svg";
+import HomeWhite from "../../../assets/NavigationButtom/home_white.svg";
+import ProductsWhite from "../../../assets/NavigationButtom/products_white.svg";
 
-            <h6>TRANSACTION</h6>
-          </a>
-        </div>
-        <div>
-          <a href="/my-page">
-            <img src={User} className="w-10 h-10" />
-            <h6>MY PAGE</h6>
-          </a>
-        </div>
-      </div>
-    </>
+function NavigationButtom() {
+  const [selected, setSelected] = useState(null); // State for selected item
+
+  const handleMouseEnter = (index) => {
+    if (selected === null) { // Only set hovered state if no item is selected
+      setSelected(index);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (selected === null) { // Clear hovered state if no item is selected
+      setSelected(null);
+    }
+  };
+
+  const handleClick = (index) => {
+    setSelected(index); // Set selected item on click
+  };
+
+  const navItems = [
+    { src: Home, srcHover: HomeWhite, label: "Home", size: 'small', link: "/" },
+    { src: Products, srcHover: ProductsWhite, label: "Products", size: 'large', link: "/newProduct" },
+    { src: Video, srcHover: VideoWhite, label: "Video", size: 'large', link: "/videos" },
+    { src: Community, srcHover: CommunityWhite, label: "Community", size: 'small', link: "/community" },
+    { src: Account, srcHover: AccountWhite, label: "Account", size: 'large', link: "/my-page" },
+  ];
+
+  const getSizeClass = (size) => {
+    if (size === 'small') {
+      return 'h-[80%] w-[80%]';
+    }
+    return 'h-[90%] w-[90%]';
+  };
+
+  return (
+    <div className="flex justify-center items-center bg-white w-full gap-3 text-sm text-center text-[#868E96]">
+      {navItems.map((item, index) => (
+        <Link to={item.link} key={index} style={{ textDecoration: 'none', width: '20%' }}>
+          <div
+            className={`flex flex-col justify-center items-center cursor-pointer rounded-lg`}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleClick(index)}
+            style={{
+              backgroundColor: selected === index ? '#4ABFA1' : 'transparent',
+              color: selected === index ? 'white' : '#868E96',
+              width: '100%'
+            }}
+          >
+            <div className="h-10 w-10 flex justify-center items-center">
+              <img
+                src={selected === index ? item.srcHover : item.src}
+                className={`${getSizeClass(item.size)} object-contain`}
+              />
+            </div>
+            <p>{item.label}</p>
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }
 

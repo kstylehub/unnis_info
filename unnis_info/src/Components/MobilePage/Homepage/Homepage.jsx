@@ -25,22 +25,22 @@ function Homepage() {
           <NavbarPhone />
           <div className="flex justify-between px-6 text-[#8e9093] bg-white pt-3 text-sm">
             <div>
-              <Link to={"/newProduct"}>
+              <Link to={"/event"}>
                 <h3>Event</h3>
               </Link>
             </div>
             <div>
-              <Link to={"/newProduct"}>
+              <Link to={"/feed"}>
               <h3>Feed</h3>
               </Link>
             </div>
             <div>
-              <Link>
+              <Link to={"/subscribe"}>
               <h3>Subscription</h3>
               </Link>
             </div>
             <div>
-              <Link>
+              <Link to={"/recycle"}>
               <h3>Recycle</h3>
               </Link>
             </div>
