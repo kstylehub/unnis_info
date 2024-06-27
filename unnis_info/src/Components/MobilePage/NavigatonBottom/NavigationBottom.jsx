@@ -33,7 +33,7 @@ function NavigationButtom() {
   const navItems = [
     { src: Home, srcHover: HomeWhite, label: "Home", size: 'small', link: "/" },
     { src: Products, srcHover: ProductsWhite, label: "Products", size: 'large', link: "/newProduct" },
-    { src: Video, srcHover: VideoWhite, label: "Video", size: 'large', link: "/videos" },
+    { src: Video, srcHover: VideoWhite, label: "Video", size: 'large', link: "/video" },
     { src: Community, srcHover: CommunityWhite, label: "Community", size: 'small', link: "/community" },
     { src: Account, srcHover: AccountWhite, label: "Account", size: 'large', link: "/my-page" },
   ];
