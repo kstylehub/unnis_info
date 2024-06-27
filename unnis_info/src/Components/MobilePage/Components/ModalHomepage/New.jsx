@@ -24,12 +24,15 @@ import {
   getAllProduct,
   getListProduct,
   getProductCategory,
+  getAllProductWithPagination,
 } from "../../../../Store/Actions/Actions";
 import { CircleLoader, RingLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 // import ModalCategory from "../ModalCategory/ModalCategory";
 import ModalSort from "../ModalCategory/ModalSort";
 import Close from "../../../../assets/Close.svg";
+import NavbarPhone from "../../NavbarPhone/NavbarPhone";
+import NavigationButtom from "../../NavigatonBottom/NavigationBottom";
 
 function NewPage() {
   const dispatch = useDispatch();
@@ -43,14 +46,20 @@ function NewPage() {
   const [reload, setReload] = useState(false);
   const [combinedData, setCombinedData] = useState([]);
   const [totalLoadedItems, setTotalLoadedItems] = useState(0);
-  const [isDataEnd, setIsDataEnd] = useState(false); 
+  const [isDataEnd, setIsDataEnd] = useState(false);
   const productCategory = useSelector(
     (state) => state.ReducerProductCategory.productCategory
   );
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
-  const loadingAllProduct = useSelector((state) => state.ReducerListProduct.loading);
-  const allProductPage = useSelector((state) => state.ReducerAllProduct.dataProduct.dataProduct);
+  const loadingAllProduct = useSelector(
+    (state) => state.ReducerListProduct.loading
+  );
+  const allProductPage = useSelector(
+    (state) => state.ReducerProductWithPagination.dataProductWithPagination
+  );
+  // console.log("data product page >>> ", allProductPage);
+
   const keyCategories = productCategory.data
     ? Object.keys(productCategory.data)
     : [];
@@ -96,22 +105,26 @@ function NewPage() {
   async function countPage() {
     const newNextPage = nextPage + 1;
     setReload(true);
-  
-    const response = await dispatch(getAllProduct({ ...requestBody, page: newNextPage }));
+
+    const response = await dispatch(
+      getAllProduct({ ...requestBody, page: newNextPage })
+    );
     if (response) {
       const newPageData = response.dataProduct;
       if (newPageData.length === 0 || newNextPage == null) {
         setIsDataEnd(true);
-      }else {
-        setCombinedData((prevCombinedData) => [...prevCombinedData, ...newPageData]);
-        setTotalLoadedItems(prevTotal => prevTotal + newPageData.length);
-        setNextPage(newNextPage); 
+      } else {
+        setCombinedData((prevCombinedData) => [
+          ...prevCombinedData,
+          ...newPageData,
+        ]);
+        setTotalLoadedItems((prevTotal) => prevTotal + newPageData.length);
+        setNextPage(newNextPage);
       }
     }
-  
+
     setReload(false);
   }
-  
 
   useEffect(() => {
     if (allProductPage) {
@@ -133,11 +146,11 @@ function NewPage() {
   }, []);
 
   useEffect(() => {
-    dispatch(getAllProduct(requestBody));
+    dispatch(getAllProductWithPagination(requestBody));
     setTimeout(() => {
       setReload(false);
     }, 3000);
-  }, [ selectedOption, clikCategory,nextPage]);
+  }, [selectedOption, clikCategory, nextPage]);
 
   function sortByLike(val) {
     setLikeCategory(val);
@@ -152,13 +165,15 @@ function NewPage() {
     setNextPage(1);
     setBtnActive(el);
     setSelectedOption(el);
-    const response = await dispatch(getAllProduct({ ...requestBody, category: lowerLizedEl }));
-    if(response) {
+    const response = await dispatch(
+      getAllProduct({ ...requestBody, category: lowerLizedEl })
+    );
+    if (response) {
       const newPageData = response.dataProduct;
       if (newPageData.length === 0 || newPageData == null) {
         setIsDataEnd(true);
-      }else {
-      setCombinedData(newPageData)
+      } else {
+        setCombinedData(newPageData);
       }
     }
   }
@@ -194,11 +209,14 @@ function NewPage() {
     setSelectedOption("All");
     setBtnActive("");
   }
+  const thedata = Array.isArray(combinedData?.dataProduct)
+    ? combinedData.dataProduct
+    : [];
 
   function DisplayProduct() {
     return (
       <>
-        {combinedData?.map((el, index) => {
+        {thedata?.map((el, index) => {
           const text = el.name;
           const truncatedText =
             text.length > 30 ? `${text.slice(0, 30)}...` : text;
@@ -303,7 +321,9 @@ function NewPage() {
           );
         })}
 
-        {combinedData.length < 30 || combinedData == null || isDataEnd == true? (
+        {combinedData.length < 30 ||
+        combinedData == null ||
+        isDataEnd == true ? (
           <></>
         ) : reload ? (
           <div className="flex justify-center items-center">
@@ -322,7 +342,7 @@ function NewPage() {
     );
   }
 
-   const handleOptionChange = async (event) => {
+  const handleOptionChange = async (event) => {
     const el = event.target.value;
     if (!el) return "";
     const firstLetter = el.charAt(0).toLowerCase();
@@ -333,13 +353,15 @@ function NewPage() {
     setShowModal(false);
     setBtnActive(el);
     setNextPage(1);
-    const response = await dispatch(getAllProduct({ ...requestBody, category: lowerLizedEl }));
-    if(response) {
+    const response = await dispatch(
+      getAllProduct({ ...requestBody, category: lowerLizedEl })
+    );
+    if (response) {
       const newPageData = response.dataProduct;
       if (newPageData.length === 0 || newPageData == null) {
         setIsDataEnd(true);
-      }else {
-      setCombinedData(newPageData)
+      } else {
+        setCombinedData(newPageData);
       }
     }
   };
@@ -415,58 +437,63 @@ function NewPage() {
 
   return (
     <>
-      <div className="absolute top-0 w-full bg-white px-5">
-        <div className="text-[#343A40] bg-white pb-3 z-20 ">
-          <div className="flex justify-between sticky ">
-            <div className="self-center">
-              <Link to={"/"}>
-                <img src={back} className="w-full" />
+      <div className="relative scrollbar-hide">
+        <div className="sticky top-0 w-full bg-white px-5 z-0">
+          <div className="text-[rgb(52,58,64)] bg-white pb-3 z-20 ">
+            <div className="flex justify-between sticky ">
+              <div className="self-center">
+                <Link to={"/"}>
+                  <img src={back} className="w-full" />
+                </Link>
+              </div>
+              <div className="self-center">
+                <img src={Logo} className="w-full" />
+              </div>
+              <Link to={"/search"} className="self-center">
+                <img src={search} className="w-full" />
               </Link>
             </div>
-            <div className="self-center">
-              <img src={Logo} className="w-full" />
+            <div className="flex justify-center">
+              {loading ? (
+                <RingLoader color="#0000ff" size={30} />
+              ) : (
+                <div className="flex px-2 shadow overflow-x-auto py-3 gap-3 max-w-screen scrollbar-hide">
+                  <CategoryProduct />
+                </div>
+              )}
             </div>
-            <Link to={"/search"} className="self-center">
-              <img src={search} className="w-full" />
-            </Link>
-          </div>
-          <div className="flex justify-center">
-            {loading ? (
-              <RingLoader color="#0000ff" size={30} />
-            ) : (
-              <div className="flex px-2 shadow overflow-x-auto py-3 gap-3 max-w-screen">
-                <CategoryProduct />
+            <div className="flex justify-between pt-5 px-2">
+              <div className="flex">
+                {selectedOption !== "All" ? (
+                  <button
+                    type="button"
+                    className="border rounded-lg p-1 flex text-center items-center gap-x-1 mr-1"
+                    onClick={handleShowAll}
+                  >
+                    <img src={Close} className="w-4 h-4" />
+                  </button>
+                ) : (
+                  ""
+                )}
+                <ModalCategory />
               </div>
+              <ModalSort sortByLike={sortByLike} />
+            </div>
+          </div>
+          <div className="overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-hide">
+            {loadingAllProduct ? (
+              <div className="flex justify-center items-center h-screen">
+                <CircleLoader color="#0000ff" size={30} />{" "}
+              </div>
+            ) : (
+              <>
+                <DisplayProduct />
+              </>
             )}
           </div>
-          <div className="flex justify-between pt-5 px-2">
-            <div className="flex">
-              {selectedOption !== "All" ? (
-                <button
-                  type="button"
-                  className="border rounded-lg p-1 flex text-center items-center gap-x-1 mr-1"
-                  onClick={handleShowAll}
-                >
-                  <img src={Close} className="w-4 h-4" />
-                </button>
-              ) : (
-                ""
-              )}
-              <ModalCategory />
-            </div>
-            <ModalSort sortByLike={sortByLike} />
-          </div>
-        </div>
-        <div className="overflow-y-auto max-h-[calc(100vh-100px)]">
-          {loadingAllProduct ? (
-            <div className="flex justify-center items-center h-screen">
-              <CircleLoader color="#0000ff" size={30} />{" "}
-            </div>
-          ) : (
-            <>
-              <DisplayProduct />
-            </>
-          )}
+        </div>{" "}
+        <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+          <NavigationButtom />
         </div>
       </div>
     </>
