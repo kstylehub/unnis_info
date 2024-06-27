@@ -140,7 +140,7 @@ export default function NavbarCategoryHome() {
                       lineHeight: "1.2",
                     }}
                   >
-                    {el.name}
+                    {el.brand} - {el.name}
                   </div>
 
                   <div className="text-left font-bold">

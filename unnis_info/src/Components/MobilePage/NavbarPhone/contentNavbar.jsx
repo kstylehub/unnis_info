@@ -1,6 +1,7 @@
 import Polygon from "../../../assets/Polygon5.svg";
 import Bg_top from "../../../assets/Homepage/top_bg.png";
 import coin from "../../../assets/Homepage/coin.png";
+import Calendar from "../../../assets/Homepage/calendar.svg";
 import invitation from "../../../assets/undangan.svg";
 import Baby from "../../../assets/Homepage/Category Icon/baby.svg";
 import Body from "../../../assets/Homepage/Category Icon/body.svg";
@@ -31,7 +32,7 @@ import {
   getAllReview,
   getEvent,
   getTopProduct,
-  getVideoByIdMember,
+  getVideoByIdMemberYoutube,
 } from "../../../Store/Actions/Actions";
 import ModalLoginWarn from "../Components/ModalHomepage/ModalLoginWarn";
 
@@ -46,7 +47,7 @@ function ContentNavbar() {
     (state) => state.ReducerProductWithPagination.dataProductWithPagination
   );
   const VideoRecommendation = useSelector(
-    (state) => state.ReducerVideoByIdMember.idVideo
+    (state) => state.ReducerVideoByIdMemberYoutube.idVideo || []
   );
   const allInfluencer = useSelector(
     (state) => state.ReducerAllInfluencer.influencer
@@ -61,7 +62,7 @@ function ContentNavbar() {
     dispatch(getEvent());
     dispatch(getActiveBanner());
     dispatch(getAllInfluencer());
-    dispatch(getVideoByIdMember());
+    dispatch(getVideoByIdMemberYoutube());
     dispatch(getAllProductWithPagination());
   }, []);
 
@@ -118,7 +119,10 @@ function ContentNavbar() {
               const firstDateObj = new Date(firstDate);
               const currentDate = new Date();
               const lastday = lastDateObj.getDate().toString().padStart(2, "0");
-              const firstday = firstDateObj.getDate().toString().padStart(2, "0");
+              const firstday = firstDateObj
+                .getDate()
+                .toString()
+                .padStart(2, "0");
               const monthNames = [
                 "Jan",
                 "Feb",
@@ -139,7 +143,7 @@ function ContentNavbar() {
               const firstyear = firstDateObj.getFullYear();
               const formattedLastDate = `${lastday}-${lastMonth}-${lastyear}`;
               const formattedFirstDate = `${firstday}-${firstMonth}-${firstyear}`;
-        
+
               // Calculate remaining days until event ends
               function calculateRemainingDays(currentDate, endDate) {
                 const end = new Date(endDate);
@@ -147,17 +151,25 @@ function ContentNavbar() {
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                 return diffDays;
               }
-        
-              const remainingDays = calculateRemainingDays(currentDate, lastDate);
-              const formattedRemainingDays = remainingDays >= 0 ? `Event will end in ${remainingDays} days` : "Event no longer available";
-      
+
+              const remainingDays = calculateRemainingDays(
+                currentDate,
+                lastDate
+              );
+              const formattedRemainingDays =
+                remainingDays >= 0
+                  ? `Event will end in ${remainingDays} days`
+                  : "Event no longer available";
+
               return (
                 <div className="" key={el.id}>
                   <div className="border sm:w-[50vw] w-[70vw] md:w-[20vw] h-full">
                     <img src={el.thumbnail} className="w-fit" alt="Banner" />
                     <div className="pl-3 my-2">
                       <div>
-                        <h1 className="text-slate-800 uppercase font-bold font-sans">{el.title}</h1>
+                        <h1 className="text-slate-800 uppercase font-bold font-sans">
+                          {el.title}
+                        </h1>
                         <div
                           className="w-full h-full text-sm text-slate-700"
                           style={{
@@ -172,7 +184,7 @@ function ContentNavbar() {
                         </div>
                       </div>
                       <div className="flex justify-between text-xs my-2 pb-2">
-                      <div>
+                        <div>
                           <p className="text-slate-700">
                             {formattedFirstDate} ~ {formattedLastDate}
                           </p>
@@ -364,7 +376,7 @@ function ContentNavbar() {
             ))}
         </OwlCarousel>
         {/* Category Icon */}
-        <div className="mt-28 pt-2 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
+        <div className="mt-28 pt-3 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
           {[
             { src: Category, label: "Category" },
             { src: Skinanalysis, label: "Skin Analysis" },
@@ -422,7 +434,7 @@ function ContentNavbar() {
             </div>
           </OwlCarousel>
         </div>
-        {/* Category Icon */}
+        {/* Icon Influencer */}
         <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
           {allInfluencer.map((item, index) => (
             <div
@@ -453,10 +465,10 @@ function ContentNavbar() {
             </div>
           ))}
         </div>
-        {/* Best Seller */}
+        {/* New Product */}
         <div className="flex flex-col px-4 py-4">
           <div className="flex justify-between pb-1">
-            <div className="font-bold">Best Seller</div>
+            <div className="font-bold">New Product</div>
             <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
@@ -527,7 +539,7 @@ function ContentNavbar() {
                       lineHeight: "1.2",
                     }}
                   >
-                    {item.name}
+                    {item.brand} - {item.name}
                   </div>
 
                   <div className="text-left font-bold">
@@ -760,9 +772,7 @@ function ContentNavbar() {
                         )}
                       </div>
                     </div>
-                    <div
-                      className="w-full text-xs text-center px-2 pt-2 font-bold"
-                    >
+                    <div className="w-full text-xs text-center px-2 pt-2 font-bold">
                       {item.brand}
                     </div>
                     <div
@@ -1050,6 +1060,11 @@ function ContentNavbar() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="bg-[#4ABFA1] w-12 h-12 sticky left-[87%] bottom-20 z-30 rounded-full shadow-lg">
+          <div className="flex justify-center items-center w-full h-full">
+            <img src={Calendar} className="w-8 h-8 " alt="calendar" />
+          </div>
         </div>
       </div>
     </>

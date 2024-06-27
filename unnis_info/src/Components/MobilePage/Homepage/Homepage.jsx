@@ -16,12 +16,13 @@ import OwlCarousel from "react-owl-carousel";
 import { Link, Outlet } from "react-router-dom";
 import NavigationButtom from "../NavigatonBottom/NavigationBottom";
 import NavbarPhone from "../NavbarPhone/NavbarPhone";
+import Calendar from "../../../assets/Homepage/calendar.svg";
 
 function Homepage() {
   return (
     <>
       <div className="bg-white relative">
-        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white">
+        <div className="pt-3 pb-1 sticky top-0 z-10 bg-white">
           <NavbarPhone />
           <div className="flex justify-between px-6 text-[#8e9093] bg-white pt-3 text-sm">
             <div>
@@ -47,9 +48,11 @@ function Homepage() {
           </div>
         </div>
         <Outlet />
+
         <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
           <NavigationButtom />
         </div>
+       
       </div>
     </>
   );
