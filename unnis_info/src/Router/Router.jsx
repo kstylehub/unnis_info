@@ -28,6 +28,8 @@ import Register from "../Components/MobilePage/ScreenNavBot/Register";
 import SearchProduct from "../Components/MobilePage/Components/SearchProduct/SearchProduct";
 import Feed from "../Components/MobilePage/Components/ModalHomepage/feed";
 import FeedDetail from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
+import Video from "../Components/MobilePage/Components/ModalHomepage/Video";
+import Community from "../Components/MobilePage/Components/ModalHomepage/Community";
 
 const router = createBrowserRouter([
   {
@@ -95,13 +97,19 @@ const router = createBrowserRouter([
           },
           {
             path: "/newProduct",
-            element: <NewPage />,
-            children: [
-            ]
+            element: <NewPage />
           },
           {
             path: "/newProduct/detailproduct/:id",
             element: <DetailProduct />,
+          },
+          {
+            path: "/video",
+            element: <Video />
+          },
+          {
+            path: "/community",
+            element: <Community />
           },
           {
             path: "/skinanalysis",
