@@ -45,7 +45,9 @@ function Feed() {
   useEffect(() => {
     dispatch(getAllFeed());
   }, [dispatch]);
-
+  const allInfluencer = useSelector(
+    (state) => state.ReducerAllInfluencer.influencer || []
+  );
   function AllFeed() {
     const data = feed?.data;
     return (
@@ -65,7 +67,7 @@ function Feed() {
 
   return (
     <>
-      <div className="pb-2 h-full overflow-x-auto">
+      <div className="pb-2 h-full overflow-x-auto relative">
         <div className="top-0 sticky lg:px-8 px-4 w-full z-20 bg-white pt-2">
           <div className="flex justify-between">
             <div className="self-center">
@@ -104,45 +106,43 @@ function Feed() {
           </div>
         </div>
         <hr className="pb-2" />
-
-        <div className="flex overflow-x-auto px-4 justify-center items-center lg:space-x-6 space-x-2 text-sm scrollbar-hide pb-1">
+        <div className="flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide py-2 text-center">
           <div
-            className="border-gray-400 border py-1 px-3 rounded-lg"
+            className=" min-w-[4vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("all")}
             style={getButtonStyle("all")}
           >
-            <button className="text-sm">All</button>
+            All
           </div>
           <div
-            className="border-gray-400 border py-1 px-3 rounded-lg"
+            className="min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("UnnisAtoZ")}
             style={getButtonStyle("UnnisAtoZ")}
           >
-            <button className="text-sm">Unnis A to Z</button>
+            Unnis A to Z
           </div>
           <div
-            className="border-gray-400 border py-1 px-3 rounded-lg"
+            className=" min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("report")}
             style={getButtonStyle("report")}
           >
-            <button className="text-sm">New Report</button>
+            New Report
           </div>
           <div
-            className="border-gray-400 border py-1 px-3 rounded-lg"
+            className="min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("editor")}
             style={getButtonStyle("editor")}
           >
-            <button className="text-sm">Editor's Pick</button>
+           Editor's Pick
           </div>
           <div
-            className="border-gray-400 border py-1 px-3 rounded-lg"
+            className="min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("letter")}
             style={getButtonStyle("letter")}
           >
-            <button className="text-sm">Unnis Letter</button>
+            Unnis Letter
           </div>
         </div>
-
         <div>
           <AllFeed />
         </div>
