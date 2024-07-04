@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvent } from "../../../../Store/Actions/Actions";
+import { Link } from "react-router-dom";
 
 function ContentEvent() {
   const event = useSelector((state) => state.ReducerEventData.event);
@@ -59,51 +60,64 @@ function ContentEvent() {
       }
 
       const remainingDays = calculateRemainingDays(currentDate, lastDate);
-      const formattedRemainingDays = remainingDays >= 0 ? `Event will end in ${remainingDays} days` : "Event no longer available";
+      const formattedRemainingDays =
+        remainingDays >= 0
+          ? `Event will end in ${remainingDays} days`
+          : "Event no longer available";
 
       const eventEnded = currentDate > lastDateObj;
 
       return (
         <div
           key={el.id}
-          className={`relative max-w rounded overflow-hidden shadow-lg ${eventEnded ? 'opacity-50' : 'hover:shadow-xl'} transition duration-300`}
+          className={`relative max-w rounded overflow-hidden shadow-lg ${
+            eventEnded ? "opacity-50" : "hover:shadow-xl"
+          } transition duration-300`}
         >
-          <div className="relative">
-            <img className="w-full" src={el.thumbnail} alt="Image" />
-            {eventEnded && (
-              <div className="absolute inset-0 bg-[#040404b2] bg-opacity-75 flex items-center justify-center">
-                <span className="text-white text-lg">Event no longer available</span>
+          <div className="">
+            <Link to={`/event/detailevent/${el.id}`}>
+              <div className="relative">
+                <img className="w-full" src={el.thumbnail} alt="Image" />
+                {eventEnded && (
+                  <div className="absolute inset-0 bg-[#040404b2] bg-opacity-75 flex items-center justify-center">
+                    <span className="text-white text-lg">
+                      Event no longer available
+                    </span>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div className="px-6 py-3 justify-center items-center">
-            <div className="font-sans font-bold uppercase">{el.title}</div>
-            <p
-              className="text-gray-700 text-s w-full text-sm"
-              style={{
-                display: "-webkit-box",
-                WebkitLineClamp: 1,
-                WebkitBoxOrient: "vertical",
-                overflow: "hidden",
-                lineHeight: "1.4",
-              }}
-            >
-              {el.subtitle}
-            </p>
-            <div className="flex items-center justify-between space-x-2 py-2 text-xs">
-              <div>
-                <p className="text-gray-700">
-                  {formattedFirstDate} ~ {formattedLastDate}
+              <div className="px-6 py-3 justify-center items-center">
+                <div className="font-sans font-bold uppercase">{el.title}</div>
+                <p
+                  className="text-gray-700 text-s w-full text-sm"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 1,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    lineHeight: "1.4",
+                  }}
+                >
+                  {el.subtitle}
                 </p>
+                <div className="flex items-center justify-between space-x-2 py-2 text-xs">
+                  <div>
+                    <p className="text-gray-700">
+                      {formattedFirstDate} ~ {formattedLastDate}
+                    </p>
+                  </div>
+                  <div className="flex">
+                    {!eventEnded ? (
+                      <p className="text-red-600 text-xs px-2 py-1/2 border border-red-600 rounded-full">
+                        {formattedRemainingDays}
+                      </p>
+                    ) : (
+                      " "
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="flex">
-                {!eventEnded ? (
-                  <p className="text-red-600 text-xs px-2 py-1/2 border border-red-600 rounded-full">
-                    {formattedRemainingDays}
-                  </p>
-                ) : " "}
-              </div>
-            </div>
+            </Link>
           </div>
         </div>
       );
