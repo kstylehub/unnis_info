@@ -40,10 +40,10 @@ function MyPage() {
       } else if (dataUser.birthDate <= 1980) {
         return "60-an";
       } else {
-        return dataUser.birthDate; 
+        return dataUser.birthDate;
       }
     }
-    return ""; 
+    return "";
   }
 
   function KlikLogin() {
@@ -53,7 +53,7 @@ function MyPage() {
           <div className="bg-white h-full w-full">
             <div className="justify-center items-center py-6 ">
               <div className="flex text-center justify-center pb-5 text-lg">
-                <h1>MY PAGE</h1>
+                <h1>ACCOUNT</h1>
               </div>
               <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>
               <div className="px-20 py-24">
@@ -98,19 +98,19 @@ function MyPage() {
       <>
         <div className="bg-white h-full w-full py-6 ">
           <div className="justify-center items-center">
-            <div className="flex text-center justify-center pb-5 text-lg">
-              <h1>MY PAGE</h1>
+            <div className="flex text-center justify-center pb-5 text-lg font-semibold">
+              <h1>Account</h1>
             </div>
             <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>
             <div className="flex flex-col py-3 px-4">
               <div className="flex flex-row justify-between">
-                <div className="font-bold text-sm">Kode Referral : TEST123</div>
+                <div className="font-bold text-sm">Referral Code : TEST123</div>
                 <button className="bg-[#4ABFA1] text-xs font-bold rounded-full py-1 px-3 text-white">
-                  Undang Teman
+                  Invite Friends
                 </button>
               </div>
-              <div className="flex flex-row text-sm mt-1 text-gray-500">
-                <div className="">Undang teman dan dapatkan bonus</div>
+              <div className="flex flex-row text-sm mt-1 text-gray-500 items-center">
+                <div className="">Invite friends and get bonuses</div>
                 <img src={coin} className="w-1/12 pb-1 pl-2" />
                 <div className="text-[#4ABFA1] text-sm font-bold items-center">
                   500
@@ -118,15 +118,57 @@ function MyPage() {
               </div>
             </div>
             <hr className=""></hr>
-            <div className="flex flex-col py-3 px-4 justify-center items-center">
-              <img src={profile} className="w-3/12 pb-1 pl-2 mt-6" />
-              <div className="flex flex-row justify-center items-center mt-2">
-                <div className="font-bold text-base mx-1">
-                username
+            <div className="flex justify-between py-4">
+              <div className=" flex justify-end px-4 pt-4">
+                <svg
+                  className="w-8 h-8 text-white dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"
+                  />
+                </svg>
+              </div>
+              <div className="flex flex-col pb-3 px-4 justify-center items-center">
+                <img src={profile} className="w-4/12 pb-1 pl-2 mt-6" />
+                <div className="flex flex-row justify-center items-center mt-2">
+                  <div className="font-bold text-base mx-1">username</div>
+                </div>
+                <div className="text-xs mt-1">
+                  {getBirthDateDescription()} Birth date / Skin type / Skin
+                  color
                 </div>
               </div>
-              <div className="text-xs mt-1">{getBirthDateDescription()} Birth date / Skin type / Skin color</div>
+              <div className=" flex justify-end px-4 pt-4">
+              <svg
+                className="w-8 h-8 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"
+                />
+              </svg>
             </div>
+            </div>
+
             <div className="flex py-3 mt-1 px-5 items-center justify-between w-full bg-gray-200">
               <div className="flex">
                 <img src={recycle} className="w-7 h-6" />
@@ -157,7 +199,7 @@ function MyPage() {
             </div>
             <div className="flex bg-gray-200 py-0.5">
               <div className="text-sm bg-white py-3 mr-0.5 text-center w-6/12 border-r border-white text-black">
-                Alamatku
+                My Address
               </div>
               <div className="text-sm bg-white py-3 text-center w-6/12  text-black">
                 Check-in
@@ -203,7 +245,7 @@ function MyPage() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full bg-gray-200 pb-1">
+            {/* <div className="flex flex-col w-full bg-gray-200 pb-1">
               <div className="flex flex-row items-left justify-left px-5 bg-white py-4">
                 <img src={coupon} className="w-7 p-1" />
                 <div className="text-sm font-bold mx-2 flex items-center">
@@ -231,7 +273,7 @@ function MyPage() {
                   </svg>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="flex flex-col w-full bg-gray-200 pb-1">
               <div className="flex flex-row items-left justify-left px-5 bg-white py-3">
                 <img src={product} className="w-7 p-1" />
@@ -240,29 +282,9 @@ function MyPage() {
                 </div>
               </div>
               <hr></hr>
-              <div className="grid grid-cols-2">
-                <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
-                  <div className="text-sm">Keranjang</div>
-                  <div className="flex flex-row justify-center items-center">
-                    <svg
-                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 8 14"
-                    >
-                      <path
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
-                      />
-                    </svg>
-                  </div>
-                </div>
+              <div className="">
                 <div className="py-3 px-5 flex items-center justify-between w-full bg-white">
-                  <div className="text-sm">Berlangganan</div>
+                  <div className="text-sm">Cart</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
                       className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
@@ -281,8 +303,8 @@ function MyPage() {
                     </svg>
                   </div>
                 </div>
-                <div className=" py-3 px-5 flex items-center justify-between w-full bg-white border-r border-t">
-                  <div className="text-sm">Pengiriman</div>
+                <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-t">
+                  <div className="text-sm">Transaction</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
                       className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
@@ -301,7 +323,47 @@ function MyPage() {
                     </svg>
                   </div>
                 </div>
-                <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-t"></div>
+                <div className=" py-3 px-5 flex items-center justify-between w-full bg-white border-t">
+                  <div className="text-sm">Subscription</div>
+                  <div className="flex flex-row justify-center items-center">
+                    <svg
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 8 14"
+                    >
+                      <path
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div className=" pt-3 pb-1 px-5 flex items-center justify-between w-full bg-white border-t">
+                  <div className="text-sm">Ingredients</div>
+                  <div className="flex flex-row justify-center items-center">
+                    <svg
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 8 14"
+                    >
+                      <path
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div className="pb-3 px-5 flex items-center justify-between w-full bg-white"></div>
               </div>
             </div>
             <div className="flex flex-col w-full bg-gray-200 pb-1">
@@ -314,7 +376,7 @@ function MyPage() {
               <hr></hr>
               <div className="grid grid-cols-2">
                 <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
-                  <div className="text-sm">Riwayat Event</div>
+                  <div className="text-sm">Event History</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
                       className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
@@ -334,7 +396,52 @@ function MyPage() {
                   </div>
                 </div>
                 <div className="py-3 px-5 flex items-center justify-between w-full bg-white">
-                  <div className="text-sm">Klaim Event</div>
+                  <div className="text-sm">Claim Event</div>
+                  <div className="flex flex-row justify-center items-center">
+                    <svg
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 8 14"
+                    >
+                      <path
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col w-full bg-gray-200 pt-1 pb-0.5">
+              <div className="flex flex-row items-left justify-left px-5 bg-white py-3">
+                <svg
+                  className="w-7 h-7 text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d="M7 9h5m3 0h2M7 12h2m3 0h5M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.616a1 1 0 0 0-.67.257l-2.88 2.592A.5.5 0 0 1 8 18.477V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"
+                  />
+                </svg>
+                <div className="text-sm font-bold mx-2 flex items-center">
+                  HELP
+                </div>
+              </div>
+              <hr></hr>
+              <div className="grid grid-cols-1">
+                <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
+                  <div className="text-sm">Help Center</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
                       className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
@@ -384,8 +491,57 @@ function MyPage() {
                     </svg>
                   </div>
                 </div>
-                <div className="py-3 px-5 flex items-center justify-between w-full bg-white" onClick={()=>handleLogout()}>
-                  <div className="text-sm">Logout</div>
+                <div
+                  className="py-3 px-5 flex items-center justify-between w-full bg-white"
+                  onClick={() => handleLogout()}
+                >
+                  <div className="text-sm">Acoount</div>
+                  <div className="flex flex-row justify-center items-center">
+                    <svg
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 8 14"
+                    >
+                      <path
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="py-3 px-5 flex items-center justify-between w-full bg-white border-r"
+                  onClick={() => handleLogout()}
+                >
+                  <div className="text-sm">Contact Us</div>
+                  <div className="flex flex-row justify-center items-center">
+                    <svg
+                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 8 14"
+                    >
+                      <path
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="py-3 px-5 flex items-center justify-between w-full bg-white"
+                  onClick={() => handleLogout()}
+                >
+                  <div className="text-sm">Feedback</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
                       className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
@@ -406,57 +562,7 @@ function MyPage() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full bg-gray-200 pt-1 pb-0.5">
-              <div className="flex flex-row items-left justify-left px-5 bg-white py-3">
-                <img src={phone} className="w-7 p-1" />
-                <div className="text-sm font-bold mx-2 flex items-center">
-                  CONTACT US
-                </div>
-              </div>
-              <hr></hr>
-              <div className="grid grid-cols-2">
-                <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
-                  <div className="text-sm">Chat Us</div>
-                  <div className="flex flex-row justify-center items-center">
-                    <svg
-                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 8 14"
-                    >
-                      <path
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="py-3 px-5 flex items-center justify-between w-full bg-white">
-                  <div className="text-sm">Email Us</div>
-                  <div className="flex flex-row justify-center items-center">
-                    <svg
-                      className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 8 14"
-                    >
-                      <path
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <div className="flex flex-col w-full bg-gray-200 py-0.5">
               <div className="flex flex-row items-left justify-left px-5 bg-white py-4">
                 <img src={toggle} className="w-7 p-1" />
