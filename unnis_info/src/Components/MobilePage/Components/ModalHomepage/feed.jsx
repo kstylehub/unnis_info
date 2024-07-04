@@ -7,17 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllFeed } from "../../../../Store/Actions/Actions";
 
 function Feed() {
-  // Modal
-  const [showModal, setShowModal] = useState(false);
-
-  const handleCameraClick = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
   // Active Button
   const [clickedButton, setClickedButton] = useState("all");
 
@@ -48,18 +37,25 @@ function Feed() {
   const allInfluencer = useSelector(
     (state) => state.ReducerAllInfluencer.influencer || []
   );
+
+  
   function AllFeed() {
-    const data = feed?.data;
+    const dataFeed = feed?.data;
+    const sortedData = dataFeed
+    ?.slice()
+    .sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
     return (
       <>
-        {data?.map((el) => (
-          <Link to={handleCameraClick} key={el.id} onClick={handleCameraClick}>
-            <img
-              className="w-full rounded-3xl py-2 px-3"
-              src={el.thumbnail}
-              alt="Image"
-            />
-          </Link>
+        {sortedData?.map((el) => (
+          <div key={el.idFeed}>
+            <Link to={`/feeddetail/${el.idFeed}`}>
+              <img
+                className="w-full rounded-3xl py-2 px-3"
+                src={el.thumbnail}
+                alt="Image"
+              ></img>
+            </Link>
+          </div>
         ))}
       </>
     );
@@ -133,7 +129,7 @@ function Feed() {
             onClick={() => handleClick("editor")}
             style={getButtonStyle("editor")}
           >
-           Editor's Pick
+            Editor's Pick
           </div>
           <div
             className="min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
@@ -147,27 +143,6 @@ function Feed() {
           <AllFeed />
         </div>
       </div>
-
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50">
-          <div className="rounded-lg bg-white text-center">
-            <div className="py-8 lg:px-6 px-4">
-              <h5 className="lg:mb-2 text-sm font-semibold leading-tight">
-                Fitur ini hanya dapat digunakan pada aplikasi UNNIS
-              </h5>
-            </div>
-            <hr />
-            <button
-              className="lg:py-4 py-3 inline-block rounded px-6 text-sm text-green-600"
-              onClick={handleCloseModal}
-              type="button"
-            >
-              Kembali
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }
