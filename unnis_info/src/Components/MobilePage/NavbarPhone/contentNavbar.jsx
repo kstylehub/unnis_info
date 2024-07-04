@@ -906,7 +906,7 @@ function ContentNavbar() {
           </div>
         </div>
         {/* All Product */}
-        <div className="bg-gray-100 text-center py-2 text-[#787878] pb-3">
+        <div className="bg-gray-100 flex text-center py-2 text-[#787878] pb-3">
           ------------------------ Kamu Pasti Suka Ini -----------------------
         </div>
         <div className="flex flex-wrap justify-between py-1 px-4 bg-gray-100">
@@ -968,7 +968,7 @@ function ContentNavbar() {
                     lineHeight: "1.2",
                   }}
                 >
-                  {item.name}
+                  {item.brand} - {item.name}
                 </div>
                 <div className="text-left font-bold text-lg">
                   Rp{" "}
