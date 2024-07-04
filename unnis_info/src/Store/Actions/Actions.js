@@ -11,6 +11,7 @@ const {
   BANNER,
   INFLUENCER,
   VIDEO,
+  COMMUNITY
 } = ACTIONS_TYPES;
 
 export const logout = () => ({
@@ -93,6 +94,7 @@ export const getAllProduct = (body) => async (dispatch) => {
       type: PRODUCT.GET_ALL_PRODUCT_SUCCESS,
       payload: data,
     });
+    console.log("product >>> ",data);
     return data; // Return the entire data object for use in countPage()
   } catch (error) {
     console.log("error get all data product:", error);
@@ -279,6 +281,7 @@ export const getAllReview = () => async (dispatch) => {
   }
 };
 
+// FEED
 export const getAllFeed = () => async (dispatch) => {
   try {
     dispatch({ type: FEED.GET_ALL_FEED_START });
@@ -303,6 +306,65 @@ export const getAllFeed = () => async (dispatch) => {
   }
 };
 
+export const getFeedById = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: FEED.GET_ALL_FEED_BY_ID_START });
+    const response = await fetch(`${BASE_URL}/feed/feedById/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: FEED.GET_ALL_FEED_BY_ID_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: FEED.GET_ALL_FEED_BY_ID_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getFeedReview = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: FEED.GET_REVIEW_FEED_BY_ID_START });
+    const response = await fetch(`${BASE_URL}/reviewFeed/reviewById/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: FEED.GET_REVIEW_FEED_BY_ID_SUCCESS,
+      payload: data,
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: FEED.GET_REVIEW_FEED_BY_ID_FAILED,
+      payload: error,
+    });
+  }
+};
+
+// EVENT
+
 export const getEvent = () => async (dispatch) => {
   try {
     dispatch({ type: EVENT.GET_DATA_EVENT_START });
@@ -326,6 +388,62 @@ export const getEvent = () => async (dispatch) => {
     console.log("error get data", error);
     dispatch({
       type: EVENT.GET_DATA_EVENT_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getEventbyId = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: EVENT.GET_EVENT_ID_START });
+    const response = await fetch(`${BASE_URL}/events/eventById/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: EVENT.GET_EVENT_ID_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: EVENT.GET_EVENT_ID_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getReviewEventbyId = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: EVENT.GET_EVENT_REVIEW_ID_START });
+    const response = await fetch(`${BASE_URL}/reviewEvent/reviewById/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: EVENT.GET_EVENT_REVIEW_ID_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: EVENT.GET_EVENT_REVIEW_ID_FAILED,
       payload: error,
     });
   }
@@ -392,7 +510,7 @@ export const getAllInfluencer = () => async (dispatch) => {
 };
 
 // VIDEO
-export const getVideoByIdMember = () => async (dispatch) => {
+export const getVideoByIdMemberYoutube = () => async (dispatch) => {
   try {
     dispatch({ type: VIDEO.GET_DATA_VIDEO_START });
     const response = await fetch(
@@ -411,7 +529,7 @@ export const getVideoByIdMember = () => async (dispatch) => {
     const data = await response.json();
     dispatch({
       type: VIDEO.GET_DATA_VIDEO_SUCCESS,
-      payload: data,
+      payload: data.data,
     });
     // console.log("data", data);
     return data;
@@ -419,6 +537,160 @@ export const getVideoByIdMember = () => async (dispatch) => {
     console.log("error get data", error);
     dispatch({
       type: VIDEO.GET_DATA_VIDEO_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getVideoByIdMemberInstagram = () => async (dispatch) => {
+  try {
+    dispatch({ type: VIDEO.GET_DATA_VIDEO_INSTAGRAM_START });
+    const response = await fetch(
+      `${BASE_URL}/video-recommendation/1?sourceVideo=instagram&length=20&start=1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_INSTAGRAM_SUCCESS,
+      payload: data.data,
+    });
+    // console.log("data ig", data);
+    // console.log("data", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_INSTAGRAM_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getVideoByIdMemberUnnis= () => async (dispatch) => {
+  try {
+    dispatch({ type: VIDEO.GET_DATA_VIDEO_UNNIS_START });
+    const response = await fetch(
+      `${BASE_URL}/video-recommendation/unnis-video/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+    const data = await response.json();
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_UNNIS_SUCCESS,
+      payload: data,
+    });
+    console.log("UNNISSS VIDEO >>> ", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_UNNIS_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getRecommendationProductVideo= () => async (dispatch) => {
+  try {
+    dispatch({ type: VIDEO.GET_DATA_VIDEO_PRODUCT_RECOMMENDATION_START });
+    const response = await fetch(
+      `${BASE_URL}/video-recommendation/product-unnis/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+    const data = await response.json();
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_PRODUCT_RECOMMENDATION_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_PRODUCT_RECOMMENDATION_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getProductVideo= () => async (dispatch) => {
+  try {
+    dispatch({ type: VIDEO.GET_DATA_VIDEO_PRODUCT_START });
+    const response = await fetch(
+      `${BASE_URL}/video-recommendation/product/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+    const data = await response.json();
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_PRODUCT_SUCCESS,
+      payload: data.data,
+    });
+    console.log("Data Product >>> ", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_PRODUCT_FAILED,
+      payload: error,
+    });
+  }
+};
+
+// COMMUNITY
+export const getAllCommunity = () => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.GET_DATA_COMMUNITY_START });
+    const response = await fetch(`${BASE_URL}/all-thread?memberId=33`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.GET_DATA_COMMUNITY_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: COMMUNITY.GET_DATA_COMMUNITY_FAILED,
       payload: error,
     });
   }

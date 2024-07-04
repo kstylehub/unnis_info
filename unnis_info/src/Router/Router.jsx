@@ -27,9 +27,10 @@ import LoginPage from "../Components/MobilePage/ScreenNavBot/LoginPage";
 import Register from "../Components/MobilePage/ScreenNavBot/Register";
 import SearchProduct from "../Components/MobilePage/Components/SearchProduct/SearchProduct";
 import Feed from "../Components/MobilePage/Components/ModalHomepage/feed";
-import FeedDetail from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
 import Video from "../Components/MobilePage/Components/ModalHomepage/Video";
 import Community from "../Components/MobilePage/Components/ModalHomepage/Community";
+import DetailEvent from "../Components/MobilePage/Components/ContentEvent/DetailEvent";
+import DetailFeed from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
                 element:<ContentEvent/>
               }
             ]
+          },
+          {
+            path: "/event/detailevent/:id",
+            element: <DetailEvent />,
           },
           {
             path: "/transaction",
@@ -162,8 +167,8 @@ const router = createBrowserRouter([
             element: <Feed />,
           },
           {
-            path: "/feeddetail",
-            element: <FeedDetail />,
+            path: "/feeddetail/:id",
+            element: <DetailFeed />,
           },
           {
             path: "/search",
