@@ -33,6 +33,7 @@ import ModalSort from "../ModalCategory/ModalSort";
 import Close from "../../../../assets/Close.svg";
 import NavbarPhone from "../../NavbarPhone/NavbarPhone";
 import NavigationButtom from "../../NavigatonBottom/NavigationBottom";
+import Recomended from "../../../../assets/Homepage/recomended.svg";
 
 function NewPage() {
   const dispatch = useDispatch();
@@ -216,110 +217,165 @@ function NewPage() {
   function DisplayProduct() {
     return (
       <>
-        {thedata?.map((el, index) => {
-          const text = el.name;
-          const truncatedText =
-            text.length > 30 ? `${text.slice(0, 30)}...` : text;
-          return (
-            <>
-              <Link to={`/newProduct/detailproduct/${el.id}`}>
-                <div key={el.id} className="flex justify-between items-center">
-                  <div className="text-center items-center justify-center w-[10%]">
-                    <h1>{index + 1}</h1>
-                  </div>
-                  <div className="w-[30%]">
-                    <img src={el.images[0]} className="w-15 h-15" />
-                  </div>
-                  <div className="justify-between w-[80%]">
-                    <div className="flex items-center text-[#ADB5BD]">
-                      <h1 className="text-xs">{el.brand} </h1>
-                      <div className="items-center pl-2">
-                        <a href="#">
-                          <img src={Arrow} className="w-2 h-2" />
-                        </a>
+        <div className="flex flex-wrap">
+          {thedata?.map((el, index) => {
+            const text = el.name;
+            const truncatedText =
+              text.length > 30 ? `${text.slice(0, 30)}...` : text;
+            return (
+              <div key={index} className=" sm:w-1/2 flex justify-center ">
+                <div className="relative border w-[95%] p-3 flex-shrink-0 mb-2 bg-white">
+                  <Link to={`/newProduct/detailproduct/${el.id}`}>
+                    {el.statusRecommend && (
+                      <div className="absolute top-0 left-3 text-white py-3 w-[45%]">
+                        <img
+                          src={Recomended}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
                       </div>
-                    </div>
-                    <div className="py-2">
-                      <p className="text-sm">{truncatedText}</p>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex gap-x-px">
-                        <Link to={el.tokopediaLink} target="_Blank">
-                          <img
-                            src={Tokopedia}
-                            className={
-                              el.tokopediaLink === ""
-                                ? "hidden"
-                                : "w-5 h-5 rounded-full"
-                            }
-                          />
-                        </Link>
-                        <Link to={el.shopeeLink} target="_Blank">
-                          <img
-                            src={Shopee}
-                            className={
-                              el.shopeeLink === ""
-                                ? "hidden"
-                                : "w-5 h-5 rounded-full"
-                            }
-                          />
-                        </Link>
-                        <Link to={el.unnispickLink} target="_Blank">
-                          <img
-                            src={UnnisIcon}
-                            className={
-                              el.unnispickLink === ""
-                                ? "hidden"
-                                : "w-5 h-5 rounded-full"
-                            }
-                          />
-                        </Link>
-                        <Link to={el.sociollaLink} target="_Blank">
-                          <img
-                            src={Sociolla}
-                            className={
-                              el.sociollaLink === ""
-                                ? "hidden"
-                                : "w-5 h-5 rounded-full"
-                            }
-                          />
-                        </Link>
-                        <Link to={el.iStyleLink} target="_Blank">
-                          <img
-                            src={Istyle}
-                            className={
-                              el.iStyleLink === ""
-                                ? "hidden"
-                                : "w-5 h-5 rounded-full"
-                            }
-                          />
-                        </Link>
-                        <Link to={el.oliveYoungLink} target="_Blank">
-                          <img
-                            src={OliveYoung}
-                            className={
-                              el.oliveYoungLink === ""
-                                ? "hidden"
-                                : "w-5 h-5 rounded-full"
-                            }
-                          />
-                        </Link>
+                    )}
+                    {el.bpom && (
+                      <div className="absolute top-0 right-3 text-white py-3 w-[15%]">
+                        <img
+                          src={el.bpom}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
                       </div>
-                      <div className="flex items-center pl-5">
-                        <img src={Star} className="w-5 h-5 rounded-full" />
-                        <div className="pl-0.5 flex gap-x-0.5">
-                          <h1 className="text-xs">{el.rating} </h1>
-                          <p className="text-xs text-gray-500">{`(${el.reviewNum})`}</p>
+                    )}
+                    {el.mui && (
+                      <div className="absolute top-0 right-6 text-white py-3 w-[15%]">
+                        <img
+                          src={el.mui}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-col pt-4">
+                      <div className="flex justify-center items-center p-1">
+                        <div style={{ width: "150px", height: "150px" }}>
+                          {el.images ? (
+                            <img
+                              src={el.images}
+                              className="object-contain"
+                              style={{ width: "100%", height: "100%" }}
+                            />
+                          ) : (
+                            <div className="bg-gray-300 w-full h-full flex items-center justify-center">
+                              Image Not Available
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className=""></div>
+                      <div
+                        className="w-full pt-2"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                          lineHeight: "1.2",
+                        }}
+                      >
+                        {el.brand} - {el.name}
+                      </div>
+                      <div className="text-left font-bold text-lg">
+                        Rp{" "}
+                        {el.price
+                          .toLocaleString("id-ID", {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                          })
+                          .replace(",", ".")}
+                      </div>
+                      <div className="flex justify-between pt-1">
+                        <div className="truncate text-center w-full flex justify-left items-center">
+                          <div className="pe-1">
+                            <svg
+                              className="w-3.5 h-3.5 text-yellow-400 dark:text-white"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+                            </svg>
+                          </div>
+                          <div className="">{el.rating}</div>
+                          <div className="pl-1 text-gray-400 text-sm pt-1">
+                            ({el.stock})
+                          </div>
+                        </div>
+                        <div className="flex justify-end">
+                          {[
+                            {
+                              href: el.unnispickLink,
+                              text: "Unnispick",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_1.png",
+                            },
+                            {
+                              href: el.shopeeLink,
+                              text: "Shopee",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_2.png",
+                            },
+                            {
+                              href: el.tokopediaLink,
+                              text: "Tokopedia",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_3.png",
+                            },
+                            {
+                              href: el.iStyleLink,
+                              text: "iStyle",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_4.png",
+                            },
+                            {
+                              href: el.sociollaLink,
+                              text: "Sociolla",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_6.png",
+                            },
+                            {
+                              href: el.styleKoreanLink,
+                              text: "Style Korean",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_7.png",
+                            },
+                            {
+                              href: el.oliveYoungLink,
+                              text: "Olive Young",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_5.png",
+                            },
+                            {
+                              href: el.kalCareLink,
+                              text: "Kal Care",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_8.png",
+                            },
+                          ]
+                            .filter((link) => link.href)
+                            .slice(0, 3)
+                            .map((link, idx) => (
+                              <a
+                                key={idx}
+                                href={link.href}
+                                className="rounded-full w-6 h-6 ml-1 flex items-center justify-center"
+                              >
+                                <img
+                                  src={link.icon}
+                                  alt={link.text}
+                                  className="bg-cover w-full h-full rounded-full"
+                                />
+                              </a>
+                            ))}
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
-                <div className="border mt-2"></div>
-              </Link>
-            </>
-          );
-        })}
+              </div>
+            );
+          })}
+        </div>
 
         {combinedData.length < 30 ||
         combinedData == null ||
