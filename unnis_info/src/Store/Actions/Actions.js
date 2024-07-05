@@ -11,7 +11,8 @@ const {
   BANNER,
   INFLUENCER,
   VIDEO,
-  COMMUNITY
+  COMMUNITY, 
+  RECYCLE
 } = ACTIONS_TYPES;
 
 export const logout = () => ({
@@ -691,6 +692,71 @@ export const getAllCommunity = () => async (dispatch) => {
     console.log("error get data", error);
     dispatch({
       type: COMMUNITY.GET_DATA_COMMUNITY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+// RECYCLE
+export const getVRecycleLeaderboard = () => async (dispatch) => {
+  try {
+    dispatch({ type: RECYCLE.GET_ALL_RECYCLE_LEADERBOARD_START });
+    const response = await fetch(
+      `${BASE_URL}/reward/leaderBoard`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: RECYCLE.GET_ALL_RECYCLE_LEADERBOARD_SUCCESS,
+      payload: data,
+    });
+    // console.log("data RECYCLE LEADERBOARD >>> ", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: RECYCLE.GET_ALL_RECYCLE_LEADERBOARD_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getRecycleHistoryById = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: RECYCLE.GET_ALL_RECYCLE_HISTORY_START });
+    const response = await fetch(
+      `${BASE_URL}/reward/historyRewardById/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: RECYCLE.GET_ALL_RECYCLE_HISTORY_SUCCESS,
+      payload: data.dataReward,
+    });
+    console.log("data RECYCLE HISTORY BY ID >>> ", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: RECYCLE.GET_ALL_RECYCLE_HISTORY_FAILED,
       payload: error,
     });
   }

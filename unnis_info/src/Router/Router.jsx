@@ -31,6 +31,8 @@ import Video from "../Components/MobilePage/Components/ModalHomepage/Video";
 import Community from "../Components/MobilePage/Components/ModalHomepage/Community";
 import DetailEvent from "../Components/MobilePage/Components/ContentEvent/DetailEvent";
 import DetailFeed from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
+import Recycle from "../Components/MobilePage/Components/ModalHomepage/Recycle";
+
 
 const router = createBrowserRouter([
   {
@@ -169,6 +171,10 @@ const router = createBrowserRouter([
           {
             path: "/feeddetail/:id",
             element: <DetailFeed />,
+          },
+          {
+            path: "/recycle",
+            element: <Recycle />,
           },
           {
             path: "/search",

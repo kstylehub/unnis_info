@@ -224,7 +224,7 @@ function NewPage() {
               text.length > 30 ? `${text.slice(0, 30)}...` : text;
             return (
               <div key={index} className=" sm:w-1/2 flex justify-center ">
-                <div className="relative border w-[95%] p-3 flex-shrink-0 mb-2 bg-white">
+                <div className="relative border w-[95%] min-h-[15vw] p-3 flex-shrink-0 mb-2 bg-white">
                   <Link to={`/newProduct/detailproduct/${el.id}`}>
                     {el.statusRecommend && (
                       <div className="absolute top-0 left-3 text-white py-3 w-[45%]">

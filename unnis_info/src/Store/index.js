@@ -13,7 +13,11 @@ import {
   ReducerProductWithPagination,
 } from "./Reducers/Reducer";
 import { ReducerReview } from "./Reducers/ReducerReview";
-import { ReducerAllFeedById, ReducerFeed, ReducerReviewFeed } from "./Reducers/ReducerFeed";
+import {
+  ReducerAllFeedById,
+  ReducerFeed,
+  ReducerReviewFeed,
+} from "./Reducers/ReducerFeed";
 import {
   ReducerEventById,
   ReducerEventData,
@@ -32,6 +36,10 @@ import {
   ReducerVideoByIdMemberYoutube,
 } from "./Reducers/ReducerVideo";
 import { ReducerAllCommunity } from "./Reducers/ReducerCommunity";
+import {
+  ReducerRecycleHistory,
+  ReducerRecycleLeaderboard,
+} from "./Reducers/ReducerRecycle";
 
 const rootReducer = combineReducers({
   ReducerProductCategory,
@@ -56,7 +64,9 @@ const rootReducer = combineReducers({
   ReducerEventById,
   ReducerReviewEventById,
   ReducerAllFeedById,
-ReducerReviewFeed
+  ReducerReviewFeed,
+  ReducerRecycleHistory,
+  ReducerRecycleLeaderboard,
 });
 
 const persistConfig = {

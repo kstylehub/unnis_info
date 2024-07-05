@@ -10,7 +10,7 @@ function DetailFeed() {
     (state) => state.ReducerAllFeedById?.dataFeedById
   );
   const eventReview = useSelector(
-    (state) => state.ReducerReviewEventById?.eventReviewById
+    (state) => state.ReducerReviewEventById.eventReviewById 
   );
   const dataFeed = feedDetail?.data;
   const dataReview = eventReview?.dataReview;
