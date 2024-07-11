@@ -33,7 +33,7 @@ import DetailEvent from "../Components/MobilePage/Components/ContentEvent/Detail
 import DetailFeed from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
 import Recycle from "../Components/MobilePage/Components/ModalHomepage/Recycle";
 import Cart from "../Components/MobilePage/Components/Transaction/Cart";
-
+import VideoShort from "../Components/MobilePage/Components/ModalHomepage/VideoShort";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +118,10 @@ const router = createBrowserRouter([
           {
             path: "/video",
             element: <Video />
+          },
+          {
+            path: "/video/videoshort/:id",
+            element: <VideoShort />
           },
           {
             path: "/community",

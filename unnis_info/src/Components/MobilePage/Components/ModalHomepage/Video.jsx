@@ -103,7 +103,7 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationInstagram.map((ig) => (
-                <div key={ig.id} className="relative">
+                <Link to={`/video/videoshort/${ig.id}`} key={ig.id} className="relative">
                   <div className="w-[10vw] h-[15vw]">
                     {ig.link ? (
                       <img
@@ -136,7 +136,7 @@ function Video() {
                       </svg>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
