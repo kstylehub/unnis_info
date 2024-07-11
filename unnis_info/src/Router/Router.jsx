@@ -32,6 +32,7 @@ import Community from "../Components/MobilePage/Components/ModalHomepage/Communi
 import DetailEvent from "../Components/MobilePage/Components/ContentEvent/DetailEvent";
 import DetailFeed from "../Components/MobilePage/Components/ModalHomepage/feeddetail";
 import Recycle from "../Components/MobilePage/Components/ModalHomepage/Recycle";
+import Cart from "../Components/MobilePage/Components/Transaction/Cart";
 
 
 const router = createBrowserRouter([
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
                 element: <TransProduct />,
               },
             ],
+          },
+          {
+            path: "/cart",
+            element: <Cart/>,
           },
           {
             path: "/my-page",

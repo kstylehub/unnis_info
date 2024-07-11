@@ -564,8 +564,6 @@ export const getVideoByIdMemberInstagram = () => async (dispatch) => {
       type: VIDEO.GET_DATA_VIDEO_INSTAGRAM_SUCCESS,
       payload: data.data,
     });
-    // console.log("data ig", data);
-    // console.log("data", data);
     return data;
   } catch (error) {
     console.log("error get data", error);
