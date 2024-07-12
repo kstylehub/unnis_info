@@ -244,8 +244,12 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationYoutube.map((recvideo) => (
-                <div key={`recvideo-${recvideo.id}`} className="relative">
-                  {recvideo.source.platform == "youtube" ? (
+                <Link
+                  to={`/video/videoyoutube/${recvideo.id}`}
+                  state={{ videoData: recvideo }}
+                  key={recvideo.id}
+                  className="relative"
+                >                  {recvideo.source.platform == "youtube" ? (
                     <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} />
                     </div>
@@ -287,7 +291,7 @@ function Video() {
                       <div>{recvideo.dataOwner.influencerName}</div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

@@ -34,6 +34,7 @@ import DetailFeed from "../Components/MobilePage/Components/ModalHomepage/feedde
 import Recycle from "../Components/MobilePage/Components/ModalHomepage/Recycle";
 import Cart from "../Components/MobilePage/Components/Transaction/Cart";
 import VideoShort from "../Components/MobilePage/Components/ModalHomepage/VideoShort";
+import VideoYoutubeDetail from "../Components/MobilePage/Components/ModalHomepage/VideoYoutubeDetail";
 
 const router = createBrowserRouter([
   {
@@ -115,6 +116,7 @@ const router = createBrowserRouter([
             path: "/newProduct/detailproduct/:id",
             element: <DetailProduct />,
           },
+          // VIDEO
           {
             path: "/video",
             element: <Video />
@@ -122,6 +124,10 @@ const router = createBrowserRouter([
           {
             path: "/video/videoshort/:id",
             element: <VideoShort />
+          },
+          {
+            path: "/video/videoyoutube/:id",
+            element: <VideoYoutubeDetail />
           },
           {
             path: "/community",

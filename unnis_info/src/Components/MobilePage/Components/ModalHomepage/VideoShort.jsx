@@ -82,7 +82,7 @@ function VideoShort() {
     const fileId = fileIdMatch ? fileIdMatch[1] : null;
 
     if (fileId) {
-      const viewLink = `https://drive.google.com/uc?export=view&id=${fileId}`;
+      const viewLink = `https://drive.google.com/thumbnail?id=${fileId}`;
       console.log("Converted View Link:", viewLink);  // Debugging log
       return viewLink;
     }
@@ -210,19 +210,19 @@ function VideoShort() {
                 </div>
               </div>
               {showProductInfo ? (
-                <div className="flex-col px-4 pb-3 justify-start items-center gap-3">
+                <div className="flex-col px-4 pb-3 justify-start items-center gap-3 p-3">
                   {video.dataProduct.map((product, index) => (
                     <div
                       key={index}
-                      className="w-full flex bg-white mb-2 text-black p-3"
+                      className="w-full flex bg-white mb-2 text-sm items-center"
                     >
-                      {/* <img
+                      <img
                         src={convertToViewLink(product.link_image)}
                         alt=""
-                        className="w-12 h-12 object-cover"
+                        className="w-16 h-16 object-contain"
                         onError={() => handleImageError(index)}
-                      /> */}
-                      <div className="pl-2">
+                      />
+                      <div className="pl-2 ">
                         <div className="font-bold">{product.product_name}</div>
                         <div className="">{product.brand_name}</div>
                       </div>
