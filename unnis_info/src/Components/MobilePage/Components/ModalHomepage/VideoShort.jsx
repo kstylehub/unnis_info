@@ -128,7 +128,7 @@ function VideoShort() {
                   </div>
                 )}
               </div>
-              <div className="flex-col w-10/12 ps-3">
+              <div className="flex-col w-10/12 ps-3 leading-normal">
                 <div className="font-semibold">{video.title}</div>
                 <div className="">
                   {getInfluencerName(video.dataOwner.influencerName)}
