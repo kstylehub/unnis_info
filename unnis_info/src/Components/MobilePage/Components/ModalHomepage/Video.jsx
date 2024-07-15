@@ -441,10 +441,12 @@ function Video() {
             </div>
             <div className="  gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationYoutube.map((relatedvide) => (
-                <div
-                  key={`relatedvideo-${relatedvide.id}`}
-                  className="relative"
-                >
+                 <Link
+                 to={`/video/videoyoutube/${relatedvide.id}`}
+                 state={{ videoData: relatedvide }}
+                 key={relatedvide.id}
+                 className="relative"
+               >
                   {relatedvide.source.platform == "youtube" ? (
                     <div className="absolute flex left-5 top-[11.5vw] w-10 h-10 rounded-full bg-white p-1 border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} />
@@ -487,7 +489,7 @@ function Video() {
                       <div>{relatedvide.dataOwner.influencerName}</div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
