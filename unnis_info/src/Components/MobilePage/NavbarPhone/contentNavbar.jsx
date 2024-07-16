@@ -437,21 +437,23 @@ function ContentNavbar() {
         {/* Icon Influencer */}
         <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
           {allInfluencer.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col justify-center items-center"
-            >
+            <Link
+            to={`/video/videoinfluencer`}
+            state={{ influencerData: item.influencerName }}
+            key={index}
+            className="flex flex-col justify-center items-center "
+          >
               <div className="w-16 h-16 rounded-full flex justify-center overflow-hidden">
-                {item.thumbnail ? (
+                {item.photo ? (
                   <img
-                    src={item.thumbnail}
+                    src={item.photo}
                     className="object-cover w-full h-full"
                     alt={item.label}
                   />
                 ) : (
                   <div className="bg-[#4ABFA1] w-full h-full rounded-full">
                     <div className="flex justify-center items-center p-4 text-xl text-white font-bold">
-                      {item.name ? item.name.charAt(0) : ""}
+                      {item.influencerName ? item.influencerName.charAt(0) : ""}
                     </div>
                   </div>
                 )}
@@ -460,9 +462,9 @@ function ContentNavbar() {
                 className="py-1 truncate w-16 text-center"
                 style={{ textOverflow: "ellipsis" }}
               >
-                {item.name ? item.name : "-"}
+                {item.influencerName ? item.influencerName : "-"}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         {/* New Product */}
@@ -674,8 +676,12 @@ function ContentNavbar() {
           </div>
           <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
             {VideoRecommendation.map((el) => (
-              <div key={el.id} className="relative">
-                {el.source.platform == "youtube" ? (
+              <Link
+                  to={`/video/videoyoutube/${el.id}`}
+                  state={{ videoData: el }}
+                  key={el.id}
+                  className="relative"
+                >                {el.source.platform == "youtube" ? (
                   <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
                     <img className="" src={Youtube} />
                   </div>
@@ -717,7 +723,7 @@ function ContentNavbar() {
                     <div>{el.dataOwner.influencerName}</div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

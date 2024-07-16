@@ -35,6 +35,9 @@ import Recycle from "../Components/MobilePage/Components/ModalHomepage/Recycle";
 import Cart from "../Components/MobilePage/Components/Transaction/Cart";
 import VideoShort from "../Components/MobilePage/Components/ModalHomepage/VideoShort";
 import VideoYoutubeDetail from "../Components/MobilePage/Components/ModalHomepage/VideoYoutubeDetail";
+import VideoInfluencer from "../Components/MobilePage/Components/ModalHomepage/VideoInfluencer";
+import VideoUnnis from "../Components/MobilePage/Components/ModalHomepage/VideoUnnis";
+import Feedback from "../Components/MobilePage/ScreenNavBot/Feedback";
 
 const router = createBrowserRouter([
   {
@@ -96,9 +99,14 @@ const router = createBrowserRouter([
             path: "/cart",
             element: <Cart/>,
           },
+            // MY PAGE ==============================================
           {
             path: "/my-page",
             element: <MyPage/>,
+          },
+          {
+            path: "/mypage/feedback",
+            element: <Feedback/>,
           },
           {
             path: "/login",
@@ -116,7 +124,7 @@ const router = createBrowserRouter([
             path: "/newProduct/detailproduct/:id",
             element: <DetailProduct />,
           },
-          // VIDEO
+          // VIDEO ==============================================
           {
             path: "/video",
             element: <Video />
@@ -128,7 +136,16 @@ const router = createBrowserRouter([
           {
             path: "/video/videoyoutube/:id",
             element: <VideoYoutubeDetail />
+          }, 
+          {
+            path: "/video/videounnis/:id",
+            element: <VideoUnnis />
           },
+          {
+            path: "/video/videoinfluencer",
+            element: <VideoInfluencer/>
+          },
+          // COMMUNITY ==============================================
           {
             path: "/community",
             element: <Community />

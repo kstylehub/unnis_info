@@ -34,12 +34,14 @@ import {
   ReducerVideoByIdMemberInstagram,
   ReducerVideoByIdMemberUnnis,
   ReducerVideoByIdMemberYoutube,
+  ReducerVideoInfluencer,
 } from "./Reducers/ReducerVideo";
 import { ReducerAllCommunity } from "./Reducers/ReducerCommunity";
 import {
   ReducerRecycleHistory,
   ReducerRecycleLeaderboard,
 } from "./Reducers/ReducerRecycle";
+import { ReducerFeedback } from "./Reducers/ReducerFeedback";
 
 const rootReducer = combineReducers({
   ReducerProductCategory,
@@ -58,6 +60,7 @@ const rootReducer = combineReducers({
   ReducerProductWithPagination,
   ReducerVideoByIdMemberInstagram,
   ReducerVideoByIdMemberUnnis,
+  ReducerVideoInfluencer,
   ReducerProductRecommendationVideo,
   ReducerProductVideo,
   ReducerAllCommunity,
@@ -67,6 +70,7 @@ const rootReducer = combineReducers({
   ReducerReviewFeed,
   ReducerRecycleHistory,
   ReducerRecycleLeaderboard,
+  ReducerFeedback
 });
 
 const persistConfig = {

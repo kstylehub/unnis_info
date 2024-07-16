@@ -495,7 +495,7 @@ function MyPage() {
                   className="py-3 px-5 flex items-center justify-between w-full bg-white"
                   onClick={() => handleLogout()}
                 >
-                  <div className="text-sm">Acoount</div>
+                  <div className="text-sm">Account</div>
                   <div className="flex flex-row justify-center items-center">
                     <svg
                       className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
@@ -537,9 +537,8 @@ function MyPage() {
                     </svg>
                   </div>
                 </div>
-                <div
+                <Link to={"/mypage/feedback"}
                   className="py-3 px-5 flex items-center justify-between w-full bg-white"
-                  onClick={() => handleLogout()}
                 >
                   <div className="text-sm">Feedback</div>
                   <div className="flex flex-row justify-center items-center">
@@ -559,7 +558,7 @@ function MyPage() {
                       />
                     </svg>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
 

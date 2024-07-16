@@ -12,7 +12,8 @@ const {
   INFLUENCER,
   VIDEO,
   COMMUNITY, 
-  RECYCLE
+  RECYCLE,
+  FEEDBACK
 } = ACTIONS_TYPES;
 
 export const logout = () => ({
@@ -484,7 +485,7 @@ export const getActiveBanner = () => async (dispatch) => {
 export const getAllInfluencer = () => async (dispatch) => {
   try {
     dispatch({ type: INFLUENCER.GET_DATA_INFLUENCER_START });
-    const response = await fetch(`${BASE_URL}/influencer/getAll/5691`, {
+    const response = await fetch(`${BASE_URL}/video-recommendation/listInfluencer/?userId=8&length=20&star=1`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -594,7 +595,7 @@ export const getVideoByIdMemberUnnis= () => async (dispatch) => {
       type: VIDEO.GET_DATA_VIDEO_UNNIS_SUCCESS,
       payload: data,
     });
-    console.log("UNNISSS VIDEO >>> ", data);
+    // console.log("UNNISSS VIDEO >>> ", data);
     return data;
   } catch (error) {
     console.log("error get data", error);
@@ -655,12 +656,43 @@ export const getProductVideo= () => async (dispatch) => {
       type: VIDEO.GET_DATA_VIDEO_PRODUCT_SUCCESS,
       payload: data.data,
     });
-    console.log("Data Product >>> ", data);
+    // console.log("Data Product >>> ", data);
     return data;
   } catch (error) {
     console.log("error get data", error);
     dispatch({
       type: VIDEO.GET_DATA_VIDEO_PRODUCT_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const getVideoInfluencer= (name) => async (dispatch) => {
+  try {
+    dispatch({ type: VIDEO.GET_DATA_VIDEO_INFLUENCER_START });
+    const response = await fetch(
+      `${BASE_URL}/video-recommendation/detailInfluencer/?name=${name}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+    const data = await response.json();
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_INFLUENCER_SUCCESS,
+      payload: data.data,
+    });
+    console.log("Data INFLUENCER >>> ", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: VIDEO.GET_DATA_VIDEO_INFLUENCER_FAILED,
       payload: error,
     });
   }
@@ -755,6 +787,37 @@ export const getRecycleHistoryById = (id) => async (dispatch) => {
     console.log("error get data", error);
     dispatch({
       type: RECYCLE.GET_ALL_RECYCLE_HISTORY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+// FEEDBACK 
+export const postFeedback = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: FEEDBACK.POST_FEEDBACK_START });
+    const response = await fetch(`${BASE_URL}/feedback`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: FEEDBACK.POST_FEEDBACK_SUCCESS,
+      payload: data,
+    });
+    console.log("FEEDBACK >>> ",data);
+    return data; 
+  } catch (error) {
+    console.log("error get all data FEEDBACK:", error);
+    dispatch({
+      type: FEEDBACK.POST_FEEDBACK_FAILED,
       payload: error,
     });
   }
