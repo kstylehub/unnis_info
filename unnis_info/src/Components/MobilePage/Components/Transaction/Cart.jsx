@@ -7,15 +7,15 @@ function Cart() {
     <>
       <div className="w-full h-full overflow-x-auto relative pb-20"> {/* Add padding-bottom here */}
         <div className="top-0 sticky lg:px-8 px-4 w-full z-20 bg-white pt-2 shadow-md">
-          <div className="flex justify-center items-center py-4">
+          <div className="flex justify-center items-center py-3">
             <Link to={"/"} className="w-1/12 flex items-center justify-center">
               <img src={back} className="w-8 h-8" alt="Back" />
             </Link>
-            <div className="w-11/12 lg:text-2xl text-xl font-semibold items-center lg:ps-8">
+            <div className="w-11/12  text-xl font-semibold items-center lg:ps-8">
               Cart
             </div>
           </div>
-          <div className="py-4 flex justify-center items-center">
+          <div className="py-3 flex justify-center items-center">
             <div className="w-1/12 flex justify-start items-center">
               <svg
                 className="w-6 h-6 text-[#43BFA1] dark:text-white"
@@ -45,7 +45,7 @@ function Cart() {
             <div className="w-10/12">Shipped to ... </div>
             <div className="w-1/12 justify-end flex items-center">
               <svg
-                className="w-7 h-7 text-gray-800 dark:text-white"
+                className="w-6 h-6 text-gray-800 dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -63,9 +63,9 @@ function Cart() {
               </svg>
             </div>
           </div>
-          <div className="pt-4 pb-6 flex justify-center items-center">
+          <div className="pt-3 pb-6 flex justify-center items-center">
             <div className="w-1/12 flex justify-start items-center">
-              <input type="radio" className="w-5 h-5"></input>
+              <input type="radio" className="w-4 h-4"></input>
             </div>
             <div className="w-11/12">Select All</div>
           </div>
