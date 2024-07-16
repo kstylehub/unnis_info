@@ -24,7 +24,7 @@ function Video() {
     dispatch(getProductVideo());
     // dispatch(getRecommendationProductVideo());
   }, []);
-  
+
   const VideoRecommendationUnnis = useSelector(
     (state) => state.ReducerVideoByIdMemberUnnis.videoUnnis
   );
@@ -67,21 +67,23 @@ function Video() {
           {/* Influencer Profile */}
           <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide pt-5 pb-4">
             {allInfluencer.map((influencer, index) => (
-              <div
+              <Link
+                to={`/video/videoinfluencer`}
+                state={{ influencerData: influencer.influencerName }}
                 key={index}
                 className="flex flex-col justify-center items-center "
               >
                 <div className="w-16 h-16 rounded-full flex justify-center overflow-hidden ">
-                  {influencer.thumbnail ? (
+                  {influencer.photo ? (
                     <img
-                      src={influencer.thumbnail}
+                      src={influencer.photo}
                       className="object-cover w-full h-full"
                       alt={influencer.label}
                     />
                   ) : (
                     <div className="bg-[#4ABFA1] w-full h-full rounded-full">
                       <div className="flex justify-center items-center space-x-4 text-xl text-white font-bold uppercase p-4">
-                        {influencer.name ? influencer.name.charAt(0) : ""}
+                        {influencer.influencerName ? influencer.influencerName.charAt(0) : ""}
                       </div>
                     </div>
                   )}
@@ -90,9 +92,9 @@ function Video() {
                   className="py-1 truncate w-16 text-center"
                   style={{ textOverflow: "ellipsis" }}
                 >
-                  {influencer.name ? influencer.name : "-"}
+                  {influencer.influencerName ? influencer.influencerName : "-"}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="py-0.5 bg-gray-200"></div>
@@ -103,7 +105,11 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationInstagram.map((ig) => (
-                <Link to={`/video/videoshort/${ig.id}`} key={ig.id} className="relative">
+                <Link
+                  to={`/video/videoshort/${ig.id}`}
+                  key={ig.id}
+                  className="relative"
+                >
                   <div className="w-[10vw] h-[15vw]">
                     {ig.link ? (
                       <img
@@ -148,7 +154,7 @@ function Video() {
           <div className="flex flex-col px-4 py-3">
             <div className="flex justify-between pb-1">
               <div className="font-bold">Recommended Product</div>
-              <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+              {/* <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
                 <svg
                   className="w-5 h-5 text-gray-800 dark:text-white"
                   aria-hidden="true"
@@ -166,7 +172,7 @@ function Video() {
                     d="m9 5 7 7-7 7"
                   />
                 </svg>
-              </div>
+              </div> */}
             </div>
             <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
               {productVideo?.map((recproduct, index) => (
@@ -249,7 +255,9 @@ function Video() {
                   state={{ videoData: recvideo }}
                   key={recvideo.id}
                   className="relative"
-                >                  {recvideo.source.platform == "youtube" ? (
+                >
+                  {" "}
+                  {recvideo.source.platform == "youtube" ? (
                     <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} />
                     </div>
@@ -303,7 +311,7 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationUnnis?.map((unisupport) => (
-                <div key={`unisupport-${unisupport.id}`} className="relative">
+                <Link to={`/video/videounnis/${unisupport.id}`} key={`unisupport-${unisupport.id}`} className="relative">
                   <div className="w-[10vw] h-[15vw]">
                     {unisupport.thumbnail ? (
                       <img
@@ -336,7 +344,7 @@ function Video() {
                       </svg>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -441,12 +449,12 @@ function Video() {
             </div>
             <div className="  gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationYoutube.map((relatedvide) => (
-                 <Link
-                 to={`/video/videoyoutube/${relatedvide.id}`}
-                 state={{ videoData: relatedvide }}
-                 key={relatedvide.id}
-                 className="relative"
-               >
+                <Link
+                  to={`/video/videoyoutube/${relatedvide.id}`}
+                  state={{ videoData: relatedvide }}
+                  key={relatedvide.id}
+                  className="relative"
+                >
                   {relatedvide.source.platform == "youtube" ? (
                     <div className="absolute flex left-5 top-[11.5vw] w-10 h-10 rounded-full bg-white p-1 border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} />

@@ -97,3 +97,21 @@ export function ReducerProductVideo(state = valueProduct, action) {
       return state;
   }
 }
+
+const dafaultInfluencer = {
+  videoInfluencer: [],
+  error: null,
+  loading: true,
+};
+export function ReducerVideoInfluencer(state = dafaultInfluencer, action) {
+  switch (action.type) {
+    case VIDEO.GET_DATA_VIDEO_INFLUENCER_START:
+      return { ...state, loading: true };
+    case VIDEO.GET_DATA_VIDEO_INFLUENCER_FAILED:
+      return { ...state, error: action.payload, loading: false };
+    case VIDEO.GET_DATA_VIDEO_INFLUENCER_SUCCESS:
+      return { ...state, videoInfluencer: action.payload, loading: false };
+    default:
+      return state;
+  }
+}
