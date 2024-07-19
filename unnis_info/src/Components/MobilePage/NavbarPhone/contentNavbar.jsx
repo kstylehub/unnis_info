@@ -776,12 +776,12 @@ function ContentNavbar() {
                   className="flex justify-center border w-[7.7vw] h-[11vw] shadow-lg hover:scale-110"
                 >
                   <div className="flex flex-col py-2">
-                    <div className="flex justify-center items-center ">
-                      <div style={{ width: "120px", height: "120px" }}>
+                    <div className="flex justify-center items-center">
+                      <div style={{ width: "100px", height: "100px" }}>
                         {item.images !== null ? (
                           <img
                             src={item.images}
-                            className="object-contain"
+                            className="object-contain p-1"
                             style={{ width: "100%", height: "100%" }}
                           />
                         ) : (
