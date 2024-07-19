@@ -37,20 +37,20 @@ import {
 import ModalLoginWarn from "../Components/ModalHomepage/ModalLoginWarn";
 
 function ContentNavbar() {
-  const product = useSelector((state) => state.ReducerTopProduct.topProduct);
-  const allReview = useSelector((state) => state.ReducerReview.dataReview);
-  const allFeed = useSelector((state) => state.ReducerFeed.dataFeed);
-  const allEvent = useSelector((state) => state.ReducerEventData.event);
-  const getUser = useSelector((state) => state.ReducerUser.dataUser);
-  const allBanner = useSelector((state) => state.ReducerActiveBanner.banner);
+  const product = useSelector((state) => state.ReducerTopProduct?.topProduct);
+  const allReview = useSelector((state) => state.ReducerReview?.dataReview);
+  const allFeed = useSelector((state) => state.ReducerFeed?.dataFeed);
+  const allEvent = useSelector((state) => state.ReducerEventData?.event);
+  const getUser = useSelector((state) => state.ReducerUser?.dataUser);
+  const allBanner = useSelector((state) => state.ReducerActiveBanner?.banner);
   const allProduct = useSelector(
     (state) => state.ReducerProductWithPagination.dataProductWithPagination
   );
   const VideoRecommendation = useSelector(
-    (state) => state.ReducerVideoByIdMemberYoutube.idVideo || []
+    (state) => state.ReducerVideoByIdMemberYoutube?.idVideo || []
   );
   const allInfluencer = useSelector(
-    (state) => state.ReducerAllInfluencer.influencer
+    (state) => state.ReducerAllInfluencer?.influencer
   );
   const dataUser = getUser?.dataMember?.[0];
 
@@ -69,14 +69,14 @@ function ContentNavbar() {
   // console.log("data top >>>>",allProductWithPagination);
   const productList = Array.isArray(product?.data) ? product.data : [];
   const allProductWithPagination = Array.isArray(allProduct?.dataProduct)
-    ? allProduct.dataProduct
+    ? allProduct?.dataProduct
     : [];
 
   function BoxReview() {
     const dataReview = allReview?.dataReview;
     const truncatedData = dataReview?.slice(0, 4);
 
-    if (!truncatedData || truncatedData.length === 0) {
+    if (!truncatedData || truncatedData?.length === 0) {
       return <div className="text-gray-300 text-sm">No box review</div>;
     }
 
@@ -376,8 +376,7 @@ function ContentNavbar() {
           margin={10}
           items={1}
         >
-          {allBanner
-            .filter((el) => el.category !== "influencer")
+          {allBanner?.filter((el) => el?.category !== "influencer")
             .map((el) => (
               <div key={el.id}>
                 <img
@@ -403,7 +402,7 @@ function ContentNavbar() {
             { src: Hair, label: "Hair" },
             { src: Baby, label: "Kids & Baby" },
             { src: Food, label: "Food" },
-          ].map((item, index) => (
+          ]?.map((item, index) => (
             <div
               key={index}
               className="flex flex-col justify-center items-center"
@@ -449,7 +448,7 @@ function ContentNavbar() {
         </div>
         {/* Icon Influencer */}
         <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-1">
-          {allInfluencer.map((item, index) => (
+          {allInfluencer?.map((item, index) => (
             <Link
               to={`/video/videoinfluencer`}
               state={{ influencerData: item.influencerName }}
@@ -505,7 +504,7 @@ function ContentNavbar() {
             </div>
           </div>
           <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
-            {productList.map((item, index) => (
+            {productList?.map((item, index) => (
               <Link to={`/newProduct/detailproduct/${item.id}`}
                 key={index}
                 className="relative border p-3 w-[8.5vw] flex-shrink-0"
@@ -559,7 +558,7 @@ function ContentNavbar() {
 
                   <div className="text-left font-bold">
                     Rp{" "}
-                    {item.price
+                    {item?.price
                       .toLocaleString("id-ID", {
                         minimumFractionDigits: 0,
                         maximumFractionDigits: 0,
@@ -651,8 +650,7 @@ function ContentNavbar() {
         </div>
         {/* Banner Influencer */}
         <OwlCarousel className="" loop autoplay margin={0} items={1}>
-          {allBanner
-            .filter((el) => el.category === "influencer")
+          {allBanner?.filter((el) => el.category === "influencer")
             .map((el) => (
               <div key={el.id}>
                 <img
@@ -772,7 +770,7 @@ function ContentNavbar() {
           </div>
           <div className="pb-5 pt-2 ps-4 pe-2">
             <OwlCarousel className="owl-theme" {...options}>
-              {productList.map((item, index) => (
+              {productList?.map((item, index) => (
                 <Link to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
                   className="flex justify-center border w-[7.7vw] h-[11vw] shadow-lg hover:scale-110"
@@ -1021,42 +1019,42 @@ function ContentNavbar() {
                   <div className="flex justify-end">
                     {[
                       {
-                        href: item.unnispickLink,
+                        href: item?.unnispickLink,
                         text: "Unnispick",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_1.png",
                       },
                       {
-                        href: item.shopeeLink,
+                        href: item?.shopeeLink,
                         text: "Shopee",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_2.png",
                       },
                       {
-                        href: item.tokopediaLink,
+                        href: item?.tokopediaLink,
                         text: "Tokopedia",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_3.png",
                       },
                       {
-                        href: item.iStyleLink,
+                        href: item?.iStyleLink,
                         text: "iStyle",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_4.png",
                       },
                       {
-                        href: item.sociollaLink,
+                        href: item?.sociollaLink,
                         text: "Sociolla",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_6.png",
                       },
                       {
-                        href: item.styleKoreanLink,
+                        href: item?.styleKoreanLink,
                         text: "Style Korean",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_7.png",
                       },
                       {
-                        href: item.oliveYoungLink,
+                        href: item?.oliveYoungLink,
                         text: "Olive Young",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_5.png",
                       },
                       {
-                        href: item.kalCareLink,
+                        href: item?.kalCareLink,
                         text: "Kal Care",
                         icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_8.png",
                       },
