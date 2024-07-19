@@ -105,7 +105,7 @@ export default function NavbarCategoryHome() {
         <>
           {truncatedData?.map((el) => {
             return (
-              <div
+              <Link to={`/newProduct/detailproduct/${el.id}`}
                 key={el.description}
                 className="relative border p-3 w-[8.5vw] flex-shrink-0"
               >
@@ -231,7 +231,7 @@ export default function NavbarCategoryHome() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </>

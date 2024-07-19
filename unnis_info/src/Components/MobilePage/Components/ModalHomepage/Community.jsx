@@ -14,7 +14,6 @@ function Community() {
   const getUser = useSelector((state) => state.ReducerUser.dataUser);
   const dataUser = getUser?.dataMember?.[0];
 
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCommunity());
@@ -32,14 +31,14 @@ function Community() {
   return (
     <>
       <div className="bg-white relative">
-        <div className="pt-4 pb-1 sticky top-0 z-20 bg-white shadow-md">
+        <div className="pt-4 pb-1 sticky top-0 z-20 bg-white shadow">
           <div className="flex justify-between">
             <div className="justify-center items-center w-3/12 p-1">
               <img src={LogoUnnis} className="w-12/12" />
             </div>
             <div className="flex justify-center items-center gap-1">
-              <img src={coin} className="w-6 h-6  flex items-center"></img>
-              <p className="font-bold text-[#4ABFA1] text-2xl">
+              <img src={coin} className="w-5 h-5  flex items-center"></img>
+              <p className="font-bold text-[#4ABFA1] text-lg">
                 {dataUser ? `${dataUser.point}` : "0"}
               </p>
             </div>
@@ -83,7 +82,7 @@ function Community() {
             <div className="w-1/12 flex justify-center items-center">
               <img src={Alert} className="w-full h-full p-0.5" />
             </div>
-            <div className="w-11/12 text-sm text-[#4ABFA1] font-semibold">
+            <div className="w-11/12 text-xs text-[#4ABFA1] font-bold">
               The opinions expressed in this community are personal and may
               different from expert opinions.
             </div>
@@ -93,22 +92,42 @@ function Community() {
           {AllCommunity?.map((com) => (
             <div key={com} className="bg-white flex flex-col ">
               <div className="px-5 py-6">
-                <div className="flex">
-                  <div className="rounded-full flex justify-center items-center ">
-                    {com.photo_profile ? (
-                      <img
-                        src={com.photo_profile}
-                        className="rounded-full w-9 h-9"
-                      />
-                    ) : (
-                      <img className="w-9 h-9 bg-[#4ABFA1] rounded-full" />
-                    )}
+                <div className="flex justify-between">
+                  <div className="flex">
+                    <div className="rounded-full flex justify-center items-center ">
+                      {com.photo_profile ? (
+                        <img
+                          src={com.photo_profile}
+                          className="rounded-full w-8 h-8 object-cover"
+                        />
+                      ) : (
+                        <img className="w-8 h-8 bg-[#4ABFA1] rounded-full" />
+                      )}
+                    </div>
+                    <div className="flex justify-center text-sm items-center pl-4">
+                      {com.user}
+                    </div>
                   </div>
-                  <div className="flex justify-center items-center pl-4">
-                    {com.user}
+                  <div className="">
+                    <svg
+                      class="w-6 h-6 text-gray-800 dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        d="M6 12h.01m6 0h.01m5.99 0h.01"
+                      />
+                    </svg>
                   </div>
                 </div>
-                <div className="py-4">{com.thread}</div>
+                <div className="py-5 text-sm">{com.thread}</div>
                 <div className="flex justify-between items-center text-sm">
                   <div className="">
                     {calculateDaysAgo(com.createdDate)} hari yang lalu

@@ -6,36 +6,38 @@ import Shopee from "../../../../assets/shopee.svg";
 import Istyle from "../../../../assets/istyle.svg";
 import OliveYoung from "../../../../assets/OliveYoung.svg";
 import Sociolla from "../../../../assets/Sociolla.svg";
-import { getDetailProduct } from "../../../../Store/Actions/Actions";
+
 import { Link, useParams } from "react-router-dom";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { CircleLoader } from "react-spinners";
+import { useDispatch, useSelector } from "react-redux";
+import { getDetailProduct } from "../../../../Store/Actions/Actions";
 
-function detailProduct() {
-  const dispatch = useDispatch();
+function DetailProduct() {
+  const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [showModalDesc, setShowModalDesc] = useState(false);
-  const detailProduct = useSelector(
-    (state) => state.ReducerDetailProduct.dataProduct
-  );
-  const user = useSelector((state) => state.ReducerUser.dataUser);
 
+  // Redux hooks
+  const detailProduct = useSelector(
+    (state) => state.ReducerDetailProduct.dataDetailProduct
+  );
   const loading = useSelector((state) => state.ReducerDetailProduct.loading);
-  const { id } = useParams();
-  const idMember = user.dataMember?.[0].id;
+  const dispatch = useDispatch();
+
+  // Effect to fetch product details on mount
   useEffect(() => {
     const body = {
-      idMember: idMember,
+      idMember: 5691, // This could be dynamically obtained from user data
       idProduct: +id,
     };
     dispatch(getDetailProduct(body));
-  }, [id]);
+  }, [id, dispatch]);
 
+  // Data and format handling
   const dataProduct = detailProduct?.dataProduct?.[0];
-  const formattedPrice =
-    detailProduct?.dataProduct?.[0].price.toLocaleString("id-ID");
+  const formattedPrice = dataProduct?.price?.toLocaleString("id-ID");
 
   // Modal Ingredients and Description
 
@@ -285,13 +287,13 @@ function detailProduct() {
         <div className="w-5/12 flex flex-col justify-center items-center">
           <p className="text-center font-bold uppercase">Nilai</p>
           <p className="text-4xl text-center font-bold">
-            {parseFloat(dataProduct.rating).toFixed(1)}
+            {parseFloat(dataProduct?.rating).toFixed(1)}
           </p>
           <div className="flex justify-evenly py-2">
             {[...Array(filledStars)].map((_, index) => (
               <svg
                 key={index}
-                className="h-5 w-5 mx-0.5 text-red-700"
+                className="h-5 w-5 mx-0.5 text-yellow-500"
                 viewBox="0 0 24 24"
                 fill="red"
                 stroke="red"
@@ -305,7 +307,7 @@ function detailProduct() {
             {[...Array(remainingStars)].map((_, index) => (
               <svg
                 key={index}
-                className="h-5 w-5 mx-0.5 text-red-700"
+                className="h-5 w-5 mx-0.5 text-yellow-500"
                 viewBox="0 0 24 24"
                 fill="gray"
                 stroke="gray"
@@ -356,23 +358,23 @@ function detailProduct() {
           </div>
 
           {/* Content */}
-          <div className="lg:px-8 px-4 border-b-4 border-gray-200 pb-3">
+          <div className="lg:px-6 px-4 border-b-4 border-gray-200 pb-3">
             <div className="h-full flex justify-center items-start">
               <img
                 className="w-10 h-10 mt-[20%]"
-                src={dataProduct.dataCountry.flag}
+                src={dataProduct?.dataCountry?.flag}
               ></img>
-              <img src={dataProduct.images} className="w-8/12" />
+              <img src={dataProduct?.images} className="w-8/12 py-5" />
               <div className="text-center flex flex-col justify-start pt-[5%]">
                 <h5 className="font-bold text-[#4ABFA1]">Disukai</h5>
-                <h6 className="">{dataProduct.likeNum}</h6>
+                <h6 className="">{dataProduct?.likeNum}</h6>
               </div>
             </div>
             <div className="py-2">
               <h1 className="font-bold text-2xl">Rp. {formattedPrice}</h1>
               <div className="pt-3 flex justify-start items-center">
                 <p className="text-gray-400 uppercase mr-3 ">
-                  {dataProduct.brand}
+                  {dataProduct?.brand}
                 </p>
                 <svg
                   className="w-3 h-3 text-gray-400 dark:text-white"
@@ -390,100 +392,243 @@ function detailProduct() {
                   />
                 </svg>
               </div>
-              <p className="font-bold">{dataProduct.name}</p>
+              <p className="font-bold ">{dataProduct?.name}</p>
               <p className="text-red-500 text-sm">
-                {dataProduct.stock === 0
+                {dataProduct?.stock === 0
                   ? "Produk tidak tersedia. Stock habis"
-                  : ` `}
+                  : ""}
               </p>
-              <div className="flex justify-start py-4 gap-4">
-                {dataProduct.keyword[0] !== undefined &&
-                  dataProduct.keyword[0] !== "" && (
-                    <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-sm">
-                      {"#" + dataProduct.keyword[0]}
+              {dataProduct?.stock !== 0 && (
+                <p className=" text-sm text-gray-400">
+                  Stock: {dataProduct?.stock}
+                </p>
+              )}
+
+              <div className="flex justify-start py-2 gap-2">
+                {dataProduct?.keyword[0] !== undefined &&
+                  dataProduct?.keyword[0] !== "" &&
+                  dataProduct?.keyword[0] !== "" && (
+                    <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-xs">
+                      {"#" + dataProduct?.keyword[0]}
                     </p>
                   )}
-                {dataProduct.keyword[1] !== undefined &&
-                  dataProduct.keyword[1] !== "" && (
-                    <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-sm">
-                      {"#" + dataProduct.keyword[1]}
+                {dataProduct?.keyword[1] !== undefined &&
+                  dataProduct?.keyword[1] !== "" && (
+                    <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-xs">
+                      {"#" + dataProduct?.keyword[1]}
                     </p>
                   )}
-                {dataProduct.keyword[2] !== undefined &&
-                  dataProduct.keyword[2] !== "" && (
-                    <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-sm">
-                      {"#" + dataProduct.keyword[2]}
+                {dataProduct?.keyword[2] !== undefined &&
+                  dataProduct?.keyword[2] !== "" && (
+                    <p className="pt-0.5 pb-1 px-2 border border-gray-400 text-gray-400 rounded-full text-xs">
+                      {"#" + dataProduct?.keyword[2]}
                     </p>
                   )}
               </div>
-              <p className="text-xs text-gray-400 pb-3">You can buy this at</p>
-              <div className="flex gap-2">
-                <Link to={dataProduct.unnispickLink} target="_Blank">
+              <p className="text-xs text-gray-400 pb-2 pt-1">You can buy this at</p>
+              <div className="flex">
+                <Link to={dataProduct?.unnispickLink} target="_Blank">
                   <img
                     src={UnnisIcon}
                     className={
-                      dataProduct.unnispickLink === ""
+                      dataProduct?.unnispickLink === ""
                         ? "hidden"
-                        : "w-8 h-8 rounded-full"
+                        : "w-7 h-7 rounded-full mr-2"
                     }
                   />
                 </Link>
 
-                <Link to={dataProduct.shopeeLink} target="_Blank">
+                <Link to={dataProduct?.shopeeLink} target="_Blank">
                   <img
                     src={Shopee}
                     className={
-                      dataProduct.shopeeLink === ""
+                      dataProduct?.shopeeLink === ""
                         ? "hidden"
-                        : "w-8 h-8 rounded-full"
+                        : "w-7 h-7 rounded-full mr-2"
                     }
                   />
                 </Link>
-                <Link to={dataProduct.tokopediaLink} target="_Blank">
+                <Link to={dataProduct?.tokopediaLink} target="_Blank">
                   <img
                     src={Tokopedia}
                     className={
-                      dataProduct.tokopediaLink === ""
+                      dataProduct?.tokopediaLink === ""
                         ? "hidden"
-                        : "w-8 h-8 rounded-full"
+                        : "w-7 h-7 rounded-full mr-2"
                     }
                   />
                 </Link>
-                <Link to={dataProduct.oliveYoungLink} target="_Blank">
+                <Link to={dataProduct?.oliveYoungLink} target="_Blank">
                   <img
                     src={OliveYoung}
                     className={
-                      dataProduct.oliveYoungLink === ""
+                      dataProduct?.oliveYoungLink === ""
                         ? "hidden"
-                        : "w-8 h-8 rounded-full"
+                        : "w-7 h-7 rounded-full mr-2"
                     }
                   />
                 </Link>
-                <Link to={dataProduct.sociollaLink} target="_Blank">
+                <Link to={dataProduct?.sociollaLink} target="_Blank">
                   <img
                     src={Sociolla}
                     className={
-                      dataProduct.sociollaLink === ""
+                      dataProduct?.sociollaLink === ""
                         ? "hidden"
-                        : "w-8 h-8 rounded-full"
+                        : "w-7 h-7 rounded-full mr-2"
                     }
                   />
                 </Link>
-                <Link to={dataProduct.styleKoreanLink} target="_Blank">
+                <Link to={dataProduct?.styleKoreanLink} target="_Blank">
                   <img
                     src={Istyle}
                     className={
-                      dataProduct.styleKoreanLink === ""
+                      dataProduct?.styleKoreanLink === ""
                         ? "hidden"
-                        : "w-8 h-8 rounded-full"
+                        : "w-7 h-7 rounded-full mr-2"
                     }
                   />
                 </Link>
               </div>
             </div>
           </div>
-          <div className="lg:px-8 px-4 border-b">
-            <div className="flex w-full py-5 ">
+          {/* BPOM dan MUI */}
+          {dataProduct?.certificate?.map((cert) =>
+            cert.name === "BPOM" || cert.name === "MUI" ? (
+              <div
+                key={cert.id}
+                className="lg:px-6 px-4 py-4 border-b-4 border-gray-200"
+              >
+                <div className="flex">
+                  <div className="w-1/12 pt-0.5">
+                    <svg
+                      className="w-6 h-6 text-gray-800 dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1"
+                        d="M9.5 11.5 11 13l4-3.5M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="w-10/12 flex flex-col">
+                    <div className="font-bold text-sm">
+                      {cert.name === "BPOM"
+                        ? "SUDAH TERSERTIFIKASI BPOM"
+                        : "SUDAH TERSERTIFIKASI HALAL MUI"}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      No. certificate: {cert.number}
+                    </div>
+                  </div>
+                  <div className="w-1/12 flex items-center justify-end">
+                    <svg
+                      className="w-6 h-6 text-[#4ABFA1] dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )
+          )}
+          {/* Analisis Ingredients*/}
+            <div className={dataProduct?.ingredientAnalyst?.length !== 0 ? "border-b-4 border-gray-200 pb-3" : "hidden"}>
+              <div className="uppercase font-bold text-sm lg:px-6 px-4 pt-4 pb-1" >
+                PRODUCT ANALYSIS RESULT
+              </div>
+              {dataProduct?.ingredientAnalyst?.map((ingredients) => (
+                <div key={ingredients.id} className={ingredients.status === true ? "lg:px-6 px-4 py-2" : "lg:px-6 px-4 py-2 bg-red-200"}>
+                  <div className="flex">
+                    <div className="w-1/12 pt-0.5">
+                      <svg
+                        className="w-6 h-6 text-gray-800 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1"
+                          d="M9.5 11.5 11 13l4-3.5M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"
+                        />
+                      </svg>
+                    </div>
+                    <div className="w-10/12 flex flex-col">
+                      <div className="font-bold text-sm uppercase">
+                        {ingredients.title}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {ingredients.desc}
+                      </div>
+                    </div>
+                    <div className="w-1/12 flex items-center justify-end">
+                      {ingredients.status === true ? (
+                        <svg
+                          className="w-6 h-6 text-[#4ABFA1] dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="w-6 h-6 text-red-500 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          {/* Ingredients */}
+          <div className="lg:px-6 px-4 ">
+            <div className="flex w-full py-4 ">
               <div className="w-1/12 ">
                 <img
                   className="h-5 w-5"
@@ -494,35 +639,41 @@ function detailProduct() {
               <div className="w-11/12 text-sm flex flex-col justify-between">
                 <div className="flex justify-between">
                   <div className="font-bold flex">INGREDIENTS</div>
-                  <div
-                    className="flex justify-center items-center"
-                    onClick={handleIngredients}
-                  >
-                    <div className="text-gray-400 mr-3">View All</div>
-                    <svg
-                      className="w-3 h-3 text-gray-400 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 8 14"
+                  {dataProduct?.ingredients !== "" && (
+                    <div
+                      className="flex justify-center items-center"
+                      onClick={handleIngredients}
                     >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
-                      />
-                    </svg>
-                  </div>
+                      <div className="text-gray-400 mr-3">View All</div>
+                      <svg
+                        className="w-3 h-3 text-gray-400 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 8 14"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                        />
+                      </svg>
+                    </div>
+                  )}
                 </div>
                 <p className="pt-2 max-h-[5em] overflow-hidden text-ellipsis">
-                  {dataProduct.ingredients}
+                  {dataProduct?.ingredients
+                    ? dataProduct?.ingredients
+                    : "No ingredients"}
                 </p>
               </div>
             </div>
           </div>
-          <div className="lg:px-8 px-4 border-b-4 border-gray-200">
+          <hr></hr>
+          {/* Description */}
+          <div className="lg:px-6 px-4 border-b-4 border-gray-200">
             <div className="flex w-full py-5 ">
               <div className="w-1/12 ">
                 <img
@@ -534,30 +685,34 @@ function detailProduct() {
               <div className="w-11/12 text-sm flex flex-col justify-between">
                 <div className="flex justify-between">
                   <div className="font-bold flex">DESCRIPTION</div>
-                  <div
-                    className="flex justify-center items-center"
-                    onClick={handleDescription}
-                  >
-                    <div className="text-gray-400 mr-3">View All</div>
-                    <svg
-                      className="w-3 h-3 text-gray-400 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 8 14"
+                  {dataProduct?.description !== "" && (
+                    <div
+                      className="flex justify-center items-center"
+                      onClick={handleDescription}
                     >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
-                      />
-                    </svg>
-                  </div>
+                      <div className="text-gray-400 mr-3">View All</div>
+                      <svg
+                        className="w-3 h-3 text-gray-400 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 8 14"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                        />
+                      </svg>
+                    </div>
+                  )}
                 </div>
                 <p className="pt-2 max-h-[5em] overflow-hidden text-ellipsis">
-                  {dataProduct.description}
+                  {dataProduct?.description
+                    ? dataProduct?.description
+                    : "No description"}
                 </p>
               </div>
             </div>
@@ -568,7 +723,7 @@ function detailProduct() {
             <div className="flex w-full pb-5 ">
               <div className="font-bold flex">REVIEW</div>
               <p className="mx-2 text-red-500 font-bold">
-                {dataProduct.reviewNum}
+                {dataProduct?.reviewNum}
               </p>
             </div>
             <div className="flex justify-center w-full py-1">
@@ -725,11 +880,11 @@ function detailProduct() {
                 onClick={closeModalIngredients}
                 className="h-5 w-5"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" />
                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -741,7 +896,9 @@ function detailProduct() {
               style={dataContainerStyle}
               className="lg:mb-2 text-sm text-left py-4"
             >
-              {dataProduct.ingredients}
+              {dataProduct.ingredients
+                ? dataProduct.ingredients
+                : "Ingredients not available"}
             </h5>
           </div>
         </div>
@@ -758,11 +915,11 @@ function detailProduct() {
                 onClick={closeModalDescription}
                 className="h-5 w-5"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" />
                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -774,13 +931,15 @@ function detailProduct() {
               style={dataContainerStyle}
               className="lg:px-6 px-4 lg:mb-2 text-sm text-left py-4"
             >
-              {dataProduct.description}
+              {dataProduct?.description
+                ? dataProduct.description
+                : "Description not available"}
             </h5>
             <hr></hr>
             <div className="lg:px-6 px-4 py-4">
               <h1 className="font-bold font-base text-left">VOLUME / HARGA</h1>
               <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
-                {dataProduct.volume} / Rp. {formattedPrice}
+                {dataProduct?.volume} / Rp. {formattedPrice}
               </h5>
             </div>
             <hr></hr>
@@ -790,21 +949,21 @@ function detailProduct() {
               </h1>
               <img
                 className="w-8 h-8 mt-2"
-                src={dataProduct.dataCountry.flag}
+                src={dataProduct?.dataCountry.flag}
               ></img>
             </div>
             <hr></hr>
             <div className="lg:px-6 px-4 py-4">
               <h1 className="font-bold font-base text-left">HOW TO USE</h1>
               <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
-                {dataProduct.howuse}
+                {dataProduct?.howuse}
               </h5>
             </div>
             <hr></hr>
             <div className="lg:px-6 px-4 py-4">
               <h1 className="font-bold font-base text-left">RECOMMEND FOR</h1>
               <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
-                {dataProduct.recommend}
+                {dataProduct?.recommend}
               </h5>
             </div>
           </div>
@@ -814,4 +973,4 @@ function detailProduct() {
   );
 }
 
-export default detailProduct;
+export default DetailProduct;

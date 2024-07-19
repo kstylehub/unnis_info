@@ -102,7 +102,12 @@ function ContentNavbar() {
 
   function BoxEvent() {
     const visibleEvents = allEvent?.dataEvent?.filter((event) => event.visible);
-    const truncatedData = visibleEvents?.slice(0, 4);
+    const currentDate = new Date();
+    const ongoingOrUpcomingEvents = visibleEvents?.filter((event) => {
+      const lastDateObj = new Date(event.endDate);
+      return lastDateObj >= currentDate;
+    });
+    const truncatedData = ongoingOrUpcomingEvents?.slice(0, 5);
 
     if (!truncatedData || truncatedData.length === 0) {
       return <div className="text-gray-300 text-sm">No recently event</div>;
@@ -117,7 +122,6 @@ function ContentNavbar() {
               const firstDate = el.startDate;
               const lastDateObj = new Date(lastDate);
               const firstDateObj = new Date(firstDate);
-              const currentDate = new Date();
               const lastday = lastDateObj.getDate().toString().padStart(2, "0");
               const firstday = firstDateObj
                 .getDate()
@@ -165,9 +169,18 @@ function ContentNavbar() {
                 <div className="" key={el.id}>
                   <div className="border sm:w-[50vw] w-[70vw] md:w-[20vw] h-full">
                     <img src={el.thumbnail} className="w-fit" alt="Banner" />
-                    <div className="pl-3 my-2">
+                    <div className=" p-4">
                       <div>
-                        <h1 className="text-slate-800 uppercase font-bold font-sans">
+                        <h1
+                          style={{
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            lineHeight: "1.4",
+                          }}
+                          className="text-slate-800 uppercase font-bold font-sans"
+                        >
                           {el.title}
                         </h1>
                         <div
@@ -177,19 +190,19 @@ function ContentNavbar() {
                             WebkitLineClamp: 1,
                             WebkitBoxOrient: "vertical",
                             overflow: "hidden",
-                            lineHeight: "1.3",
+                            lineHeight: "1.4",
                           }}
                         >
                           {el.subtitle}
                         </div>
                       </div>
-                      <div className="flex justify-between text-xs my-2 pb-2">
+                      <div className="flex justify-between text-xs my-2 ">
                         <div>
                           <p className="text-slate-700">
                             {formattedFirstDate} ~ {formattedLastDate}
                           </p>
                         </div>
-                        <div className="border rounded-full px-2 border-rose-600 mr-3">
+                        <div className="border rounded-full px-2 border-rose-600">
                           <p className="text-rose-600">
                             {formattedRemainingDays}
                           </p>
@@ -355,9 +368,9 @@ function ContentNavbar() {
             </div>
           </div>
         </div>
-        {/* Banner Event or Product */}
+        {/* Main Banner Event or Product */}
         <OwlCarousel
-          className="absolute top-[8.5vw] px-3.5 "
+          className="absolute top-[9.5vw] px-3.5 "
           loop
           autoplay
           margin={10}
@@ -376,7 +389,7 @@ function ContentNavbar() {
             ))}
         </OwlCarousel>
         {/* Category Icon */}
-        <div className="mt-28 pt-3 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
+        <div className="mt-28 pt-1 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
           {[
             { src: Category, label: "Category" },
             { src: Skinanalysis, label: "Skin Analysis" },
@@ -412,11 +425,11 @@ function ContentNavbar() {
           <OwlCarousel
             items={1}
             nav={false}
-            dots={true}
+            // dots={true}
             autoplay
             loop={true}
             mouseDrag={true}
-            className="owl-theme"
+            // className="owl-theme"
           >
             <div className="px-1">
               <img
@@ -435,14 +448,14 @@ function ContentNavbar() {
           </OwlCarousel>
         </div>
         {/* Icon Influencer */}
-        <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
+        <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-1">
           {allInfluencer.map((item, index) => (
             <Link
-            to={`/video/videoinfluencer`}
-            state={{ influencerData: item.influencerName }}
-            key={index}
-            className="flex flex-col justify-center items-center "
-          >
+              to={`/video/videoinfluencer`}
+              state={{ influencerData: item.influencerName }}
+              key={index}
+              className="flex flex-col justify-center items-center "
+            >
               <div className="w-16 h-16 rounded-full flex justify-center overflow-hidden">
                 {item.photo ? (
                   <img
@@ -468,10 +481,10 @@ function ContentNavbar() {
           ))}
         </div>
         {/* New Product */}
-        <div className="flex flex-col px-4 py-4">
+        <div className="flex flex-col px-4 py-3">
           <div className="flex justify-between pb-1">
             <div className="font-bold">New Product</div>
-            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+            <div className="flex justify-center items-center h-7 w-7 rounded-full border border-gray-200">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -493,7 +506,7 @@ function ContentNavbar() {
           </div>
           <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
             {productList.map((item, index) => (
-              <div
+              <Link to={`/newProduct/detailproduct/${item.id}`}
                 key={index}
                 className="relative border p-3 w-[8.5vw] flex-shrink-0"
               >
@@ -632,7 +645,7 @@ function ContentNavbar() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -654,7 +667,7 @@ function ContentNavbar() {
         <div className="Video">
           <div className="flex justify-between pb-1 px-4">
             <div className="font-bold">Recommended Video</div>
-            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+            <div className="flex justify-center items-center h-7 w-7 rounded-full border border-gray-200">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -677,11 +690,13 @@ function ContentNavbar() {
           <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
             {VideoRecommendation.map((el) => (
               <Link
-                  to={`/video/videoyoutube/${el.id}`}
-                  state={{ videoData: el }}
-                  key={el.id}
-                  className="relative"
-                >                {el.source.platform == "youtube" ? (
+                to={`/video/videoyoutube/${el.id}`}
+                state={{ videoData: el }}
+                key={el.id}
+                className="relative"
+              >
+                {" "}
+                {el.source.platform == "youtube" ? (
                   <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
                     <img className="" src={Youtube} />
                   </div>
@@ -733,9 +748,9 @@ function ContentNavbar() {
         </div>
         {/* For You */}
         <div className="Foryou">
-          <div className="flex justify-between pb-1 px-4">
+          <div className="flex justify-between pb-1 pt-2 px-4">
             <div className="font-bold">For You</div>
-            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+            {/* <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -753,12 +768,12 @@ function ContentNavbar() {
                   d="m9 5 7 7-7 7"
                 />
               </svg>
-            </div>
+            </div> */}
           </div>
           <div className="pb-5 pt-2 ps-4 pe-2">
             <OwlCarousel className="owl-theme" {...options}>
               {productList.map((item, index) => (
-                <div
+                <Link to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
                   className="flex justify-center border w-[7.7vw] h-[11vw] shadow-lg hover:scale-110"
                 >
@@ -794,7 +809,7 @@ function ContentNavbar() {
                       {item.name}
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </OwlCarousel>
           </div>
@@ -803,7 +818,7 @@ function ContentNavbar() {
         <div className="Category">
           <div className="flex justify-between pb-1 px-4">
             <div className="font-bold">Category</div>
-            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+            <div className="flex justify-center items-center h-7 w-7 rounded-full border border-gray-200">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -828,7 +843,7 @@ function ContentNavbar() {
           </div>
         </div>
         {/* Review Box */}
-        <div className="ReviewBox">
+        {/* <div className="ReviewBox">
           <div className="flex justify-between pb-1 px-4">
             <div className="font-bold">Beauty Box Review</div>
             <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
@@ -854,12 +869,12 @@ function ContentNavbar() {
           <div className="flex px-4 gap-3 overflow-x-auto scrollbar-hide py-3">
             <BoxReview />
           </div>
-        </div>
+        </div> */}
         {/* Event */}
         <div className="Event">
           <div className="flex justify-between pb-1 px-4">
             <div className="font-bold">Event</div>
-            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+            <div className="flex justify-center items-center h-7 w-7 rounded-full border border-gray-200">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -884,10 +899,10 @@ function ContentNavbar() {
           </div>
         </div>
         {/* Feed */}
-        <div className="Feed pt-3">
+        <div className="Feed ">
           <div className="flex justify-between py-1 px-4">
             <div className="font-bold">Feed</div>
-            <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+            <div className="flex justify-center items-center h-7 w-7 rounded-full border border-gray-200">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -907,17 +922,17 @@ function ContentNavbar() {
               </svg>
             </div>
           </div>
-          <div className="flex px-4 gap-3 overflow-x-auto scrollbar-hide py-3">
+          <div className="flex px-4 gap-3 overflow-x-auto scrollbar-hide pt-3">
             <BoxFeed />
           </div>
         </div>
         {/* All Product */}
-        <div className="bg-gray-100 flex text-center py-2 text-[#787878] pb-3">
-          ------------------------ Kamu Pasti Suka Ini -----------------------
+        <div className="bg-gray-100 flex justify-center text-sm text-center py-2 text-[#787878] pb-3">
+          ----------------------- Kamu Pasti Suka Ini ----------------------
         </div>
         <div className="flex flex-wrap justify-between py-1 px-4 bg-gray-100">
           {allProductWithPagination.map((item, index) => (
-            <div
+            <Link to={`/newProduct/detailproduct/${item.id}`}
               key={index}
               className="relative border p-3 w-[49%] flex-shrink-0 mb-2 bg-white"
             >
@@ -1064,7 +1079,7 @@ function ContentNavbar() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="bg-[#4ABFA1] w-12 h-12 sticky left-[87%] bottom-20 z-30 rounded-full shadow-lg">

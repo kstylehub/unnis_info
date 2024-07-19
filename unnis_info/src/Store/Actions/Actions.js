@@ -11,9 +11,9 @@ const {
   BANNER,
   INFLUENCER,
   VIDEO,
-  COMMUNITY, 
+  COMMUNITY,
   RECYCLE,
-  FEEDBACK
+  FEEDBACK,
 } = ACTIONS_TYPES;
 
 export const logout = () => ({
@@ -35,7 +35,7 @@ export const register = (dataRegister) => async (dispatch) => {
     }
 
     const data = await response.json();
-    console.log(data, "suksssesss");
+    // console.log(data, "suksssesss");
     dispatch({
       type: USER.REGISTER_GET_SUCCESS,
       payload: data,
@@ -49,17 +49,20 @@ export const register = (dataRegister) => async (dispatch) => {
   }
 };
 export const login = (email, password) => async (dispatch) => {
+  // console.log('Login attempt:', email, password);
   try {
     dispatch({ type: USER.LOGIN_GET_START });
     const response = await fetch(`${BASE_URL}/auth/login`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
     });
+
     if (!response.ok) {
-      throw new Error("Internal server error");
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Internal server error');
     }
 
     const data = await response.json();
@@ -67,14 +70,16 @@ export const login = (email, password) => async (dispatch) => {
       type: USER.LOGIN_GET_SUCCESS,
       payload: data,
     });
+    // console.log('Login successful:', data);
   } catch (error) {
-    console.log("error login");
+    console.error('Error during login:', error.message);
     dispatch({
       type: USER.LOGIN_GET_FAILED,
-      payload: error,
+      payload: error.message,
     });
   }
 };
+
 
 // PRODUCT
 export const getAllProduct = (body) => async (dispatch) => {
@@ -96,7 +101,7 @@ export const getAllProduct = (body) => async (dispatch) => {
       type: PRODUCT.GET_ALL_PRODUCT_SUCCESS,
       payload: data,
     });
-    console.log("product >>> ",data);
+    console.log("product >>> ", data);
     return data; // Return the entire data object for use in countPage()
   } catch (error) {
     console.log("error get all data product:", error);
@@ -108,44 +113,48 @@ export const getAllProduct = (body) => async (dispatch) => {
 };
 
 export const getAllProductWithPagination = () => async (dispatch) => {
-    try {
-      dispatch({ type: PRODUCT.GET_PAGINATION_PRODUCT_START });
-  
-      const response = await fetch(`${BASE_URL}/product/listProductPage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ idMember: 1, limit: 50, page: 5, category: "", filter: "" }), 
-      });
-  
-      if (!response.ok) {
-        throw new Error("Internal server error");
-      }
-  
-      const data = await response.json();
-      console.log("Full response data:", data); 
-  
-      if (!data.dataProduct) {
-        throw new Error("dataProduct is undefined in the response");
-      }
-  
-      dispatch({
-        type: PRODUCT.GET_PAGINATION_PRODUCT_SUCCESS,
-        payload: data,
-      });
-      console.log("this is list product", data);
-      return data; 
-    } catch (error) {
-      console.log("error get data product:", error);
-      dispatch({
-        type: PRODUCT.GET_PAGINATION_PRODUCT_FAILED,
-        payload: error.message, 
-      });
+  try {
+    dispatch({ type: PRODUCT.GET_PAGINATION_PRODUCT_START });
+
+    const response = await fetch(`${BASE_URL}/product/listProductPage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idMember: 1,
+        limit: 50,
+        page: 5,
+        category: "",
+        filter: "",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Internal server error");
     }
-  };
-  
-  
+
+    const data = await response.json();
+    // console.log("Full response data:", data);
+
+    if (!data.dataProduct) {
+      throw new Error("dataProduct is undefined in the response");
+    }
+
+    dispatch({
+      type: PRODUCT.GET_PAGINATION_PRODUCT_SUCCESS,
+      payload: data,
+    });
+    // console.log("this is list product", data);
+    return data;
+  } catch (error) {
+    console.log("error get data product:", error);
+    dispatch({
+      type: PRODUCT.GET_PAGINATION_PRODUCT_FAILED,
+      payload: error.message,
+    });
+  }
+};
 
 export const getProductCategory = () => async (dispatch) => {
   try {
@@ -229,8 +238,17 @@ export const getTopProduct = () => async (dispatch) => {
 };
 
 export const getDetailProduct = (body) => async (dispatch) => {
+  console.log("bodyyyyy", body);
   try {
+    // Validate the body data before sending
+    if (!body.idMember || !body.idProduct) {
+      throw new Error("Invalid request payload");
+    }
+
+    // Start the request
     dispatch({ type: PRODUCT.GET_DETAIL_PRODUCT_START });
+
+    // Make the API request
     const response = await fetch(`${BASE_URL}/product/detailProduct`, {
       method: "POST",
       headers: {
@@ -238,20 +256,24 @@ export const getDetailProduct = (body) => async (dispatch) => {
       },
       body: JSON.stringify(body),
     });
+
+    // Check for a successful response
     if (!response.ok) {
       throw new Error("Internal server error");
     }
 
+    // Parse the response data
     const data = await response.json();
     dispatch({
       type: PRODUCT.GET_DETAIL_PRODUCT_SUCCESS,
       payload: data,
     });
+    console.log("this is the data that fetch", data);
   } catch (error) {
     console.log("error get data", error);
     dispatch({
       type: PRODUCT.GET_DETAIL_PRODUCT_FAILED,
-      payload: error,
+      payload: error.message,
     });
   }
 };
@@ -485,12 +507,15 @@ export const getActiveBanner = () => async (dispatch) => {
 export const getAllInfluencer = () => async (dispatch) => {
   try {
     dispatch({ type: INFLUENCER.GET_DATA_INFLUENCER_START });
-    const response = await fetch(`${BASE_URL}/video-recommendation/listInfluencer/?userId=8&length=20&star=1`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}/video-recommendation/listInfluencer/?userId=8&length=20&star=1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("internal Server error");
     }
@@ -575,7 +600,7 @@ export const getVideoByIdMemberInstagram = () => async (dispatch) => {
   }
 };
 
-export const getVideoByIdMemberUnnis= () => async (dispatch) => {
+export const getVideoByIdMemberUnnis = () => async (dispatch) => {
   try {
     dispatch({ type: VIDEO.GET_DATA_VIDEO_UNNIS_START });
     const response = await fetch(
@@ -606,7 +631,7 @@ export const getVideoByIdMemberUnnis= () => async (dispatch) => {
   }
 };
 
-export const getRecommendationProductVideo= () => async (dispatch) => {
+export const getRecommendationProductVideo = () => async (dispatch) => {
   try {
     dispatch({ type: VIDEO.GET_DATA_VIDEO_PRODUCT_RECOMMENDATION_START });
     const response = await fetch(
@@ -636,18 +661,15 @@ export const getRecommendationProductVideo= () => async (dispatch) => {
   }
 };
 
-export const getProductVideo= () => async (dispatch) => {
+export const getProductVideo = () => async (dispatch) => {
   try {
     dispatch({ type: VIDEO.GET_DATA_VIDEO_PRODUCT_START });
-    const response = await fetch(
-      `${BASE_URL}/video-recommendation/product/`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${BASE_URL}/video-recommendation/product/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error("internal Server error");
     }
@@ -667,7 +689,7 @@ export const getProductVideo= () => async (dispatch) => {
   }
 };
 
-export const getVideoInfluencer= (name) => async (dispatch) => {
+export const getVideoInfluencer = (name) => async (dispatch) => {
   try {
     dispatch({ type: VIDEO.GET_DATA_VIDEO_INFLUENCER_START });
     const response = await fetch(
@@ -731,15 +753,12 @@ export const getAllCommunity = () => async (dispatch) => {
 export const getVRecycleLeaderboard = () => async (dispatch) => {
   try {
     dispatch({ type: RECYCLE.GET_ALL_RECYCLE_LEADERBOARD_START });
-    const response = await fetch(
-      `${BASE_URL}/reward/leaderBoard`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${BASE_URL}/reward/leaderBoard`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error("internal Server error");
     }
@@ -763,15 +782,12 @@ export const getVRecycleLeaderboard = () => async (dispatch) => {
 export const getRecycleHistoryById = (id) => async (dispatch) => {
   try {
     dispatch({ type: RECYCLE.GET_ALL_RECYCLE_HISTORY_START });
-    const response = await fetch(
-      `${BASE_URL}/reward/historyRewardById/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${BASE_URL}/reward/historyRewardById/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error("internal Server error");
     }
@@ -792,7 +808,7 @@ export const getRecycleHistoryById = (id) => async (dispatch) => {
   }
 };
 
-// FEEDBACK 
+// FEEDBACK
 export const postFeedback = (body) => async (dispatch) => {
   try {
     dispatch({ type: FEEDBACK.POST_FEEDBACK_START });
@@ -812,8 +828,8 @@ export const postFeedback = (body) => async (dispatch) => {
       type: FEEDBACK.POST_FEEDBACK_SUCCESS,
       payload: data,
     });
-    console.log("FEEDBACK >>> ",data);
-    return data; 
+    console.log("FEEDBACK >>> ", data);
+    return data;
   } catch (error) {
     console.log("error get all data FEEDBACK:", error);
     dispatch({

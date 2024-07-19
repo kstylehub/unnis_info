@@ -39,7 +39,7 @@ function VideoInfluencer() {
   return (
     <>
       <div className="bg-white relative">
-        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white shadow-md">
+        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white shadow">
           <div className="flex justify-center py-1">
             <div className="absolute top-3 left-5">
               <Link to="/video">
@@ -62,7 +62,7 @@ function VideoInfluencer() {
             </div>
           </div>
         </div>
-        <div className="p-0.5 bg-gray-200"></div>
+        {/* <div className="p-0.5 bg-gray-200"></div> */}
         <div className="p-5">
           {dataInfluencer.videoRecommendation?.map((video, index) => (
             <div className="flex pb-4 gap-2 " key={index}>

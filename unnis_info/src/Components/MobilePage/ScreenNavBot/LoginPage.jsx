@@ -18,10 +18,16 @@ function LoginPage() {
     setIsPasswordVisible((prevState) => !prevState);
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
     dispatch(login(email, password));
-    navigate("/my-page");
   }
+  
+  useEffect(() => {
+    if (user) {
+      navigate("/my-page");
+    }
+  }, [user, navigate]);
 
   return (
     <>

@@ -111,28 +111,28 @@ function Feed() {
             All
           </div>
           <div
-            className="min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
+            className="min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("UnnisAtoZ")}
             style={getButtonStyle("UnnisAtoZ")}
           >
             Unnis A to Z
           </div>
           <div
-            className=" min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
+            className=" min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("report")}
             style={getButtonStyle("report")}
           >
             New Report
           </div>
           <div
-            className="min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
+            className="min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("editor")}
             style={getButtonStyle("editor")}
           >
             Editor's Pick
           </div>
           <div
-            className="min-w-[6vw] items-center border-gray-400 border py-1 px-3 rounded-full"
+            className="min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
             onClick={() => handleClick("letter")}
             style={getButtonStyle("letter")}
           >

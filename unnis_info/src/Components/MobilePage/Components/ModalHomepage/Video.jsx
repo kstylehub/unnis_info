@@ -58,14 +58,14 @@ function Video() {
   return (
     <>
       <div className="bg-white relative">
-        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white shadow-md">
+        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white shadow">
           <div className="flex justify-center py-1">
             <img src={LogoUnnis} className="w-24" />
           </div>
         </div>
         <div className="h-screen">
           {/* Influencer Profile */}
-          <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide pt-5 pb-4">
+          <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide pt-5 ">
             {allInfluencer.map((influencer, index) => (
               <Link
                 to={`/video/videoinfluencer`}
@@ -97,11 +97,11 @@ function Video() {
               </Link>
             ))}
           </div>
-          <div className="py-0.5 bg-gray-200"></div>
+          {/* <div className="py-0.5 bg-gray-200"></div> */}
           {/* Short Video Instagram*/}
           <div className="Video You Tube">
-            <div className="flex justify-start py-3 px-4">
-              <div className="font-bold">Short Video</div>
+            <div className="flex justify-start pb-3 px-4">
+              {/* <div className="font-bold">Short Video</div> */}
             </div>
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationInstagram.map((ig) => (
@@ -151,9 +151,9 @@ function Video() {
             <img src={VideoBanner} className="rounded-lg w-full" />
           </div>
           {/* Recommended Product */}
-          <div className="flex flex-col px-4 py-3">
+          <div className="flex flex-col px-4 pb-3 pt-1">
             <div className="flex justify-between pb-1">
-              <div className="font-bold">Recommended Product</div>
+              <div className="font-bold text-sm">Recommended Product</div>
               {/* <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
                 <svg
                   className="w-5 h-5 text-gray-800 dark:text-white"
@@ -176,7 +176,7 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
               {productVideo?.map((recproduct, index) => (
-                <div
+                <Link to={`/newProduct/detailproduct/${recproduct.id}`}
                   key={index}
                   className="relative border p-3 w-[8.5vw] flex-shrink-0"
                 >
@@ -239,14 +239,14 @@ function Video() {
                       </div>
                     )}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
           {/* Recommendation Video */}
           <div className="Video You Tube">
-            <div className="flex justify-start py-3 px-4">
-              <div className="font-bold">Recommendation Video</div>
+            <div className="flex justify-start pb-3 px-4">
+              <div className="font-bold text-sm">Recommendation Video</div>
             </div>
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationYoutube.map((recvideo) => (
@@ -351,14 +351,13 @@ function Video() {
           {/* Related Product */}
           <div className="flex flex-col px-4 py-3">
             <div className="flex justify-between pb-1">
-              <div className="font-bold">Related Product</div>
-              <div className="flex justify-center items-center h-8 w-8 rounded-full border border-gray-200">
+              <div className="font-bold text-sm">Related Product</div>
+              <div className="flex justify-center items-center h-7 w-7 rounded-full border border-gray-200">
                 <svg
                   className="w-5 h-5 text-gray-800 dark:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+          
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -374,7 +373,7 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
               {productVideo.map((item, index) => (
-                <div
+                <Link to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
                   className="relative border p-3 w-[8.5vw] flex-shrink-0"
                 >
@@ -437,15 +436,15 @@ function Video() {
                       </div>
                     )}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
           <div className="py-0.5 bg-gray-200 mt-3"></div>
           {/* More Related Videos */}
           <div className="More Related Videos">
-            <div className="flex justify-start py-3 px-4">
-              <div className="font-bold">More Related Video</div>
+            <div className="flex justify-start pt-4 pb-2 px-4">
+              <div className="font-bold text-sm">More Related Video</div>
             </div>
             <div className="  gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationYoutube.map((relatedvide) => (

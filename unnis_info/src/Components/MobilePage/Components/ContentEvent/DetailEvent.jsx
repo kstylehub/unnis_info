@@ -61,7 +61,7 @@ function DetailEvent() {
             <div className="w-4/12 "></div>
           </div>
         </div>
-        <div className="h-screen">
+        <div className="">
           {Array.isArray(dataEvent) && dataEvent.length > 0 ? (
             dataEvent.map((el, index) => (
               <div key={index} className="bg-white">
@@ -146,7 +146,6 @@ function DetailEvent() {
                     </div>
                   </div>
                 </div>
-                <div className="pt-1 bg-gray-200"></div>
                 <div className="py-4">
                   {Array.isArray(dataReview) && dataReview.length > 0 ? (
                     dataReview.map((review, reviewIndex) => (

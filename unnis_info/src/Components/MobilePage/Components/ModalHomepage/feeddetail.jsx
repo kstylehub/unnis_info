@@ -139,7 +139,7 @@ function DetailFeed() {
                   </div>
                 </div>
               </div>
-              <div className="pt-1 bg-gray-200"></div>
+              {/* <div className="pt-1 bg-gray-200"></div> */}
               <hr></hr>
               <div className="py-4">
                 {Array.isArray(dataReview) && dataReview.length > 0 ? (
