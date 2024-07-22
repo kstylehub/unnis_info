@@ -439,7 +439,7 @@ function MyPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col w-full bg-gray-200 pt-1 pb-0.5">
+              <div className="flex flex-col w-full bg-gray-200 pb-1">
                 <div className="flex flex-row items-left justify-left px-5 bg-white py-3">
                   <svg
                     className="w-7 h-7 text-gray-800 dark:text-white"
@@ -484,7 +484,7 @@ function MyPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col w-full bg-gray-200">
+              <div className="flex flex-col w-full bg-gray-200 pb-0.5">
                 <div className="flex flex-row items-left justify-left px-5 bg-white py-3">
                   <img src={setting} className="w-7 p-1" />
                   <div className="text-sm font-bold mx-2 flex items-center">
@@ -536,7 +536,7 @@ function MyPage() {
                       </svg>
                     </div>
                   </div>
-                  <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
+                  <Link to="/mypage/contactus" className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
                     <div className="text-sm">Contact Us</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
@@ -555,7 +555,7 @@ function MyPage() {
                         />
                       </svg>
                     </div>
-                  </div>
+                  </Link>
                   <Link
                     to={"/mypage/feedback"}
                     className="py-3 px-5 flex items-center justify-between w-full bg-white"

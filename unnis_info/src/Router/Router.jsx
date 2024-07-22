@@ -39,6 +39,7 @@ import VideoInfluencer from "../Components/MobilePage/Components/ModalHomepage/V
 import VideoUnnis from "../Components/MobilePage/Components/ModalHomepage/VideoUnnis";
 import Feedback from "../Components/MobilePage/ScreenNavBot/Feedback";
 import Faq from "../Components/MobilePage/ScreenNavBot/Faq";
+import ContactUs from "../Components/MobilePage/ScreenNavBot/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
           {
             path: "/mypage/feedback",
             element: <Feedback/>,
+          },
+          {
+            path: "/mypage/contactus",
+            element: <ContactUs/>,
           },
           {
             path: "/mypage/faq",
