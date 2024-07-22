@@ -14,6 +14,7 @@ const {
   COMMUNITY,
   RECYCLE,
   FEEDBACK,
+  FAQ
 } = ACTIONS_TYPES;
 
 export const logout = () => ({
@@ -834,6 +835,36 @@ export const postFeedback = (body) => async (dispatch) => {
     console.log("error get all data FEEDBACK:", error);
     dispatch({
       type: FEEDBACK.POST_FEEDBACK_FAILED,
+      payload: error,
+    });
+  }
+};
+
+// FAQ
+
+export const getFaqByCategory = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: FAQ.GET_FAQ_CATEGORY_START });
+    const response = await fetch(`${BASE_URL}/faq/listFaqByCategory/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Internal Server error");
+    }
+    const data = await response.json();
+    // console.log(data, "fetched data"); // Add this line to debug
+    dispatch({
+      type: FAQ.GET_FAQ_CATEGORY_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.error("error get data", error); // Changed to console.error
+    dispatch({
+      type: FAQ.GET_FAQ_CATEGORY_FAILED,
       payload: error,
     });
   }

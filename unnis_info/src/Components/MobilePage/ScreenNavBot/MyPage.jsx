@@ -493,7 +493,7 @@ function MyPage() {
                 </div>
                 <hr></hr>
                 <div className="grid grid-cols-2">
-                  <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
+                  <Link to ="/mypage/faq"className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
                     <div className="text-sm">FAQ</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
@@ -512,7 +512,7 @@ function MyPage() {
                         />
                       </svg>
                     </div>
-                  </div>
+                  </Link>
                   <div
                     className="py-3 px-5 flex items-center justify-between w-full bg-white"
                     onClick={() => handleLogout()}

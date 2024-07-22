@@ -39,7 +39,7 @@ function Feedback() {
   return (
     <>
       <div className="w-full h-full overflow-x-auto relative pb-20">
-        <div className="top-0 sticky px-5 w-full z-20 bg-white pt-2 shadow-md">
+        <div className="top-0 sticky px-5 w-full z-20 bg-white pt-2 shadow">
           <div className="flex justify-center items-center py-3">
             <Link
               to={"/my-page"}
