@@ -162,12 +162,12 @@ function ContentNavbar() {
               );
               const formattedRemainingDays =
                 remainingDays >= 0
-                  ? `Event will end in ${remainingDays} days`
-                  : "Event no longer available";
+                  ? `End in ${remainingDays} days`
+                  : "Event ended";
 
               return (
                 <div className="" key={el.id}>
-                  <div className="border sm:w-[50vw] w-[75vw] md:w-[20vw] h-full">
+                  <div className="border sm:w-[50vw] w-[80vw] md:w-[20vw] h-full">
                     <img src={el.thumbnail} className="w-fit" alt="Banner" />
                     <div className=" p-4">
                       <div>
@@ -370,7 +370,7 @@ function ContentNavbar() {
         </div>
         {/* Main Banner Event or Product */}
         <OwlCarousel
-          className="absolute lg:top-[9.5vw] top-[35vw] px-3.5 "
+          className="absolute lg:top-[9.5vw] top-[40vw] px-3.5 "
           loop
           autoplay
           margin={10}
@@ -507,7 +507,7 @@ function ContentNavbar() {
             {productList?.map((item, index) => (
               <Link to={`/newProduct/detailproduct/${item.id}`}
                 key={index}
-                className="relative border p-3 lg:w-[8.5vw] w-[30vw] flex-shrink-0"
+                className="relative border p-3 lg:w-[8.5vw] w-[40vw] flex-shrink-0"
               >
                 {item.bpom && (
                   <div className="absolute top-0 right-3  text-white py-3 w-[10%]">
@@ -773,7 +773,7 @@ function ContentNavbar() {
               {productList?.map((item, index) => (
                 <Link to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
-                  className="flex justify-center border lg:w-[7.7vw] w-[28vw] lg:h-[11vw] h-[42vw] shadow-lg hover:scale-110"
+                  className="flex justify-center border lg:w-[7.7vw] w-[30vw] lg:h-[11vw] h-[50vw] shadow-lg hover:scale-110"
                 >
                   <div className="flex flex-col py-2">
                     <div className="flex justify-center items-center">

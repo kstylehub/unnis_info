@@ -54,7 +54,7 @@ function Transaction() {
             <Outlet />
           </div>
         </div>
-        <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+        <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
           <NavigationButtom />
         </div>
       </div>

@@ -455,7 +455,7 @@ function Video() {
                   className="relative"
                 >
                   {relatedvide.source.platform == "youtube" ? (
-                    <div className="absolute flex left-5 top-[11.5vw] w-10 h-10 rounded-full bg-white p-1 border-2 border-[#4ABFA1]">
+                    <div className="absolute flex left-5 top-[46vw] w-10 h-10 rounded-full bg-white p-1 border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} />
                     </div>
                   ) : (
@@ -500,7 +500,7 @@ function Video() {
               ))}
             </div>
           </div>
-          <div className="bg-slate-50 pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+          <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
             <NavigationButtom />
           </div>
         </div>

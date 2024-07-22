@@ -107,7 +107,7 @@ export default function NavbarCategoryHome() {
             return (
               <Link to={`/newProduct/detailproduct/${el.id}`}
                 key={el.description}
-                className="relative border p-3 lg:w-[8.5vw] w-[30vw] flex-shrink-0"
+                className="relative border p-3 lg:w-[8.5vw] w-[40vw] flex-shrink-0"
               >
                 {el.statusRecommend && (
                   <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 text-xs font-bold">
