@@ -314,7 +314,7 @@ function VideoYoutubeDetail() {
               <iframe
                 src={videoSrc}
                 title={videoData.title}
-                className="w-full h-[15vw]"
+                className="w-full lg:h-[15vw] h-[55vw] "
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -446,13 +446,13 @@ function VideoYoutubeDetail() {
                   className="relative"
                 >
                   {recvideo.source.platform === "youtube" ? (
-                    <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
+                    <div className="absolute flex left-0 lg:top-[8.6vw] top-[27vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} alt="YouTube" />
                     </div>
                   ) : (
                     <div className=""></div>
                   )}
-                  <div className="w-[20vw] h-[10vw]">
+                  <div className="lg:w-[20vw] w-[60vw] lg:h-[10vw] h-[33vw]">
                     {recvideo.link ? (
                       <img
                         src={`https://img.youtube.com/vi/${getYouTubeVideoId(

@@ -31,7 +31,7 @@ function Community() {
   return (
     <>
       <div className="bg-white relative">
-        <div className="pt-4 pb-1 sticky top-0 z-20 bg-white shadow">
+        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white shadow">
           <div className="flex justify-between">
             <div className="justify-center items-center w-3/12 p-1">
               <img src={LogoUnnis} className="w-12/12" />

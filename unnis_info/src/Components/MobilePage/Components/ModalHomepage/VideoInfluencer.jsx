@@ -66,7 +66,7 @@ function VideoInfluencer() {
         <div className="p-5">
           {dataInfluencer.videoRecommendation?.map((video, index) => (
             <div className="flex pb-4 gap-2 " key={index}>
-              <div className="w-6/12 h-[6.5vw]">
+              <div className="w-6/12 lg:h-[6.5vw] h-[25vw]">
                  <img
                 className="h-full w-full object-cover rounded-md "
                 src={YouTubeThumbnail(video.videoLink)}

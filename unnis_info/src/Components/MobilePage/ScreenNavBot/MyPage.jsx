@@ -97,9 +97,9 @@ function MyPage() {
     return (
       <>
         {user.dataMember.map((data, index) => (
-          <div key={index} className="bg-white h-full w-full py-6 ">
+          <div key={index} className="bg-white h-full w-full py-4 ">
             <div className="justify-center items-center">
-              <div className="flex text-center justify-center pb-5 text-lg font-semibold">
+              <div className="flex text-center justify-center pb-4 text-lg font-semibold">
                 <h1>Account</h1>
               </div>
               <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>

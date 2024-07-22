@@ -223,7 +223,7 @@ function NewPage() {
             const truncatedText =
               text.length > 30 ? `${text.slice(0, 30)}...` : text;
             return (
-              <div key={index} className=" sm:w-1/2 flex justify-center ">
+              <div key={index} className=" w-1/2 flex justify-center ">
                 <div className="relative border w-[95%] min-h-[15vw] p-3 flex-shrink-0 mb-2 bg-white">
                   <Link to={`/newProduct/detailproduct/${el.id}`}>
                     {el.statusRecommend && (
@@ -513,7 +513,7 @@ function NewPage() {
               {loading ? (
                 <RingLoader color="#0000ff" size={30} />
               ) : (
-                <div className="flex px-2 shadow overflow-x-auto py-3 gap-3 max-w-screen scrollbar-hide">
+                <div className="flex px-2 overflow-x-auto py-3 gap-3 max-w-screen scrollbar-hide">
                   <CategoryProduct />
                 </div>
               )}

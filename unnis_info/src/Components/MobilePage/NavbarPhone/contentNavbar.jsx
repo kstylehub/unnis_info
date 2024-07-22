@@ -167,7 +167,7 @@ function ContentNavbar() {
 
               return (
                 <div className="" key={el.id}>
-                  <div className="border sm:w-[50vw] w-[70vw] md:w-[20vw] h-full">
+                  <div className="border sm:w-[50vw] w-[75vw] md:w-[20vw] h-full">
                     <img src={el.thumbnail} className="w-fit" alt="Banner" />
                     <div className=" p-4">
                       <div>
@@ -203,7 +203,7 @@ function ContentNavbar() {
                           </p>
                         </div>
                         <div className="border rounded-full px-2 border-rose-600">
-                          <p className="text-rose-600">
+                          <p className="text-rose-600 text-xs">
                             {formattedRemainingDays}
                           </p>
                         </div>
@@ -231,7 +231,7 @@ function ContentNavbar() {
           return (
             <div
               key={el.idFeed}
-              className="gap-1 flex-none mb-5 h-[10vw] w-[20vw]"
+              className="gap-1 flex-none mb-5 lg:h-[10vw] h-[40vw] lg:w-[20vw] w-[75vw]"
             >
               <img src={el.thumbnail} className="w-full h-full rounded-lg" />
             </div>
@@ -328,7 +328,7 @@ function ContentNavbar() {
     autoplayHoverPause: true,
     responsive: {
       0: {
-        items: 1,
+        items: 3,
       },
       600: {
         items: 3,
@@ -340,7 +340,7 @@ function ContentNavbar() {
     <>
       <div className="mt-2">
         <div
-          className="h-[10vw]"
+          className="lg:h-[10vw] h-[35vw]"
           style={{
             backgroundImage: `url(${Bg_top})`,
             backgroundSize: "cover", // or 'contain', depending on how you want it to fit
@@ -370,7 +370,7 @@ function ContentNavbar() {
         </div>
         {/* Main Banner Event or Product */}
         <OwlCarousel
-          className="absolute top-[9.5vw] px-3.5 "
+          className="absolute lg:top-[9.5vw] top-[35vw] px-3.5 "
           loop
           autoplay
           margin={10}
@@ -381,7 +381,7 @@ function ContentNavbar() {
               <div key={el.id}>
                 <img
                   src={el.thumbnail}
-                  className="w-full max-h-[12vw] rounded-lg"
+                  className="w-full lg:max-h-[12vw] max-h-[43vw] rounded-lg"
                   alt={el.title}
                 />
               </div>
@@ -507,7 +507,7 @@ function ContentNavbar() {
             {productList?.map((item, index) => (
               <Link to={`/newProduct/detailproduct/${item.id}`}
                 key={index}
-                className="relative border p-3 w-[8.5vw] flex-shrink-0"
+                className="relative border p-3 lg:w-[8.5vw] w-[30vw] flex-shrink-0"
               >
                 {item.bpom && (
                   <div className="absolute top-0 right-3  text-white py-3 w-[10%]">
@@ -655,7 +655,7 @@ function ContentNavbar() {
               <div key={el.id}>
                 <img
                   src={el.thumbnail}
-                  className="w-full max-h-[12vw]"
+                  className="w-full lg:max-h-[12vw] max-h-[43vw]"
                   alt={el.title}
                 />
               </div>
@@ -695,13 +695,13 @@ function ContentNavbar() {
               >
                 {" "}
                 {el.source.platform == "youtube" ? (
-                  <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
+                  <div className="absolute flex left-0 lg:top-[8.6vw] top-[28vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
                     <img className="" src={Youtube} />
                   </div>
                 ) : (
                   <div className=""></div>
                 )}
-                <div className="w-[20vw] h-[10vw]">
+                <div className="lg:w-[20vw] w-[60vw] lg:h-[10vw] h-[35vw]">
                   {el.link ? (
                     <img
                       src={YouTubeThumbnail({ videoUrl: el.link })}
@@ -714,7 +714,7 @@ function ContentNavbar() {
                     </div>
                   )}
                 </div>
-                <div className="flex justify-left items-center py-3">
+                <div className="flex justify-left items-center lg:py-3 py-2">
                   <img
                     src={el.dataOwner.photoProfile}
                     className="h-12 w-12 rounded-full object-cover flex justify-center items-center"
@@ -773,7 +773,7 @@ function ContentNavbar() {
               {productList?.map((item, index) => (
                 <Link to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
-                  className="flex justify-center border w-[7.7vw] h-[11vw] shadow-lg hover:scale-110"
+                  className="flex justify-center border lg:w-[7.7vw] w-[28vw] lg:h-[11vw] h-[42vw] shadow-lg hover:scale-110"
                 >
                   <div className="flex flex-col py-2">
                     <div className="flex justify-center items-center">

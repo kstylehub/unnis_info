@@ -97,20 +97,20 @@ function Video() {
               </Link>
             ))}
           </div>
-          {/* <div className="py-0.5 bg-gray-200"></div> */}
+     
           {/* Short Video Instagram*/}
           <div className="Video You Tube">
             <div className="flex justify-start pb-3 px-4">
               {/* <div className="font-bold">Short Video</div> */}
             </div>
-            <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
+            <div className="flex overflow-x-auto ml-5 gap-4 text-sm scrollbar-hide py-2">
               {VideoRecommendationInstagram.map((ig) => (
                 <Link
                   to={`/video/videoshort/${ig.id}`}
                   key={ig.id}
                   className="relative"
                 >
-                  <div className="w-[10vw] h-[15vw]">
+                  <div className="lg:w-[10vw] w-[35vw] lg:h-[15vw] h-[50vw]">
                     {ig.link ? (
                       <img
                         src={ig.thumbnail}
@@ -118,12 +118,12 @@ function Video() {
                         alt="YouTube Thumbnail"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-lg">
+                      <div className="w-full h-full bg-gray-200 flex sitems-center justify-center rounded-lg">
                         <span>Thumbnail Not Available</span>
                       </div>
                     )}
                   </div>
-                  <div className="absolute z-10 top-[45%] left-[45%] ">
+                  <div className="absolute z-10 lg:top-[45%] top-[40%] lg:left-[45%] left-[40%]">
                     <div className="h-10 w-10 bg-[#0000007f] rounded-full flex justify-center items-center">
                       <svg
                         className="w-9 h-9 text-white dark:text-white "
@@ -178,7 +178,7 @@ function Video() {
               {productVideo?.map((recproduct, index) => (
                 <Link to={`/newProduct/detailproduct/${recproduct.id}`}
                   key={index}
-                  className="relative border p-3 w-[8.5vw] flex-shrink-0"
+                  className="relative border p-3 lg:w-[8.5vw] w-[30vw] flex-shrink-0"
                 >
                   {recproduct.bpom && (
                     <div className="absolute top-0 right-3  text-white py-3 w-[10%]">
@@ -258,13 +258,13 @@ function Video() {
                 >
                   {" "}
                   {recvideo.source.platform == "youtube" ? (
-                    <div className="absolute flex left-0 top-[8.6vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
+                    <div className="absolute flex left-0 lg:top-[8.6vw] top-[27vw] w-10 h-10 bg-white p-1 rounded-full border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} />
                     </div>
                   ) : (
                     <div className=""></div>
                   )}
-                  <div className="w-[20vw] h-[10vw]">
+                  <div className="lg:w-[20vw] w-[60vw] lg:h-[10vw] h-[33vw]">
                     {recvideo.link ? (
                       <img
                         src={YouTubeThumbnail({ videoUrl: recvideo.link })}
@@ -277,7 +277,7 @@ function Video() {
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-left items-center py-3">
+                  <div className="flex justify-left items-center lg:py-3 py-2">
                     <img
                       src={recvideo.dataOwner.photoProfile}
                       className="h-12 w-12 rounded-full object-cover flex justify-center items-center"
@@ -312,7 +312,7 @@ function Video() {
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationUnnis?.map((unisupport) => (
                 <Link to={`/video/videounnis/${unisupport.id}`} key={`unisupport-${unisupport.id}`} className="relative">
-                  <div className="w-[10vw] h-[15vw]">
+                  <div className="lg:w-[10vw] w-[35vw] lg:h-[15vw] h-[50vw]">
                     {unisupport.thumbnail ? (
                       <img
                         src={unisupport.thumbnail}
@@ -325,7 +325,7 @@ function Video() {
                       </div>
                     )}
                   </div>
-                  <div className="absolute z-10 top-[45%] left-[45%] ">
+                  <div className="absolute z-10 lg:top-[45%] top-[40%] lg:left-[45%] left-[40%]">
                     <div className="h-10 w-10 bg-[#0000007f] rounded-full flex justify-center items-center">
                       <svg
                         className="w-9 h-9 text-white dark:text-white "
@@ -375,7 +375,7 @@ function Video() {
               {productVideo.map((item, index) => (
                 <Link to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
-                  className="relative border p-3 w-[8.5vw] flex-shrink-0"
+                  className="relative border p-3 lg:w-[8.5vw] w-[30vw]  flex-shrink-0"
                 >
                   {item.bpom && (
                     <div className="absolute top-0 right-3  text-white py-3 w-[10%]">
@@ -440,7 +440,7 @@ function Video() {
               ))}
             </div>
           </div>
-          <div className="py-0.5 bg-gray-200 mt-3"></div>
+          <div className="py-0.5 bg-gray-200 mt-1"></div>
           {/* More Related Videos */}
           <div className="More Related Videos">
             <div className="flex justify-start pt-4 pb-2 px-4">
@@ -465,16 +465,16 @@ function Video() {
                     {relatedvide.link ? (
                       <img
                         src={YouTubeThumbnail({ videoUrl: relatedvide.link })}
-                        className="w-full h-[13vw] object-cover"
+                        className="w-full lg:h-[13vw] h-[53vw] object-cover"
                         alt="YouTube Thumbnail"
                       />
                     ) : (
-                      <div className="w-full h-[13vw] bg-gray-200 flex items-center justify-center">
+                      <div className="w-full lg:h-[13vw] h-[53vw] bg-gray-200 flex items-center justify-center">
                         <span>Thumbnail Not Available</span>
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-left items-center pt-3 px-4 pb-5">
+                  <div className="flex justify-left items-center pt-2 px-4 pb-5">
                     <img
                       src={relatedvide.dataOwner.photoProfile}
                       className="h-12 w-12 rounded-full object-cover flex justify-center items-center"
