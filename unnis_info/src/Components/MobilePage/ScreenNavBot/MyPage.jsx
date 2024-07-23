@@ -23,7 +23,9 @@ function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
   const getDataUser = useSelector((state) => state.ReducerUser.dataUser);
   const dataUser = getDataUser?.dataMember?.[0];
-  const dataToMap = Array.isArray(getDataUser.dataMember) ? getDataUser.dataMember : getDataUser;
+  const dataToMap = Array.isArray(getDataUser.dataMember)
+    ? getDataUser.dataMember
+    : getDataUser;
 
   function getBirthDateDescription() {
     if (dataUser) {
@@ -96,13 +98,15 @@ function MyPage() {
   function Profile() {
     return (
       <>
+        <div className="sticky bg-white top-0">
+          <div className="flex text-center justify-center py-4 text-lg font-semibold shadow">
+            <h1>Account</h1>
+          </div>
+        </div>
         {dataToMap.map((data, index) => (
-          <div key={index} className="bg-white h-full w-full py-4 ">
+          <div key={index} className="bg-white  w-full ">
             <div className="justify-center items-center">
-              <div className="flex text-center justify-center pb-4 text-lg font-semibold">
-                <h1>Account</h1>
-              </div>
-              <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>
+              <hr className="flex-auto transition duration-500 ease-in-out "></hr>
               <div className="flex flex-col py-3 px-4">
                 <div className="flex flex-row justify-between">
                   <div className="font-bold text-sm">
@@ -146,7 +150,6 @@ function MyPage() {
                     className="w-28 h-28 text-gray-300 dark:text-white"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
-           
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -493,7 +496,10 @@ function MyPage() {
                 </div>
                 <hr></hr>
                 <div className="grid grid-cols-2">
-                  <Link to ="/mypage/faq"className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
+                  <Link
+                    to="/mypage/faq"
+                    className="py-3 px-5 flex items-center justify-between w-full bg-white border-r"
+                  >
                     <div className="text-sm">FAQ</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
@@ -536,7 +542,10 @@ function MyPage() {
                       </svg>
                     </div>
                   </div>
-                  <Link to="/mypage/contactus" className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
+                  <Link
+                    to="/mypage/contactus"
+                    className="py-3 px-5 flex items-center justify-between w-full bg-white border-r"
+                  >
                     <div className="text-sm">Contact Us</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
@@ -590,13 +599,13 @@ function MyPage() {
                   </div>
                 </div>
               </div>
-              <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+           
+            </div>
+               <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 left-0 right-0 z-20">
                 <NavigationButtom />
               </div>
-            </div>
           </div>
         ))}
-        
       </>
     );
   }
