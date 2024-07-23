@@ -135,7 +135,7 @@ function Faq() {
                 </div>
               </div>
 
-              <div className="bg-gray-200 px-5 ">
+              <div className="bg-gray-100 px-5 ">
                 {openQuestions[faq.id] && (
                   <div className="mt-2  text-gray-700 py-3">{faq.answer}</div>
                 )}

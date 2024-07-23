@@ -21,9 +21,9 @@ import ModalMyPage from "../Components/ModalMyPage/ModalMyPage";
 
 function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
-
   const getDataUser = useSelector((state) => state.ReducerUser.dataUser);
   const dataUser = getDataUser?.dataMember?.[0];
+  const dataToMap = Array.isArray(getDataUser.dataMember) ? getDataUser.dataMember : getDataUser;
 
   function getBirthDateDescription() {
     if (dataUser) {
@@ -96,7 +96,7 @@ function MyPage() {
   function Profile() {
     return (
       <>
-        {user.dataMember.map((data, index) => (
+        {dataToMap.map((data, index) => (
           <div key={index} className="bg-white h-full w-full py-4 ">
             <div className="justify-center items-center">
               <div className="flex text-center justify-center pb-4 text-lg font-semibold">
@@ -143,7 +143,7 @@ function MyPage() {
                 </div>
                 <div className="flex flex-col pb-3 px-4 justify-center items-center">
                   <svg
-                    class="w-28 h-28 text-gray-300 dark:text-white"
+                    className="w-28 h-28 text-gray-300 dark:text-white"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
            
@@ -151,9 +151,9 @@ function MyPage() {
                     viewBox="0 0 24 24"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
 
@@ -164,7 +164,7 @@ function MyPage() {
                   </div>
                   <div className="text-xs mt-1">
                     {data.birthDate !== 0
-                      ? getBirthDateDescription(data.birthDate)
+                      ? getBirthDateDescription(data?.birthDate)
                       : " - "}
                     / {data.skinType ? data.skinType : " - "} /{" "}
                     {data.skinColor ? data.skinColor : " - "}
@@ -596,6 +596,7 @@ function MyPage() {
             </div>
           </div>
         ))}
+        
       </>
     );
   }
