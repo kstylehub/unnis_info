@@ -43,6 +43,7 @@ import {
 } from "./Reducers/ReducerRecycle";
 import { ReducerFeedback } from "./Reducers/ReducerFeedback";
 import { ReducerFaqByCategory } from "./Reducers/ReducerFaq";
+import { ReducerSubReview } from "./Reducers/ReducerSubs";
 
 const rootReducer = combineReducers({
   ReducerProductCategory,
@@ -72,7 +73,9 @@ const rootReducer = combineReducers({
   ReducerRecycleHistory,
   ReducerRecycleLeaderboard,
   ReducerFeedback,
-ReducerFaqByCategory});
+  ReducerFaqByCategory,
+  ReducerSubReview,
+});
 
 const persistConfig = {
   key: "root",
