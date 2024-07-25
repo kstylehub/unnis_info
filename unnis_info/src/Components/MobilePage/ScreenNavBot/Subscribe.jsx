@@ -24,6 +24,7 @@ function Subscribe() {
   const [showModalReport, setShowModalReport] = useState(false);
   const [textReport, setTextReport] = useState("")
   const [sortBy, setSortBye] = useState()
+  const [idReview, setIdReview] = useState(0)
 
   useEffect(() => {
     dispatch(getAllReviewSubs());
@@ -36,8 +37,9 @@ function Subscribe() {
       : [];
 
     
-  console.log(dataReviewSub);
-  const handleReport = () => {
+  // console.log(dataReviewSub);
+  const handleReport = (id) => {
+    setIdReview(id)
     setShowModalReport(!showModalReport)
   }
   const handleScroll = () => {
@@ -67,7 +69,6 @@ function Subscribe() {
   function sortByLike(val) {
     // setLikeCategory(val);
     setSortBye(val)
-    console.log(val);
   }
 
   function reportBySelect(val) {
@@ -77,7 +78,7 @@ function Subscribe() {
   function toggleModalReport(){
     setShowModalReport(!showModalReport)
   }
-  console.log(filteredData);
+  // console.log(filteredData);
   return (
     <>
       <div className="bg-white relative">
@@ -167,7 +168,7 @@ function Subscribe() {
 
           {/* REVIEW */}
           <div className={`${isButton == true ? "hidden" : ""}`}>
-            <ModalReport reportBySelect={reportBySelect} isOpen={showModalReport} onClose={toggleModalReport}/>
+            <ModalReport reportBySelect={reportBySelect} isOpen={showModalReport} onClose={toggleModalReport} idReview={idReview}/>
             <div className="flex justify-end mr-4">
               <ModalSort sortByLike={sortByLike} />
             </div>
@@ -212,7 +213,7 @@ function Subscribe() {
                             </button>
                           </p>
                         </div>
-                        <button className="text-xs text-red-600 mt-5 underline" type="button" onClick={handleReport}>
+                        <button className="text-xs text-red-600 mt-5 underline" type="button" onClick={()=>handleReport(el.id)}>
                           Laporan Ulasan
                         </button>
                       </div>

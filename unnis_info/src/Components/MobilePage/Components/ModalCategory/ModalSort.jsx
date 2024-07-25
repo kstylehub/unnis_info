@@ -69,8 +69,8 @@ const ModalSort = ({sortByLike}) => {
       </button>
 
       {showModal && (
-        <div className="fixed z-50 lg:left-[36.5%] inset-0 flex items-center justify-center  lg:w-[27%] w-[100vw] shadow-lg shadow-indigo-500/50">
-          <div className="z-50 bg-white rounded-lg  border border-gray-400 p-3 w-screen top-[45%] lg:w-[100%]  relative">
+        <div className="fixed z-50 lg:left-[37.5%] inset-0 flex items-center justify-center  lg:w-[25%] w-[100vw] shadow-lg shadow-indigo-500/50">
+          <div className="z-50 bg-white rounded-lg  border border-gray-400 shadow-lg p-3 w-screen top-[45%] lg:w-[100%]  relative">
             <div className="z-50 bg-white max-h-[50%] h-[60vh]">
               <div className="flex justify-between items-center mb-2 bg-white">
                 <h2 className="text-xl font-bold pl-3">Sort By</h2>

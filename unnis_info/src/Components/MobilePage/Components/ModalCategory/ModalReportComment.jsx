@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import ArrowBot from "../../../../assets/Polygon10.svg";
 import Close from "../../../../assets/Close.svg";
+import { useDispatch } from "react-redux";
 
-const ModalReport = ({ reportBySelect, isOpen, onClose }) => {
+const ModalReport = ({ reportBySelect, isOpen, onClose, idReview }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const reportInputRefs = useRef([]);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     reportBySelect(selectedOption);
@@ -17,6 +19,7 @@ const ModalReport = ({ reportBySelect, isOpen, onClose }) => {
     }
   };
 
+  console.log(idReview);
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
     onClose();
@@ -28,12 +31,15 @@ const ModalReport = ({ reportBySelect, isOpen, onClose }) => {
 
   const categories = [
     {
+      id: 0,
       name: "ini adalah spam",
     },
     {
+      id: 1,
       name: "Konten ini mengandung diskriminasi, ancaman dan melanggar nilai/norma sosial",
     },
     {
+      id: 2,
       name: "Konten ini mengandung SARA dan vulgar",
     },
   ];
@@ -81,8 +87,8 @@ const ModalReport = ({ reportBySelect, isOpen, onClose }) => {
   }
 
   return isOpen ? (
-    <div className="fixed z-50 lg:left-[36.5%] inset-0 flex items-center justify-center  lg:w-[27%] w-[100vw] shadow-lg shadow-indigo-500/50">
-      <div className="z-50 bg-white  rounded-lg border border-gray-400 p-3 w-screen top-[45%] lg:w-[100%] relative">
+    <div className="fixed z-50 lg:left-[37.5%] inset-0 flex items-center justify-center  lg:w-[25%] w-[100vw] shadow-lg shadow-indigo-500/50">
+      <div className="z-50 bg-white  rounded-lg border border-gray-400 p-3 w-screen shadow-lg top-[45%] lg:w-[100%] relative">
         <div className="z-50 bg-white max-h-[50%] h-[60vh]">
           <div className="flex justify-between items-center mb-2 bg-white">
             <h2 className="text-xl font-bold pl-3">Report Comment</h2>
