@@ -2,16 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import ArrowBot from "../../../../assets/Polygon10.svg";
 import Close from "../../../../assets/Close.svg";
 import { useDispatch } from "react-redux";
+import { postReport } from "../../../../Store/Actions/Actions";
 
-const ModalReport = ({ reportBySelect, isOpen, onClose, idReview }) => {
+const ModalReport = ({ isOpen, onClose, idReview }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const reportInputRefs = useRef([]);
   const dispatch = useDispatch()
 
   useEffect(() => {
-    reportBySelect(selectedOption);
-  }, [selectedOption, reportBySelect]);
+  }, [selectedOption, ]);
 
   const handleClickReport = (index) => {
     if (reportInputRefs.current[index]) {
@@ -19,9 +19,13 @@ const ModalReport = ({ reportBySelect, isOpen, onClose, idReview }) => {
     }
   };
 
-  console.log(idReview);
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    let data = {
+      idReview: +idReview,
+      reason:event.target.value
+    }
+    dispatch(postReport(data))
     onClose();
   };
 
@@ -57,7 +61,7 @@ const ModalReport = ({ reportBySelect, isOpen, onClose, idReview }) => {
               <div className="flex">
                 <input
                   type="radio"
-                  value={el.name}
+                  value={el.id}
                   checked={selectedOption === el.name}
                   onChange={handleOptionChange}
                   className="mr-4 hidden"

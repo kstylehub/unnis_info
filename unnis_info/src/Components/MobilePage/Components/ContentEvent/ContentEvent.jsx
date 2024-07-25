@@ -21,8 +21,14 @@ function ContentEvent() {
     ?.slice()
     .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
 
-  function AllEvent() {
-    return sortedData?.map((el) => {
+  function ShowEvent() {
+    let filterData;
+    if (activeButton === "All") {
+      filterData = sortedData;
+    } else {
+      filterData = sortedData.filter((el) => el.category === activeButton);
+    }
+    return filterData?.map((el) => {
       const lastDate = el.endDate;
       const firstDate = el.startDate;
       const lastDateObj = new Date(lastDate);
@@ -171,7 +177,7 @@ function ContentEvent() {
         </div>
       </div>
       <div className="">
-        <AllEvent />
+        <ShowEvent />
       </div>
     </div>
   );

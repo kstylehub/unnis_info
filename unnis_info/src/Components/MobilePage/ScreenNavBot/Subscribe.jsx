@@ -168,7 +168,7 @@ function Subscribe() {
 
           {/* REVIEW */}
           <div className={`${isButton == true ? "hidden" : ""}`}>
-            <ModalReport reportBySelect={reportBySelect} isOpen={showModalReport} onClose={toggleModalReport} idReview={idReview}/>
+            <ModalReport  isOpen={showModalReport} onClose={toggleModalReport} idReview={idReview}/>
             <div className="flex justify-end mr-4">
               <ModalSort sortByLike={sortByLike} />
             </div>

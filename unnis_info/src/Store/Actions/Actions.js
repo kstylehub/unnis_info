@@ -349,7 +349,7 @@ export const postReport = (body) => async (dispatch) => {
       throw new Error("Internal server error");
     }
     const data = await response.json();
-
+    Swal.fire("Success!", "Your file has been deleted.", "success");
   } catch (error) {
     console.log("error get all data FEEDBACK:", error);
   }
