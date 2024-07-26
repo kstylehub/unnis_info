@@ -14,6 +14,9 @@ import Makeup from "../../../assets/Homepage/Category Icon/make_up.svg";
 import Mask from "../../../assets/Homepage/Category Icon/mask.svg";
 import Longbanner1 from "../../../assets/Homepage/Long Banner/Banner1.png";
 import Longbanner2 from "../../../assets/Homepage/Long Banner/Banner2.png";
+import Medal1 from "../../../assets/Homepage/Best Seller/1.svg";
+import Medal2 from "../../../assets/Homepage/Best Seller/2.svg";
+import Medal3 from "../../../assets/Homepage/Best Seller/3.svg";
 import Skinanalysis from "../../../assets/Homepage/Category Icon/skin_analysis.svg";
 import Skinbanner from "../../../assets/Homepage/check_skin_problem.svg";
 import Skincare from "../../../assets/Homepage/Category Icon/skincare.svg";
@@ -30,6 +33,7 @@ import {
   getAllInfluencer,
   getAllProductWithPagination,
   getAllReview,
+  getBestSellerProduct,
   getEvent,
   getTopProduct,
   getVideoByIdMemberYoutube,
@@ -37,7 +41,8 @@ import {
 import ModalLoginWarn from "../Components/ModalHomepage/ModalLoginWarn";
 
 function ContentNavbar() {
-  const product = useSelector((state) => state.ReducerTopProduct?.topProduct);
+  const product = useSelector((state) => state.ReducerBestSellerProduct?.topProduct);
+  const topProduct = useSelector((state) => state.ReducerTopProduct?.topData);
   const allReview = useSelector((state) => state.ReducerReview?.dataReview);
   const allFeed = useSelector((state) => state.ReducerFeed?.dataFeed);
   const allEvent = useSelector((state) => state.ReducerEventData?.event);
@@ -64,10 +69,14 @@ function ContentNavbar() {
     dispatch(getAllInfluencer());
     dispatch(getVideoByIdMemberYoutube());
     dispatch(getAllProductWithPagination());
+    dispatch(getBestSellerProduct());
   }, []);
 
   // console.log("data top >>>>",allProductWithPagination);
   const productList = Array.isArray(product?.data) ? product.data : [];
+  const sortedProductList = productList.sort((a, b) => b.reviewNum - a.reviewNum).slice(0, 3);
+  const medals = [Medal1, Medal2, Medal3];
+  const productListTop = Array.isArray(topProduct?.dataProduct) ? topProduct.dataProduct : [];
   const allProductWithPagination = Array.isArray(allProduct?.dataProduct)
     ? allProduct?.dataProduct
     : [];
@@ -376,7 +385,8 @@ function ContentNavbar() {
           margin={10}
           items={1}
         >
-          {allBanner?.filter((el) => el?.category !== "influencer")
+          {allBanner
+            ?.filter((el) => el?.category !== "influencer")
             .map((el) => (
               <div key={el.id}>
                 <img
@@ -391,7 +401,7 @@ function ContentNavbar() {
         <div className="mt-28 pt-1 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
           {[
             { src: Category, label: "Category" },
-            { src: Skinanalysis, label: "Skin Analysis" },
+            { src: Skinanalysis, label: "Skin Analysis", to: "/skinanalysis" },
             { src: Skincare, label: "Skincare" },
             { src: Cleansing, label: "Cleansing" },
             { src: Mask, label: "Mask" },
@@ -403,7 +413,8 @@ function ContentNavbar() {
             { src: Baby, label: "Kids & Baby" },
             { src: Food, label: "Food" },
           ]?.map((item, index) => (
-            <div
+            <a
+              href={item.to}
               key={index}
               className="flex flex-col justify-center items-center"
             >
@@ -416,7 +427,7 @@ function ContentNavbar() {
               >
                 {item.label}
               </div>
-            </div>
+            </a>
           ))}
         </div>
         {/* Long Banner */}
@@ -479,6 +490,173 @@ function ContentNavbar() {
             </Link>
           ))}
         </div>
+        {/* Best Seller */}
+        <div className="flex flex-col px-4 pt-3">
+          <div className="flex justify-between pb-1">
+            <div className="font-bold">Best Seller</div>
+          </div>
+          <div className="flex flex-col px-2">
+            {sortedProductList?.map((item, index) => (
+              <Link
+                to={`/newProduct/detailproduct/${item.id}`}
+                key={index}
+                className="flex border-b py-2"
+              >
+                <div className="w-1/12 flex items-center">
+                  <img src={medals[index]} className="object-contain"  />
+                </div>
+                <div
+                  className="w-2/12"
+                  style={{ width: "100px", height: "100px" }}
+                >
+                  {item.images !== null ? (
+                    <img
+                      src={item.images}
+                      className="object-contain p-1"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  ) : (
+                    <div className="bg-gray-300 w-full h-full flex items-center justify-center">
+                      Image Not Available
+                    </div>
+                  )}
+                </div>
+                <div className="w-8/12 flex flex-col ">
+                  <div className="flex justify-end">
+                    {item.bpom ? (
+                      <div className=" w-[7%]">
+                        <img
+                          src={item.bpom}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    ) : (
+                      <svg
+                      className="w-5 h-5 text-white dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m9 5 7 7-7 7"
+                      />
+                    </svg>
+                    )}
+                    {item.mui && (
+                      <div className="  w-[7%]">
+                        <img
+                          src={item.mui}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    ) }
+                  </div>
+                  <div className="text-sm uppercase">{item.brand}</div>
+                  <div
+                    className="w-full text-sm font-bold"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 1,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      lineHeight: "1.2",
+                    }}
+                  >
+                    {item.name}
+                  </div>
+
+                  <div className="flex justify-between pt-1 text-xs">
+                    <div className="truncate text-center w-full flex justify-left items-center">
+                      <div className="pe-1">
+                        <svg
+                          className="w-3.5 h-3.5 text-yellow-400 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+                        </svg>
+                      </div>
+                      {parseFloat(item.rating).toFixed(1)}
+                      <div className="pl-1 text-gray-400 text-xs">
+                        ({item.stock})
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-end">
+                    {[
+                      {
+                        href: item.unnispickLink,
+                        text: "Unnispick",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_1.png",
+                      },
+                      {
+                        href: item.shopeeLink,
+                        text: "Shopee",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_2.png",
+                      },
+                      {
+                        href: item.tokopediaLink,
+                        text: "Tokopedia",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_3.png",
+                      },
+                      {
+                        href: item.iStyleLink,
+                        text: "iStyle",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_4.png",
+                      },
+                      {
+                        href: item.sociollaLink,
+                        text: "Sociolla",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_6.png",
+                      },
+                      {
+                        href: item.styleKoreanLink,
+                        text: "Style Korean",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_7.png",
+                      },
+                      {
+                        href: item.oliveYoungLink,
+                        text: "Olive Young",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_5.png",
+                      },
+                      {
+                        href: item.kalCareLink,
+                        text: "Kal Care",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_8.png",
+                      },
+                    ]
+                      .filter((link) => link.href)
+                      .slice(0, 3)
+                      .map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.href}
+                          className="rounded-full w-5 h-5 ml-0.5 flex items-center justify-center"
+                        >
+                          <img
+                            src={link.icon}
+                            alt={link.text}
+                            className="bg-cover w-full h-full rounded-full"
+                          />
+                        </a>
+                      ))}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
         {/* New Product */}
         <div className="flex flex-col px-4 py-3">
           <div className="flex justify-between pb-1">
@@ -504,8 +682,9 @@ function ContentNavbar() {
             </div>
           </div>
           <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
-            {productList?.map((item, index) => (
-              <Link to={`/newProduct/detailproduct/${item.id}`}
+            {productListTop?.map((item, index) => (
+              <Link
+                to={`/newProduct/detailproduct/${item.id}`}
                 key={index}
                 className="relative border p-3 lg:w-[8.5vw] w-[40vw] flex-shrink-0"
               >
@@ -650,12 +829,13 @@ function ContentNavbar() {
         </div>
         {/* Banner Influencer */}
         <OwlCarousel className="" loop autoplay margin={0} items={1}>
-          {allBanner?.filter((el) => el.category === "influencer")
+          {allBanner
+            ?.filter((el) => el.category === "influencer")
             .map((el) => (
               <div key={el.id}>
                 <img
                   src={el.thumbnail}
-                  className="w-full lg:max-h-[12vw] max-h-[43vw]"
+                  className="w-full lg:max-h-[14vw] max-h-[43vw]"
                   alt={el.title}
                 />
               </div>
@@ -771,7 +951,8 @@ function ContentNavbar() {
           <div className="pb-5 pt-2 ps-4 pe-2">
             <OwlCarousel className="owl-theme" {...options}>
               {productList?.map((item, index) => (
-                <Link to={`/newProduct/detailproduct/${item.id}`}
+                <Link
+                  to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
                   className="flex justify-center border lg:w-[7.7vw] w-[30vw] lg:h-[11vw] h-[50vw] shadow-lg hover:scale-110"
                 >
@@ -930,7 +1111,8 @@ function ContentNavbar() {
         </div>
         <div className="flex flex-wrap justify-between py-1 px-4 bg-gray-100">
           {allProductWithPagination.map((item, index) => (
-            <Link to={`/newProduct/detailproduct/${item.id}`}
+            <Link
+              to={`/newProduct/detailproduct/${item.id}`}
               key={index}
               className="relative border p-3 w-[49%] flex-shrink-0 mb-2 bg-white"
             >

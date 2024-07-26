@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Youtube from "../../../../assets/Homepage/yutub.svg";
 import VideoBanner from "../../../../assets/Video Page/banner_ai_video.svg";
+import UnnisOnly from "../TopBar/UnnisOnly";
+
 function Video() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -58,12 +60,10 @@ function Video() {
   return (
     <>
       <div className="bg-white relative">
-        <div className="pt-3 pb-1 sticky top-0 z-20 bg-white shadow">
-          <div className="flex justify-center py-1">
-            <img src={LogoUnnis} className="w-24" />
-          </div>
-        </div>
-        <div className="h-screen">
+      <div className="sticky top-0 z-10 shadow">
+        <UnnisOnly/>
+      </div>
+        <div className="">
           {/* Influencer Profile */}
           <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide pt-5 ">
             {allInfluencer.map((influencer, index) => (
@@ -123,7 +123,7 @@ function Video() {
                       </div>
                     )}
                   </div>
-                  <div className="absolute z-10 lg:top-[45%] top-[40%] lg:left-[45%] left-[40%]">
+                  <div className="absolute z-5 lg:top-[45%] top-[40%] lg:left-[45%] left-[40%]">
                     <div className="h-10 w-10 bg-[#0000007f] rounded-full flex justify-center items-center">
                       <svg
                         className="w-9 h-9 text-white dark:text-white "
@@ -325,7 +325,7 @@ function Video() {
                       </div>
                     )}
                   </div>
-                  <div className="absolute z-10 lg:top-[45%] top-[40%] lg:left-[45%] left-[40%]">
+                  <div className="absolute z-5 lg:top-[45%] top-[40%] lg:left-[45%] left-[40%]">
                     <div className="h-10 w-10 bg-[#0000007f] rounded-full flex justify-center items-center">
                       <svg
                         className="w-9 h-9 text-white dark:text-white "
@@ -455,7 +455,7 @@ function Video() {
                   className="relative"
                 >
                   {relatedvide.source.platform == "youtube" ? (
-                    <div className="absolute flex left-5 top-[46vw] w-10 h-10 rounded-full bg-white p-1 border-2 border-[#4ABFA1]">
+                    <div className="absolute flex z-5 left-5 lg:top-[11.2vw] top-[46vw] w-10 h-10 rounded-full bg-white p-1 border-2 border-[#4ABFA1]">
                       <img className="" src={Youtube} />
                     </div>
                   ) : (

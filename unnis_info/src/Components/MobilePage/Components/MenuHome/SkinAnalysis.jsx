@@ -49,7 +49,7 @@ function SkinAnalysis() {
             Analisa masalah kulitmu dan dapatkan rekomendasi produk sesuai jenis
             kulit!
           </p>
-          <img src={main_skin} className="lg:w-9/12 md:w-6/12 w-9/12" />
+          <img src={main_skin} className="lg:w-10/12 md:w-6/12 w-9/12" />
           <div className="flex justify-center my-8">
             <Link to={"/skinsectionone"}>
               <button className="bg-white mx-1 rounded-lg lg:font-base text-sm font-semibold px-10 py-2 drop-shadow-md">
