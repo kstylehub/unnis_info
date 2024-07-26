@@ -20,6 +20,24 @@ export function ReducerFeed(state= defaultValue, action){
             return state
     }
 }
+const defaultValueVisible = {
+    dataFeed: [],
+    error: null,
+    loading: true
+}
+
+export function ReducerFeedVisible(state= defaultValueVisible, action){
+    switch (action.type) {
+        case FEED.VISIBLE.GET_ALL_FEED_START:
+            return{...state, loading: true}
+        case FEED.VISIBLE.GET_ALL_FEED_FAILED: 
+            return{...state, error: action.payload, loading: false}
+        case FEED.VISIBLE.GET_ALL_FEED_SUCCESS:
+            return{...state, dataFeed: action.payload, loading: false}
+        default:
+            return state
+    }
+}
 
 const defaultValue1 = {
     dataFeedById: [],

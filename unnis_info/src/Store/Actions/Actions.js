@@ -389,7 +389,7 @@ export const postReport = (body) => async (dispatch) => {
 export const getAllFeed = () => async (dispatch) => {
   try {
     dispatch({ type: FEED.GET_ALL_FEED_START });
-    const response = await fetch(`${BASE_URL}/feed/listFeedVisible`, {
+    const response = await fetch(`${BASE_URL}/feed/listFeed`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -407,6 +407,30 @@ export const getAllFeed = () => async (dispatch) => {
   } catch (error) {
     console.log("error get data", error);
     dispatch({ type: FEED.GET_ALL_FEED_FAILED, payload: error });
+  }
+};
+
+export const getAllFeedVisible = () => async (dispatch) => {
+  try {
+    dispatch({ type: FEED.VISIBLE.GET_ALL_FEED_START });
+    const response = await fetch(`${BASE_URL}/feed/listFeedVisible`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: FEED.VISIBLE.GET_ALL_FEED_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({ type: FEED.VISIBLE.GET_ALL_FEED_FAILED, payload: error });
   }
 };
 

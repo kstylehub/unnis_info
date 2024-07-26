@@ -29,7 +29,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getActiveBanner,
-  getAllFeed,
+  getAllFeedVisible,
   getAllInfluencer,
   getAllProductWithPagination,
   getAllReview,
@@ -44,7 +44,7 @@ function ContentNavbar() {
   const product = useSelector((state) => state.ReducerBestSellerProduct?.topProduct);
   const topProduct = useSelector((state) => state.ReducerTopProduct?.topData);
   const allReview = useSelector((state) => state.ReducerReview?.dataReview);
-  const allFeed = useSelector((state) => state.ReducerFeed?.dataFeed);
+  const allFeed = useSelector((state) => state.ReducerFeedVisible?.dataFeed);
   const allEvent = useSelector((state) => state.ReducerEventData?.event);
   const getUser = useSelector((state) => state.ReducerUser?.dataUser);
   const allBanner = useSelector((state) => state.ReducerActiveBanner?.banner);
@@ -63,7 +63,7 @@ function ContentNavbar() {
   useEffect(() => {
     dispatch(getTopProduct());
     dispatch(getAllReview());
-    dispatch(getAllFeed());
+    dispatch(getAllFeedVisible());
     dispatch(getEvent());
     dispatch(getActiveBanner());
     dispatch(getAllInfluencer());
