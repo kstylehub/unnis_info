@@ -211,10 +211,38 @@ export const getListProduct = () => async (dispatch) => {
   }
 };
 
+export const getBestSellerProduct = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT.GET_BEST_SELLER_PRODUCT_START });
+    const response = await fetch(`${BASE_URL}/product/bestSeller?limit=10`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: PRODUCT.GET_BEST_SELLER_PRODUCT_SUCCESS,
+      payload: data,
+    });
+    // console.log(data)
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: PRODUCT.GET_BEST_SELLER_PRODUCT_FAILED,
+      payload: error,
+    });
+  }
+};
+
 export const getTopProduct = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT.GET_TOP_PRODUCT_START });
-    const response = await fetch(`${BASE_URL}/product/bestSeller?limit=10`, {
+    const response = await fetch(`${BASE_URL}/product/topProduct`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -229,6 +257,7 @@ export const getTopProduct = () => async (dispatch) => {
       type: PRODUCT.GET_TOP_PRODUCT_SUCCESS,
       payload: data,
     });
+    // console.log(data, "TOP PRODUCT")
   } catch (error) {
     console.log("error get data", error);
     dispatch({

@@ -8,9 +8,10 @@ import {
   ReducerDetailProduct,
   ReducerProductCategory,
   ReducerListProduct,
-  ReducerTopProduct,
   ReducerAllProduct,
   ReducerProductWithPagination,
+  ReducerBestSellerProduct,
+  ReducerTopProduct,
 } from "./Reducers/Reducer";
 import { ReducerReview } from "./Reducers/ReducerReview";
 import {
@@ -47,7 +48,7 @@ import { ReducerFaqByCategory } from "./Reducers/ReducerFaq";
 const rootReducer = combineReducers({
   ReducerProductCategory,
   ReducerListProduct,
-  ReducerTopProduct,
+ReducerTopProduct,
   ReducerReview,
   ReducerFeed,
   ReducerEventData,
@@ -72,7 +73,8 @@ const rootReducer = combineReducers({
   ReducerRecycleHistory,
   ReducerRecycleLeaderboard,
   ReducerFeedback,
-ReducerFaqByCategory});
+ReducerFaqByCategory,
+ReducerBestSellerProduct});
 
 const persistConfig = {
   key: "root",

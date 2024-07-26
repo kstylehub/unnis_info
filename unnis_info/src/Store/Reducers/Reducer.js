@@ -45,14 +45,33 @@ const listTopProduct = {
   loading: true,
 };
 
-export function ReducerTopProduct(state = listTopProduct, action) {
+export function ReducerBestSellerProduct(state = listTopProduct, action) {
+  switch (action.type) {
+    case PRODUCT.GET_BEST_SELLER_PRODUCT_START:
+      return { ...state, loading: true };
+    case PRODUCT.GET_BEST_SELLER_PRODUCT_FAILED:
+      return { ...state, error: action.payload, loading: false };
+    case PRODUCT.GET_BEST_SELLER_PRODUCT_SUCCESS:
+      return { ...state, topProduct: action.payload, loading: false };
+    default:
+      return state;
+  }
+}
+
+const listTopProduct2 = {
+  topData: [],
+  error: null,
+  loading: true,
+};
+
+export function ReducerTopProduct(state = listTopProduct2, action) {
   switch (action.type) {
     case PRODUCT.GET_TOP_PRODUCT_START:
       return { ...state, loading: true };
     case PRODUCT.GET_TOP_PRODUCT_FAILED:
       return { ...state, error: action.payload, loading: false };
     case PRODUCT.GET_TOP_PRODUCT_SUCCESS:
-      return { ...state, topProduct: action.payload, loading: false };
+      return { ...state, topData: action.payload, loading: false };
     default:
       return state;
   }
