@@ -44,6 +44,14 @@ function Feed() {
     const sortedData = dataFeed
     ?.slice()
     .sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
+    console.log(sortedData);
+    
+    let filterData;
+    if (clickedButton === "All") {
+      filterData = sortedData;
+    } else {
+      filterData = sortedData.filter((el) => el.category === clickedButton);
+    }
     return (
       <>
         {sortedData?.map((el) => (
