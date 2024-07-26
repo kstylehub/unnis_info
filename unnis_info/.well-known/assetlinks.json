@@ -1,0 +1,9 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.brommko.android.unnispark",
+      "sha256_cert_fingerprints":
+      ["83:67:ab:d1:96:a4:9f:95:ab:8b:0f:a3:56:4d:c1:dc:91:8d:f6:c8:bb:f5:6b:d3:a3:3b:23:1f:f5:f5:73:cd"]
+    }
+  }]

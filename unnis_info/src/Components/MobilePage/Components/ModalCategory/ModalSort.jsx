@@ -38,6 +38,7 @@ const ModalSort = ({sortByLike}) => {
       <>
         {categories.map((el) => {
           return (
+            <>
             <div className="mb-3" key={el.name}>
               <label>
                 <input
@@ -50,6 +51,7 @@ const ModalSort = ({sortByLike}) => {
                 {el.name}
               </label>
             </div>
+            </>
           );
         })}
       </>
@@ -59,7 +61,7 @@ const ModalSort = ({sortByLike}) => {
   return (
     <>
       <button
-        className="border rounded-lg p-1 flex text-center items-center gap-x-1"
+        className="border rounded-lg p-1 flex text-center items-center gap-x-1 px-5"
         onClick={handleModalOpen}
       >
         <h1>{selectedOption}</h1>
@@ -67,9 +69,9 @@ const ModalSort = ({sortByLike}) => {
       </button>
 
       {showModal && (
-        <div className="fixed lg:left-[55%] inset-0 flex items-center justify-center bg-black opacity-90 lg:w-[30%] w-[100vw] shadow-lg shadow-indigo-500/50">
-          <div className="z-100 bg-white rounded-lg p-3 w-screen top-[45%] lg:w-[100%]  relative">
-            <div className="z-100 bg-white max-h-[50%] h-[60vh]">
+        <div className="fixed z-50 lg:left-[37.5%] inset-0 flex items-center justify-center  lg:w-[25%] w-[100vw] shadow-lg shadow-indigo-500/50">
+          <div className="z-50 bg-white rounded-lg  border border-gray-400 shadow-lg p-3 w-screen top-[45%] lg:w-[100%]  relative">
+            <div className="z-50 bg-white max-h-[50%] h-[60vh]">
               <div className="flex justify-between items-center mb-2 bg-white">
                 <h2 className="text-xl font-bold pl-3">Sort By</h2>
                 <button

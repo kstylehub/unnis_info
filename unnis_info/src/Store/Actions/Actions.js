@@ -14,7 +14,8 @@ const {
   COMMUNITY,
   RECYCLE,
   FEEDBACK,
-  FAQ
+  FAQ,
+  SUBSCRIPTION
 } = ACTIONS_TYPES;
 
 export const logout = () => ({
@@ -308,6 +309,8 @@ export const getDetailProduct = (body) => async (dispatch) => {
   }
 };
 
+// ===================== REVIEW =============================
+
 export const getAllReview = () => async (dispatch) => {
   try {
     dispatch({ type: REVIEW.GET_ALL_REVIEW_START });
@@ -335,7 +338,54 @@ export const getAllReview = () => async (dispatch) => {
   }
 };
 
-// FEED
+export const getAllReviewSubs = () => async (dispatch) => {
+  try {
+    dispatch({ type: SUBSCRIPTION.REVIEW.GET_ALL_REVIEW_START });
+    const response = await fetch(
+      `${BASE_URL}/reviewSub/listAllReviewMobile/0`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: SUBSCRIPTION.REVIEW.GET_ALL_REVIEW_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({ type: SUBSCRIPTION.REVIEW.GET_ALL_REVIEW_FAILED, payload: error });
+  }
+};
+
+export const postReport = (body) => async (dispatch) => {
+  try {
+    const response = await fetch(`${BASE_URL}/reviewSub/reportReview`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+    const data = await response.json();
+    Swal.fire("Success!", "Your file has been deleted.", "success");
+  } catch (error) {
+    console.log("error get all data FEEDBACK:", error);
+  }
+};
+
+
+// ==================== FEED ===============================
 export const getAllFeed = () => async (dispatch) => {
   try {
     dispatch({ type: FEED.GET_ALL_FEED_START });

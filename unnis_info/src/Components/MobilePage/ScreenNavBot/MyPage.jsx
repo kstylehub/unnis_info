@@ -23,26 +23,26 @@ function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
   const getDataUser = useSelector((state) => state.ReducerUser.dataUser);
   const dataUser = getDataUser?.dataMember?.[0];
-  const dataToMap = Array.isArray(getDataUser.dataMember)
-    ? getDataUser.dataMember
-    : getDataUser;
+  const dataToMap = Array.isArray(getDataUser?.dataMember) ? getDataUser?.dataMember : getDataUser;
 
+
+  console.log(dataToMap);
   function getBirthDateDescription() {
     if (dataUser) {
-      if (dataUser.birthDate <= 2010) {
+      if (dataUser?.birthDate <= 2010) {
         return "10-an";
-      } else if (dataUser.birthDate <= 2000) {
+      } else if (dataUser?.birthDate <= 2000) {
         return "20-an";
-      } else if (dataUser.birthDate <= 1990) {
+      } else if (dataUser?.birthDate <= 1990) {
         return "30-an";
-      } else if (dataUser.birthDate <= 1980) {
+      } else if (dataUser?.birthDate <= 1980) {
         return "40-an";
-      } else if (dataUser.birthDate <= 1970) {
+      } else if (dataUser?.birthDate <= 1970) {
         return "50-an";
-      } else if (dataUser.birthDate <= 1980) {
+      } else if (dataUser?.birthDate <= 1980) {
         return "60-an";
       } else {
-        return dataUser.birthDate;
+        return dataUser?.birthDate;
       }
     }
     return "";
