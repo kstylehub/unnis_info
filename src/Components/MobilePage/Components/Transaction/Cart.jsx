@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import back from "../../../../assets/previous.svg";
 import Box from "../../../../assets/box_transaction.png";
+import CartButtom from "../BottomBar/CartBottom";
 
 function Cart() {
   return (
     <>
-      <div className="w-full h-full overflow-x-auto relative pb-20"> {/* Add padding-bottom here */}
+      <div className="flex flex-col min-h-screen bg-white relative">
         <div className="top-0 sticky lg:px-8 px-4 w-full z-20 bg-white pt-2 shadow-md">
           <div className="flex justify-center items-center py-3">
             <Link to={"/"} className="w-1/12 flex items-center justify-center">
               <img src={back} className="w-8 h-8" alt="Back" />
             </Link>
-            <div className="w-11/12  text-xl font-semibold items-center lg:ps-8">
+            <div className="w-11/12 text-xl font-semibold items-center lg:ps-8">
               Cart
             </div>
           </div>
@@ -70,26 +71,21 @@ function Cart() {
             <div className="w-11/12">Select All</div>
           </div>
         </div>
-        <div className="h-[35vw] flex flex-col justify-center items-center lg:text-lg text-sm">
-          <img src={Box} className="w-5/12 h-auto"></img>
-          <p className="mb-3 mt-12 text-base ">You haven't choose product :)</p> 
-          <Link to={"/newProduct"}>
-            <button className="px-6 my-3 font-semibold text-white text-base border rounded-lg py-2 border-green-500 bg-[#43BFA1]">
-              Let's view Product
-            </button>
-          </Link>
+        <div className="flex-grow">
+          <div className="pt-20 flex flex-col justify-center items-center lg:text-lg text-sm">
+            <img src={Box} className="w-5/12 h-auto" alt="Box" />
+            <p className="mb-3 mt-12 text-base">
+              You haven't chosen a product :)
+            </p>
+            <Link to={"/newProduct"}>
+              <button className="px-6 my-3 font-semibold text-white text-base border rounded-lg py-2 border-green-500 bg-[#43BFA1]">
+                Let's view Product
+              </button>
+            </Link>
+          </div>
         </div>
-     
-        <div className="fixed bottom-0 px-5 lg:w-3/12 w-full flex justify-between items-center bg-white p-4 shadow-lg border-t"> {/* Change to fixed */}
-          <div className="">
-            <div className="">Total</div>
-            <div className="font-bold">Rp0</div>
-          </div>
-          <div className="">
-            <button className="text-white font-semibold text-base border rounded-lg py-2 px-6 border-green-500 bg-[#43BFA1] shadow">
-              Pay
-            </button>
-          </div>
+        <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+          <CartButtom />
         </div>
       </div>
     </>
