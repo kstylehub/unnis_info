@@ -1,23 +1,17 @@
 import NavigationButtom from "../NavigatonBottom/NavigationBottom";
 import coin from "../../../assets/MyPage/coin.png";
-import profile from "../../../assets/MyPage/profile.png";
 import recycle from "../../../assets/MyPage/recycle.png";
 import { Link } from "react-router-dom";
-import LogoUnnis from "../../../assets/unnis_logo.png";
-import { useState } from "react";
 import review from "../../../assets/MyPage/review.png";
 import coin_new from "../../../assets/MyPage/coin_new.png";
 import love from "../../../assets/MyPage/love.png";
 import mark from "../../../assets/MyPage/mark.png";
-import coupon from "../../../assets/MyPage/coupon.png";
 import product from "../../../assets/MyPage/bag.png";
 import gift from "../../../assets/MyPage/gift.png";
 import setting from "../../../assets/MyPage/setting.png";
 import toggle from "../../../assets/MyPage/toggle.png";
-import phone from "../../../assets/MyPage/phone.png";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../Store/Actions/Actions";
-import ModalMyPage from "../Components/ModalMyPage/ModalMyPage";
+import { useSelector } from "react-redux";
+
 
 function MyPage() {
   const user = useSelector((state) => state.ReducerUser.dataUser);
@@ -26,7 +20,7 @@ function MyPage() {
   const dataToMap = Array.isArray(getDataUser?.dataMember) ? getDataUser?.dataMember : getDataUser;
 
 
-  console.log(dataToMap);
+  // console.log(dataToMap);
   function getBirthDateDescription() {
     if (dataUser) {
       if (dataUser?.birthDate <= 2010) {
@@ -48,57 +42,10 @@ function MyPage() {
     return "";
   }
 
-  function KlikLogin() {
-    return (
-      <>
-        <div className="h-full" style={{ overflow: "hidden" }}>
-          <div className="bg-white h-full w-full">
-            <div className="justify-center items-center py-6 ">
-              <div className="flex text-center justify-center pb-5 text-lg">
-                <h1>ACCOUNT</h1>
-              </div>
-              <hr className="flex-auto border-t-1 transition duration-500 ease-in-out border-gray-300"></hr>
-              <div className="px-20 py-24">
-                <div className="flex justify-center pb-4">
-                  <img src={LogoUnnis} alt="Logo Unnis" />
-                </div>
-                <div className="items-center text-center pb-4">
-                  <h1 className="pb-4 font-semibold">
-                    Kekhawatiran tentang kosmetik sudah berakhir!
-                  </h1>
-                  <p>
-                    Login sekarang dan dapatkan rekomendasi kosmetik khusus
-                    untukmu.
-                  </p>
-                </div>
-                <div className="text-sm text-center py-2 bg-[#4ABFA1] text-white">
-                  <Link to={"/login"}>
-                    <button>Login Sekarang</button>
-                  </Link>
-                </div>
-                <div className="text-[#4ABFA1] text-center pt-2">
-                  <h1 className="font-semibold text-sm">v.2.6.30</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
-            <NavigationButtom />
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  const dispatch = useDispatch();
-  function handleLogout() {
-    dispatch(logout());
-  }
-
   function Profile() {
     return (
       <>
-        <div className="sticky bg-white top-0">
+        <div className="top-0 sticky w-full z-20 bg-white pt-2 shadow">
           <div className="flex text-center justify-center py-4 text-lg font-semibold shadow">
             <h1>Account</h1>
           </div>
@@ -308,7 +255,7 @@ function MyPage() {
                 </div>
                 <hr></hr>
                 <div className="">
-                  <div className="py-3 px-5 flex items-center justify-between w-full bg-white">
+                  <Link to="/cart" className="py-3 px-5 flex items-center justify-between w-full bg-white">
                     <div className="text-sm">Cart</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
@@ -327,7 +274,7 @@ function MyPage() {
                         />
                       </svg>
                     </div>
-                  </div>
+                  </Link>
                   <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-t">
                     <div className="text-sm">Transaction</div>
                     <div className="flex flex-row justify-center items-center">
@@ -519,11 +466,12 @@ function MyPage() {
                       </svg>
                     </div>
                   </Link>
-                  <div
+                  <Link
+                  to="/mypage/account"
                     className="py-3 px-5 flex items-center justify-between w-full bg-white"
-                    onClick={() => handleLogout()}
+                  
                   >
-                    <div className="text-sm">Log Out</div>
+                    <div className="text-sm">Account</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
                         className="w-2 h-2 text-[#4ABFA1] dark:text-[#4ABFA1]"
@@ -541,7 +489,7 @@ function MyPage() {
                         />
                       </svg>
                     </div>
-                  </div>
+                  </Link>
                   <Link
                     to="/mypage/contactus"
                     className="py-3 px-5 flex items-center justify-between w-full bg-white border-r"
@@ -614,8 +562,6 @@ function MyPage() {
     // console.log(user);
     if (user) {
       return <Profile />;
-    } else {
-      return <KlikLogin />;
     }
   }
 
