@@ -14,7 +14,7 @@ function ContactUs() {
             >
               <img src={back} className="w-8 h-8" alt="Back" />
             </Link>
-            <div className="w-4/12 text-xl font-semibold text-center">
+            <div className="w-4/12 text-lg font-semibold text-center">
               Contact Us
             </div>
             <div className="w-4/12"></div>

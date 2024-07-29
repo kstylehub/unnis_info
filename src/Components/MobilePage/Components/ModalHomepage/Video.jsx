@@ -60,9 +60,9 @@ function Video() {
   return (
     <>
       <div className="bg-white relative">
-      <div className="sticky top-0 z-10 shadow">
-        <UnnisOnly/>
-      </div>
+        <div className="sticky top-0 z-10 shadow">
+          <UnnisOnly />
+        </div>
         <div className="">
           {/* Influencer Profile */}
           <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide pt-5 ">
@@ -83,7 +83,9 @@ function Video() {
                   ) : (
                     <div className="bg-[#4ABFA1] w-full h-full rounded-full">
                       <div className="flex justify-center items-center space-x-4 text-xl text-white font-bold uppercase p-4">
-                        {influencer.influencerName ? influencer.influencerName.charAt(0) : ""}
+                        {influencer.influencerName
+                          ? influencer.influencerName.charAt(0)
+                          : ""}
                       </div>
                     </div>
                   )}
@@ -97,7 +99,7 @@ function Video() {
               </Link>
             ))}
           </div>
-     
+
           {/* Short Video Instagram*/}
           <div className="Video You Tube">
             <div className="flex justify-start pb-3 px-4">
@@ -176,7 +178,8 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
               {productVideo?.map((recproduct, index) => (
-                <Link to={`/newProduct/detailproduct/${recproduct.id}`}
+                <Link
+                  to={`/newProduct/detailproduct/${recproduct.id}`}
                   key={index}
                   className="relative border p-3 lg:w-[8.5vw] w-[30vw] flex-shrink-0"
                 >
@@ -311,7 +314,11 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto ml-5 gap-5 text-sm scrollbar-hide py-2">
               {VideoRecommendationUnnis?.map((unisupport) => (
-                <Link to={`/video/videounnis/${unisupport.id}`} key={`unisupport-${unisupport.id}`} className="relative">
+                <Link
+                  to={`/video/videounnis/${unisupport.id}`}
+                  key={`unisupport-${unisupport.id}`}
+                  className="relative"
+                >
                   <div className="lg:w-[10vw] w-[35vw] lg:h-[15vw] h-[50vw]">
                     {unisupport.thumbnail ? (
                       <img
@@ -357,7 +364,6 @@ function Video() {
                   className="w-5 h-5 text-gray-800 dark:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
-          
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -373,7 +379,8 @@ function Video() {
             </div>
             <div className="flex overflow-x-auto gap-2 scrollbar-hide py-2">
               {productVideo.map((item, index) => (
-                <Link to={`/newProduct/detailproduct/${item.id}`}
+                <Link
+                  to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
                   className="relative border p-3 lg:w-[8.5vw] w-[30vw]  flex-shrink-0"
                 >

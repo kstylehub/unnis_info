@@ -39,7 +39,7 @@ function Faq() {
             >
               <img src={back} className="w-8 h-8" alt="Back" />
             </Link>
-            <div className="w-4/12 text-xl font-semibold text-center">FAQ</div>
+            <div className="w-4/12 text-lg font-semibold text-center">FAQ</div>
             <div className="w-4/12"></div>
           </div>
           <div className="border-t pt-2">

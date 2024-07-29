@@ -40,6 +40,7 @@ import VideoUnnis from "../Components/MobilePage/Components/ModalHomepage/VideoU
 import Feedback from "../Components/MobilePage/ScreenNavBot/Feedback";
 import Faq from "../Components/MobilePage/ScreenNavBot/Faq";
 import ContactUs from "../Components/MobilePage/ScreenNavBot/ContactUs";
+import Account from "../Components/MobilePage/ScreenNavBot/Account";
 
 const router = createBrowserRouter([
   {
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
           {
             path: "/mypage/contactus",
             element: <ContactUs/>,
+          },
+          {
+            path: "/mypage/account",
+            element: <Account/>,
           },
           {
             path: "/mypage/faq",
