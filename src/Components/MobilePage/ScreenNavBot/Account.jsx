@@ -66,7 +66,7 @@ function Account() {
           </div>
         </div>
         <div className="flex flex-col">
-          <div className="flex items-center justify-between p-5 border-b">
+          <Link to="/mypage/account/changepassword" className="flex items-center justify-between p-5 border-b">
             <div className="w-11/12 ps-2">Ubah Kata Sandi</div>
             <div className="w-1/12 justify-end">
               <svg
@@ -85,7 +85,7 @@ function Account() {
                 />
               </svg>
             </div>
-          </div>
+          </Link>
           <div
             className="flex items-center justify-between p-5 border-b"
             onClick={() => setShowModalDelAccount(true)}

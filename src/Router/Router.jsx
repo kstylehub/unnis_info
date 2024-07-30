@@ -41,6 +41,7 @@ import Feedback from "../Components/MobilePage/ScreenNavBot/Feedback";
 import Faq from "../Components/MobilePage/ScreenNavBot/Faq";
 import ContactUs from "../Components/MobilePage/ScreenNavBot/ContactUs";
 import Account from "../Components/MobilePage/ScreenNavBot/Account";
+import ChangePassword from "../Components/MobilePage/ScreenNavBot/ChangePassword";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +119,10 @@ const router = createBrowserRouter([
           {
             path: "/mypage/account",
             element: <Account/>,
+          },
+          {
+            path: "/mypage/account/changepassword",
+            element: <ChangePassword/>,
           },
           {
             path: "/mypage/faq",
