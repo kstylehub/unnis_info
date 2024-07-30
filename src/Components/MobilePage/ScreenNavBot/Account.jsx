@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link} from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../../../Store/Actions/Actions";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAccount, logout } from "../../../Store/Actions/Actions";
 import NavigationButtom from "../NavigatonBottom/NavigationBottom";
 import LogoUnnis from "../../../assets/unnis_logo.png";
 import back from "../../../assets/previous.svg";
@@ -9,15 +9,30 @@ import back from "../../../assets/previous.svg";
 function Account() {
   const dispatch = useDispatch();
   const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [isDelAccount, setIsDelAccount] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showModalDelAccount, setShowModalDelAccount] = useState(false);
+  const [showConfirmDelModal, setShowConfirmDelModal] = useState(false);
+  const [deleteReason, setDeleteReason] = useState("");
+  const user = useSelector((state) => state.ReducerUser.dataUser);
+  const dataToMap = Array.isArray(user?.dataMember) ? user?.dataMember : user;
 
   function handleLogout() {
     dispatch(logout());
     setIsLoggedOut(true);
+    setShowLogoutModal(false);
+  }
+
+  function handleDeleteAccount() {
+    const id = dataToMap.id;
+    dispatch(deleteAccount(id, { reason: deleteReason }));
+    setShowConfirmDelModal(false);
+    setShowModalDelAccount(false);
+    setIsDelAccount(true);
   }
 
   function AccountPage() {
-
-    if (isLoggedOut) {
+    if (isLoggedOut || isDelAccount) {
       return <KlikLogin />;
     } else {
       return <Page />;
@@ -27,6 +42,9 @@ function Account() {
   return (
     <>
       <AccountPage />
+      {showLogoutModal && <LogoutModal />}
+      {showModalDelAccount && <DelAccModal />}
+      {showConfirmDelModal && <ConfirmDelModal />}
     </>
   );
 
@@ -68,7 +86,10 @@ function Account() {
               </svg>
             </div>
           </div>
-          <div className="flex items-center justify-between p-5 border-b">
+          <div
+            className="flex items-center justify-between p-5 border-b"
+            onClick={() => setShowModalDelAccount(true)}
+          >
             <div className="w-11/12 ps-2">Hapus Akun</div>
             <div className="w-1/12 justify-end">
               <svg
@@ -90,7 +111,7 @@ function Account() {
           </div>
           <div
             className="flex items-center justify-between p-5 border-b"
-            onClick={handleLogout}
+            onClick={() => setShowLogoutModal(true)}
           >
             <div className="w-11/12 ps-2">Log Out</div>
             <div className="w-1/12 justify-end">
@@ -155,6 +176,114 @@ function Account() {
           </div>
         </div>
       </>
+    );
+  }
+
+  function LogoutModal() {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center z-50">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="bg-white p-8 rounded shadow-lg z-10">
+          <h2 className=" mb-6">Anda yakin akan keluar aplikasi?</h2>
+          <div className="flex justify-center gap-6">
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 bg-[#4ABFA1] text-white rounded"
+            >
+              Keluar
+            </button>
+            <button
+              onClick={() => setShowLogoutModal(false)}
+              className=" px-4 py-2 bg-gray-200 rounded"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function DelAccModal() {
+    const reasons = [
+      "Untuk Mendaftar dengan akun lain",
+      "Jumlah produk yang terdaftar sedikit",
+      "Tidak terlalu bermanfaat",
+      "Tidak ada produk yang kucari",
+      "Aplikasinya berjalan lambat",
+      "Ingin berpindah ke layanan/aplikasi lain",
+      "Aplikasi tidak nyaman untuk digunakan",
+      "Lainnya",
+    ];
+
+    return (
+      <div className="absolute inset-0 flex items-center justify-center z-50">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white  rounded-t-2xl shadow-lg z-10">
+          <div className="flex justify-between  p-4 border-b">
+            <h2 className="  font-bold uppercase">
+              pilih alasan penghapusan akun
+            </h2>
+            <div className="" onClick={() => setShowModalDelAccount(false)}>
+              <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center p-4 gap-6 text-sm">
+            {reasons.map((reason) => (
+              <div
+                key={reason}
+                onClick={() => {
+                  setDeleteReason(reason);
+                  // setShowModalDelAccount(false);
+                  setShowConfirmDelModal(true);
+                }}
+              >
+                {reason}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function ConfirmDelModal() {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center z-50">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="bg-white p-8 rounded shadow-lg z-10">
+          <h2 className=" mb-6">Anda yakin akan menghapus akun?</h2>
+          <div className="flex justify-center gap-6">
+            <button
+              onClick={handleDeleteAccount}
+              className="px-4 py-2 bg-[#4ABFA1] text-white rounded"
+            >
+              Hapus
+            </button>
+            <button
+              onClick={() => setShowConfirmDelModal(false)}
+              className=" px-4 py-2 bg-gray-200 rounded"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 }

@@ -24,7 +24,7 @@ import {
   ReducerEventData,
   ReducerReviewEventById,
 } from "./Reducers/ReducerEvent";
-import { ReducerUser, ReducerUserRegister } from "./Reducers/ReducerUser";
+import { ReducerDeleteAccount, ReducerUser, ReducerUserRegister } from "./Reducers/ReducerUser";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { ReducerActiveBanner } from "./Reducers/ReducerBanner";
@@ -77,7 +77,8 @@ ReducerTopProduct,
   ReducerFaqByCategory,
   ReducerSubReview,
   ReducerFaqByCategory,
-  ReducerBestSellerProduct
+  ReducerBestSellerProduct,
+  ReducerDeleteAccount
 });
 
 const persistConfig = {

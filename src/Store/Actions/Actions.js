@@ -23,6 +23,7 @@ export const logout = () => ({
 });
 
 export const register = (dataRegister) => async (dispatch) => {
+  // console.log(dataRegister)
   try {
     dispatch({ type: USER.REGISTER_GET_START });
     const response = await fetch(`${BASE_URL}/auth/register`, {
@@ -82,6 +83,35 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+export const deleteAccount = (id,body) => async (dispatch) => {
+  try {
+    dispatch({ type: USER.DELETE_ACCOUNT_START });
+    const response = await fetch(`${BASE_URL}/member/deleteAccount/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: USER.DELETE_ACCOUNT_SUCCESS,
+      payload: data,
+    });
+    // console.log("delete",data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: USER.DELETE_ACCOUNT_FAILED,
+      payload: error,
+    });
+  }
+};
 
 // PRODUCT
 export const getAllProduct = (body) => async (dispatch) => {
@@ -103,7 +133,7 @@ export const getAllProduct = (body) => async (dispatch) => {
       type: PRODUCT.GET_ALL_PRODUCT_SUCCESS,
       payload: data,
     });
-    console.log("product >>> ", data);
+    // console.log("product >>> ", data);
     return data; // Return the entire data object for use in countPage()
   } catch (error) {
     console.log("error get all data product:", error);

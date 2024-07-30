@@ -41,3 +41,22 @@ export function ReducerUserRegister(state = register, action) {
             return state
     }
 }
+
+const delAccont = {
+    dataDelAccount: null,
+    error: null,
+    loading: true
+}
+
+export function ReducerDeleteAccount(state = delAccont, action) {
+    switch (action.type) {
+        case USER.DELETE_ACCOUNT_START:
+            return {...state, loading: true}
+        case USER.DELETE_ACCOUNT_FAILED:
+            return {...state, loading: false, error: action.payload}
+        case USER.DELETE_ACCOUNT_SUCCESS: 
+            return {...state, loading: false, dataDelAccount: action.payload}
+        default:
+            return state
+    }
+}
