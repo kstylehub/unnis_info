@@ -42,6 +42,7 @@ import Faq from "../Components/MobilePage/ScreenNavBot/Faq";
 import ContactUs from "../Components/MobilePage/ScreenNavBot/ContactUs";
 import Account from "../Components/MobilePage/ScreenNavBot/Account";
 import ChangePassword from "../Components/MobilePage/ScreenNavBot/ChangePassword";
+import CommunityDetail from "../Components/MobilePage/Components/ModalHomepage/CommunityDetail";
 
 const router = createBrowserRouter([
   {
@@ -169,6 +170,10 @@ const router = createBrowserRouter([
           {
             path: "/community",
             element: <Community />
+          },
+          {
+            path: "/community/thread/:id",
+            element: <CommunityDetail />
           },
           {
             path: "/skinanalysis",

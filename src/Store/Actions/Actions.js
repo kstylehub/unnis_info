@@ -1,7 +1,7 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
-// const BASE_URL = 'http://52.74.126.149:9696';
-const BASE_URL = "http://3.35.189.96:9696";
+const BASE_URL = 'http://52.74.126.149:9696';
+// const BASE_URL = "http://3.35.189.96:9696";
 const {
   PRODUCT,
   REVIEW,
@@ -859,6 +859,65 @@ export const getAllCommunity = () => async (dispatch) => {
   }
 };
 
+export const getCommunityById = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.GET_DATA_COMMUNITY_BY_ID_START });
+    const response = await fetch(`${BASE_URL}/thread-by-id?memberId=33&threadId=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.GET_DATA_COMMUNITY_BY_ID_SUCCESS,
+      payload: data,
+    });
+    // console.log("data COMMUNITY BY ID >>> ", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: COMMUNITY.GET_DATA_COMMUNITY_BY_ID_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const postReply = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_COMMUNITY_REPLY_START });
+    const response = await fetch(`${BASE_URL}/reply-thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_COMMUNITY_REPLY_SUCCESS,
+      payload: data,
+    });
+    console.log("Community Reply >>> ", data);
+    return data;
+  } catch (error) {
+    console.log("error get all data FEEDBACK:", error);
+    dispatch({
+      type: COMMUNITY.POST_COMMUNITY_REPLY_FAILED,
+      payload: error,
+    });
+  }
+};
+
 // RECYCLE
 export const getVRecycleLeaderboard = () => async (dispatch) => {
   try {
@@ -907,7 +966,7 @@ export const getRecycleHistoryById = (id) => async (dispatch) => {
       type: RECYCLE.GET_ALL_RECYCLE_HISTORY_SUCCESS,
       payload: data.dataReward,
     });
-    console.log("data RECYCLE HISTORY BY ID >>> ", data);
+    // console.log("data RECYCLE HISTORY BY ID >>> ", data);
     return data;
   } catch (error) {
     console.log("error get data", error);
@@ -938,7 +997,7 @@ export const postFeedback = (body) => async (dispatch) => {
       type: FEEDBACK.POST_FEEDBACK_SUCCESS,
       payload: data,
     });
-    console.log("FEEDBACK >>> ", data);
+    // console.log("FEEDBACK >>> ", data);
     return data;
   } catch (error) {
     console.log("error get all data FEEDBACK:", error);

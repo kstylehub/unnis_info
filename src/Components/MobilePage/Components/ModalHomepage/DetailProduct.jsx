@@ -19,27 +19,25 @@ function DetailProduct() {
   const [showModal, setShowModal] = useState(false);
   const [showModalDesc, setShowModalDesc] = useState(false);
 
-  // Redux hooks
+
   const detailProduct = useSelector(
     (state) => state.ReducerDetailProduct.dataDetailProduct
   );
   const loading = useSelector((state) => state.ReducerDetailProduct.loading);
   const dispatch = useDispatch();
 
-  // Effect to fetch product details on mount
+
   useEffect(() => {
     const body = {
-      idMember: 5691, // This could be dynamically obtained from user data
+      idMember: 5691, 
       idProduct: +id,
     };
     dispatch(getDetailProduct(body));
   }, [id, dispatch]);
 
-  // Data and format handling
+ 
   const dataProduct = detailProduct?.dataProduct?.[0];
   const formattedPrice = dataProduct?.price?.toLocaleString("id-ID");
-
-  // Modal Ingredients and Description
 
   const handleIngredients = () => {
     setShowModal(true);
@@ -360,10 +358,24 @@ function DetailProduct() {
           {/* Content */}
           <div className="lg:px-6 px-4 border-b-4 border-gray-200 pb-3">
             <div className="h-full flex justify-center items-start">
-              <img
-                className="w-10 h-10 mt-[20%]"
-                src={dataProduct?.dataCountry?.flag}
-              ></img>
+              <div className="mt-[5%] flex flex-col gap-4">
+                {dataProduct?.bpom ? (
+                  <img className="w-10 h-10 " src={dataProduct?.bpom}></img>
+                ) : (
+                  ""
+                )}
+                {dataProduct?.mui ? (
+                  <img className="w-10 h-10 " src={dataProduct?.mui}></img>
+                ) : (
+                  ""
+                )}
+                {dataProduct?.dataCountry?.flag ? (
+                  <img className="w-10 h-10 " src={dataProduct?.dataCountry?.flag}></img>
+                ) : (
+                  ""
+                )}
+              </div>
+
               <img src={dataProduct?.images} className="w-8/12 py-5" />
               <div className="text-center flex flex-col justify-start pt-[5%]">
                 <h5 className="font-bold text-[#4ABFA1]">Disukai</h5>
@@ -425,7 +437,9 @@ function DetailProduct() {
                     </p>
                   )}
               </div>
-              <p className="text-xs text-gray-400 pb-2 pt-1">You can buy this at</p>
+              <p className="text-xs text-gray-400 pb-2 pt-1">
+                You can buy this at
+              </p>
               <div className="flex">
                 <Link to={dataProduct?.unnispickLink} target="_Blank">
                   <img
@@ -552,79 +566,92 @@ function DetailProduct() {
             )
           )}
           {/* Analisis Ingredients*/}
-            <div className={dataProduct?.ingredientAnalyst?.length !== 0 ? "border-b-4 border-gray-200 pb-3" : "hidden"}>
-              <div className="uppercase font-bold text-sm lg:px-6 px-4 pt-4 pb-1" >
-                PRODUCT ANALYSIS RESULT
-              </div>
-              {dataProduct?.ingredientAnalyst?.map((ingredients) => (
-                <div key={ingredients.id} className={ingredients.status === true ? "lg:px-6 px-4 py-2" : "lg:px-6 px-4 py-2 bg-red-200"}>
-                  <div className="flex">
-                    <div className="w-1/12 pt-0.5">
+          <div
+            className={
+              dataProduct?.ingredientAnalyst?.length !== 0
+                ? "border-b-4 border-gray-200 pb-3"
+                : "hidden"
+            }
+          >
+            <div className="uppercase font-bold text-sm lg:px-6 px-4 pt-4 pb-1">
+              PRODUCT ANALYSIS RESULT
+            </div>
+            {dataProduct?.ingredientAnalyst?.map((ingredients) => (
+              <div
+                key={ingredients.id}
+                className={
+                  ingredients.status === true
+                    ? "lg:px-6 px-4 py-2"
+                    : "lg:px-6 px-4 py-2 bg-red-200"
+                }
+              >
+                <div className="flex">
+                  <div className="w-1/12 pt-0.5">
+                    <svg
+                      className="w-6 h-6 text-gray-800 dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1"
+                        d="M9.5 11.5 11 13l4-3.5M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="w-10/12 flex flex-col">
+                    <div className="font-bold text-sm uppercase">
+                      {ingredients.title}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {ingredients.desc}
+                    </div>
+                  </div>
+                  <div className="w-1/12 flex items-center justify-end">
+                    {ingredients.status === true ? (
                       <svg
-                        className="w-6 h-6 text-gray-800 dark:text-white"
+                        className="w-6 h-6 text-[#4ABFA1] dark:text-white"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
-                        fill="none"
+                        fill="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1"
-                          d="M9.5 11.5 11 13l4-3.5M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"
+                          fillRule="evenodd"
+                          d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
+                          clipRule="evenodd"
                         />
                       </svg>
-                    </div>
-                    <div className="w-10/12 flex flex-col">
-                      <div className="font-bold text-sm uppercase">
-                        {ingredients.title}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {ingredients.desc}
-                      </div>
-                    </div>
-                    <div className="w-1/12 flex items-center justify-end">
-                      {ingredients.status === true ? (
-                        <svg
-                          className="w-6 h-6 text-[#4ABFA1] dark:text-white"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          className="w-6 h-6 text-red-500 dark:text-white"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
-                    </div>
+                    ) : (
+                      <svg
+                        className="w-6 h-6 text-red-500 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    )}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
           {/* Ingredients */}
           <div className="lg:px-6 px-4 ">

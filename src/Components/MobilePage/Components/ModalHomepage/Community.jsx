@@ -33,7 +33,7 @@ function Community() {
     <>
       <div className="bg-white relative">
         <div className="pt-3 pb-1 sticky top-0 z-20 bg-white shadow">
-        <CommunityTopBar/>
+          <CommunityTopBar />
         </div>
         <div className="">
           {AllCommunity?.map((com) => (
@@ -57,7 +57,7 @@ function Community() {
                   </div>
                   <div className="">
                     <svg
-                      class="w-6 h-6 text-gray-800 dark:text-white"
+                      className="w-6 h-6 text-gray-800 dark:text-white"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -67,8 +67,8 @@ function Community() {
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeWidth="2"
                         d="M6 12h.01m6 0h.01m5.99 0h.01"
                       />
                     </svg>
@@ -76,7 +76,7 @@ function Community() {
                 </div>
                 <div className="py-5 text-sm">{com.thread}</div>
                 <div className="flex justify-between items-center text-sm">
-                  <div className="">
+                  <div className="text-gray-400 text-xs">
                     {calculateDaysAgo(com.createdDate)} hari yang lalu
                   </div>
                   <div className="flex justify-center items-center gap-3">
@@ -100,7 +100,10 @@ function Community() {
                       </svg>
                       {com.like}
                     </div>
-                    <div className="flex justify-center items-center gap-1">
+                    <Link
+                      to={`/community/thread/${com.id}`}
+                      className="flex justify-center items-center gap-1"
+                    >
                       <svg
                         className="w-6 h-6 text-gray-800 dark:text-white"
                         aria-hidden="true"
@@ -119,7 +122,7 @@ function Community() {
                         />
                       </svg>
                       {com.reply}
-                    </div>
+                    </Link>
                     <svg
                       className="w-6 h-6 text-gray-800 dark:text-white"
                       aria-hidden="true"
