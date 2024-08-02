@@ -877,7 +877,6 @@ export const getCommunityById = (id) => async (dispatch) => {
       type: COMMUNITY.GET_DATA_COMMUNITY_BY_ID_SUCCESS,
       payload: data,
     });
-    // console.log("data COMMUNITY BY ID >>> ", data);
     return data;
   } catch (error) {
     console.log("error get data", error);
@@ -907,12 +906,68 @@ export const postReply = (body) => async (dispatch) => {
       type: COMMUNITY.POST_COMMUNITY_REPLY_SUCCESS,
       payload: data,
     });
-    console.log("Community Reply >>> ", data);
     return data;
   } catch (error) {
-    console.log("error get all data FEEDBACK:", error);
+    console.log("error get all data", error);
     dispatch({
       type: COMMUNITY.POST_COMMUNITY_REPLY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const reportThreadCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_REPORT_THREAD_START });
+    const response = await fetch(`${BASE_URL}/thread-report`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_REPORT_THREAD_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_REPORT_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const reportReplyCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_REPORT_REPLY_START });
+    const response = await fetch(`${BASE_URL}/thread-reply-report`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_REPORT_REPLY_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_REPORT_REPLY_FAILED,
       payload: error,
     });
   }

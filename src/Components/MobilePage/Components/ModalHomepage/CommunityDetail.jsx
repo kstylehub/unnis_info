@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getCommunityById, postReply } from "../../../../Store/Actions/Actions";
+import {
+  getCommunityById,
+  postReply,
+  reportReplyCommunity,
+} from "../../../../Store/Actions/Actions";
 import back from "../../../../assets/previous.svg";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CommunityDetail() {
   const { id } = useParams();
   const [reply, setReply] = useState("");
   const dispatch = useDispatch();
-
   const dataComment = useSelector(
     (state) => state.ReducerCommunityById?.communityById
   );
   const user = useSelector((state) => state.ReducerUser?.dataUser);
-
   const dataToMap = Array.isArray(user?.dataMember)
     ? user?.dataMember
     : [user?.dataMember];
@@ -23,6 +27,11 @@ function CommunityDetail() {
     dispatch(getCommunityById(id));
   }, [dispatch, id]);
 
+  const [report, setReport] = useState("");
+  const [showActionModal, setShowActionModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [idMember, setIdMember] = useState(0);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (dataComment && memberId && reply) {
@@ -31,12 +40,31 @@ function CommunityDetail() {
         idMember: +memberId,
         reply: reply,
       };
-      // console.log(dataReply);
       dispatch(postReply(dataReply));
-      setReply(""); // Clear the input after submitting
+      setReply("");
       setTimeout(() => {
         window.location.reload();
       }, 500);
+    }
+  };
+  const handleAction = (e) => {
+    e.preventDefault();
+    if (idMember && memberId && report) {
+      let dataReport = {
+        idReplyThread: +idMember,
+        idMember: +memberId,
+        reason_report: report,
+      };
+      try {
+        dispatch(reportReplyCommunity(dataReport));
+        toast.success("Report successfully submitted!");
+        setReport("");
+        setShowActionModal(false);
+      } catch (error) {
+        toast.error("Failed to submit report. Please try again.");
+      }
+    } else {
+      toast.warn("Please fill in all fields before submitting.");
     }
   };
 
@@ -83,24 +111,6 @@ function CommunityDetail() {
                 <div className="flex justify-center text-sm items-center pl-4 font-bold">
                   {dataComment?.user}
                 </div>
-              </div>
-              <div className="">
-                <svg
-                  className="w-6 h-6 text-gray-800 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    d="M6 12h.01m6 0h.01m5.99 0h.01"
-                  />
-                </svg>
               </div>
             </div>
             <div className="py-5 text-sm">{dataComment?.thread}</div>
@@ -189,7 +199,14 @@ function CommunityDetail() {
                     {reply.user}
                   </div>
                 </div>
-                <div className="">
+
+                <div
+                  className=""
+                  onClick={() => {
+                    setShowReportModal(true);
+                    setIdMember(reply.idReply);
+                  }}
+                >
                   <svg
                     className="w-6 h-6 text-gray-800 dark:text-white"
                     aria-hidden="true"
@@ -211,8 +228,9 @@ function CommunityDetail() {
               <div className="py-3 text-sm">{reply.thread}</div>
               <div className="flex justify-between  text-sm">
                 <div className="text-gray-400 text-xs">
-
-                  {calculateDaysAgo(reply?.createdDate) > 0 ? calculateDaysAgo(reply?.createdDate)+" hari yang lalu" : "hari ini"} 
+                  {calculateDaysAgo(reply?.createdDate) > 0
+                    ? calculateDaysAgo(reply?.createdDate) + " hari yang lalu"
+                    : "hari ini"}
                 </div>
                 <div className="flex justify-center items-center gap-3 pe-1">
                   <div className="flex justify-center items-center gap-1">
@@ -271,8 +289,89 @@ function CommunityDetail() {
           </div>
         </form>
       </div>
+      {showActionModal && <ActionModal />}
+      {showReportModal && <ReportModal />}
+      <ToastContainer />
     </div>
   );
+
+  function ActionModal() {
+    return (
+      <form className="absolute inset-0 flex items-center justify-center z-20">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bg-white p-8 rounded shadow-lg">
+          <h2 className=" mb-6">Yakin ingin report reply?</h2>
+          <div className="flex justify-center gap-6">
+            <button
+              onClick={handleAction}
+              className="px-4 py-2 bg-[#4ABFA1] text-white rounded"
+            >
+              Report
+            </button>
+            <button
+              onClick={() => setShowActionModal(false)}
+              className=" px-4 py-2 bg-gray-200 rounded"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  function ReportModal() {
+    const reasons = [
+      "Konten tidak sesuai",
+      "Menyinggung pihak lain",
+      "Mengandung SARA",
+      "Spam",
+      "Lainnya",
+    ];
+
+    return (
+      <div className="absolute inset-0 flex items-center justify-center z-50">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white  rounded-t-2xl shadow-lg z-10">
+          <div className="flex justify-between  p-4 border-b">
+            <h2 className="  font-bold uppercase">pilih alasan report akun</h2>
+            <div className="" onClick={() => setShowReportModal(false)}>
+              <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center p-4 gap-6 text-sm">
+            {reasons.map((report) => (
+              <div
+                key={report}
+                onClick={() => {
+                  setReport(report);
+                  setShowActionModal(true);
+                  setShowReportModal(false);
+                }}
+              >
+                {report}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CommunityDetail;

@@ -43,3 +43,45 @@ export function ReducerCommunityById(
             return state;
     }
 }
+
+const defaultValue3 ={
+    dataReportThread:[],
+    error:null,
+    loading:true,
+}
+export function ReducerReportThread(
+    state=defaultValue3,
+    action,
+){
+    switch (action.type) {
+        case COMMUNITY.POST_REPORT_THREAD_START:
+            return {...state, loading: true }
+        case COMMUNITY.POST_REPORT_THREAD_FAILED:
+            return {...state, error: action.payload, loading:false }
+        case COMMUNITY.POST_REPORT_THREAD_SUCCESS:
+            return {...state, dataReportThread: action.payload.data, loading:false }
+        default:
+            return state;
+    }
+}
+
+const defaultValue4 ={
+    dataReportReply:[],
+    error:null,
+    loading:true,
+}
+export function ReducerReportReply(
+    state=defaultValue4,
+    action,
+){
+    switch (action.type) {
+        case COMMUNITY.POST_REPORT_THREAD_START:
+            return {...state, loading: true }
+        case COMMUNITY.POST_REPORT_THREAD_FAILED:
+            return {...state, error: action.payload, loading:false }
+        case COMMUNITY.POST_REPORT_THREAD_SUCCESS:
+            return {...state, dataReportReply: action.payload.data, loading:false }
+        default:
+            return state;
+    }
+}

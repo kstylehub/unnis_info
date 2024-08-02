@@ -2,25 +2,58 @@ import { Link, Outlet } from "react-router-dom";
 import NavigationButtom from "../../NavigatonBottom/NavigationBottom";
 import LogoUnnis from "../../../../assets/unnis_logo.png";
 import Alert from "../../../../assets/Community/alert.svg";
-import { getAllCommunity } from "../../../../Store/Actions/Actions";
+import {
+  getAllCommunity,
+  reportThreadCommunity,
+} from "../../../../Store/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import coin from "../../../../assets/Homepage/coin.png";
 import CommunityTopBar from "../TopBar/CommunityTopBar";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Community() {
   const AllCommunity = useSelector(
     (state) => state.ReducerAllCommunity.Community
   );
   const getUser = useSelector((state) => state.ReducerUser.dataUser);
-  const dataUser = getUser?.dataMember?.[0];
+  const dataToMap = Array.isArray(getUser?.dataMember)
+    ? getUser?.dataMember
+    : [getUser?.dataMember];
+  const memberId = dataToMap.length > 0 ? dataToMap[0]?.id : null;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCommunity());
   }, []);
 
-  // Function to calculate the difference in days between today and a given date
+  const [report, setReport] = useState("");
+  const [showActionModal, setShowActionModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [idMember, setIdMember] = useState(0);
+
+  const handleAction = (e) => {
+    e.preventDefault();
+    if (idMember && memberId && report) {
+      let dataReport = {
+        idThread: +idMember,
+        idMember: +memberId,
+        reason_report: report,
+      };    
+      try {
+        dispatch(reportThreadCommunity(dataReport));
+        toast.success("Report successfully submitted!");
+        setReport("");
+        setShowActionModal(false);
+      } catch (error) {
+        toast.error("Failed to submit report. Please try again.");
+      }
+    } else {
+      toast.warn("Please fill in all fields before submitting.");
+    }
+  };
+
   const calculateDaysAgo = (dateString) => {
     const createdDate = new Date(dateString);
     const currentDate = new Date();
@@ -51,11 +84,15 @@ function Community() {
                         <img className="w-8 h-8 bg-[#4ABFA1] rounded-full" />
                       )}
                     </div>
-                    <div className="flex justify-center text-sm items-center pl-4">
+                    <div className="flex justify-center text-sm items-center pl-4 font-bold">
                       {com.user}
                     </div>
                   </div>
-                  <div className="">
+                  <div className="" 
+                      onClick={() => {
+                        setShowReportModal(true);
+                        setIdMember(com.id);
+                      }}>
                     <svg
                       className="w-6 h-6 text-gray-800 dark:text-white"
                       aria-hidden="true"
@@ -150,8 +187,88 @@ function Community() {
           </div>
         </div>
       </div>
+      {showActionModal && <ActionModal />}
+      {showReportModal && <ReportModal />}
+      <ToastContainer />
     </>
   );
-}
+
+  function ActionModal() {
+    return (
+      <form className="absolute inset-0 flex items-center justify-center z-20">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bg-white p-8 rounded shadow-lg">
+          <h2 className=" mb-6">Yakin ingin report thread?</h2>
+          <div className="flex justify-center gap-6">
+            <button
+              onClick={handleAction}
+              className="px-4 py-2 bg-[#4ABFA1] text-white rounded"
+            >
+              Report
+            </button>
+            <button
+              onClick={() => setShowActionModal(false)}
+              className=" px-4 py-2 bg-gray-200 rounded"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  function ReportModal() {
+    const reasons = [
+      "Konten tidak sesuai",
+      "Menyinggung pihak lain",
+      "Mengandung SARA",
+      "Spam",
+      "Lainnya",
+    ];
+
+    return (
+      <div className="absolute inset-0 flex items-center justify-center z-50">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white  rounded-t-2xl shadow-lg z-10">
+          <div className="flex justify-between  p-4 border-b">
+            <h2 className="  font-bold uppercase">pilih alasan report akun</h2>
+            <div className="" onClick={() => setShowReportModal(false)}>
+              <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center p-4 gap-6 text-sm">
+            {reasons.map((report) => (
+              <div
+                key={report}
+                onClick={() => {
+                  setReport(report);
+                  setShowActionModal(true);
+                  setShowReportModal(false);
+                }}
+              >
+                {report}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+}}
 
 export default Community;
