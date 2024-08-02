@@ -34,6 +34,7 @@ import Close from "../../../../assets/Close.svg";
 import NavbarPhone from "../../NavbarPhone/NavbarPhone";
 import NavigationButtom from "../../NavigatonBottom/NavigationBottom";
 import Recomended from "../../../../assets/Homepage/recomended.svg";
+import imgClose from "../../../../assets/Close.svg";
 
 function NewPage() {
   const dispatch = useDispatch();
@@ -45,153 +46,160 @@ function NewPage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("All");
   const [reload, setReload] = useState(false);
-  const [combinedData, setCombinedData] = useState([]);
   const [totalLoadedItems, setTotalLoadedItems] = useState(0);
   const [isDataEnd, setIsDataEnd] = useState(false);
-  const productCategory = useSelector(
-    (state) => state.ReducerProductCategory.productCategory
-  );
+  const [clickedButton, setClickedButton] = useState("all");
+  const  [hiddenButton, setHiddenButton] = useState(false)
+  const [filter, setFilter] = useState({
+    idMember: 0,
+    limit: 10,
+    page: 1,
+    filter: "",
+    category: "",
+  })
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
-  const loadingAllProduct = useSelector(
-    (state) => state.ReducerListProduct.loading
-  );
-  const allProductPage = useSelector(
-    (state) => state.ReducerProductWithPagination.dataProductWithPagination
-  );
-  // console.log("data product page >>> ", allProductPage);
+  const allProductPage = useSelector((state) => state.ReducerProductWithPagination.dataProductWithPagination);
+  const loadingProduct = useSelector((state) => state.ReducerProductWithPagination.loading);
 
-  const keyCategories = productCategory.data
-    ? Object.keys(productCategory.data)
-    : [];
-  const nameCategories = keyCategories.map(
-    (str) => str.charAt(0).toUpperCase() + str.slice(1)
-  );
+  const [dataProduct, setDataProduct] = useState(allProductPage.dataProduct || [])
+  const [combinedData, setCombinedData] = useState([]);
+
+  
+  const getButtonStyle = (button) => {
+    if (clickedButton === button) {
+      return {
+        color: "black",
+        border: "1px solid black",
+      };
+    } else {
+      return {
+        color: "gray",
+      };
+    }
+  };
+
+  useEffect(() => {
+    dispatch(getAllProductWithPagination(filter));
+  }, [dispatch, filter]);
+
+  // useEffect(() => {
+  //   if (allProductPage) {
+  //     // setTotalLoadedItems(allProductxPage.length);
+  //     setCombinedData(allProductPage);
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (allProductPage?.dataProduct?.length > 0) {
+      setCombinedData((prevCombinedData) => [
+        ...prevCombinedData,
+        ...allProductPage.dataProduct,
+      ]);
+      setNextPage(filter.page + 1);
+    } else {
+      setIsDataEnd(true);
+    }
+  }, [allProductPage]);
+
+  
 
   const category = [
     {
-      name: nameCategories[0],
+      name: "Skincare",
       icon: SkinCare,
     },
     {
-      name: nameCategories[1],
+      name: "Cleansing",
       icon: Cleansing,
     },
     {
-      name: nameCategories[2],
+      name: "Mask",
       icon: Mask,
     },
     {
-      name: nameCategories[3],
+      name: "Suncare",
       icon: Suncare,
     },
     {
-      name: nameCategories[4],
+      name: "Face",
       icon: Face,
     },
     {
-      name: nameCategories[5].replace("eye", "&eye"),
+      name: "Lip&Eye",
       icon: Lip,
     },
     {
-      name: nameCategories[6],
+      name: "Body",
       icon: Body,
     },
     {
-      name: nameCategories[7],
+      name: "Hair",
       icon: Hair,
     },
   ];
 
-  async function countPage() {
-    const newNextPage = nextPage + 1;
-    setReload(true);
-
-    const response = await dispatch(
-      getAllProduct({ ...requestBody, page: newNextPage })
-    );
-    if (response) {
-      const newPageData = response.dataProduct;
-      if (newPageData.length === 0 || newNextPage == null) {
-        setIsDataEnd(true);
-      } else {
-        setCombinedData((prevCombinedData) => [
-          ...prevCombinedData,
-          ...newPageData,
-        ]);
-        setTotalLoadedItems((prevTotal) => prevTotal + newPageData.length);
-        setNextPage(newNextPage);
-      }
-    }
-
-    setReload(false);
-  }
-
-  useEffect(() => {
-    if (allProductPage) {
-      setTotalLoadedItems(allProductPage.length);
-      setCombinedData(allProductPage);
-    }
-  }, []);
-
-  const requestBody = {
-    idMember: 0,
-    limit: 30,
-    page: nextPage,
-    category: selectedOption == "All" ? "" : clikCategory,
-  };
-
-  useEffect(() => {
-    dispatch(getProductCategory());
-    dispatch(getListProduct());
-  }, []);
-
-  useEffect(() => {
-    dispatch(getAllProductWithPagination(requestBody));
-    setTimeout(() => {
-      setReload(false);
-    }, 3000);
-  }, [selectedOption, clikCategory, nextPage]);
-
-  function sortByLike(val) {
-    setLikeCategory(val);
+  async function loadMoreData() {
+    if (isDataEnd || loadingProduct) return;
+    setFilter((prevState) => ({
+      ...prevState,
+      page: nextPage,
+    }));
   }
 
   async function handleCategory(el) {
     if (!el) return "";
-    const firstLetter = el.charAt(0).toLowerCase();
-    const restOfEl = el.slice(1);
-    const lowerLizedEl = firstLetter + restOfEl;
-    setClickCategory(lowerLizedEl);
-    setNextPage(1);
+    setClickCategory(el);
+    setHiddenButton(true);
     setBtnActive(el);
-    setSelectedOption(el);
-    const response = await dispatch(
-      getAllProduct({ ...requestBody, category: lowerLizedEl })
-    );
-    if (response) {
-      const newPageData = response.dataProduct;
-      if (newPageData.length === 0 || newPageData == null) {
-        setIsDataEnd(true);
-      } else {
-        setCombinedData(newPageData);
-      }
-    }
+    setNextPage(1);
+    setIsDataEnd(false);
+    setFilter((prevState) => ({
+      ...prevState,
+      category: el,
+      page: 1,
+    }));
+    setCombinedData([]);
   }
-  const modal = productCategory?.data ? Object.keys(productCategory?.data) : [];
+
+
+  const handleClick = (button) => {
+    setClickedButton(button);
+    setHiddenButton(true);
+    setFilter((prevState) => ({
+      ...prevState,
+      filter: button,
+      page: 1,
+    }));
+    setCombinedData([]);
+  };
+
+  
+  async function closeFilter() {
+    setHiddenButton(false);
+    setClickedButton("all");
+    setBtnActive("");
+    setFilter((prevState) => ({
+      ...prevState,
+      category: "",
+      filter: "",
+      page: 1,
+    }));
+    setCombinedData([]);
+  }
+
   function CategoryProduct() {
     return (
       <>
-        {category.map((el) => {
+        {category.map((el, index) => {
           return (
-            <Link
-              to={"#"}
+            <button
               onClick={() => handleCategory(el.name)}
-              key={el.name}
+              key={index}
               className={
                 btnActive == el.name
-                  ? "bg-teal-100 rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
-                  : "bg-[#DEE2E6] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
+                  ? "bg-teal-100 min-w-[5.5vw] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
+                  : "bg-[#DEE2E6] min-w-[5.5vw] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
               }
               style={{ textAlign: "-webkit-center" }}
             >
@@ -199,7 +207,7 @@ function NewPage() {
               <div className="text-center ">
                 <p>{el.name}</p>
               </div>
-            </Link>
+            </button>
           );
         })}
       </>
@@ -210,15 +218,12 @@ function NewPage() {
     setSelectedOption("All");
     setBtnActive("");
   }
-  const thedata = Array.isArray(combinedData?.dataProduct)
-    ? combinedData.dataProduct
-    : [];
 
   function DisplayProduct() {
     return (
       <>
         <div className="flex flex-wrap">
-          {thedata?.map((el, index) => {
+          {combinedData?.map((el, index) => {
             const text = el.name;
             const truncatedText =
               text.length > 30 ? `${text.slice(0, 30)}...` : text;
@@ -283,7 +288,7 @@ function NewPage() {
                         {el.brand} - {el.name}
                       </div>
                       <div className="text-left font-bold text-lg">
-                        Rp{" "}
+                        Rp
                         {el.price
                           .toLocaleString("id-ID", {
                             minimumFractionDigits: 0,
@@ -377,126 +382,29 @@ function NewPage() {
           })}
         </div>
 
-        {combinedData.length < 30 ||
-        combinedData == null ||
-        isDataEnd == true ? (
-          <></>
-        ) : reload ? (
-          <div className="flex justify-center items-center">
-            <CircleLoader color="#0000ff" size={30} />
-          </div>
-        ) : (
-          <div
-            className="justify-center items-center text-center"
-            onClick={countPage}
-          >
+        {!isDataEnd && (
+        <div className="justify-center items-center text-center" onClick={loadMoreData}>
+          {loadingProduct ? (
+            <div className="flex justify-center items-center">
+              <CircleLoader color="#0000ff" size={30} />
+            </div>
+          ) : (
             <button>Load More</button>
-          </div>
-        )}
-        <div className="pb-36"></div>
+          )}
+        </div>
+      )}
+      <div className="pb-36"></div>
       </>
     );
   }
-
-  const handleOptionChange = async (event) => {
-    const el = event.target.value;
-    if (!el) return "";
-    const firstLetter = el.charAt(0).toLowerCase();
-    const restOfEl = el.slice(1);
-    const lowerLizedEl = firstLetter + restOfEl;
-    setClickCategory(lowerLizedEl);
-    setSelectedOption(el);
-    setShowModal(false);
-    setBtnActive(el);
-    setNextPage(1);
-    const response = await dispatch(
-      getAllProduct({ ...requestBody, category: lowerLizedEl })
-    );
-    if (response) {
-      const newPageData = response.dataProduct;
-      if (newPageData.length === 0 || newPageData == null) {
-        setIsDataEnd(true);
-      } else {
-        setCombinedData(newPageData);
-      }
-    }
-  };
-
-  const handleModalOpen = () => {
-    setShowModal(true);
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
-
-  function Category() {
-    return (
-      <>
-        {category.map((el) => {
-          return (
-            <div className="mb-5" key={el.name}>
-              <label>
-                <input
-                  type="radio"
-                  value={el.name}
-                  checked={selectedOption === el.name}
-                  onChange={handleOptionChange}
-                  className="mr-4"
-                />
-                {el.name}
-              </label>
-            </div>
-          );
-        })}
-      </>
-    );
-  }
-
-  function ModalCategory() {
-    return (
-      <>
-        <button
-          className="border rounded-lg p-1 flex text-center items-center gap-x-1"
-          onClick={handleModalOpen}
-        >
-          <h1>{selectedOption}</h1>
-          <img src={ArrowBot} className="h-3 w-3" />
-        </button>
-
-        {showModal && (
-          <div className="fixed lg:left-[55%] inset-0 flex items-center justify-center bg-black opacity-90 lg:w-[30%] w-[100vw] shadow-lg shadow-indigo-500/50">
-            <div className="z-100 bg-white rounded-lg p-3 w-screen top-[45%] lg:w-[100%]  relative">
-              <div className="z-100 bg-white max-h-[50%] h-[60vh]">
-                <div className="flex justify-between items-center mb-2 bg-white">
-                  <h2 className="text-xl font-bold pl-3">Category Product</h2>
-                  <button
-                    onClick={handleModalClose}
-                    className="text-gray-600 hover:text-gray-800 pr-3"
-                  >
-                    <img src={Close} className="w-4 h-4" />
-                  </button>
-                </div>
-                <div className="border mb-4"></div>
-                <div className="modal-content flex overflow-y-auto max-h-[inherit]">
-                  <div className="pl-3 h-full">
-                    <Category />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </>
-    );
-  }
+  
 
   return (
     <>
       <div className="relative scrollbar-hide">
         <div className="sticky top-0 w-full bg-white px-5 z-0">
-          <div className="text-[rgb(52,58,64)] bg-white pb-3 z-20 ">
-            <div className="flex justify-between sticky ">
+          <div className="text-[rgb(52,58,64)] bg-white pb-3 z-20 sticky top-0">
+            <div className="flex justify-between">
               <div className="self-center">
                 <Link to={"/"}>
                   <img src={back} className="w-full" />
@@ -510,36 +418,55 @@ function NewPage() {
               </Link>
             </div>
             <div className="flex justify-center">
-              {loading ? (
-                <RingLoader color="#0000ff" size={30} />
-              ) : (
                 <div className="flex px-2 overflow-x-auto py-3 gap-3 max-w-screen scrollbar-hide">
                   <CategoryProduct />
                 </div>
-              )}
             </div>
+            <div className="border border flex my-2"></div>
             <div className="flex justify-between pt-5 px-2">
-              <div className="flex">
-                {selectedOption !== "All" ? (
-                  <button
-                    type="button"
-                    className="border rounded-lg p-1 flex text-center items-center gap-x-1 mr-1"
-                    onClick={handleShowAll}
-                  >
-                    <img src={Close} className="w-4 h-4" />
-                  </button>
-                ) : (
-                  ""
-                )}
-                <ModalCategory />
-              </div>
-              <ModalSort sortByLike={sortByLike} />
+            <div className="flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide py-2 text-center">
+              <button
+                onClick={closeFilter}
+                className={`${hiddenButton == false ?  "hidden" : "min-w-[2vw] items-center border-gray-400 border rounded-full"}`} style={{textAlign: "-webkit-center"}}
+                type="button"
+              >
+                <img src={imgClose} className="w-4 h-4" />
+              </button>
+              <button
+                className=" min-w-[4vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                onClick={() => handleClick("Newest")}
+                style={getButtonStyle("Newest")}
+              >
+                 Newest
+              </button>
+              <button
+                className="min-w-[5vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                onClick={() => handleClick("Top Likes")}
+                style={getButtonStyle("Top Likes")}
+              >
+                Top Likes
+              </button>
+              <button
+                className=" min-w-[6vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                onClick={() => handleClick("Top Review")}
+                style={getButtonStyle("Top Review")}
+              >
+                Top Review
+              </button>
+              <button
+                className="min-w-[5vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                onClick={() => handleClick("Stock")}
+                style={getButtonStyle("Stock")}
+              >
+                Stock
+              </button>
+            </div>
             </div>
           </div>
-          <div className="overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-hide">
-            {loadingAllProduct ? (
+          <div className="overflow-y-auto max-h-[calc(100vh-100px)] mb-[50px]">
+            {loadingProduct ? (
               <div className="flex justify-center items-center h-screen">
-                <CircleLoader color="#0000ff" size={30} />{" "}
+                <CircleLoader color="#0000ff" size={30} />
               </div>
             ) : (
               <>
@@ -547,7 +474,7 @@ function NewPage() {
               </>
             )}
           </div>
-        </div>{" "}
+        </div>
         <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
           <NavigationButtom />
         </div>
