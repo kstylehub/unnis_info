@@ -144,7 +144,16 @@ export const getAllProduct = (body) => async (dispatch) => {
   }
 };
 
-export const getAllProductWithPagination = () => async (dispatch) => {
+export const getAllProductWithPagination = (body) => async (dispatch) => {
+  const dataFilter = {
+    idMember: body.idMember,
+    limit: 10,
+    page: body.page,
+    category: body.category,
+    filter: body.filter
+  };
+
+  
   try {
     dispatch({ type: PRODUCT.GET_PAGINATION_PRODUCT_START });
 
@@ -153,13 +162,7 @@ export const getAllProductWithPagination = () => async (dispatch) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        idMember: 1,
-        limit: 50,
-        page: 5,
-        category: "",
-        filter: "",
-      }),
+      body: JSON.stringify(dataFilter),
     });
 
     if (!response.ok) {

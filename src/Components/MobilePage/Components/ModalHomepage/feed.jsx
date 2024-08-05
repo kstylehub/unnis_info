@@ -54,7 +54,7 @@ function Feed() {
     }
     return (
       <>
-        {sortedData?.map((el) => (
+        {filterData?.map((el) => (
           <div key={el.idFeed}>
             <Link to={`/feeddetail/${el.idFeed}`}>
               <img
@@ -111,41 +111,48 @@ function Feed() {
         </div>
         <hr className="pb-2" />
         <div className="flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide py-2 text-center">
-          <div
+          <button
             className=" min-w-[4vw] items-center border-gray-400 border py-1 px-3 rounded-full"
-            onClick={() => handleClick("all")}
-            style={getButtonStyle("all")}
+            onClick={() => handleClick("All")}
+            style={getButtonStyle("All")}
           >
             All
-          </div>
-          <div
+          </button>
+          <button
             className="min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
-            onClick={() => handleClick("UnnisAtoZ")}
-            style={getButtonStyle("UnnisAtoZ")}
+            onClick={() => handleClick("Unnis A to Z")}
+            style={getButtonStyle("Unnis A to Z")}
           >
             Unnis A to Z
-          </div>
-          <div
+          </button>
+          <button
             className=" min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
-            onClick={() => handleClick("report")}
-            style={getButtonStyle("report")}
+            onClick={() => handleClick("New Report")}
+            style={getButtonStyle("New Report")}
           >
             New Report
-          </div>
-          <div
+          </button>
+          <button
             className="min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
-            onClick={() => handleClick("editor")}
-            style={getButtonStyle("editor")}
+            onClick={() => handleClick("Editor's Pick")}
+            style={getButtonStyle("Editor's Pick")}
           >
             Editor's Pick
-          </div>
-          <div
+          </button>
+          <button
             className="min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
-            onClick={() => handleClick("letter")}
-            style={getButtonStyle("letter")}
+            onClick={() => handleClick("Unnis Letter")}
+            style={getButtonStyle("Unnis Letter")}
           >
             Unnis Letter
-          </div>
+          </button>
+          <button
+            className="min-w-[7vw] items-center border-gray-400 border py-1 px-3 rounded-full"
+            onClick={() => handleClick("Event Lain")}
+            style={getButtonStyle("Event Lain")}
+          >
+            Event Lain
+          </button>
         </div>
         <div>
           <AllFeed />

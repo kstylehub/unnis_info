@@ -12,20 +12,20 @@ import Food from "../../../assets/Homepage/Category Icon/food.svg";
 import Hair from "../../../assets/Homepage/Category Icon/hair.svg";
 import Makeup from "../../../assets/Homepage/Category Icon/make_up.svg";
 import Mask from "../../../assets/Homepage/Category Icon/mask.svg";
+import Skinanalysis from "../../../assets/Homepage/Category Icon/skin_analysis.svg";
+import Skincare from "../../../assets/Homepage/Category Icon/skincare.svg";
+import Suncare from "../../../assets/Homepage/Category Icon/suncare.svg";
 import Longbanner1 from "../../../assets/Homepage/Long Banner/Banner1.png";
 import Longbanner2 from "../../../assets/Homepage/Long Banner/Banner2.png";
 import Medal1 from "../../../assets/Homepage/Best Seller/1.svg";
 import Medal2 from "../../../assets/Homepage/Best Seller/2.svg";
 import Medal3 from "../../../assets/Homepage/Best Seller/3.svg";
-import Skinanalysis from "../../../assets/Homepage/Category Icon/skin_analysis.svg";
 import Skinbanner from "../../../assets/Homepage/check_skin_problem.svg";
-import Skincare from "../../../assets/Homepage/Category Icon/skincare.svg";
-import Suncare from "../../../assets/Homepage/Category Icon/suncare.svg";
 import Recomended from "../../../assets/Homepage/recomended.svg";
 import Youtube from "../../../assets/Homepage/yutub.svg";
 import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getActiveBanner,
@@ -39,6 +39,7 @@ import {
   getVideoByIdMemberYoutube,
 } from "../../../Store/Actions/Actions";
 import ModalLoginWarn from "../Components/ModalHomepage/ModalLoginWarn";
+import ModalIcon from "../Components/ModalCategory/ModalIconCategory";
 
 function ContentNavbar() {
   const product = useSelector((state) => state.ReducerBestSellerProduct?.topProduct);
@@ -48,18 +49,12 @@ function ContentNavbar() {
   const allEvent = useSelector((state) => state.ReducerEventData?.event);
   const getUser = useSelector((state) => state.ReducerUser?.dataUser);
   const allBanner = useSelector((state) => state.ReducerActiveBanner?.banner);
-  const allProduct = useSelector(
-    (state) => state.ReducerProductWithPagination.dataProductWithPagination
-  );
-  const VideoRecommendation = useSelector(
-    (state) => state.ReducerVideoByIdMemberYoutube?.idVideo || []
-  );
-  const allInfluencer = useSelector(
-    (state) => state.ReducerAllInfluencer?.influencer
-  );
-  const dataUser = getUser?.dataMember?.[0];
+  const allProduct = useSelector((state) => state.ReducerProductWithPagination.dataProductWithPagination);
+  const VideoRecommendation = useSelector((state) => state.ReducerVideoByIdMemberYoutube?.idVideo || []);
+  const allInfluencer = useSelector((state) => state.ReducerAllInfluencer?.influencer);
 
-  const dispatch = useDispatch();
+  const [modalCategory, setModalCategory] = useState(false)
+
   useEffect(() => {
     dispatch(getTopProduct());
     dispatch(getAllReview());
@@ -72,6 +67,37 @@ function ContentNavbar() {
     dispatch(getBestSellerProduct());
   }, []);
 
+  const dataUser = getUser?.dataMember?.[0];
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  let categoryIcon = [
+    { src: Category, label: "Category" },
+    { src: Skinanalysis, label: "Skin Analysis", to: "/skinanalysis" },
+    { src: Skincare, label: "Skincare" },
+    { src: Cleansing, label: "Cleansing" },
+    { src: Mask, label: "Mask" },
+    { src: Suncare, label: "Suncare" },
+    { src: Face, label: "Face" },
+    { src: Makeup, label: "Lip & Eye" },
+    { src: Body, label: "Body" },
+    { src: Hair, label: "Hair" },
+    { src: Baby, label: "Kids & Baby" },
+    { src: Food, label: "Food" },
+  ]
+
+  const handleNavigate = (label) => {
+    if(label == "Category"){
+      setModalCategory(true)
+    } else if(label == "Skin Analysis") {
+      navigate("/skinanalysis")
+    }
+  }
+
+  const toggleModalCategory = () => {
+    setModalCategory(false)
+  }
   // console.log("data top >>>>",allProductWithPagination);
   const productList = Array.isArray(product?.data) ? product.data : [];
   const sortedProductList = productList.sort((a, b) => b.reviewNum - a.reviewNum).slice(0, 3);
@@ -347,6 +373,7 @@ function ContentNavbar() {
 
   return (
     <>
+      <ModalIcon isOpen={modalCategory} onClose={toggleModalCategory} />
       <div className="mt-2">
         <div
           className="lg:h-[10vw] h-[35vw]"
@@ -399,22 +426,9 @@ function ContentNavbar() {
         </OwlCarousel>
         {/* Category Icon */}
         <div className="mt-28 pt-1 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
-          {[
-            { src: Category, label: "Category" },
-            { src: Skinanalysis, label: "Skin Analysis", to: "/skinanalysis" },
-            { src: Skincare, label: "Skincare" },
-            { src: Cleansing, label: "Cleansing" },
-            { src: Mask, label: "Mask" },
-            { src: Suncare, label: "Suncare" },
-            { src: Face, label: "Face" },
-            { src: Makeup, label: "Lip & Eye" },
-            { src: Body, label: "Body" },
-            { src: Hair, label: "Hair" },
-            { src: Baby, label: "Kids & Baby" },
-            { src: Food, label: "Food" },
-          ]?.map((item, index) => (
-            <a
-              href={item.to}
+          {categoryIcon?.map((item, index) => (
+            <button
+              onClick={()=>handleNavigate(item.label)}
               key={index}
               className="flex flex-col justify-center items-center"
             >
@@ -427,7 +441,7 @@ function ContentNavbar() {
               >
                 {item.label}
               </div>
-            </a>
+            </button>
           ))}
         </div>
         {/* Long Banner */}
