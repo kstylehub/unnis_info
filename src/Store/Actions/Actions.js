@@ -976,6 +976,65 @@ export const reportReplyCommunity = (body) => async (dispatch) => {
   }
 };
 
+export const likeThreadCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_LIKE_THREAD_START });
+    const response = await fetch(`${BASE_URL}/like-thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_LIKE_THREAD_SUCCESS,
+      payload: data,
+    });
+    
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_LIKE_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const dislikeThreadCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_DISLIKE_THREAD_START });
+    const response = await fetch(`${BASE_URL}/dislike-thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_DISLIKE_THREAD_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_DISLIKE_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
 // RECYCLE
 export const getVRecycleLeaderboard = () => async (dispatch) => {
   try {
