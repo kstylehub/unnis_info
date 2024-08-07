@@ -93,7 +93,9 @@ function Recycle() {
                   <div className="font-semibold text-[#818181] flex justify-end items-center">
                     {el.count} points
                   </div>{" "}
-                  <div className="border border-[#4ABFA1] rounded-full px-3 py-0.5 text-[#4ABFA1]">Klaim</div>
+                  <div className="border border-[#4ABFA1] rounded-full px-3 py-0.5 text-[#4ABFA1]">
+                    Klaim
+                  </div>
                 </div>
               </div>
             </div>
@@ -104,8 +106,8 @@ function Recycle() {
   }
 
   return (
-    <div className=" h-full overflow-x-auto relative">
-      <div className="top-0 sticky lg:px-8 px-4 w-full z-20 bg-white pt-2">
+    <div className=" h-screen flex-col flex relative overflow-hidden">
+      <div className="top-0 sticky lg:px-8 px-4 w-full bg-white pt-2 border-b-2 border-[#E0E0E0]">
         <div className="flex justify-between">
           <div className="self-center">
             <Link to={"/"}>
@@ -142,83 +144,84 @@ function Recycle() {
           </div>
         </div>
       </div>
-      <hr className="border-[#aeaeae] border-2" />
-      <div className="w-full">
-        <div className="">
-          <img src={Banner} className="w-full" />
-        </div>
-      </div>
-      <div className="bg-[#cacaca] p-1" />
-      <div className="flex justify-center px-6 py-5">
-        <div className="w-1/12">
-          <svg
-            className="w-6 h-6 text-gray-800 dark:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              strokeWidth="2"
-              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-            />
-          </svg>
-        </div>
-        <div className="w-10/12 flex flex-col">
-          <div className="font-bold">Reward History</div>
-          <div className="text-xs pe-4">
-            * Click the claim button to redeem Reward Points for Coins that you
-            can use.
+      <div className=" flex- overflow-y-scroll">
+        <div className="w-full">
+          <div className="">
+            <img src={Banner} className="w-full" />
           </div>
         </div>
-        <div className="w-2/12 flex items-end text-xs gap-0.5 text-[#9e9e9e]">
-          View All
-          <svg
-            className=" w-4 h-4 text-[#9e9e9e] dark:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m9 5 7 7-7 7"
-            />
-          </svg>
+        <div className="bg-[#cacaca] p-1" />
+        <div className="flex justify-center px-6 py-5">
+          <div className="w-1/12">
+            <svg
+              className="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeWidth="2"
+                d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
+              />
+            </svg>
+          </div>
+          <div className="w-10/12 flex flex-col">
+            <div className="font-bold">Reward History</div>
+            <div className="text-xs pe-4">
+              * Click the claim button to redeem Reward Points for Coins that
+              you can use.
+            </div>
+          </div>
+          <div className="w-2/12 flex items-end text-xs gap-0.5 text-[#9e9e9e]">
+            View All
+            <svg
+              className=" w-4 h-4 text-[#9e9e9e] dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m9 5 7 7-7 7"
+              />
+            </svg>
+          </div>
+        </div>{" "}
+        <History />
+        <hr />
+        <div className="bg-[#e8e8e8] h-[28vw]">
+          <div className="flex text-start px-6 py-5 font-bold gap-2">
+            <svg
+              className="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m7.171 12.906-2.153 6.411 2.672-.89 1.568 2.34 1.825-5.183m5.73-2.678 2.154 6.411-2.673-.89-1.568 2.34-1.825-5.183M9.165 4.3c.58.068 1.153-.17 1.515-.628a1.681 1.681 0 0 1 2.64 0 1.68 1.68 0 0 0 1.515.628 1.681 1.681 0 0 1 1.866 1.866c-.068.58.17 1.154.628 1.516a1.681 1.681 0 0 1 0 2.639 1.682 1.682 0 0 0-.628 1.515 1.681 1.681 0 0 1-1.866 1.866 1.681 1.681 0 0 0-1.516.628 1.681 1.681 0 0 1-2.639 0 1.681 1.681 0 0 0-1.515-.628 1.681 1.681 0 0 1-1.867-1.866 1.681 1.681 0 0 0-.627-1.515 1.681 1.681 0 0 1 0-2.64c.458-.361.696-.935.627-1.515A1.681 1.681 0 0 1 9.165 4.3ZM14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
+              />
+            </svg>
+            Leaderboard
+          </div>
+          <Leaderboard />
         </div>
-      </div>{" "}
-      <History />
-      <hr />
-      <div className="bg-[#e8e8e8] h-[28vw]">
-        <div className="flex text-start px-6 py-5 font-bold gap-2">
-          <svg
-            className="w-6 h-6 text-gray-800 dark:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m7.171 12.906-2.153 6.411 2.672-.89 1.568 2.34 1.825-5.183m5.73-2.678 2.154 6.411-2.673-.89-1.568 2.34-1.825-5.183M9.165 4.3c.58.068 1.153-.17 1.515-.628a1.681 1.681 0 0 1 2.64 0 1.68 1.68 0 0 0 1.515.628 1.681 1.681 0 0 1 1.866 1.866c-.068.58.17 1.154.628 1.516a1.681 1.681 0 0 1 0 2.639 1.682 1.682 0 0 0-.628 1.515 1.681 1.681 0 0 1-1.866 1.866 1.681 1.681 0 0 0-1.516.628 1.681 1.681 0 0 1-2.639 0 1.681 1.681 0 0 0-1.515-.628 1.681 1.681 0 0 1-1.867-1.866 1.681 1.681 0 0 0-.627-1.515 1.681 1.681 0 0 1 0-2.64c.458-.361.696-.935.627-1.515A1.681 1.681 0 0 1 9.165 4.3ZM14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
-            />
-          </svg>
-          Leaderboard
-        </div>
-        <Leaderboard />
       </div>
-      <div className="top-0 sticky justify-center py-5 bg-[#4ABFA1] items-center p-3">
+      <div className="left-0 right-0 buttom-0 sticky justify-center py-4 bg-[#4ABFA1] items-center px-3">
         <div className="justify-center items-center flex text-white text-lg">
           Get Rewards
         </div>

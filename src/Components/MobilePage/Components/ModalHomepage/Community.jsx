@@ -1,7 +1,5 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavigationButtom from "../../NavigatonBottom/NavigationBottom";
-import LogoUnnis from "../../../../assets/unnis_logo.png";
-import Alert from "../../../../assets/Community/alert.svg";
 import {
   dislikeThreadCommunity,
   getAllCommunity,
@@ -10,7 +8,6 @@ import {
 } from "../../../../Store/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import coin from "../../../../assets/Homepage/coin.png";
 import CommunityTopBar from "../TopBar/CommunityTopBar";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,7 +29,7 @@ function Community() {
   }, [dispatch]);
 
   const [report, setReport] = useState("");
-  const [likeStatus, setLikeStatus] = useState({}); // Object to store like status for each thread
+  const [likeStatus, setLikeStatus] = useState({}); 
   const [showActionModal, setShowActionModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [idMember, setIdMember] = useState(0);
@@ -119,6 +116,12 @@ function Community() {
     const differenceInTime = currentDate - createdDate;
     const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
+  };
+
+  const handleWhatsAppShare = () => {
+    const message = encodeURIComponent("Yuk download Unnis di https://play.google.com/store/apps/details?id=com.brommko.android.unnispark");
+    const url = `https://wa.me/?text=${message}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -253,6 +256,8 @@ function Community() {
                       height="24"
                       fill="none"
                       viewBox="0 0 24 24"
+                      onClick={handleWhatsAppShare}
+                      style={{ cursor: 'pointer' }}
                     >
                       <path
                         stroke="currentColor"

@@ -37,7 +37,7 @@ import {
   ReducerVideoByIdMemberYoutube,
   ReducerVideoInfluencer,
 } from "./Reducers/ReducerVideo";
-import { ReducerAllCommunity, ReducerCommunityById, ReducerDislikeThreadCommunity, ReducerLikeThreadCommunity, ReducerReportReply, ReducerReportThread } from "./Reducers/ReducerCommunity";
+import { ReducerAllCommunity, ReducerCommunityById, ReducerDislikeReplyCommunity, ReducerDislikeThreadCommunity, ReducerLikeReplyCommunity, ReducerLikeThreadCommunity, ReducerReportReply, ReducerReportThread } from "./Reducers/ReducerCommunity";
 import {
   ReducerRecycleHistory,
   ReducerRecycleLeaderboard,
@@ -82,7 +82,9 @@ ReducerTopProduct,
   ReducerReportThread,
   ReducerReportReply,
   ReducerLikeThreadCommunity,
-  ReducerDislikeThreadCommunity
+  ReducerDislikeThreadCommunity,
+  ReducerLikeReplyCommunity,
+  ReducerDislikeReplyCommunity
 });
 
 const persistConfig = {

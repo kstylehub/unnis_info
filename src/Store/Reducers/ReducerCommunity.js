@@ -96,11 +96,11 @@ export function ReducerLikeThreadCommunity (
     action,
 ){
     switch (action.type) {
-        case COMMUNITY.POST_REPORT_THREAD_START:
+        case COMMUNITY.POST_LIKE_THREAD_START:
             return {...state, loading: true }
-        case COMMUNITY.POST_REPORT_THREAD_FAILED:
+        case COMMUNITY.POST_LIKE_THREAD_FAILED:
             return {...state, error: action.payload, loading:false }
-        case COMMUNITY.POST_REPORT_THREAD_SUCCESS:
+        case COMMUNITY.POST_LIKE_THREAD_SUCCESS:
             return {...state, dataLikeThread: action.payload.data, loading:false }
         default:
             return state;
@@ -117,12 +117,54 @@ export function ReducerDislikeThreadCommunity (
     action,
 ){
     switch (action.type) {
-        case COMMUNITY.POST_REPORT_THREAD_START:
+        case COMMUNITY.POST_DISLIKE_THREAD_START:
             return {...state, loading: true }
-        case COMMUNITY.POST_REPORT_THREAD_FAILED:
+        case COMMUNITY.POST_DISLIKE_THREAD_FAILED:
             return {...state, error: action.payload, loading:false }
-        case COMMUNITY.POST_REPORT_THREAD_SUCCESS:
+        case COMMUNITY.POST_DISLIKE_THREAD_SUCCESS:
             return {...state, dataDislikeThread: action.payload.data, loading:false }
+        default:
+            return state;
+    }
+}
+
+const defaultValueLikeReply={
+    dataLikeReply:[],
+    error:null,
+    loading:true,
+}
+export function ReducerLikeReplyCommunity (
+    state=defaultValueLikeReply,
+    action,
+){
+    switch (action.type) {
+        case COMMUNITY.POST_LIKE_REPLY_START:
+            return {...state, loading: true }
+        case COMMUNITY.POST_LIKE_REPLY_FAILED:
+            return {...state, error: action.payload, loading:false }
+        case COMMUNITY.POST_LIKE_REPLY_SUCCESS:
+            return {...state, dataLikeReply: action.payload.data, loading:false }
+        default:
+            return state;
+    }
+}
+
+const defaultValueDislikeReply ={
+    dataDislikeReply:[],
+    error:null,
+    loading:true,
+}
+export function ReducerDislikeReplyCommunity (
+    state=defaultValueDislikeReply,
+    action,
+){
+    switch (action.type) {
+        case COMMUNITY.POST_DISLIKE_REPLY_START:
+            return {...state, loading: true }
+        case COMMUNITY.POST_DISLIKE_REPLY_FAILED:
+            return {...state, error: action.payload, loading:false }
+        case COMMUNITY.POST_DISLIKE_REPLY_SUCCESS:
+            return {...state, dataDislikeReply: action.payload.data, loading:false }
         default:
             return state;
     }
