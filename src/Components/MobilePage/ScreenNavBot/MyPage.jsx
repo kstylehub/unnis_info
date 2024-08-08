@@ -296,7 +296,7 @@ function MyPage() {
                       </svg>
                     </div>
                   </div>
-                  <div className=" py-3 px-5 flex items-center justify-between w-full bg-white border-t">
+                  <Link to={"/subcription-menu"} className=" py-3 px-5 flex items-center justify-between w-full bg-white border-t">
                     <div className="text-sm">Subscription</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
@@ -315,7 +315,7 @@ function MyPage() {
                         />
                       </svg>
                     </div>
-                  </div>
+                  </Link>
                   <div className=" pt-3 pb-1 px-5 flex items-center justify-between w-full bg-white border-t">
                     <div className="text-sm">Ingredients</div>
                     <div className="flex flex-row justify-center items-center">
@@ -348,7 +348,7 @@ function MyPage() {
                 </div>
                 <hr></hr>
                 <div className="grid grid-cols-2">
-                  <div className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
+                  <Link to={"/historyEvent"} className="py-3 px-5 flex items-center justify-between w-full bg-white border-r">
                     <div className="text-sm">Event History</div>
                     <div className="flex flex-row justify-center items-center">
                       <svg
@@ -367,7 +367,7 @@ function MyPage() {
                         />
                       </svg>
                     </div>
-                  </div>
+                  </Link>
                   <div className="py-3 px-5 flex items-center justify-between w-full bg-white">
                     <div className="text-sm">Claim Event</div>
                     <div className="flex flex-row justify-center items-center">

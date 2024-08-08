@@ -43,6 +43,11 @@ import ContactUs from "../Components/MobilePage/ScreenNavBot/ContactUs";
 import Account from "../Components/MobilePage/ScreenNavBot/Account";
 import ChangePassword from "../Components/MobilePage/ScreenNavBot/ChangePassword";
 import CommunityDetail from "../Components/MobilePage/Components/ModalHomepage/CommunityDetail";
+import HistoryEvent from "../Components/MobilePage/Components/ContentEvent/HistoryEvent";
+import SubscriptionMenu from "../Components/MobilePage/Components/Subscribe/SubscriptionMenu";
+import SubscriptionInformation from "../Components/MobilePage/Components/Subscribe/SubcriptionInformation";
+import HistoryPayment from "../Components/MobilePage/Components/Subscribe/PaymentHistory";
+import WelcomeVoucher from "../Components/MobilePage/Components/Subscribe/WelcomeVoucher";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +88,10 @@ const router = createBrowserRouter([
             ]
           },
           {
+            path: "/historyEvent",
+            element: <HistoryEvent/>
+          },
+          {
             path: "/event/detailevent/:id",
             element: <DetailEvent />,
           },
@@ -108,6 +117,22 @@ const router = createBrowserRouter([
           {
             path: "/my-page",
             element: <MyPage/>,
+          },
+          {
+            path: "/subcription-menu",
+            element: <SubscriptionMenu/>
+          },
+          {
+            path: "/history-payment",
+            element: <HistoryPayment/>
+          },
+          {
+            path: "/welcome-voucher",
+            element: <WelcomeVoucher/>
+          },
+          {
+            path: "/subcription-information",
+            element: <SubscriptionInformation/>
           },
           {
             path: "/mypage/feedback",
