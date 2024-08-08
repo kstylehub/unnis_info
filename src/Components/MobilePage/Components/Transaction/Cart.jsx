@@ -75,7 +75,7 @@ function Cart() {
           <div className="pt-20 flex flex-col justify-center items-center lg:text-lg text-sm">
             <img src={Box} className="w-5/12 h-auto" alt="Box" />
             <p className="mb-3 mt-12 text-base">
-              You haven't chosen a product :)
+              You haven't chosen a product {':)'}
             </p>
             <Link to={"/newProduct"}>
               <button className="px-6 my-3 font-semibold text-white text-base border rounded-lg py-2 border-green-500 bg-[#43BFA1]">
