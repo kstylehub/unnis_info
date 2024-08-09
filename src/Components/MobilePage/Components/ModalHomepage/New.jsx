@@ -198,8 +198,8 @@ function NewPage() {
               key={index}
               className={
                 btnActive == el.name
-                  ? "bg-teal-100 min-w-[5.5vw] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
-                  : "bg-[#DEE2E6] min-w-[5.5vw] rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
+                  ? "bg-teal-100 md:min-w-[5.5vw] min-w-[20vw] md:text- rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
+                  : "bg-[#DEE2E6] md:min-w-[5.5vw] min-w-[20vw] md:text-sm rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
               }
               style={{ textAlign: "-webkit-center" }}
             >
@@ -424,37 +424,39 @@ function NewPage() {
             </div>
             <div className="border border flex my-2"></div>
             <div className="flex justify-between pt-5 px-2">
-            <div className="flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide py-2 text-center">
+            <div className="flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide py-2 text-center gap-2">
               <button
                 onClick={closeFilter}
-                className={`${hiddenButton == false ?  "hidden" : "min-w-[2vw] items-center border-gray-400 border rounded-full"}`} style={{textAlign: "-webkit-center"}}
+                className={`${hiddenButton == false ?  "hidden" : "md:min-w-[2vw] min-w-[30px] whitespace-nowrap items-center border-gray-400 border rounded-full"}`} style={{textAlign: "-webkit-center"}}
                 type="button"
               >
                 <img src={imgClose} className="w-4 h-4" />
               </button>
               <button
-                className=" min-w-[4vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                className=" md:min-w-[4vw] min-w-[70px]  items-center border-gray-400 whitespace-nowrap border py-1 px-2 rounded-full"
                 onClick={() => handleClick("Newest")}
                 style={getButtonStyle("Newest")}
               >
+                <div className="w-fit text-xs">
                  Newest
+                </div>
               </button>
               <button
-                className="min-w-[5vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                className="md:min-w-[6vw] min-w-[100px] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
                 onClick={() => handleClick("Top Likes")}
                 style={getButtonStyle("Top Likes")}
               >
                 Top Likes
               </button>
               <button
-                className=" min-w-[6vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                className=" md:min-w-[6vw] min-w-[100px] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
                 onClick={() => handleClick("Top Review")}
                 style={getButtonStyle("Top Review")}
               >
                 Top Review
               </button>
               <button
-                className="min-w-[5vw] items-center border-gray-400 border py-1 px-2 rounded-full"
+                className="md:min-w-[5vw] min-w-[100x] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
                 onClick={() => handleClick("Stock")}
                 style={getButtonStyle("Stock")}
               >
