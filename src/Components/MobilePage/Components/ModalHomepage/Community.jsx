@@ -29,7 +29,7 @@ function Community() {
   }, [dispatch]);
 
   const [report, setReport] = useState("");
-  const [likeStatus, setLikeStatus] = useState({}); 
+  const [likeStatus, setLikeStatus] = useState({});
   const [showActionModal, setShowActionModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [idMember, setIdMember] = useState(0);
@@ -100,13 +100,14 @@ function Community() {
   };
 
   const saveLikeStatusToLocalStorage = (comId, status) => {
-    const likeStatus = JSON.parse(localStorage.getItem('likeStatus')) || {};
+    const likeStatus = JSON.parse(localStorage.getItem("likeStatus")) || {};
     likeStatus[comId] = status;
-    localStorage.setItem('likeStatus', JSON.stringify(likeStatus));
+    localStorage.setItem("likeStatus", JSON.stringify(likeStatus));
   };
 
   const loadLikeStatusFromLocalStorage = () => {
-    const savedLikeStatus = JSON.parse(localStorage.getItem('likeStatus')) || {};
+    const savedLikeStatus =
+      JSON.parse(localStorage.getItem("likeStatus")) || {};
     setLikeStatus(savedLikeStatus);
   };
 
@@ -119,9 +120,11 @@ function Community() {
   };
 
   const handleWhatsAppShare = () => {
-    const message = encodeURIComponent("Yuk download Unnis di https://play.google.com/store/apps/details?id=com.brommko.android.unnispark");
+    const message = encodeURIComponent(
+      "Yuk download Unnis di https://play.google.com/store/apps/details?id=com.brommko.android.unnispark"
+    );
     const url = `https://wa.me/?text=${message}`;
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   return (
@@ -178,7 +181,10 @@ function Community() {
                 <div className="py-5 text-sm">{com.thread}</div>
                 <div className="flex justify-between items-center text-sm">
                   <div className="text-gray-400 text-xs">
-                    {calculateDaysAgo(com.createdDate)} hari yang lalu
+                    {calculateDaysAgo(com.createdDate) > 0
+                      ? calculateDaysAgo(com.createdDate) + " hari yang lalu"
+                      : "hari ini"}{" "}
+                   
                   </div>
                   <div className="flex justify-center items-center gap-3">
                     {!likeStatus[com.id] ? (
@@ -257,7 +263,7 @@ function Community() {
                       fill="none"
                       viewBox="0 0 24 24"
                       onClick={handleWhatsAppShare}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: "pointer" }}
                     >
                       <path
                         stroke="currentColor"
@@ -272,7 +278,30 @@ function Community() {
               <div className="py-1 bg-gray-200"></div>
             </div>
           ))}
-          <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
+          <div className="sticky bottom-20 w-full flex justify-end p-2">
+            <Link
+              to="/community/postthread"
+              className="bg-[#4ABFA1] z-10 w-12 h-12 rounded-full flex justify-center items-center shadow"
+            >
+              <svg
+                class="p-2 text-white dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                  d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                />
+              </svg>
+            </Link>
+          </div>
+
+          <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-10">
             <NavigationButtom />
           </div>
         </div>

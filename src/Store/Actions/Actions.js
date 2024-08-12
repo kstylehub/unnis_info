@@ -890,6 +890,36 @@ export const getCommunityById = (id) => async (dispatch) => {
   }
 };
 
+export const postThread = (body) => async (dispatch) => {
+  console.log("body", body);
+  try {
+    dispatch({ type: COMMUNITY.POST_COMMUNITY_THREAD_START });
+    const response = await fetch(`${BASE_URL}/thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_COMMUNITY_THREAD_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_COMMUNITY_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
 export const postReply = (body) => async (dispatch) => {
   try {
     dispatch({ type: COMMUNITY.POST_COMMUNITY_REPLY_START });

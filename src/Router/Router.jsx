@@ -48,6 +48,7 @@ import SubscriptionMenu from "../Components/MobilePage/Components/Subscribe/Subs
 import SubscriptionInformation from "../Components/MobilePage/Components/Subscribe/SubcriptionInformation";
 import HistoryPayment from "../Components/MobilePage/Components/Subscribe/PaymentHistory";
 import WelcomeVoucher from "../Components/MobilePage/Components/Subscribe/WelcomeVoucher";
+import CommunityPostThread from "../Components/MobilePage/Components/ModalHomepage/CommunityPostThread";
 
 const router = createBrowserRouter([
   {
@@ -67,9 +68,9 @@ const router = createBrowserRouter([
                 children: [
                   {
                     path: "/",
-                    element: <NavbarCategoryHome/>
-                  }
-                ]
+                    element: <NavbarCategoryHome />,
+                  },
+                ],
               },
             ],
           },
@@ -80,16 +81,16 @@ const router = createBrowserRouter([
           {
             path: "/event",
             element: <Event />,
-            children:[
+            children: [
               {
-                path:"/event",
-                element:<ContentEvent/>
-              }
-            ]
+                path: "/event",
+                element: <ContentEvent />,
+              },
+            ],
           },
           {
             path: "/historyEvent",
-            element: <HistoryEvent/>
+            element: <HistoryEvent />,
           },
           {
             path: "/event/detailevent/:id",
@@ -97,7 +98,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/transaction",
-            element: <Transaction/>,
+            element: <Transaction />,
             children: [
               {
                 path: "/transaction/transsubs",
@@ -111,60 +112,60 @@ const router = createBrowserRouter([
           },
           {
             path: "/cart",
-            element: <Cart/>,
+            element: <Cart />,
           },
-            // MY PAGE ==============================================
+          // MY PAGE ==============================================
           {
             path: "/my-page",
-            element: <MyPage/>,
+            element: <MyPage />,
           },
           {
             path: "/subcription-menu",
-            element: <SubscriptionMenu/>
+            element: <SubscriptionMenu />,
           },
           {
             path: "/history-payment",
-            element: <HistoryPayment/>
+            element: <HistoryPayment />,
           },
           {
             path: "/welcome-voucher",
-            element: <WelcomeVoucher/>
+            element: <WelcomeVoucher />,
           },
           {
             path: "/subcription-information",
-            element: <SubscriptionInformation/>
+            element: <SubscriptionInformation />,
           },
           {
             path: "/mypage/feedback",
-            element: <Feedback/>,
+            element: <Feedback />,
           },
           {
             path: "/mypage/contactus",
-            element: <ContactUs/>,
+            element: <ContactUs />,
           },
           {
             path: "/mypage/account",
-            element: <Account/>,
+            element: <Account />,
           },
           {
             path: "/mypage/account/changepassword",
-            element: <ChangePassword/>,
+            element: <ChangePassword />,
           },
           {
             path: "/mypage/faq",
-            element: <Faq/>,
+            element: <Faq />,
           },
           {
             path: "/login",
-            element: <LoginPage/>
+            element: <LoginPage />,
           },
           {
             path: "/register",
-            element: <Register/>
+            element: <Register />,
           },
           {
             path: "/newProduct",
-            element: <NewPage />
+            element: <NewPage />,
           },
           {
             path: "/newProduct/detailproduct/:id",
@@ -173,44 +174,47 @@ const router = createBrowserRouter([
           // VIDEO ==============================================
           {
             path: "/video",
-            element: <Video />
+            element: <Video />,
           },
           {
             path: "/video/videoshort/:id",
-            element: <VideoShort />
+            element: <VideoShort />,
           },
           {
             path: "/video/videoyoutube/:id",
-            element: <VideoYoutubeDetail />
-          }, 
+            element: <VideoYoutubeDetail />,
+          },
           {
             path: "/video/videounnis/:id",
-            element: <VideoUnnis />
+            element: <VideoUnnis />,
           },
           {
             path: "/video/videoinfluencer",
-            element: <VideoInfluencer/>
+            element: <VideoInfluencer />,
           },
+
           // COMMUNITY ==============================================
           {
             path: "/community",
-            element: <Community />
+            element: <Community />,
           },
           {
             path: "/community/thread/:id",
-            element: <CommunityDetail />
+            element: <CommunityDetail />,
           },
+          {
+            path: "/community/postthread",
+            element: <CommunityPostThread />,
+          },
+
+          // SKIN ANALYSIS TEST ==============================================
           {
             path: "/skinanalysis",
             element: <SkinAnalysis />,
           },
-          // {
-          //   path: "/detailproduct",
-          //   element: <DetailProduct />,
-          // },
           {
             path: "/skinsectionone",
-                element: <SkinSectionOne />,
+            element: <SkinSectionOne />,
           },
           {
             path: "/skinsectiontwo",
@@ -260,8 +264,8 @@ const router = createBrowserRouter([
           },
           {
             path: "/search",
-            element: <SearchProduct/>
-          }
+            element: <SearchProduct />,
+          },
         ],
       },
     ],
