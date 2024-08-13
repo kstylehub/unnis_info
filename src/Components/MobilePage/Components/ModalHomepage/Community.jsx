@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import NavigationButtom from "../../NavigatonBottom/NavigationBottom";
 import {
+  deleteThread,
   dislikeThreadCommunity,
   getAllCommunity,
   likeThreadCommunity,
@@ -30,9 +31,12 @@ function Community() {
 
   const [report, setReport] = useState("");
   const [likeStatus, setLikeStatus] = useState({});
-  const [showActionModal, setShowActionModal] = useState(false);
+  const [showReportConfirmModal, setShowReportConfirmModal] = useState(false);
+  const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
-  const [idMember, setIdMember] = useState(0);
+  const [showChooseModal, setShowChooseModal] = useState(false);
+  const [idMember, setIdThread] = useState(0);
+  const [idUserThread, setIdUserThread] = useState(0);
 
   const handleAction = (e) => {
     e.preventDefault();
@@ -46,12 +50,29 @@ function Community() {
         dispatch(reportThreadCommunity(dataReport));
         toast.success("Report successfully submitted!");
         setReport("");
-        setShowActionModal(false);
+        setShowReportConfirmModal(false);
       } catch (error) {
         toast.error("Failed to submit report. Please try again.");
       }
     } else {
       toast.warn("Please fill in all fields before submitting.");
+    }
+  };
+
+  const handleDelete = () => {
+    if (idMember) {
+      try {
+        dispatch(deleteThread(idMember));
+        setShowDeleteConfirmModal(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+        toast.success("Delete Thread successfully!");
+      } catch (error) {
+        toast.error("Failed to submit report. Please try again.");
+      }
+    } else {
+      toast.warn("Id Thread Not Defined");
     }
   };
 
@@ -97,6 +118,16 @@ function Community() {
         toast.error("Failed to dislike thread. Please try again.");
       }
     }
+  };
+
+  const handleChoose = () => {
+    setShowChooseModal(false);
+    setShowReportModal(true);
+  };
+
+  const handleActionDel = () => {
+    setShowDeleteConfirmModal(true);
+    setShowChooseModal(false);
   };
 
   const saveLikeStatusToLocalStorage = (comId, status) => {
@@ -156,8 +187,9 @@ function Community() {
                   <div
                     className=""
                     onClick={() => {
-                      setShowReportModal(true);
-                      setIdMember(com.id);
+                      setShowChooseModal(true);
+                      setIdThread(com.id);
+                      setIdUserThread(com.idMember);
                     }}
                   >
                     <svg
@@ -184,7 +216,6 @@ function Community() {
                     {calculateDaysAgo(com.createdDate) > 0
                       ? calculateDaysAgo(com.createdDate) + " hari yang lalu"
                       : "hari ini"}{" "}
-                   
                   </div>
                   <div className="flex justify-center items-center gap-3">
                     {!likeStatus[com.id] ? (
@@ -284,7 +315,7 @@ function Community() {
               className="bg-[#4ABFA1] z-10 w-12 h-12 rounded-full flex justify-center items-center shadow"
             >
               <svg
-                class="p-2 text-white dark:text-white"
+                className="p-2 text-white dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -292,9 +323,9 @@ function Community() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
                   d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
                 />
               </svg>
@@ -305,14 +336,16 @@ function Community() {
             <NavigationButtom />
           </div>
         </div>
+        <ToastContainer />
       </div>
-      {showActionModal && <ActionModal />}
+      {showReportConfirmModal && <ReportConfirmModal />}
+      {showDeleteConfirmModal && <DeleteConfirmModal />}
       {showReportModal && <ReportModal />}
-      <ToastContainer />
+      {showChooseModal && <ChooseModal />}
     </>
   );
 
-  function ActionModal() {
+  function ReportConfirmModal() {
     return (
       <form className="absolute inset-0 flex items-center justify-center z-20">
         <div className="bg-black opacity-50 absolute inset-0"></div>
@@ -326,7 +359,32 @@ function Community() {
               Report
             </button>
             <button
-              onClick={() => setShowActionModal(false)}
+              onClick={() => setShowReportConfirmModal(false)}
+              className=" px-4 py-2 bg-gray-200 rounded"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  function DeleteConfirmModal() {
+    return (
+      <form className="absolute inset-0 flex items-center justify-center z-20">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bg-white p-8 rounded shadow-lg">
+          <h2 className=" mb-6">Yakin ingin hapus thread?</h2>
+          <div className="flex justify-center gap-6">
+            <button
+              onClick={handleDelete}
+              className="px-4 py-2 bg-[#4ABFA1] text-white rounded"
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => setShowDeleteConfirmModal(false)}
               className=" px-4 py-2 bg-gray-200 rounded"
             >
               Batal
@@ -352,7 +410,12 @@ function Community() {
         <div className="absolute bottom-0 left-0 right-0 bg-white  rounded-t-2xl shadow-lg z-10">
           <div className="flex justify-between  p-4 border-b">
             <h2 className="  font-bold uppercase">pilih alasan report akun</h2>
-            <div className="" onClick={() => setShowReportModal(false)}>
+            <div
+              className=""
+              onClick={() => {
+                setShowReportModal(false);
+              }}
+            >
               <svg
                 className="w-6 h-6 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -373,17 +436,59 @@ function Community() {
 
           <div className="flex flex-col justify-center p-4 gap-6 text-sm">
             {reasons.map((report) => (
-              <div
+              <button
+                className="text-start"
                 key={report}
                 onClick={() => {
                   setReport(report);
-                  setShowActionModal(true);
+                  setShowReportConfirmModal(true);
                   setShowReportModal(false);
                 }}
               >
                 {report}
-              </div>
+              </button>
             ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function ChooseModal() {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center z-50">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white  rounded-t-2xl shadow-lg z-10">
+          <div className="flex justify-between  p-4 border-b">
+            <h2 className="  font-bold uppercase">pilih aksi selanjutnya</h2>
+            <div className="" onClick={() => setShowChooseModal(false)}>
+              <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col justify-start text-start p-4 gap-6 text-sm">
+            <button className="text-start" onClick={() => handleChoose()}>
+              Report Thread
+            </button>
+            {idUserThread == memberId && (
+              <button className="text-start" onClick={() => handleActionDel()}>
+                Delete Thread
+              </button>
+            )}
           </div>
         </div>
       </div>

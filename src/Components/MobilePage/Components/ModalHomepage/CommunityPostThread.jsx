@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import back from "../../../../assets/previous.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { postThread } from "../../../../Store/Actions/Actions";
 function CommunityPostThread() {
   const [thread, setThread] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.ReducerUser?.dataUser);
   const dataUser = Array.isArray(user?.dataMember)
@@ -26,7 +27,7 @@ function CommunityPostThread() {
       try {
         dispatch(postThread(dataThread));
         setThread("");
-        toast.success("Report successfully submitted!");
+        navigate('/community');
       } catch (error) {
         toast.error("Failed to submit report. Please try again.");
       }
@@ -47,7 +48,7 @@ function CommunityPostThread() {
         return "40-an";
       } else if (dataUser?.birthDate <= 1970) {
         return "50-an";
-      } else if (dataUser?.birthDate <= 1980) {
+      } else if (dataUser?.birthDate <= 1960) {
         return "60-an";
       } else {
         return dataUser?.birthDate;
