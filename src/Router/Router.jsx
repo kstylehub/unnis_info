@@ -48,6 +48,7 @@ import SubscriptionMenu from "../Components/MobilePage/Components/Subscribe/Subs
 import SubscriptionInformation from "../Components/MobilePage/Components/Subscribe/SubcriptionInformation";
 import HistoryPayment from "../Components/MobilePage/Components/Subscribe/PaymentHistory";
 import WelcomeVoucher from "../Components/MobilePage/Components/Subscribe/WelcomeVoucher";
+import FavoriteTypeSkincare from "../Components/MobilePage/Components/Subscribe/FavoriteTypeSkincare";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ const router = createBrowserRouter([
           {
             path: "/welcome-voucher",
             element: <WelcomeVoucher/>
+          },
+          {
+            path: "/favorite-skincare",
+            element: <FavoriteTypeSkincare/>
           },
           {
             path: "/subcription-information",

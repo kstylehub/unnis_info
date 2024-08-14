@@ -9,6 +9,8 @@ import Face from "../../../../assets/Face.png";
 import Hair from "../../../../assets/Hair.png";
 import Lip from "../../../../assets/Lip&Eye.png";
 import Mask from "../../../../assets/Mask.png";
+import lifestle from "../../../../assets/lifestyle.png";
+import detergent from "../../../../assets/detergen.png";
 import UnnisIcon from "../../../../assets/UnnisPickIcon.svg";
 import Tokopedia from "../../../../assets/tokopedia.svg";
 import Shopee from "../../../../assets/shopee.svg";
@@ -137,6 +139,14 @@ function NewPage() {
       name: "Hair",
       icon: Hair,
     },
+    {
+      name: "Lifestyle",
+      icon: lifestle
+    },
+    {
+      name: "Detergent",
+      icon: detergent
+    }
   ];
 
   async function loadMoreData() {
@@ -198,8 +208,8 @@ function NewPage() {
               key={index}
               className={
                 btnActive == el.name
-                  ? "bg-teal-100 md:min-w-[5.5vw] min-w-[20vw] md:text- rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
-                  : "bg-[#DEE2E6] md:min-w-[5.5vw] min-w-[20vw] md:text-sm rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
+                  ? "bg-teal-100 md:min-w-[5.5vw] min-w-[22vw] md:text- rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%]"
+                  : "bg-[#DEE2E6] md:min-w-[5.5vw] min-w-[22vw] md:text-sm rounded-lg py-1 px-2 text-center justify-center items-center gap-4 w-[100%] "
               }
               style={{ textAlign: "-webkit-center" }}
             >
