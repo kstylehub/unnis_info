@@ -1276,10 +1276,10 @@ function ContentNavbar() {
             </Link>
           ))}
         </div>
-        <div className="bg-[#4ABFA1] w-12 h-12 sticky left-[87%] bottom-20 z-30 rounded-full shadow-lg">
-          <div className="flex justify-center items-center w-full h-full">
-            <img src={Calendar} className="w-8 h-8 " alt="calendar" />
-          </div>
+        <div className="bg-[#4ABFA1] w-12 h-12 sticky left-[86%] bottom-20 z-30 rounded-full shadow">
+          <Link to="/checkin" className="flex justify-center items-center w-full h-full ">
+            <img src={Calendar} className="w-7 h-7 " alt="calendar" />
+          </Link>
         </div>
       </div>
     </>
