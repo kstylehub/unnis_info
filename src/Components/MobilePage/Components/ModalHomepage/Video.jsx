@@ -44,6 +44,10 @@ function Video() {
     (state) => state.ReducerProductVideo.productVideo || []
   );
 
+  const scrollToTop = () => {
+    window.location.reload();
+  }
+
   const YouTubeThumbnail = ({ videoUrl }) => {
     const getYouTubeVideoId = (url) => {
       const regex =
@@ -149,9 +153,12 @@ function Video() {
             </div>
           </div>
           {/* Ai Video Recommendation Banner */}
-          <div className="w-full px-4 py-3">
-            <img src={VideoBanner} className="rounded-lg w-full" />
-          </div>
+          <Link to="/skinanalysis">
+            <div className="w-full px-4 py-3">
+              <img src={VideoBanner} className="rounded-lg w-full" />
+            </div>
+          </Link>
+
           {/* Recommended Product */}
           <div className="flex flex-col px-4 pb-3 pt-1">
             <div className="flex justify-between pb-1">
@@ -507,6 +514,27 @@ function Video() {
               ))}
             </div>
           </div>
+          <div className="sticky bottom-[10%] flex justify-end pe-3 z-20 w-full">
+            <div onClick={scrollToTop} className="bg-[#4ABFA1] w-10 h-10 rounded-full shadow">
+              <svg
+                className="p-1 text-white dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+            
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 6v13m0-13 4 4m-4-4-4 4"
+                />
+              </svg>
+            </div>
+          </div>
+
           <div className="bg-white pt-2.5 pb-1 px-1.5 sticky bottom-0 z-20">
             <NavigationButtom />
           </div>
