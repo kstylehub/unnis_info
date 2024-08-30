@@ -49,6 +49,7 @@ function SubscriptionMenu() {
     {
       id: 3,
       name: "Favorite Type Skincare",
+      link: "/favorite-skincare"
     },
   ];
 
