@@ -2,38 +2,54 @@ import { Link } from "react-router-dom";
 import back from "../../../../assets/previous.svg";
 import Box from "../../../../assets/box_transaction.png";
 import CartButtom from "../BottomBar/CartBottom";
+import { useState } from "react";
 
 function FavoriteTypeSkincare() {
 
+  const [btnActive, setBtnActive] = useState(0)
     const typeSkincare = [
         {
+            id: 1,
             name: "Skin/Toner"
         },
         {
+            id: 2,
             name: "Lotion/Emulsion"
         },
         {
+            id: 3,
             name: "Essence/Serum"
         },
         {
+            id: 4,
             name: "Ampoule"
         },
         {
+            id: 5,
             name: "Cream"
         },
         {
+            id: 6,
             name: "Mist"
         },
         {
+            id: 7,
             name: "Sheetmask"
         },
         {
+            id: 8,
             name: "Pads"
         },
         {
+            id: 9,
             name: "Maskpack"
         }
     ]
+
+    function handleType(id) {
+      console.log(id);
+      setBtnActive(id)
+    }
   return (
     <>
       <div className="flex flex-col min-h-screen bg-white relative">
@@ -67,7 +83,7 @@ function FavoriteTypeSkincare() {
             {typeSkincare.map((el)=> {
                 return (
                     <>
-                        <div className="border border-gray-500 rounded-lg p-3">
+                        <div className={`${btnActive == el.id ? "bg-[#43BFA1] border" : ""} border border-gray-500 rounded-lg p-3`} onClick={()=>handleType(el.id)}>
                             <button>
                                 {el.name}
                             </button>
@@ -78,9 +94,11 @@ function FavoriteTypeSkincare() {
         </div>
         <div className="pt-5 flex flex-col justify-center items-center lg:text-lg text-sm">
           <div className="flex gap-5">
+            <Link to={'/subcription-menu'}>
             <button className="px-16 my-3 font-semibold text-white text-base border rounded-lg py-2 border-green-500 bg-red-500">
               Batal
             </button>
+            </Link>
             <button className="px-16 my-3 font-semibold text-white text-base border rounded-lg py-2 border-green-500 bg-[#43BFA1]">
               Simpan
             </button>
