@@ -12,13 +12,15 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { CircleLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailProduct } from "../../../../Store/Actions/Actions";
+import {
+  getAllProductWithPagination,
+  getDetailProduct,
+} from "../../../../Store/Actions/Actions";
 
 function DetailProduct() {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [showModalDesc, setShowModalDesc] = useState(false);
-
 
   const detailProduct = useSelector(
     (state) => state.ReducerDetailProduct.dataDetailProduct
@@ -26,19 +28,23 @@ function DetailProduct() {
   const loading = useSelector((state) => state.ReducerDetailProduct.loading);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     const body = {
-      idMember: 5691, 
+      idMember: 5691,
       idProduct: +id,
     };
     dispatch(getDetailProduct(body));
+    dispatch(getAllProductWithPagination());
   }, [id, dispatch]);
 
- 
   const dataProduct = detailProduct?.dataProduct?.[0];
   const formattedPrice = dataProduct?.price?.toLocaleString("id-ID");
-
+  const allProduct = useSelector(
+    (state) => state.ReducerProductWithPagination.dataProductWithPagination
+  );
+  const allProductWithPagination = Array.isArray(allProduct?.dataProduct)
+    ? allProduct?.dataProduct
+    : [];
   const handleIngredients = () => {
     setShowModal(true);
   };
@@ -73,22 +79,22 @@ function DetailProduct() {
           <div className="flex justify-evenly items-center" key={value}>
             <div className="flex w-2/12">
               <svg
-                className="w-5 h-5 "
+                className="w-5 h-5 text-yellow-400 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
                 viewBox="0 0 24 24"
-                fill="red"
-                stroke="red"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
               >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                <path d="M13.849 4.22c-.584-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
               </svg>
               <p className="mx-1 text-sm">{value}</p>
             </div>
             <div className="mx-1 w-9/12 h-2 bg-gray-200 rounded-full ">
               {valueReviewDistribution[value] > 0 && (
                 <div
-                  className="bg-red-500 h-2 rounded-full dark:bg-red-500"
+                  className="bg-yellow-400 h-2 rounded-full dark:bg-yellow-400"
                   style={{
                     width: `${
                       (valueReviewDistribution[value] / maxCount) * 100
@@ -165,29 +171,29 @@ function DetailProduct() {
             {[...Array(filledStars)].map((_, index) => (
               <svg
                 key={index}
-                className="w-4 h-4 mr-0.5"
+                className="w-4 h-4 text-yellow-400 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
                 viewBox="0 0 24 24"
-                fill="red"
-                stroke="red"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
               >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                <path d="M13.849 4.22c-.584-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
               </svg>
             ))}
             {[...Array(remainingStars)].map((_, index) => (
               <svg
                 key={index}
-                className="w-4 h-4 mr-0.5"
+                className="w-4 h-4 text-gray-200 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
                 viewBox="0 0 24 24"
-                fill="gray"
-                stroke="gray"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
               >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                <path d="M13.849 4.22c-.584-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
               </svg>
             ))}
           </div>
@@ -291,29 +297,29 @@ function DetailProduct() {
             {[...Array(filledStars)].map((_, index) => (
               <svg
                 key={index}
-                className="h-5 w-5 mx-0.5 text-yellow-500"
+                className="w-5 h-5 text-yellow-400 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
                 viewBox="0 0 24 24"
-                fill="red"
-                stroke="red"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
               >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                <path d="M13.849 4.22c-.584-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
               </svg>
             ))}
             {[...Array(remainingStars)].map((_, index) => (
               <svg
                 key={index}
-                className="h-5 w-5 mx-0.5 text-yellow-500"
+                className="w-5 h-5 text-gray-200 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
                 viewBox="0 0 24 24"
-                fill="gray"
-                stroke="gray"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
               >
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                <path d="M13.849 4.22c-.584-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
               </svg>
             ))}
           </div>
@@ -326,7 +332,7 @@ function DetailProduct() {
     return (
       <>
         <div className="w-full h-full overflow-y-auto">
-          <div className="top-0 sticky lg:px-8 px-4 w-full bg-white pt-2 border-b border-gray-400">
+          <div className="top-0 absolute z-10 lg:px-8 px-4 w-full bg-white pt-2 border-b border-gray-400">
             <div className="flex justify-between">
               <div className="self-center">
                 <Link to={"/newProduct"}>
@@ -356,7 +362,7 @@ function DetailProduct() {
           </div>
 
           {/* Content */}
-          <div className="lg:px-6 px-4 border-b-4 border-gray-200 pb-3">
+          <div className="lg:px-6 px-4 border-b-4 border-gray-200 pb-3 pt-[20%]">
             <div className="h-full flex justify-center items-start">
               <div className="mt-[5%] flex flex-col gap-4">
                 {dataProduct?.bpom ? (
@@ -370,7 +376,10 @@ function DetailProduct() {
                   ""
                 )}
                 {dataProduct?.dataCountry?.flag ? (
-                  <img className="w-10 h-10 " src={dataProduct?.dataCountry?.flag}></img>
+                  <img
+                    className="w-10 h-10 "
+                    src={dataProduct?.dataCountry?.flag}
+                  ></img>
                 ) : (
                   ""
                 )}
@@ -863,7 +872,165 @@ function DetailProduct() {
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABZElEQVR4nOXVzUtUYRTH8XECmSxsU9hO3IhIi0BaDENQoC1EGAwCcRFBq9CN1EZxMRYu3EjlVpTy5d/8yAMnuF7uPHPnupIOHC73uef8vud5Oc9ttf57wwSWsYV3aGcXBQ8whxcZn4nYNr7gGifx3B4KwSJ+R2DOf5XE+5G/Vnwvi8/gHEfojZjB84L4FV4XdH5gUAX4jDNMj1jCdkH8PXZxmSBYwgU+ViXu4WAM8X6MTRYgf/Ednark/eTjiP8zdGM8iU+1qiwHcFt8vfTtJf7gEI8qxXMA+cqXCsuSNv7r0D3MADZqiE/FEU9xi7UBUf1pap6ceIw1AsxFUnfUmjcFrEbSU8zjQ6Hyh6XYRoB+dOp5oWt3yuJ3AXSwmToTr/C4MrkpYByrA/iG4zsAegGYHRbwNgJWGog/iVv4Z+5fMBGdmCDHcfnt1fBBHIJ0Ey+MqiRB3gSoLmAXn/Bs3JnfD7sB89Qc+nnafpYAAAAASUVORK5CYII="
             />
           </div>
-
+          {/* Relevan Product  */}
+          <div className="lg:px-8 px-4 pt-4">
+            <div className="">
+              <div className="font-bold  pb-4">Relevant Product</div>
+              <div className="flex flex-wrap justify-between bg-white">
+                {allProductWithPagination.map((item, index) => (
+                  <Link
+                    to={`/newProduct/detailproduct/${item.id}`}
+                    key={index}
+                    className="relative border p-3 w-[49%] flex-shrink-0 mb-2 bg-white"
+                  >
+                    {item.statusRecommend && (
+                      <div className="absolute top-0 left-3  text-white py-3 w-[48%]">
+                        <img
+                          src={Recomended}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    )}
+                    {item.bpom && (
+                      <div className="absolute top-0 right-3  text-white py-3 w-[15%]">
+                        <img
+                          src={item.bpom}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    )}
+                    {item.mui && (
+                      <div className="absolute top-0 right-6  text-white py-3 w-[15%]">
+                        <img
+                          src={item.mui}
+                          className="object-contain"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-col pt-4">
+                      <div className="flex justify-center items-center p-1">
+                        <div style={{ width: "150px", height: "150px" }}>
+                          {item.images ? (
+                            <img
+                              src={item.images}
+                              className="object-contain"
+                              style={{ width: "100%", height: "100%" }}
+                            />
+                          ) : (
+                            <div className="bg-gray-300 w-full h-full flex items-center justify-center">
+                              Image Not Available
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        className="w-full pt-2"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                          lineHeight: "1.2",
+                        }}
+                      >
+                        {item.brand} - {item.name}
+                      </div>
+                      <div className="text-left font-bold text-lg">
+                        Rp{" "}
+                        {item.price
+                          .toLocaleString("id-ID", {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                          })
+                          .replace(",", ".")}
+                      </div>
+                      <div className="flex justify-between pt-1">
+                        <div className="truncate text-center w-full flex justify-left items-center">
+                          <div className="pe-1">
+                            <svg
+                              className="w-3.5 h-3.5 text-yellow-400 dark:text-white"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+                            </svg>
+                          </div>
+                          <div className="">{item.rating}</div>
+                          <div className="pl-1 text-gray-400 text-sm pt-1">
+                            ({item.stock})
+                          </div>
+                        </div>
+                        <div className="flex justify-end">
+                          {[
+                            {
+                              href: item?.unnispickLink,
+                              text: "Unnispick",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_1.png",
+                            },
+                            {
+                              href: item?.shopeeLink,
+                              text: "Shopee",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_2.png",
+                            },
+                            {
+                              href: item?.tokopediaLink,
+                              text: "Tokopedia",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_3.png",
+                            },
+                            {
+                              href: item?.iStyleLink,
+                              text: "iStyle",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_4.png",
+                            },
+                            {
+                              href: item?.sociollaLink,
+                              text: "Sociolla",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_6.png",
+                            },
+                            {
+                              href: item?.styleKoreanLink,
+                              text: "Style Korean",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_7.png",
+                            },
+                            {
+                              href: item?.oliveYoungLink,
+                              text: "Olive Young",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_5.png",
+                            },
+                            {
+                              href: item?.kalCareLink,
+                              text: "Kal Care",
+                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_8.png",
+                            },
+                          ]
+                            .filter((link) => link.href)
+                            .slice(0, 3)
+                            .map((link, idx) => (
+                              <a
+                                key={idx}
+                                href={link.href}
+                                className="rounded-full w-6 h-6 ml-1 flex items-center justify-center"
+                              >
+                                <img
+                                  src={link.icon}
+                                  alt={link.text}
+                                  className="bg-cover w-full h-full rounded-full"
+                                />
+                              </a>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
           {/* ButtomNavbar  */}
           <div className="bottom-0 left-0 sticky lg:px-8 px-4 w-full bg-white py-1 border-t border-gray-400">
             <div className="flex justify-between">
