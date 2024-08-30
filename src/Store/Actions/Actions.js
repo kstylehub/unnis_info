@@ -890,6 +890,35 @@ export const getCommunityById = (id) => async (dispatch) => {
   }
 };
 
+export const postThread = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_COMMUNITY_THREAD_START });
+    const response = await fetch(`${BASE_URL}/thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_COMMUNITY_THREAD_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_COMMUNITY_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
 export const postReply = (body) => async (dispatch) => {
   try {
     dispatch({ type: COMMUNITY.POST_COMMUNITY_REPLY_START });
@@ -971,6 +1000,181 @@ export const reportReplyCommunity = (body) => async (dispatch) => {
     console.log("error get all data", error);
     dispatch({
       type: COMMUNITY.POST_REPORT_REPLY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const likeThreadCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_LIKE_THREAD_START });
+    const response = await fetch(`${BASE_URL}/like-thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_LIKE_THREAD_SUCCESS,
+      payload: data,
+    });
+    
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_LIKE_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const dislikeThreadCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_DISLIKE_THREAD_START });
+    const response = await fetch(`${BASE_URL}/dislike-thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_DISLIKE_THREAD_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_DISLIKE_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const likeReplyCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_LIKE_REPLY_START });
+    const response = await fetch(`${BASE_URL}/like-reply-thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_LIKE_REPLY_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_LIKE_REPLY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const dislikeReplyCommunity = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.POST_DISLIKE_REPLY_START });
+    const response = await fetch(`${BASE_URL}/dislike-reply-thread`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.POST_DISLIKE_REPLY_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    console.log("error get all data", error);
+    dispatch({
+      type: COMMUNITY.POST_DISLIKE_REPLY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const deleteThread = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.DELETE_THREAD_START });
+    const response = await fetch(`${BASE_URL}/thread-delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.DELETE_THREAD_SUCCESS,
+      payload: data,
+    });
+    // console.log("delete",data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: COMMUNITY.DELETE_THREAD_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const deleteReply = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: COMMUNITY.DELETE_REPLY_START });
+    const response = await fetch(`${BASE_URL}/thread-reply-delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.DELETE_REPLY_SUCCESS,
+      payload: data,
+    });
+    // console.log("delete",data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: COMMUNITY.DELETE_REPLY_FAILED,
       payload: error,
     });
   }

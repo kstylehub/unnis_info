@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
+  deleteReply,
+  dislikeReplyCommunity,
   getCommunityById,
+  likeReplyCommunity,
   postReply,
   reportReplyCommunity,
 } from "../../../../Store/Actions/Actions";
@@ -25,12 +28,17 @@ function CommunityDetail() {
 
   useEffect(() => {
     dispatch(getCommunityById(id));
+    loadLikeStatusFromLocalStorage();
   }, [dispatch, id]);
 
   const [report, setReport] = useState("");
-  const [showActionModal, setShowActionModal] = useState(false);
+  const [likeStatus, setLikeStatus] = useState({});
+  const [showReportConfirmModal, setShowReportConfirmModal] = useState(false);
+  const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showChooseModal, setShowChooseModal] = useState(false);
   const [idMember, setIdMember] = useState(0);
+  const [idMemberReply, setIdMemberReply] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,13 +67,104 @@ function CommunityDetail() {
         dispatch(reportReplyCommunity(dataReport));
         toast.success("Report successfully submitted!");
         setReport("");
-        setShowActionModal(false);
+        setShowReportConfirmModal(false);
       } catch (error) {
         toast.error("Failed to submit report. Please try again.");
       }
     } else {
       toast.warn("Please fill in all fields before submitting.");
     }
+  };
+
+  const handleDelete = () => {
+    if (idMember) {
+      try {
+        dispatch(deleteReply(idMember));
+        setShowDeleteConfirmModal(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        toast.success("Delete Reply successfully!");
+      } catch (error) {
+        toast.error("Failed to submit report. Please try again.");
+      }
+    } else {
+      toast.warn("Id Reply Not Defined");
+    }
+  };
+
+  const handleLike = (comId) => {
+    if (comId && memberId) {
+      let data = {
+        idReplyThread: +comId,
+        idMember: +memberId,
+      };
+      try {
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        dispatch(likeReplyCommunity(data));
+        setLikeStatus((prevStatus) => ({
+          ...prevStatus,
+          [comId]: true,
+        }));
+        saveLikeStatusToLocalStorage(comId, true);
+      } catch (error) {
+        toast.error("Failed to like thread. Please try again.");
+      }
+    }
+  };
+
+  const handleDislike = (comId) => {
+    if (comId && memberId) {
+      let data = {
+        idReplyThread: +comId,
+        idMember: +memberId,
+      };
+      try {
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        dispatch(dislikeReplyCommunity(data));
+        setLikeStatus((prevStatus) => ({
+          ...prevStatus,
+          [comId]: false,
+        }));
+        saveLikeStatusToLocalStorage(comId, false);
+      } catch (error) {
+        toast.error("Failed to dislike thread. Please try again.");
+      }
+    }
+  };
+
+  const handleChoose = () => {
+    setShowChooseModal(false);
+    setShowReportModal(true);
+  };
+
+  const handleActionDel = () => {
+    setShowDeleteConfirmModal(true);
+    setShowChooseModal(false);
+  };
+
+  const saveLikeStatusToLocalStorage = (comId, status) => {
+    const likeStatus = JSON.parse(localStorage.getItem("likeStatus")) || {};
+    likeStatus[comId] = status;
+    localStorage.setItem("likeStatus", JSON.stringify(likeStatus));
+  };
+
+  const loadLikeStatusFromLocalStorage = () => {
+    const savedLikeStatus =
+      JSON.parse(localStorage.getItem("likeStatus")) || {};
+    setLikeStatus(savedLikeStatus);
+  };
+
+  const handleWhatsAppShare = () => {
+    const message = encodeURIComponent(
+      "Yuk download Unnis di https://play.google.com/store/apps/details?id=com.brommko.android.unnispark"
+    );
+    const url = `https://wa.me/?text=${message}`;
+    window.open(url, "_blank");
   };
 
   const calculateDaysAgo = (dateString) => {
@@ -167,6 +266,8 @@ function CommunityDetail() {
                   height="24"
                   fill="none"
                   viewBox="0 0 24 24"
+                  onClick={handleWhatsAppShare}
+                  style={{ cursor: "pointer" }}
                 >
                   <path
                     stroke="currentColor"
@@ -203,8 +304,9 @@ function CommunityDetail() {
                 <div
                   className=""
                   onClick={() => {
-                    setShowReportModal(true);
+                    setShowChooseModal(true);
                     setIdMember(reply.idReply);
+                    setIdMemberReply(reply.idMember);
                   }}
                 >
                   <svg
@@ -233,26 +335,49 @@ function CommunityDetail() {
                     : "hari ini"}
                 </div>
                 <div className="flex justify-center items-center gap-3 pe-1">
-                  <div className="flex justify-center items-center gap-1">
-                    <svg
-                      className="w-6 h-6 text-[#4ABFA1] dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="none"
-                      viewBox="0 0 24 24"
+                  {!likeStatus[reply?.idReply] ? (
+                    <div
+                      onClick={() => handleLike(reply?.idReply)}
+                      className="flex justify-center items-center gap-1 cursor-pointer"
                     >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
-                      />
-                    </svg>
-                    {reply.like}
-                  </div>
+                      <svg
+                        className="w-6 h-6 text-[#4ABFA1] dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
+                        />
+                      </svg>
+                      {reply?.like}
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => handleDislike(reply?.idReply)}
+                      className="flex justify-center items-center gap-1 cursor-pointer"
+                    >
+                      <svg
+                        className="w-6 h-6 text-red-600 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
+                      </svg>
+                      {reply?.like}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -289,13 +414,15 @@ function CommunityDetail() {
           </div>
         </form>
       </div>
-      {showActionModal && <ActionModal />}
       {showReportModal && <ReportModal />}
+      {showChooseModal && <ChooseModal />}
+      {showReportConfirmModal && <ReportConfirmModal />}
+      {showDeleteConfirmModal && <DeleteConfirmModal />}
       <ToastContainer />
     </div>
   );
 
-  function ActionModal() {
+  function ReportConfirmModal() {
     return (
       <form className="absolute inset-0 flex items-center justify-center z-20">
         <div className="bg-black opacity-50 absolute inset-0"></div>
@@ -309,7 +436,32 @@ function CommunityDetail() {
               Report
             </button>
             <button
-              onClick={() => setShowActionModal(false)}
+              onClick={() => setShowReportConfirmModal(false)}
+              className=" px-4 py-2 bg-gray-200 rounded"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  function DeleteConfirmModal() {
+    return (
+      <form className="absolute inset-0 flex items-center justify-center z-20">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bg-white p-8 rounded shadow-lg">
+          <h2 className=" mb-6">Yakin ingin hapus reply?</h2>
+          <div className="flex justify-center gap-6">
+            <button
+              onClick={handleDelete}
+              className="px-4 py-2 bg-[#4ABFA1] text-white rounded"
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => setShowDeleteConfirmModal(false)}
               className=" px-4 py-2 bg-gray-200 rounded"
             >
               Batal
@@ -360,13 +512,53 @@ function CommunityDetail() {
                 key={report}
                 onClick={() => {
                   setReport(report);
-                  setShowActionModal(true);
+                  setShowReportConfirmModal(true);
                   setShowReportModal(false);
                 }}
               >
                 {report}
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  function ChooseModal() {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center z-50">
+        <div className="bg-black opacity-50 absolute inset-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white  rounded-t-2xl shadow-lg z-10">
+          <div className="flex justify-between  p-4 border-b">
+            <h2 className="  font-bold uppercase">pilih aksi selanjutnya</h2>
+            <div className="" onClick={() => setShowChooseModal(false)}>
+              <svg
+                className="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col justify-start text-start p-4 gap-6 text-sm">
+            <button className="text-start" onClick={() => handleChoose()}>
+              Report Reply
+            </button>
+            {idMemberReply == memberId && (
+              <button className="text-start" onClick={() => handleActionDel()}>
+                Delete Reply
+              </button>
+            )}
           </div>
         </div>
       </div>
