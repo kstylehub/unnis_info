@@ -203,7 +203,7 @@ function DetailProduct() {
 
     return (
       <>
-        {data?.map((review) => (
+        {data.slice(-2)?.map((review) => (
           <React.Fragment key={review.id}>
             <div className="flex justify-between items-center py-3">
               <div className="w-2/12">
@@ -288,11 +288,7 @@ function DetailProduct() {
     const remainingStars = maxRating - filledStars;
     return (
       <>
-        <div className="w-5/12 flex flex-col justify-center items-center">
-          <p className="text-center font-bold uppercase">Nilai</p>
-          <p className="text-4xl text-center font-bold">
-            {parseFloat(dataProduct?.rating).toFixed(1)}
-          </p>
+        <div className="flex gap-1  items-center">
           <div className="flex justify-evenly py-2">
             {[...Array(filledStars)].map((_, index) => (
               <svg
@@ -323,6 +319,12 @@ function DetailProduct() {
               </svg>
             ))}
           </div>
+          <p className="text-lg text-center font-bold">
+            {parseFloat(dataProduct?.rating).toFixed(1)}
+          </p>
+          <p className="text-sm text-center text-gray-500">
+                 ({dataProduct?.reviewNum})
+                </p>
         </div>
       </>
     );
@@ -755,73 +757,35 @@ function DetailProduct() {
           </div>
 
           {/* Count Review */}
-          <div className="lg:px-8 px-4 py-6 border-b">
-            <div className="flex w-full pb-5 ">
-              <div className="font-bold flex">REVIEW</div>
-              <p className="mx-2 text-red-500 font-bold">
-                {dataProduct?.reviewNum}
-              </p>
+          <div className="lg:px-8 px-4 py-4 border-b">
+            <div className="flex justify-between w-full  ">
+              <div className="flex">
+                <div className="font-bold flex">Review</div>
+               
+              </div>
+              <div className="flex text-sm justify-center items-center">
+                <Link to={`/newProduct/detailproduct/allreview/${id}`} className="text-gray-400 mr-3">View All</Link>
+                <svg
+                  className="w-3 h-3 text-gray-400 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 8 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                  />
+                </svg>
+              </div>
             </div>
-            <div className="flex justify-center w-full py-1">
+    
+            <div className="flex justify-left w-full item-center ">
               <StarAll />
-              <AllReview1 />
-              {/* <div className="flex flex-col w-7/12 px-5">
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">5</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">4</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">3</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">2</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-              <div className="flex justify-evenly items-center">
-                <img
-                  className="w-4 h-4 mx-1"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nOWSvUoDQRCAP0UfwEIJ+ARiLwq+Qgq7pBf8AbHVQhFBU1vZi9YW+ha5Wmw1MxdFTSdEUE8WduE0p+4kl0JcGFjYme9jZhb+1RE4FDgYFnxBIXPRgvlhCM6CQOC0VHgbphS6QaDwcg+V0gQCuzl46GKnFHgGYwryVaCQJjAeDbqFaYW6wobCvsKxwLlAUgAPXSQux+X6Gldbd6wegcL1dyA1hsBVj0CgUaKgUTgmhU2BtwHA7wp7P+5CYUnguQ9BV6AWu/A5gTsD/FFhMQqe20nVMJqqCe5HtW3oYKsfwaVBcGGCZzCi8GQQdDIYjRa0YbZgzg8Kyy78/dO7q4kWCKzm/7bASQqT4f0GJgSOBF5DXgtWLIJ1D2+6L/vLd2763LVogZtnCjMxc7Xk/s3zAWvuhhjTjKx9AAAAAElFTkSuQmCC"
-                />
-                <p className="mx-1 text-sm">1</p>
-                <div className="mx-1 w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                  <div className="bg-red-600 h-2 rounded-full dark:bg-red-500 w-[45%]"></div>
-                </div>
-                <p className="mx-1 text-sm">27</p>
-              </div>
-            </div> */}
+            
             </div>
           </div>
 
@@ -866,7 +830,7 @@ function DetailProduct() {
           </div>
 
           {/* Edit Review  */}
-          <div className="absolute bottom-20 right-4 rounded-full w-14 h-14 bg-[#4ABFA1] shadow-xl">
+          <div className="absolute bottom-20 z-20 right-4 rounded-full w-14 h-14 bg-[#4ABFA1] shadow-xl">
             <img
               className="w-full p-3"
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABZElEQVR4nOXVzUtUYRTH8XECmSxsU9hO3IhIi0BaDENQoC1EGAwCcRFBq9CN1EZxMRYu3EjlVpTy5d/8yAMnuF7uPHPnupIOHC73uef8vud5Oc9ttf57wwSWsYV3aGcXBQ8whxcZn4nYNr7gGifx3B4KwSJ+R2DOf5XE+5G/Vnwvi8/gHEfojZjB84L4FV4XdH5gUAX4jDNMj1jCdkH8PXZxmSBYwgU+ViXu4WAM8X6MTRYgf/Ednark/eTjiP8zdGM8iU+1qiwHcFt8vfTtJf7gEI8qxXMA+cqXCsuSNv7r0D3MADZqiE/FEU9xi7UBUf1pap6ceIw1AsxFUnfUmjcFrEbSU8zjQ6Hyh6XYRoB+dOp5oWt3yuJ3AXSwmToTr/C4MrkpYByrA/iG4zsAegGYHRbwNgJWGog/iVv4Z+5fMBGdmCDHcfnt1fBBHIJ0Ey+MqiRB3gSoLmAXn/Bs3JnfD7sB89Qc+nnafpYAAAAASUVORK5CYII="

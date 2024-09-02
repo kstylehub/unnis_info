@@ -51,6 +51,7 @@ import WelcomeVoucher from "../Components/MobilePage/Components/Subscribe/Welcom
 import CommunityPostThread from "../Components/MobilePage/Components/ModalHomepage/CommunityPostThread";
 import CheckIn from "../Components/MobilePage/Components/ModalHomepage/CheckIn";
 import FavoriteTypeSkincare from "../Components/MobilePage/Components/Subscribe/FavoriteTypeSkincare";
+import DetailProductReview from "../Components/MobilePage/Components/ModalHomepage/DetailProductReview";
 
 const router = createBrowserRouter([
   {
@@ -180,6 +181,10 @@ const router = createBrowserRouter([
           {
             path: "/newProduct/detailproduct/:id",
             element: <DetailProduct />,
+          },
+          {
+            path: "/newProduct/detailproduct/allreview/:id",
+            element: <DetailProductReview />,
           },
           // VIDEO ==============================================
           {
