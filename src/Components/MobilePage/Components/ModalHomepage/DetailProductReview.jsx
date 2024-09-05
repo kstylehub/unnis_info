@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import back from "../../../../assets/previous.svg";
 import logo from "../../../../assets/logo.png";
 import { useSelector } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 
 function DetailProductReview() {
   const { id } = useParams();
@@ -12,6 +12,22 @@ function DetailProductReview() {
   const dataProduct = detailProduct?.dataProduct?.[0];
   const dataContainerStyle = {
     whiteSpace: "pre-wrap",
+  };
+  const [sortCriteria, setSortCriteria] = useState("newest"); // default to newest
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+  const sortReviews = (reviews, criteria) => {
+    if (!reviews) return [];
+
+    return [...reviews].sort((a, b) => {
+      if (criteria === "liked") {
+        return b.countLike - a.countLike; // descending by likes
+      } else {
+        return new Date(b.dateReview) - new Date(a.dateReview); // descending by date
+      }
+    });
   };
 
   function StarAll() {
@@ -111,7 +127,7 @@ function DetailProductReview() {
 
   function AllReview() {
     const data = detailProduct?.dataProduct[0]?.listReview;
-
+    const sortedReviews = sortReviews(data, sortCriteria);
     function Birt(birthYear) {
       if (birthYear == 0) {
         return "-";
@@ -200,7 +216,7 @@ function DetailProductReview() {
 
     return (
       <>
-        {data?.map((review) => (
+        {sortedReviews?.map((review) => (
           <React.Fragment key={review.id}>
             <div className="flex justify-between items-center py-3">
               <div className="w-2/12">
@@ -319,7 +335,6 @@ function DetailProductReview() {
                   {dataProduct?.reviewNum}
                 </p>
               </div>
-            
             </div>
             <div className=""></div>
             <div className="flex justify-center w-full py-1">
@@ -329,9 +344,9 @@ function DetailProductReview() {
           </div>
 
           {/* Review */}
-          <div className="lg:px-8 px-4 pt-4">
-            <div className="flex justify-between">
-              <div className="flex justify-center items-center">
+          <div className="lg:px-8 px-4 pt-3">
+            <div className="flex justify-between items-center pb-2">
+              {/* <div className="flex justify-center items-center">
                 <p className="text-sm">Disukai</p>
                 <svg
                   className="w-3 h-3 mx-3 text-gray-500 dark:text-white"
@@ -348,9 +363,67 @@ function DetailProductReview() {
                     d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"
                   />
                 </svg>
+              </div> */}
+              <div className="relative inline-block text-left">
+                <button
+                  type="button"
+                  className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none  "
+                  onClick={toggleDropdown}
+                >
+                  {sortCriteria === "liked" ? "Disukai" : "Terbaru"}
+                  <svg
+                    className="-mr-1 ml-2 h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 01.02-1.06z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                {dropdownVisible && (
+                  <div
+                    className=" absolute  mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="menu-button"
+                    tabIndex="-1"
+                  >
+                    <div className="py-1" role="none">
+                      <button
+                        className={`w-full text-left px-4 py-2 text-sm text-gray-700 ${
+                          sortCriteria === "liked" ? "font-bold" : ""
+                        }`}
+                        onClick={() => {
+                          setSortCriteria("liked");
+                          setDropdownVisible(false);
+                        }}
+                      >
+                        Disukai
+                      </button>
+                      <button
+                        className={`w-full text-left px-4 py-2 text-sm text-gray-700 ${
+                          sortCriteria === "newest" ? "font-bold" : ""
+                        }`}
+                        onClick={() => {
+                          setSortCriteria("newest");
+                          setDropdownVisible(false);
+                        }}
+                      >
+                        Terbaru
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
+
               <svg
-                className="w-5 h-5 text-gray-800 dark:text-white"
+                className="w-6 h-6 text-gray-800 dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -1,12 +1,12 @@
 import back from "../../../../assets/previous.svg";
 import logo from "../../../../assets/logo.png";
+import Share from "../../../../assets/Share1.png";
 import UnnisIcon from "../../../../assets/UnnisPickIcon.svg";
 import Tokopedia from "../../../../assets/tokopedia.svg";
 import Shopee from "../../../../assets/shopee.svg";
 import Istyle from "../../../../assets/istyle.svg";
 import OliveYoung from "../../../../assets/OliveYoung.svg";
 import Sociolla from "../../../../assets/Sociolla.svg";
-
 import { Link, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { useEffect } from "react";
@@ -16,6 +16,7 @@ import {
   getAllProductWithPagination,
   getDetailProduct,
 } from "../../../../Store/Actions/Actions";
+import { Helmet } from "react-helmet";
 
 function DetailProduct() {
   const { id } = useParams();
@@ -64,54 +65,25 @@ function DetailProduct() {
     whiteSpace: "pre-wrap",
   };
 
-  function AllReview1() {
-    const data = detailProduct?.dataProduct[0]?.listReview;
-    const valueReviewDistribution = data?.reduce((acc, review) => {
-      const value = review.valueReview || 0;
-      acc[value] = (acc[value] || 0) + 1;
-      return acc;
-    }, {});
-    const maxCount = Math.max(...Object.values(valueReviewDistribution));
+  const metaData = {
+    title: dataProduct?.name || "Product Name",
+    description: dataProduct?.description || "Product Description",
+    price: formattedPrice || "Product Price",
+    brand: dataProduct?.brand || "Product Brand",
+    image: dataProduct?.images || "https://yourwebsite.com/default-image.jpg",
+    url: `https://mobile.unnispick.com/newProduct/detailproduct/${
+      dataProduct?.id || 1
+    }`,
+  };
 
-    return (
-      <div className="flex flex-col w-7/12 px-5">
-        {[5, 4, 3, 2, 1].map((value) => (
-          <div className="flex justify-evenly items-center" key={value}>
-            <div className="flex w-2/12">
-              <svg
-                className="w-5 h-5 text-yellow-400 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13.849 4.22c-.584-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-              </svg>
-              <p className="mx-1 text-sm">{value}</p>
-            </div>
-            <div className="mx-1 w-9/12 h-2 bg-gray-200 rounded-full ">
-              {valueReviewDistribution[value] > 0 && (
-                <div
-                  className="bg-yellow-400 h-2 rounded-full dark:bg-yellow-400"
-                  style={{
-                    width: `${
-                      (valueReviewDistribution[value] / maxCount) * 100
-                    }%`,
-                  }}
-                ></div>
-              )}
-            </div>
-            <div className="w-1/12 mx-1 text-sm">
-              {valueReviewDistribution[value] || 0}
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
+  // Fungsi untuk membagikan ke WhatsApp
+  const handleShareToWhatsApp = () => {
+    const urlWithCacheBypass = `${metaData.url}?v=${new Date().getTime()}`;
+    const message = `Temukan ${metaData.brand} - ${metaData.title} dengan harga Rp ${metaData.price}. Dapatkan sekarang juga di UNNIS! ${urlWithCacheBypass}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
 
+    window.open(whatsappUrl, "_blank");
+  };
   function AllReview() {
     const data = detailProduct?.dataProduct[0]?.listReview;
 
@@ -323,8 +295,8 @@ function DetailProduct() {
             {parseFloat(dataProduct?.rating).toFixed(1)}
           </p>
           <p className="text-sm text-center text-gray-500">
-                 ({dataProduct?.reviewNum})
-                </p>
+            ({dataProduct?.reviewNum})
+          </p>
         </div>
       </>
     );
@@ -333,25 +305,38 @@ function DetailProduct() {
   function Display() {
     return (
       <>
+        <Helmet>
+          <title>{metaData.title}</title>
+          <meta property="og:title" content={metaData.title} />
+          <meta property="og:description" content={metaData.description} />
+          <meta property="og:price" content={metaData.price} />
+          <meta property="og:brand" content={metaData.brand} />
+          <meta property="og:image" content={metaData.images} />
+          <meta property="og:url" content={metaData.url} />
+          <meta property="og:type" content="website" />
+        </Helmet>
         <div className="w-full h-full overflow-y-auto">
           <div className="top-0 absolute z-10 lg:px-8 px-4 w-full bg-white pt-2 border-b border-gray-400">
-            <div className="flex justify-between">
-              <div className="self-center">
+            <div className="flex ">
+              <div className="self-center w-4/12">
                 <Link to={"/newProduct"}>
-                  <img src={back} className="w-full" />
+                  <img src={back} className="w-[25%]" />
                 </Link>
               </div>
-              <div className="self-center flex justify-center">
-                <img src={logo} className="w-4/12" />
+              <div className="self-center flex justify-center w-4/12">
+                <img src={logo} className="w-[80%]" />
               </div>
-              <div className="self-center">
+              <div className="self-center flex gap-3 justify-end items-center w-4/12">
+                <div onClick={handleShareToWhatsApp} className="w-[20%]">
+                  <img src={Share} className="w-full" />
+                </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth="1.5"
+                  strokeWidth="1.0"
                   stroke="currentColor"
-                  className="w-8 h-8"
+                  className="w-[25%] h-[25%]"
                 >
                   <path
                     strokeLinecap="round"
@@ -761,10 +746,14 @@ function DetailProduct() {
             <div className="flex justify-between w-full  ">
               <div className="flex">
                 <div className="font-bold flex">Review</div>
-               
               </div>
               <div className="flex text-sm justify-center items-center">
-                <Link to={`/newProduct/detailproduct/allreview/${id}`} className="text-gray-400 mr-3">View All</Link>
+                <Link
+                  to={`/newProduct/detailproduct/allreview/${id}`}
+                  className="text-gray-400 mr-3"
+                >
+                  View All
+                </Link>
                 <svg
                   className="w-3 h-3 text-gray-400 dark:text-white"
                   aria-hidden="true"
@@ -782,16 +771,15 @@ function DetailProduct() {
                 </svg>
               </div>
             </div>
-    
+
             <div className="flex justify-left w-full item-center ">
               <StarAll />
-            
             </div>
           </div>
 
           {/* Review */}
           <div className="lg:px-8 px-4 pt-4">
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <div className="flex justify-center items-center">
                 <p className="text-sm">Disukai</p>
                 <svg
@@ -825,7 +813,7 @@ function DetailProduct() {
                   d="M7.75 4H19M7.75 4a2.25 2.25 0 0 1-4.5 0m4.5 0a2.25 2.25 0 0 0-4.5 0M1 4h2.25m13.5 6H19m-2.25 0a2.25 2.25 0 0 1-4.5 0m4.5 0a2.25 2.25 0 0 0-4.5 0M1 10h11.25m-4.5 6H19M7.75 16a2.25 2.25 0 0 1-4.5 0m4.5 0a2.25 2.25 0 0 0-4.5 0M1 16h2.25"
                 />
               </svg>
-            </div>
+            </div> */}
             <AllReview />
           </div>
 

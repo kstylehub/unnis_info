@@ -143,3 +143,29 @@ export function ReducerProductWithPagination(
       return state;
   }
 }
+
+const reportProduct = {
+  dataReportProduct: [],
+  error: null,
+  loading: true,
+};
+
+export function ReducerReportProduct(
+  state = reportProduct,
+  action
+) {
+  switch (action.type) {
+    case PRODUCT.POST_REPORT_PRODUCT_START:
+      return { ...state, loading: true };
+    case PRODUCT.POST_REPORT_PRODUCT_FAILED:
+      return { ...state, loading: false, error: action.payload };
+    case PRODUCT.POST_REPORT_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        dataReportProduct: action.payload,
+      };
+    default:
+      return state;
+  }
+}
