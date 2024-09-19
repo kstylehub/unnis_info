@@ -169,3 +169,55 @@ export function ReducerReportProduct(
       return state;
   }
 }
+
+const likeProduct = {
+  dataLikeReviewProduct: [],
+  error: null,
+  loading: true,
+};
+
+export function ReducerLikeProductReview(
+  state = likeProduct,
+  action
+) {
+  switch (action.type) {
+    case PRODUCT.POST_LIKE_PRODUCT_START:
+      return { ...state, loading: true };
+    case PRODUCT.POST_LIKE_PRODUCT_FAILED:
+      return { ...state, loading: false, error: action.payload };
+    case PRODUCT.POST_LIKE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        dataLikeReviewProduct: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
+const dislikeProduct = {
+  dataDislikeReviewProduct: [],
+  error: null,
+  loading: true,
+};
+
+export function ReducerDislikeProductReview(
+  state = dislikeProduct,
+  action
+) {
+  switch (action.type) {
+    case PRODUCT.POST_DISLIKE_PRODUCT_START:
+      return { ...state, loading: true };
+    case PRODUCT.POST_DISLIKE_PRODUCT_FAILED:
+      return { ...state, loading: false, error: action.payload };
+    case PRODUCT.POST_DISLIKE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        dataDislikeReviewProduct: action.payload,
+      };
+    default:
+      return state;
+  }
+}

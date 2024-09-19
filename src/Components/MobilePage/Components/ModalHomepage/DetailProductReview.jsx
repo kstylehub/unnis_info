@@ -1,8 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import back from "../../../../assets/previous.svg";
-import logo from "../../../../assets/logo.png";
-import { useSelector } from "react-redux";
-import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { getAllProductWithPagination, getDetailProduct, postDislikeReviewProduct, postLikeReviewProduct } from "../../../../Store/Actions/Actions";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function DetailProductReview() {
   const { id } = useParams();
@@ -13,8 +15,15 @@ function DetailProductReview() {
   const dataContainerStyle = {
     whiteSpace: "pre-wrap",
   };
+  const getUser = useSelector((state) => state.ReducerUser.dataUser);
+  const dataToMap = Array.isArray(getUser?.dataMember)
+    ? getUser?.dataMember
+    : [getUser?.dataMember];
+  const memberId = dataToMap.length > 0 ? dataToMap[0]?.id : null;
   const [sortCriteria, setSortCriteria] = useState("newest"); // default to newest
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [likeStatus, setLikeStatus] = useState({});
+  const dispatch = useDispatch();
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
@@ -29,6 +38,19 @@ function DetailProductReview() {
       }
     });
   };
+
+  useEffect(() => {
+    const body = {
+      idMember: 5691,
+      idProduct: +id,
+    };
+    dispatch(getDetailProduct(body));
+    dispatch(getAllProductWithPagination());
+  }, [id, dispatch]);
+  
+  useEffect(() => {
+    loadLikeStatusFromLocalStorage();
+  }, [dispatch]);
 
   function StarAll() {
     const rating = detailProduct.dataProduct[0]?.rating;
@@ -246,10 +268,49 @@ function DetailProductReview() {
                   </div>
 
                   <div className="flex items-center justify-end">
-                    <img
-                      className="w-4 h-4 mr-1"
-                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABqUlEQVR4nO2Uu0qDQRCFPwUvIEjwgoKXwgtaqGhlb2FpJ6KlCbESC7FSawsLQaKCRTSIeRpLe8FG8+9ujPEBIgOz8EM2msQIFh5YWJiz58zM7g78o1GUYTCClIWMgzsHGQPpDxjynAIMO0g75QjXQlLOfilehAUHWQv5wLozsPIGK7IPcQxkX2GhZuZe3MBBASYr0OVgTCsSkXtdeQcpiQlHuA4OvEkZBqoMvIiIhxKwsBozWA1xvImF7ZCA9DH/ChO1WmhgTVateAkmtbrzkHtOglIyTeIJurULuZDBmZY32qyBgzE1OKsKGtjR8jaaNYhgUw3SVcESTKlB9hn6GhV/h34DN/II5C6CJAt72qbDCrTXKy5cC0d6drcm0UKvhUslJusUb5M/oWeuniDx5QEDsw5utV3r3xnInSn31sBMPUnJyJj3zzaCTckylLmBLT9GIliiEVhY9jNHWhC/E9nH2iKcZZrBC8zF5tP+I3Q+QId/DA5uCrDITxDBtIVrzfZYl+yvJUYrYGFE5ktsNF8UYZxW4g0SRTixcCqfit/AC/TI+hXxP4tP4mflMT6kErsAAAAASUVORK5CYII="
-                    />
+                  {!likeStatus[review.id] ? (
+                      <div
+                        onClick={() => handleLike(review.id)}
+                        className="flex justify-center items-center gap-1 cursor-pointer"
+                      >
+                        <svg
+                          className="w-6 h-6 text-[#4ABFA1] dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
+                          />
+                        </svg>
+                        {review.like}
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => handleDislike(review.id)}
+                        className="flex justify-center items-center gap-1 cursor-pointer"
+                      >
+                        <svg
+                          className="w-6 h-6 text-red-600 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
+                        </svg>
+                        {review.like}
+                      </div>
+                    )}
                     <p className="text-sm"> {review.countLike} likes</p>
                   </div>
                 </div>
@@ -293,6 +354,64 @@ function DetailProductReview() {
       </>
     );
   }
+
+  const handleLike = (comId) => {
+    console.log(comId);
+    console.log(memberId+"memberid");
+    if (comId && memberId) {
+      let data = {
+        idReview: +comId,
+        idMember: +memberId,
+      };
+      try {
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        dispatch(postLikeReviewProduct(data));
+        setLikeStatus((prevStatus) => ({
+          ...prevStatus,
+          [comId]: true,
+        }));
+        saveLikeStatusToLocalStorage(comId, true);
+      } catch (error) {
+        toast.error("Failed to like thread. Please try again.");
+      }
+    }
+  };
+
+  const handleDislike = (comId) => {
+    if (comId && memberId) {
+      let data = {
+        idReview: +comId,
+        idMember: +memberId,
+      };
+      try {
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        dispatch(postDislikeReviewProduct(data));
+        setLikeStatus((prevStatus) => ({
+          ...prevStatus,
+          [comId]: false,
+        }));
+        saveLikeStatusToLocalStorage(comId, false);
+      } catch (error) {
+        toast.error("Failed to dislike thread. Please try again.");
+      }
+    }
+  };
+
+  const saveLikeStatusToLocalStorage = (comId, status) => {
+    const likeStatus = JSON.parse(localStorage.getItem("likeStatus")) || {};
+    likeStatus[comId] = status;
+    localStorage.setItem("likeStatus", JSON.stringify(likeStatus));
+  };
+
+  const loadLikeStatusFromLocalStorage = () => {
+    const savedLikeStatus =
+      JSON.parse(localStorage.getItem("likeStatus")) || {};
+    setLikeStatus(savedLikeStatus);
+  };
 
   return (
     <>
@@ -441,6 +560,7 @@ function DetailProductReview() {
             <AllReview />
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

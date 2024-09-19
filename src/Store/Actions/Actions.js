@@ -1,8 +1,8 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
-// const BASE_URL = 'http://52.74.126.149:9696';
+const BASE_URL = 'http://52.74.126.149:9696';
 // const BASE_URL = "http://3.35.189.96:9696";
-const BASE_URL = "https://api-mobile.unnispick.com";
+// const BASE_URL = "https://api-mobile.unnispick.com";
 const {
   PRODUCT,
   REVIEW,
@@ -368,6 +368,66 @@ export const postReportProduct = (body) => async (dispatch) => {
     console.log("error post report product:", error);
     dispatch({
       type: PRODUCT.POST_REPORT_PRODUCT_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const postLikeReviewProduct = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT.POST_LIKE_PRODUCT_START });
+    const response = await fetch(`${BASE_URL}/product/review/likeReview`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: PRODUCT.POST_LIKE_PRODUCT_SUCCESS,
+      payload: data,
+    });
+    // console.log("product >>> ", data);
+    return data; 
+  } catch (error) {
+    console.log("error post like product:", error);
+    dispatch({
+      type: PRODUCT.POST_LIKE_PRODUCT_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const postDislikeReviewProduct = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT.POST_DISLIKE_PRODUCT_START });
+    const response = await fetch(`${BASE_URL}/product/review/cancelReview`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Internal server error");
+    }
+
+    const data = await response.json();
+    dispatch({
+      type: PRODUCT.POST_DISLIKE_PRODUCT_SUCCESS,
+      payload: data,
+    });
+    // console.log("product >>> ", data);
+    return data; 
+  } catch (error) {
+    console.log("error post like product:", error);
+    dispatch({
+      type: PRODUCT.POST_DISLIKE_PRODUCT_FAILED,
       payload: error,
     });
   }

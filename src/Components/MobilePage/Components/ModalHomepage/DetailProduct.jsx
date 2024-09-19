@@ -311,7 +311,7 @@ function DetailProduct() {
           <meta property="og:description" content={metaData.description} />
           <meta property="og:price" content={metaData.price} />
           <meta property="og:brand" content={metaData.brand} />
-          <meta property="og:image" content={metaData.images} />
+          <meta property="og:image" content={metaData.image} />
           <meta property="og:url" content={metaData.url} />
           <meta property="og:type" content="website" />
         </Helmet>
