@@ -1,8 +1,8 @@
 import ACTIONS_TYPES from "../Constans/ActionTypes";
 
-const BASE_URL = 'http://52.74.126.149:9797';
+// const BASE_URL = 'http://52.74.126.149:9797';
 // const BASE_URL = "http://3.35.189.96:9696";
-// const BASE_URL = "https://api-mobile.unnispick.com";
+const BASE_URL = "https://api-mobile.unnispick.com";
 const {
   PRODUCT,
   REVIEW,
