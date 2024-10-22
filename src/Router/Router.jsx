@@ -52,6 +52,7 @@ import CommunityPostThread from "../Components/MobilePage/Components/ModalHomepa
 import CheckIn from "../Components/MobilePage/Components/ModalHomepage/CheckIn";
 import FavoriteTypeSkincare from "../Components/MobilePage/Components/Subscribe/FavoriteTypeSkincare";
 import DetailProductReview from "../Components/MobilePage/Components/ModalHomepage/DetailProductReview";
+import DetailProductPostReview from "../Components/MobilePage/Components/ModalHomepage/DetailProductPostReview";
 
 const router = createBrowserRouter([
   {
@@ -185,6 +186,10 @@ const router = createBrowserRouter([
           {
             path: "/newProduct/detailproduct/allreview/:id",
             element: <DetailProductReview />,
+          },
+          {
+            path: "/newProduct/detailproduct/postreview/:id",
+            element: <DetailProductPostReview />,
           },
           // VIDEO ==============================================
           {

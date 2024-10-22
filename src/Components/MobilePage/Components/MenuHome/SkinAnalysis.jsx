@@ -4,7 +4,8 @@ import back from "../../../../assets/previous.svg";
 import camera from "../../../../assets/SkinAnalysis/camera.png";
 import main_skin from "../../../../assets/SkinAnalysis/main_skin_analysis.png";
 import { useSelector } from "react-redux";
-
+import andImg from "../../../../assets/and_img.png";
+import iosImg from "../../../../assets/ios_img.png";
 function SkinAnalysis() {
   const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.ReducerUser.dataUser);
@@ -66,23 +67,38 @@ function SkinAnalysis() {
         </div>
       </div>
 
-      {/* Modal */}
       {showModal && (
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50">
           <div className="rounded-lg bg-white text-center lg:mx-20 mx-16">
-            <div className="py-8 lg:px-6 px-4">
+            <div
+              onClick={handleCloseModal}
+              className="flex justify-end py-2 pr-4"
+            >
+              x
+            </div>
+            <div className="pb-4 lg:px-6 px-4">
               <h5 className="lg:mb-2 text-sm font-semibold leading-tight">
-                Fitur ini hanya dapat digunakan pada aplikasi UNNIS
+                Fitur ini dapat kamu gunakan di aplikasi UNNIS. unduh sekarang!{" "}
               </h5>
             </div>
             <hr></hr>
-            <button
-              className="lg:py-4 py-3 inline-block rounded px-6 text-sm text-green-600"
-              onClick={handleCloseModal}
-              type="button"
-            >
-              Kembali
-            </button>
+            <div className=" lg:px-6 px-4 py-4 flex w-full justify-center items-center">
+              <Link
+                to="https://play.google.com/store/apps/details?id=com.brommko.android.unnispark"
+                target="_blank"
+                className="flex justify-center items-center"
+              >
+                <img src={andImg} className="w-11/12" />
+              </Link>
+
+              <Link
+                to="https://apps.apple.com/id/app/unnis-beauty-curator/id1600606073"
+                target="_blank"
+                className="flex justify-center items-center"
+              >
+                <img src={iosImg} className="w-11/12" />
+              </Link>
+            </div>
           </div>
         </div>
       )}

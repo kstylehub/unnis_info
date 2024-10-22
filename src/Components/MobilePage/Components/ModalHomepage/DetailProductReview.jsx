@@ -12,6 +12,7 @@ function DetailProductReview() {
     (state) => state.ReducerDetailProduct.dataDetailProduct
   );
   const dataProduct = detailProduct?.dataProduct?.[0];
+  // console.log(dataProduct);
   const dataContainerStyle = {
     whiteSpace: "pre-wrap",
   };

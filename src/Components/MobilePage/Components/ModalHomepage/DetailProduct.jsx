@@ -17,7 +17,8 @@ import {
   getDetailProduct,
 } from "../../../../Store/Actions/Actions";
 import { Helmet } from "react-helmet";
-
+import andImg from "../../../../assets/and_img.png";
+import iosImg from "../../../../assets/ios_img.png";
 function DetailProduct() {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
@@ -26,6 +27,7 @@ function DetailProduct() {
   const detailProduct = useSelector(
     (state) => state.ReducerDetailProduct.dataDetailProduct
   );
+
   const loading = useSelector((state) => state.ReducerDetailProduct.loading);
   const dispatch = useDispatch();
 
@@ -65,6 +67,16 @@ function DetailProduct() {
     whiteSpace: "pre-wrap",
   };
 
+  const [showModalApp, setShowModalApp] = useState(false);
+
+  const handleOpenModalApp = () => {
+    setShowModalApp(true);
+  };
+
+  const handleCloseModalApp = () => {
+    setShowModalApp(false);
+  };
+
   const metaData = {
     title: dataProduct?.name || "Product Name",
     description: dataProduct?.description || "Product Description",
@@ -86,7 +98,7 @@ function DetailProduct() {
   };
   function AllReview() {
     const data = detailProduct?.dataProduct[0]?.listReview;
-
+console.log("test >>>>", data)
     function Birt(birthYear) {
       if (birthYear == 0) {
         return "-";
@@ -331,6 +343,7 @@ function DetailProduct() {
                   <img src={Share} className="w-full" />
                 </div>
                 <svg
+                  onClick={handleOpenModalApp}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -819,7 +832,7 @@ function DetailProduct() {
 
           {/* Edit Review  */}
           <div className="absolute bottom-20 z-20 right-4 rounded-full w-14 h-14 bg-[#4ABFA1] shadow-xl">
-            <img
+            <img onClick={handleOpenModalApp}
               className="w-full p-3"
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABZElEQVR4nOXVzUtUYRTH8XECmSxsU9hO3IhIi0BaDENQoC1EGAwCcRFBq9CN1EZxMRYu3EjlVpTy5d/8yAMnuF7uPHPnupIOHC73uef8vud5Oc9ttf57wwSWsYV3aGcXBQ8whxcZn4nYNr7gGifx3B4KwSJ+R2DOf5XE+5G/Vnwvi8/gHEfojZjB84L4FV4XdH5gUAX4jDNMj1jCdkH8PXZxmSBYwgU+ViXu4WAM8X6MTRYgf/Ednark/eTjiP8zdGM8iU+1qiwHcFt8vfTtJf7gEI8qxXMA+cqXCsuSNv7r0D3MADZqiE/FEU9xi7UBUf1pap6ceIw1AsxFUnfUmjcFrEbSU8zjQ6Hyh6XYRoB+dOp5oWt3yuJ3AXSwmToTr/C4MrkpYByrA/iG4zsAegGYHRbwNgJWGog/iVv4Z+5fMBGdmCDHcfnt1fBBHIJ0Ey+MqiRB3gSoLmAXn/Bs3JnfD7sB89Qc+nnafpYAAAAASUVORK5CYII="
             />
@@ -993,10 +1006,16 @@ function DetailProduct() {
                 />
                 <p className="uppercase text-[#4ABFA1]">LIKES</p>
               </div>
-              <button className="w-5/12 bg-white border rounded-lg  border-[#4ABFA1] my-2 font-bold text-[#4ABFA1]">
+              <button
+                onClick={handleOpenModalApp}
+                className="w-5/12 bg-white border rounded-lg  border-[#4ABFA1] my-2 font-bold text-[#4ABFA1]"
+              >
                 Cart
               </button>
-              <button className="w-5/12 bg-[#4ABFA1] border rounded-lg  border-[#4ABFA1] my-2 font-bold text-white">
+              <button
+                onClick={handleOpenModalApp}
+                className="w-5/12 bg-[#4ABFA1] border rounded-lg  border-[#4ABFA1] my-2 font-bold text-white"
+              >
                 Buy
               </button>
             </div>
@@ -1005,6 +1024,7 @@ function DetailProduct() {
       </>
     );
   }
+
   return (
     <>
       {loading ? (
@@ -1111,6 +1131,43 @@ function DetailProduct() {
               <h5 style={dataContainerStyle} className="text-sm text-left pt-1">
                 {dataProduct?.recommend}
               </h5>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal */}
+      {showModalApp && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-black flex justify-center items-center z-50">
+          <div className="rounded-lg bg-white text-center lg:mx-20 mx-16">
+            <div
+              onClick={handleCloseModalApp}
+              className="flex justify-end py-2 pr-4"
+            >
+              x
+            </div>
+            <div className="pb-4 lg:px-6 px-4">
+              <h5 className="lg:mb-2 text-sm font-semibold leading-tight">
+                Fitur ini dapat kamu gunakan di aplikasi UNNIS. unduh sekarang!{" "}
+              </h5>
+            </div>
+            <hr></hr>
+            <div className=" lg:px-6 px-4 py-4 flex w-full justify-center items-center">
+              <Link
+                to="https://play.google.com/store/apps/details?id=com.brommko.android.unnispark"
+                target="_blank"
+                className="flex justify-center items-center"
+              >
+                <img src={andImg} className="w-11/12" />
+              </Link>
+
+              <Link
+                to="https://apps.apple.com/id/app/unnis-beauty-curator/id1600606073"
+                target="_blank"
+                className="flex justify-center items-center"
+              >
+                <img src={iosImg} className="w-11/12" />
+              </Link>
             </div>
           </div>
         </div>
