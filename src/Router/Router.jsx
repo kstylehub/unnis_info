@@ -53,6 +53,7 @@ import CheckIn from "../Components/MobilePage/Components/ModalHomepage/CheckIn";
 import FavoriteTypeSkincare from "../Components/MobilePage/Components/Subscribe/FavoriteTypeSkincare";
 import DetailProductReview from "../Components/MobilePage/Components/ModalHomepage/DetailProductReview";
 import DetailProductPostReview from "../Components/MobilePage/Components/ModalHomepage/DetailProductPostReview";
+import Page404 from "../Components/MobilePage/Components/ErrorPage/Page404";
 
 const router = createBrowserRouter([
   {
@@ -285,6 +286,10 @@ const router = createBrowserRouter([
           {
             path: "/search",
             element: <SearchProduct />,
+          },
+          {
+            path: "/page404",
+            element: <Page404/>,
           },
         ],
       },

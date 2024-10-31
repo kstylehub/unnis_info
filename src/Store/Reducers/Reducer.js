@@ -91,6 +91,8 @@ export function ReducerDetailProduct(state = detailProduct, action) {
       return { ...state, error: action.payload, loading: false };
     case PRODUCT.GET_DETAIL_PRODUCT_SUCCESS:
       return { ...state, dataDetailProduct: action.payload, loading: false };
+    case PRODUCT.RESET_DETAIL_PRODUCT: // Aksi reset baru
+      return { ...state, dataDetailProduct: null, loading: false, error: null };
     default:
       return state;
   }
@@ -150,10 +152,7 @@ const reportProduct = {
   loading: true,
 };
 
-export function ReducerReportProduct(
-  state = reportProduct,
-  action
-) {
+export function ReducerReportProduct(state = reportProduct, action) {
   switch (action.type) {
     case PRODUCT.POST_REPORT_PRODUCT_START:
       return { ...state, loading: true };
@@ -176,10 +175,7 @@ const likeProduct = {
   loading: true,
 };
 
-export function ReducerLikeProductReview(
-  state = likeProduct,
-  action
-) {
+export function ReducerLikeProductReview(state = likeProduct, action) {
   switch (action.type) {
     case PRODUCT.POST_LIKE_PRODUCT_START:
       return { ...state, loading: true };
@@ -202,10 +198,7 @@ const dislikeProduct = {
   loading: true,
 };
 
-export function ReducerDislikeProductReview(
-  state = dislikeProduct,
-  action
-) {
+export function ReducerDislikeProductReview(state = dislikeProduct, action) {
   switch (action.type) {
     case PRODUCT.POST_DISLIKE_PRODUCT_START:
       return { ...state, loading: true };

@@ -7,7 +7,7 @@ import Shopee from "../../../../assets/shopee.svg";
 import Istyle from "../../../../assets/istyle.svg";
 import OliveYoung from "../../../../assets/OliveYoung.svg";
 import Sociolla from "../../../../assets/Sociolla.svg";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { CircleLoader } from "react-spinners";
@@ -19,8 +19,11 @@ import {
 import { Helmet } from "react-helmet";
 import andImg from "../../../../assets/and_img.png";
 import iosImg from "../../../../assets/ios_img.png";
+
 function DetailProduct() {
   const { id } = useParams();
+  const navigate = useNavigate(); // Hook untuk navigasi halaman
+
   const [showModal, setShowModal] = useState(false);
   const [showModalDesc, setShowModalDesc] = useState(false);
 
@@ -41,6 +44,13 @@ function DetailProduct() {
   }, [id, dispatch]);
 
   const dataProduct = detailProduct?.dataProduct?.[0];
+
+  useEffect(() => {
+    if (!loading && !dataProduct) {
+      navigate("/page404");
+    }
+  }, [loading, dataProduct, navigate]);
+
   const formattedPrice = dataProduct?.price?.toLocaleString("id-ID");
   const allProduct = useSelector(
     (state) => state.ReducerProductWithPagination.dataProductWithPagination
@@ -97,8 +107,8 @@ function DetailProduct() {
     window.open(whatsappUrl, "_blank");
   };
   function AllReview() {
-    const data = detailProduct?.dataProduct[0]?.listReview;
-console.log("test >>>>", data)
+    const data = detailProduct?.dataProduct?.[0]?.listReview;
+
     function Birt(birthYear) {
       if (birthYear == 0) {
         return "-";
@@ -148,11 +158,12 @@ console.log("test >>>>", data)
       const ratingInRange = Math.max(0, Math.min(rating, maxRating)); // Ensure rating is between 0 and 5
       const filledStars = Math.floor(ratingInRange);
       const remainingStars = maxRating - filledStars;
+      const validFilledStars = Number.isInteger(filledStars) && filledStars > 0 ? filledStars : 0;
 
       return (
         <>
           <div className="flex justify-evenly py-2">
-            {[...Array(filledStars)].map((_, index) => (
+            {[...Array(validFilledStars)].map((_, index) => (
               <svg
                 key={index}
                 className="w-4 h-4 text-yellow-400 dark:text-white"
@@ -187,7 +198,7 @@ console.log("test >>>>", data)
 
     return (
       <>
-        {data.slice(-2)?.map((review) => (
+        {data?.slice(-2)?.map((review) => (
           <React.Fragment key={review.id}>
             <div className="flex justify-between items-center py-3">
               <div className="w-2/12">
@@ -266,15 +277,18 @@ console.log("test >>>>", data)
   }
 
   function StarAll() {
-    const rating = detailProduct.dataProduct[0]?.rating;
+    const rating = detailProduct?.dataProduct?.[0]?.rating;
     const maxRating = 5;
     const filledStars = Math.floor(rating);
     const remainingStars = maxRating - filledStars;
+    const validFilledStars = Number.isInteger(filledStars) && filledStars > 0 ? filledStars : 0;
+    const validremainingStars = Number.isInteger(remainingStars) && remainingStars > 0 ? remainingStars : 0;
+
     return (
       <>
         <div className="flex gap-1  items-center">
           <div className="flex justify-evenly py-2">
-            {[...Array(filledStars)].map((_, index) => (
+          {[...Array(validFilledStars)].map((_, index) => (
               <svg
                 key={index}
                 className="w-5 h-5 text-yellow-400 dark:text-white"
@@ -288,7 +302,7 @@ console.log("test >>>>", data)
                 <path d="M13.849 4.22c-.584-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
               </svg>
             ))}
-            {[...Array(remainingStars)].map((_, index) => (
+            {[...Array(validremainingStars)].map((_, index) => (
               <svg
                 key={index}
                 className="w-5 h-5 text-gray-200 dark:text-white"
@@ -832,7 +846,8 @@ console.log("test >>>>", data)
 
           {/* Edit Review  */}
           <div className="absolute bottom-20 z-20 right-4 rounded-full w-14 h-14 bg-[#4ABFA1] shadow-xl">
-            <img onClick={handleOpenModalApp}
+            <img
+              onClick={handleOpenModalApp}
               className="w-full p-3"
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABZElEQVR4nOXVzUtUYRTH8XECmSxsU9hO3IhIi0BaDENQoC1EGAwCcRFBq9CN1EZxMRYu3EjlVpTy5d/8yAMnuF7uPHPnupIOHC73uef8vud5Oc9ttf57wwSWsYV3aGcXBQ8whxcZn4nYNr7gGifx3B4KwSJ+R2DOf5XE+5G/Vnwvi8/gHEfojZjB84L4FV4XdH5gUAX4jDNMj1jCdkH8PXZxmSBYwgU+ViXu4WAM8X6MTRYgf/Ednark/eTjiP8zdGM8iU+1qiwHcFt8vfTtJf7gEI8qxXMA+cqXCsuSNv7r0D3MADZqiE/FEU9xi7UBUf1pap6ceIw1AsxFUnfUmjcFrEbSU8zjQ6Hyh6XYRoB+dOp5oWt3yuJ3AXSwmToTr/C4MrkpYByrA/iG4zsAegGYHRbwNgJWGog/iVv4Z+5fMBGdmCDHcfnt1fBBHIJ0Ey+MqiRB3gSoLmAXn/Bs3JnfD7sB89Qc+nnafpYAAAAASUVORK5CYII="
             />
