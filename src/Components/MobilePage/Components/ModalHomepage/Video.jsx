@@ -188,7 +188,7 @@ function Video() {
                 <Link
                   to={`/newProduct/detailproduct/${recproduct.id}`}
                   key={index}
-                  className="relative border p-3 lg:w-[8.5vw] w-[30vw] flex-shrink-0"
+                  className="relative border px-3 py-2"
                 >
                   {recproduct.bpom && (
                     <div className="absolute top-0 right-3  text-white py-3 w-[10%]">
@@ -210,7 +210,7 @@ function Video() {
                   )}
                   <div className="flex flex-col">
                     <div className="flex justify-center items-center p-1">
-                      <div style={{ width: "120px", height: "120px" }}>
+                      <div style={{ width: "100px", height: "100px" }}>
                         {recproduct.images !== null ? (
                           <img
                             src={recproduct.images}
@@ -389,7 +389,7 @@ function Video() {
                 <Link
                   to={`/newProduct/detailproduct/${item.id}`}
                   key={index}
-                  className="relative border p-3 lg:w-[8.5vw] w-[30vw]  flex-shrink-0"
+                  className="relative border px-3 py-2 "
                 >
                   {item.bpom && (
                     <div className="absolute top-0 right-3  text-white py-3 w-[10%]">
@@ -411,7 +411,7 @@ function Video() {
                   )}
                   <div className="flex flex-col">
                     <div className="flex justify-center items-center p-1">
-                      <div style={{ width: "120px", height: "120px" }}>
+                      <div style={{ width: "100px", height: "100px" }}>
                         {item.images !== null ? (
                           <img
                             src={item.images}

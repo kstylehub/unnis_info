@@ -51,23 +51,28 @@ function NewPage() {
   const [totalLoadedItems, setTotalLoadedItems] = useState(0);
   const [isDataEnd, setIsDataEnd] = useState(false);
   const [clickedButton, setClickedButton] = useState("all");
-  const  [hiddenButton, setHiddenButton] = useState(false)
+  const [hiddenButton, setHiddenButton] = useState(false);
   const [filter, setFilter] = useState({
     idMember: 0,
     limit: 10,
     page: 1,
     filter: "",
     category: "",
-  })
+  });
 
   const loading = useSelector((state) => state.ReducerProductCategory.loading);
-  const allProductPage = useSelector((state) => state.ReducerProductWithPagination.dataProductWithPagination);
-  const loadingProduct = useSelector((state) => state.ReducerProductWithPagination.loading);
+  const allProductPage = useSelector(
+    (state) => state.ReducerProductWithPagination.dataProductWithPagination
+  );
+  const loadingProduct = useSelector(
+    (state) => state.ReducerProductWithPagination.loading
+  );
 
-  const [dataProduct, setDataProduct] = useState(allProductPage.dataProduct || [])
+  const [dataProduct, setDataProduct] = useState(
+    allProductPage.dataProduct || []
+  );
   const [combinedData, setCombinedData] = useState([]);
 
-  
   const getButtonStyle = (button) => {
     if (clickedButton === button) {
       return {
@@ -104,8 +109,6 @@ function NewPage() {
     }
   }, [allProductPage]);
 
-  
-
   const category = [
     {
       name: "Skincare",
@@ -141,12 +144,12 @@ function NewPage() {
     },
     {
       name: "Lifestyle",
-      icon: lifestle
+      icon: lifestle,
     },
     {
       name: "Detergent",
-      icon: detergent
-    }
+      icon: detergent,
+    },
   ];
 
   async function loadMoreData() {
@@ -172,7 +175,6 @@ function NewPage() {
     setCombinedData([]);
   }
 
-
   const handleClick = (button) => {
     setClickedButton(button);
     setHiddenButton(true);
@@ -184,7 +186,6 @@ function NewPage() {
     setCombinedData([]);
   };
 
-  
   async function closeFilter() {
     setHiddenButton(false);
     setClickedButton("all");
@@ -250,6 +251,13 @@ function NewPage() {
                         />
                       </div>
                     )}
+                    {/^normal$/i.test(el.priceType) === false && (
+                      <div className="absolute top-0 left-0 font-semibold  text-white py-3 w-[30%]">
+                        <div className="bg-[#4ABFA1]  px-2 text-md ">
+                          <p className="">{el.discountRate}%</p>
+                        </div>
+                      </div>
+                    )}
                     {el.bpom && (
                       <div className="absolute top-0 right-3 text-white py-3 w-[15%]">
                         <img
@@ -286,104 +294,127 @@ function NewPage() {
                       </div>
                       <div className=""></div>
                       <div
-                        className="w-full pt-2"
+                  className="w-full pt-2 text-sm"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    lineHeight: "1.2",
+                  }}
+                >
+                  {el.brand.toUpperCase()} - {el.name}
+                </div>
+                <div className="flex items-center">
+                  <div className="text-left font-bold text-base">
+                    Rp{""}
+                    {el.price
+                      .toLocaleString("id-ID", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })
+                      .replace(",", ".")}
+                  </div>
+                  {el.originalPrice !== el.price &&
+                    el.originalPrice !== 0 && (
+                      <div
+                        className="text-left text-xs pl-1 line-through text-gray-400"
                         style={{
                           display: "-webkit-box",
-                          WebkitLineClamp: 2,
+                          WebkitLineClamp: 1,
                           WebkitBoxOrient: "vertical",
                           overflow: "hidden",
-                          lineHeight: "1.2",
                         }}
                       >
-                        {el.brand} - {el.name}
-                      </div>
-                      <div className="text-left font-bold text-lg">
                         Rp
-                        {el.price
+                        {el.originalPrice
                           .toLocaleString("id-ID", {
                             minimumFractionDigits: 0,
                             maximumFractionDigits: 0,
                           })
                           .replace(",", ".")}
                       </div>
-                      <div className="flex justify-between pt-1">
-                        <div className="truncate text-center w-full flex justify-left items-center">
-                          <div className="pe-1">
-                            <svg
-                              className="w-3.5 h-3.5 text-yellow-400 dark:text-white"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                            </svg>
-                          </div>
-                          <div className="">{el.rating}</div>
-                          <div className="pl-1 text-gray-400 text-sm pt-1">
-                            ({el.stock})
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          {[
-                            {
-                              href: el.unnispickLink,
-                              text: "Unnispick",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_1.png",
-                            },
-                            {
-                              href: el.shopeeLink,
-                              text: "Shopee",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_2.png",
-                            },
-                            {
-                              href: el.tokopediaLink,
-                              text: "Tokopedia",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_3.png",
-                            },
-                            {
-                              href: el.iStyleLink,
-                              text: "iStyle",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_4.png",
-                            },
-                            {
-                              href: el.sociollaLink,
-                              text: "Sociolla",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_6.png",
-                            },
-                            {
-                              href: el.styleKoreanLink,
-                              text: "Style Korean",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_7.png",
-                            },
-                            {
-                              href: el.oliveYoungLink,
-                              text: "Olive Young",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_5.png",
-                            },
-                            {
-                              href: el.kalCareLink,
-                              text: "Kal Care",
-                              icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_8.png",
-                            },
-                          ]
-                            .filter((link) => link.href)
-                            .slice(0, 3)
-                            .map((link, idx) => (
-                              <a
-                                key={idx}
-                                href={link.href}
-                                className="rounded-full w-6 h-6 ml-1 flex items-center justify-center"
-                              >
-                                <img
-                                  src={link.icon}
-                                  alt={link.text}
-                                  className="bg-cover w-full h-full rounded-full"
-                                />
-                              </a>
-                            ))}
-                        </div>
-                      </div>
+                    )}
+                </div>
+
+                <div className="flex justify-between  items-center">
+                  <div className="truncate text-center w-full flex justify-left items-center">
+                    <div className="pe-1">
+                      <svg
+                        className="w-3 h-3 text-yellow-400 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+                      </svg>
+                    </div>
+                    <div className="text-sm">{el.rating}</div>
+                    <div className="pl-1 text-gray-400 text-xs ">
+                      ({el.stock})
+                    </div>
+                  </div>
+                  <div className="flex justify-end ">
+                    {[
+                      {
+                        href: el?.unnispickLink,
+                        text: "Unnispick",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_1.png",
+                      },
+                      {
+                        href: el?.shopeeLink,
+                        text: "Shopee",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_2.png",
+                      },
+                      {
+                        href: el?.tokopediaLink,
+                        text: "Tokopedia",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_3.png",
+                      },
+                      {
+                        href: el?.iStyleLink,
+                        text: "iStyle",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_4.png",
+                      },
+                      {
+                        href: el?.sociollaLink,
+                        text: "Sociolla",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_6.png",
+                      },
+                      {
+                        href: el?.styleKoreanLink,
+                        text: "Style Korean",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_7.png",
+                      },
+                      {
+                        href: el?.oliveYoungLink,
+                        text: "Olive Young",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_5.png",
+                      },
+                      {
+                        href: el?.kalCareLink,
+                        text: "Kal Care",
+                        icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_8.png",
+                      },
+                    ]
+                      .filter((link) => link.href)
+                      .slice(0, 3)
+                      .map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.href}
+                          className="rounded-full w-4 h-4 ml-1 flex items-center justify-center"
+                        >
+                          <img
+                            src={link.icon}
+                            alt={link.text}
+                            className="bg-cover w-full h-full rounded-full"
+                          />
+                        </a>
+                      ))}
+                  </div>
+                </div>
                     </div>
                   </Link>
                 </div>
@@ -393,21 +424,23 @@ function NewPage() {
         </div>
 
         {!isDataEnd && (
-        <div className="justify-center items-center text-center" onClick={loadMoreData}>
-          {loadingProduct ? (
-            <div className="flex justify-center items-center">
-              <CircleLoader color="#0000ff" size={30} />
-            </div>
-          ) : (
-            <button>Load More</button>
-          )}
-        </div>
-      )}
-      <div className="pb-36"></div>
+          <div
+            className="justify-center items-center text-center"
+            onClick={loadMoreData}
+          >
+            {loadingProduct ? (
+              <div className="flex justify-center items-center">
+                <CircleLoader color="#0000ff" size={30} />
+              </div>
+            ) : (
+              <button>Load More</button>
+            )}
+          </div>
+        )}
+        <div className="pb-36"></div>
       </>
     );
   }
-  
 
   return (
     <>
@@ -428,51 +461,54 @@ function NewPage() {
               </Link>
             </div>
             <div className="flex justify-center">
-                <div className="flex px-2 overflow-x-auto py-3 gap-3 max-w-screen scrollbar-hide">
-                  <CategoryProduct />
-                </div>
+              <div className="flex px-2 overflow-x-auto py-3 gap-3 max-w-screen scrollbar-hide">
+                <CategoryProduct />
+              </div>
             </div>
             <div className="border border flex my-2"></div>
             <div className="flex justify-between pt-5 px-2">
-            <div className="flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide py-2 text-center gap-2">
-              <button
-                onClick={closeFilter}
-                className={`${hiddenButton == false ?  "hidden" : "md:min-w-[2vw] min-w-[30px] whitespace-nowrap items-center border-gray-400 border rounded-full"}`} style={{textAlign: "-webkit-center"}}
-                type="button"
-              >
-                <img src={imgClose} className="w-4 h-4" />
-              </button>
-              <button
-                className=" md:min-w-[4vw] min-w-[70px]  items-center border-gray-400 whitespace-nowrap border py-1 px-2 rounded-full"
-                onClick={() => handleClick("Newest")}
-                style={getButtonStyle("Newest")}
-              >
-                <div className="w-fit text-xs">
-                 Newest
-                </div>
-              </button>
-              <button
-                className="md:min-w-[6vw] min-w-[100px] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
-                onClick={() => handleClick("Top Likes")}
-                style={getButtonStyle("Top Likes")}
-              >
-                Top Likes
-              </button>
-              <button
-                className=" md:min-w-[6vw] min-w-[100px] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
-                onClick={() => handleClick("Top Review")}
-                style={getButtonStyle("Top Review")}
-              >
-                Top Review
-              </button>
-              <button
-                className="md:min-w-[5vw] min-w-[100x] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
-                onClick={() => handleClick("Stock")}
-                style={getButtonStyle("Stock")}
-              >
-                Stock
-              </button>
-            </div>
+              <div className="flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide py-2 text-center gap-2">
+                <button
+                  onClick={closeFilter}
+                  className={`${
+                    hiddenButton == false
+                      ? "hidden"
+                      : "md:min-w-[2vw] min-w-[30px] whitespace-nowrap items-center border-gray-400 border rounded-full"
+                  }`}
+                  style={{ textAlign: "-webkit-center" }}
+                  type="button"
+                >
+                  <img src={imgClose} className="w-4 h-4" />
+                </button>
+                <button
+                  className=" md:min-w-[4vw] min-w-[70px]  items-center border-gray-400 whitespace-nowrap border py-1 px-2 rounded-full"
+                  onClick={() => handleClick("Newest")}
+                  style={getButtonStyle("Newest")}
+                >
+                  <div className="w-fit text-xs">Newest</div>
+                </button>
+                <button
+                  className="md:min-w-[6vw] min-w-[100px] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
+                  onClick={() => handleClick("Top Likes")}
+                  style={getButtonStyle("Top Likes")}
+                >
+                  Top Likes
+                </button>
+                <button
+                  className=" md:min-w-[6vw] min-w-[100px] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
+                  onClick={() => handleClick("Top Review")}
+                  style={getButtonStyle("Top Review")}
+                >
+                  Top Review
+                </button>
+                <button
+                  className="md:min-w-[5vw] min-w-[100x] items-center whitespace-nowrap border-gray-400 border py-1 px-2 rounded-full"
+                  onClick={() => handleClick("Stock")}
+                  style={getButtonStyle("Stock")}
+                >
+                  Stock
+                </button>
+              </div>
             </div>
           </div>
           <div className="overflow-y-auto max-h-[calc(100vh-100px)] mb-[50px]">

@@ -31,6 +31,7 @@ import {
   getActiveBanner,
   getAllFeed,
   getAllInfluencer,
+  getAllProduct,
   getAllProductWithPagination,
   getAllReview,
   getBestSellerProduct,
@@ -42,20 +43,38 @@ import ModalLoginWarn from "../Components/ModalHomepage/ModalLoginWarn";
 import ModalIcon from "../Components/ModalCategory/ModalIconCategory";
 
 function ContentNavbar() {
-  const product = useSelector((state) => state.ReducerBestSellerProduct?.topProduct);
+  const product = useSelector(
+    (state) => state.ReducerBestSellerProduct?.topProduct
+  );
+  const allProductNew = useSelector(
+    (state) => state.ReducerAllProduct?.dataProduct
+  );
   const topProduct = useSelector((state) => state.ReducerTopProduct?.topData);
   const allReview = useSelector((state) => state.ReducerReview?.dataReview);
   const allFeed = useSelector((state) => state.ReducerFeed?.dataFeed);
   const allEvent = useSelector((state) => state.ReducerEventData?.event);
   const getUser = useSelector((state) => state.ReducerUser?.dataUser);
   const allBanner = useSelector((state) => state.ReducerActiveBanner?.banner);
-  const allProduct = useSelector((state) => state.ReducerProductWithPagination.dataProductWithPagination);
-  const VideoRecommendation = useSelector((state) => state.ReducerVideoByIdMemberYoutube?.idVideo || []);
-  const allInfluencer = useSelector((state) => state.ReducerAllInfluencer?.influencer);
+  const allProduct = useSelector(
+    (state) => state.ReducerProductWithPagination.dataProductWithPagination
+  );
+  const VideoRecommendation = useSelector(
+    (state) => state.ReducerVideoByIdMemberYoutube?.idVideo || []
+  );
+  const allInfluencer = useSelector(
+    (state) => state.ReducerAllInfluencer?.influencer
+  );
 
-  const [modalCategory, setModalCategory] = useState(false)
+  const [modalCategory, setModalCategory] = useState(false);
 
   useEffect(() => {
+    const body = {
+      idMember: 5691,
+      limit: 100,
+      page: 1,
+      category: "",
+      filter: "new",
+    };
     dispatch(getTopProduct());
     dispatch(getAllReview());
     dispatch(getAllFeed());
@@ -65,8 +84,14 @@ function ContentNavbar() {
     dispatch(getVideoByIdMemberYoutube());
     dispatch(getAllProductWithPagination());
     dispatch(getBestSellerProduct());
+    dispatch(getAllProduct(body));
   }, []);
 
+  const getallProductNew = Array.isArray(allProductNew?.dataProduct)
+    ? allProductNew?.dataProduct
+    : [];
+
+  // console.log("getallProduct", getallProductNew);
   const dataUser = getUser?.dataMember?.[0];
 
   const dispatch = useDispatch();
@@ -85,27 +110,33 @@ function ContentNavbar() {
     { src: Hair, label: "Hair" },
     { src: Baby, label: "Kids & Baby" },
     { src: Food, label: "Food" },
-  ]
+  ];
 
   const handleNavigate = (label) => {
-    if(label == "Category"){
-      setModalCategory(true)
-    } else if(label == "Skin Analysis") {
-      navigate("/skinanalysis")
+    if (label == "Category") {
+      setModalCategory(true);
+    } else if (label == "Skin Analysis") {
+      navigate("/skinanalysis");
     }
-  }
+  };
 
   const toggleModalCategory = () => {
-    setModalCategory(false)
-  }
-  // console.log("data top >>>>",allProductWithPagination);
+    setModalCategory(false);
+  };
+
   const productList = Array.isArray(product?.data) ? product.data : [];
-  const sortedProductList = productList.sort((a, b) => b.reviewNum - a.reviewNum).slice(0, 3);
+  const sortedProductList = productList
+    .sort((a, b) => b.reviewNum - a.reviewNum)
+    .slice(0, 3);
   const medals = [Medal1, Medal2, Medal3];
-  const productListTop = Array.isArray(topProduct?.dataProduct) ? topProduct.dataProduct : [];
+  const productListTop = Array.isArray(topProduct?.dataProduct)
+    ? topProduct.dataProduct
+    : [];
   const allProductWithPagination = Array.isArray(allProduct?.dataProduct)
     ? allProduct?.dataProduct
     : [];
+
+  // console.log("data top >>>>",allProductWithPagination);
 
   function BoxReview() {
     const dataReview = allReview?.dataReview;
@@ -428,7 +459,7 @@ function ContentNavbar() {
         <div className="mt-28 pt-1 flex overflow-x-auto ml-5 gap-3 text-sm scrollbar-hide">
           {categoryIcon?.map((item, index) => (
             <button
-              onClick={()=>handleNavigate(item.label)}
+              onClick={() => handleNavigate(item.label)}
               key={index}
               className="flex flex-col justify-center items-center"
             >
@@ -517,7 +548,7 @@ function ContentNavbar() {
                 className="flex border-b py-2"
               >
                 <div className="w-1/12 flex items-center">
-                  <img src={medals[index]} className="object-contain"  />
+                  <img src={medals[index]} className="object-contain" />
                 </div>
                 <div
                   className="w-2/12"
@@ -547,22 +578,22 @@ function ContentNavbar() {
                       </div>
                     ) : (
                       <svg
-                      className="w-5 h-5 text-white dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m9 5 7 7-7 7"
-                      />
-                    </svg>
+                        className="w-5 h-5 text-white dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="m9 5 7 7-7 7"
+                        />
+                      </svg>
                     )}
                     {item.mui && (
                       <div className="  w-[7%]">
@@ -572,7 +603,7 @@ function ContentNavbar() {
                           style={{ width: "100%", height: "100%" }}
                         />
                       </div>
-                    ) }
+                    )}
                   </div>
                   <div className="text-sm uppercase">{item.brand}</div>
                   <div
@@ -700,30 +731,46 @@ function ContentNavbar() {
               <Link
                 to={`/newProduct/detailproduct/${item.id}`}
                 key={index}
-                className="relative border p-3 lg:w-[8.5vw] w-[40vw] flex-shrink-0"
+                className="relative border p-2 w-[40%] flex-shrink-0 mb-2 bg-white"
               >
+                {/* {item.statusRecommend && (
+                  <div className="absolute top-0 left-3  text-white py-3 w-[48%]">
+                    <img
+                      src={Recomended}
+                      className="object-contain"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>
+                )} */}
+                {/^normal$/i.test(item.priceType) === false && (
+                  <div className="absolute top-0 left-0 font-semibold  text-white py-3 w-[30%]">
+                    <div className="bg-[#4ABFA1]  px-2 text-md ">
+                      <p className="">{item.discountRate}%</p>
+                    </div>
+                  </div>
+                )}
                 {item.bpom && (
-                  <div className="absolute top-0 right-3  text-white py-3 w-[10%]">
+                  <div className="absolute top-0 right-1.5  text-white py-3 w-[15%]">
                     <img
                       src={item.bpom}
                       className="object-contain"
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "80%", height: "100%" }}
                     />
                   </div>
                 )}
                 {item.mui && (
-                  <div className="absolute top-0 right-6  text-white py-3 w-[10%]">
+                  <div className="absolute top-0 right-6  text-white py-3 w-[15%]">
                     <img
                       src={item.mui}
                       className="object-contain"
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "40%", height: "100%" }}
                     />
                   </div>
                 )}
-                <div className="flex flex-col">
+                <div className="flex flex-col pt-4">
                   <div className="flex justify-center items-center p-1">
-                    <div style={{ width: "120px", height: "120px" }}>
-                      {item.images !== null ? (
+                    <div style={{ width: "100px", height: "100px" }}>
+                      {item.images ? (
                         <img
                           src={item.images}
                           className="object-contain"
@@ -746,23 +793,45 @@ function ContentNavbar() {
                       lineHeight: "1.2",
                     }}
                   >
-                    {item.brand} - {item.name}
+                    {item.brand.toUpperCase()} - {item.name}
+                  </div>
+                  <div className="flex items-center">
+                    <div className="text-left font-bold text-sm">
+                      Rp{""}
+                      {item.price
+                        .toLocaleString("id-ID", {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        })
+                        .replace(",", ".")}
+                    </div>
+                    {item.originalPrice !== item.price &&
+                      item.originalPrice !== 0 && (
+                        <div
+                          className="text-left text-xs pl-1 line-through text-gray-400"
+                          style={{
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                          }}
+                        >
+                          Rp
+                          {item.originalPrice
+                            .toLocaleString("id-ID", {
+                              minimumFractionDigits: 0,
+                              maximumFractionDigits: 0,
+                            })
+                            .replace(",", ".")}
+                        </div>
+                      )}
                   </div>
 
-                  <div className="text-left font-bold">
-                    Rp{" "}
-                    {item?.price
-                      .toLocaleString("id-ID", {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0,
-                      })
-                      .replace(",", ".")}
-                  </div>
-                  <div className="flex justify-between pt-1 text-xs">
+                  <div className="flex justify-between  items-center">
                     <div className="truncate text-center w-full flex justify-left items-center">
                       <div className="pe-1">
                         <svg
-                          className="w-3.5 h-3.5 text-yellow-400 dark:text-white"
+                          className="w-3 h-3 text-yellow-400 dark:text-white"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
@@ -771,50 +840,50 @@ function ContentNavbar() {
                           <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                         </svg>
                       </div>
-                      {parseFloat(item.rating).toFixed(1)}
-                      <div className="pl-1 text-gray-400 text-xs">
+                      <div className="text-xs">{item.rating}</div>
+                      <div className="pl-1 text-gray-400 text-xs ">
                         ({item.stock})
                       </div>
                     </div>
-                    <div className="flex justify-end">
+                    <div className="flex justify-end ">
                       {[
                         {
-                          href: item.unnispickLink,
+                          href: item?.unnispickLink,
                           text: "Unnispick",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_1.png",
                         },
                         {
-                          href: item.shopeeLink,
+                          href: item?.shopeeLink,
                           text: "Shopee",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_2.png",
                         },
                         {
-                          href: item.tokopediaLink,
+                          href: item?.tokopediaLink,
                           text: "Tokopedia",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_3.png",
                         },
                         {
-                          href: item.iStyleLink,
+                          href: item?.iStyleLink,
                           text: "iStyle",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_4.png",
                         },
                         {
-                          href: item.sociollaLink,
+                          href: item?.sociollaLink,
                           text: "Sociolla",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_6.png",
                         },
                         {
-                          href: item.styleKoreanLink,
+                          href: item?.styleKoreanLink,
                           text: "Style Korean",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_7.png",
                         },
                         {
-                          href: item.oliveYoungLink,
+                          href: item?.oliveYoungLink,
                           text: "Olive Young",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_5.png",
                         },
                         {
-                          href: item.kalCareLink,
+                          href: item?.kalCareLink,
                           text: "Kal Care",
                           icon: "https://s3.ap-northeast-2.amazonaws.com/admin.unnispick.com/link_8.png",
                         },
@@ -825,7 +894,7 @@ function ContentNavbar() {
                           <a
                             key={idx}
                             href={link.href}
-                            className="rounded-full w-5 h-5 ml-0.5 flex items-center justify-center"
+                            className="rounded-full w-3.5 h-3.5 ml-1 flex items-center justify-center"
                           >
                             <img
                               src={link.icon}
@@ -849,7 +918,7 @@ function ContentNavbar() {
               <div key={el.id}>
                 <img
                   src={el.thumbnail}
-                  className="w-full lg:max-h-[14vw] max-h-[43vw]"
+                  className="w-full "
                   alt={el.title}
                 />
               </div>
@@ -1124,13 +1193,13 @@ function ContentNavbar() {
           ----------------------- Kamu Pasti Suka Ini ----------------------
         </div>
         <div className="flex flex-wrap justify-between py-1 px-4 bg-gray-100">
-          {allProductWithPagination.map((item, index) => (
+          {getallProductNew.map((item, index) => (
             <Link
               to={`/newProduct/detailproduct/${item.id}`}
               key={index}
               className="relative border p-3 w-[49%] flex-shrink-0 mb-2 bg-white"
             >
-              {item.statusRecommend && (
+              {/* {item.statusRecommend && (
                 <div className="absolute top-0 left-3  text-white py-3 w-[48%]">
                   <img
                     src={Recomended}
@@ -1138,13 +1207,20 @@ function ContentNavbar() {
                     style={{ width: "100%", height: "100%" }}
                   />
                 </div>
+              )} */}
+              {/^normal$/i.test(item.priceType) === false && (
+                <div className="absolute top-0 left-0 font-semibold  text-white py-3 w-[25%]">
+                  <div className="bg-[#4ABFA1]  px-2 text-md ">
+                    <p className="">{item.discountRate}%</p>
+                  </div>
+                </div>
               )}
               {item.bpom && (
-                <div className="absolute top-0 right-3  text-white py-3 w-[15%]">
+                <div className="absolute top-0 right-1.5  text-white py-3 w-[15%]">
                   <img
                     src={item.bpom}
                     className="object-contain"
-                    style={{ width: "100%", height: "100%" }}
+                    style={{ width: "80%", height: "100%" }}
                   />
                 </div>
               )}
@@ -1153,13 +1229,13 @@ function ContentNavbar() {
                   <img
                     src={item.mui}
                     className="object-contain"
-                    style={{ width: "100%", height: "100%" }}
+                    style={{ width: "40%", height: "100%" }}
                   />
                 </div>
               )}
               <div className="flex flex-col pt-4">
                 <div className="flex justify-center items-center p-1">
-                  <div style={{ width: "150px", height: "150px" }}>
+                  <div style={{ width: "120px", height: "120px" }}>
                     {item.images ? (
                       <img
                         src={item.images}
@@ -1174,7 +1250,7 @@ function ContentNavbar() {
                   </div>
                 </div>
                 <div
-                  className="w-full pt-2"
+                  className="w-full pt-2 text-sm"
                   style={{
                     display: "-webkit-box",
                     WebkitLineClamp: 2,
@@ -1183,22 +1259,45 @@ function ContentNavbar() {
                     lineHeight: "1.2",
                   }}
                 >
-                  {item.brand} - {item.name}
+                  {item.brand.toUpperCase()} - {item.name}
                 </div>
-                <div className="text-left font-bold text-lg">
-                  Rp{" "}
-                  {item.price
-                    .toLocaleString("id-ID", {
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    })
-                    .replace(",", ".")}
+                <div className="flex items-center">
+                  <div className="text-left font-bold text-base">
+                    Rp{""}
+                    {item.price
+                      .toLocaleString("id-ID", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })
+                      .replace(",", ".")}
+                  </div>
+                  {item.originalPrice !== item.price &&
+                    item.originalPrice !== 0 && (
+                      <div
+                        className="text-left text-xs pl-1 line-through text-gray-400"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        Rp
+                        {item.originalPrice
+                          .toLocaleString("id-ID", {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                          })
+                          .replace(",", ".")}
+                      </div>
+                    )}
                 </div>
-                <div className="flex justify-between pt-1">
+
+                <div className="flex justify-between  items-center">
                   <div className="truncate text-center w-full flex justify-left items-center">
                     <div className="pe-1">
                       <svg
-                        className="w-3.5 h-3.5 text-yellow-400 dark:text-white"
+                        className="w-3 h-3 text-yellow-400 dark:text-white"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -1207,12 +1306,12 @@ function ContentNavbar() {
                         <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                       </svg>
                     </div>
-                    <div className="">{item.rating}</div>
-                    <div className="pl-1 text-gray-400 text-sm pt-1">
+                    <div className="text-sm">{item.rating}</div>
+                    <div className="pl-1 text-gray-400 text-xs ">
                       ({item.stock})
                     </div>
                   </div>
-                  <div className="flex justify-end">
+                  <div className="flex justify-end ">
                     {[
                       {
                         href: item?.unnispickLink,
@@ -1261,7 +1360,7 @@ function ContentNavbar() {
                         <a
                           key={idx}
                           href={link.href}
-                          className="rounded-full w-6 h-6 ml-1 flex items-center justify-center"
+                          className="rounded-full w-4 h-4 ml-1 flex items-center justify-center"
                         >
                           <img
                             src={link.icon}
@@ -1277,7 +1376,10 @@ function ContentNavbar() {
           ))}
         </div>
         <div className="bg-[#4ABFA1] w-12 h-12 sticky left-[86%] bottom-20 z-30 rounded-full shadow">
-          <Link to="/checkin" className="flex justify-center items-center w-full h-full ">
+          <Link
+            to="/checkin"
+            className="flex justify-center items-center w-full h-full "
+          >
             <img src={Calendar} className="w-7 h-7 " alt="calendar" />
           </Link>
         </div>

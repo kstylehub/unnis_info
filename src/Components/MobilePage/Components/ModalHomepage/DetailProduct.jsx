@@ -44,7 +44,7 @@ function DetailProduct() {
   }, [id, dispatch]);
 
   const dataProduct = detailProduct?.dataProduct?.[0];
-
+// console.log(dataProduct);
   useEffect(() => {
     if (!loading && !dataProduct) {
       navigate("/page404");
@@ -158,7 +158,8 @@ function DetailProduct() {
       const ratingInRange = Math.max(0, Math.min(rating, maxRating)); // Ensure rating is between 0 and 5
       const filledStars = Math.floor(ratingInRange);
       const remainingStars = maxRating - filledStars;
-      const validFilledStars = Number.isInteger(filledStars) && filledStars > 0 ? filledStars : 0;
+      const validFilledStars =
+        Number.isInteger(filledStars) && filledStars > 0 ? filledStars : 0;
 
       return (
         <>
@@ -281,14 +282,18 @@ function DetailProduct() {
     const maxRating = 5;
     const filledStars = Math.floor(rating);
     const remainingStars = maxRating - filledStars;
-    const validFilledStars = Number.isInteger(filledStars) && filledStars > 0 ? filledStars : 0;
-    const validremainingStars = Number.isInteger(remainingStars) && remainingStars > 0 ? remainingStars : 0;
+    const validFilledStars =
+      Number.isInteger(filledStars) && filledStars > 0 ? filledStars : 0;
+    const validremainingStars =
+      Number.isInteger(remainingStars) && remainingStars > 0
+        ? remainingStars
+        : 0;
 
     return (
       <>
         <div className="flex gap-1  items-center">
           <div className="flex justify-evenly py-2">
-          {[...Array(validFilledStars)].map((_, index) => (
+            {[...Array(validFilledStars)].map((_, index) => (
               <svg
                 key={index}
                 className="w-5 h-5 text-yellow-400 dark:text-white"
@@ -406,7 +411,38 @@ function DetailProduct() {
               </div>
             </div>
             <div className="py-2">
-              <h1 className="font-bold text-2xl">Rp. {formattedPrice}</h1>
+              {/* <h1 className="font-bold text-2xl">Rp. {formattedPrice}</h1> */}
+              <div className="flex items-center">
+                <h1 className="text-left font-bold text-2xl">
+               Rp
+                  {dataProduct.price
+                    .toLocaleString("id-ID", {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })
+                    .replace(",", ".")}
+                </h1>
+                {dataProduct.originalPrice !== dataProduct.price &&
+                  dataProduct.originalPrice !== 0 && (
+                    <div
+                      className="text-left text-lg pl-3 line-through text-gray-400"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 1,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      Rp
+                      {dataProduct.originalPrice
+                        .toLocaleString("id-ID", {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        })
+                        .replace(",", ".")}
+                    </div>
+                  )}
+              </div>
               <div className="pt-3 flex justify-start items-center">
                 <p className="text-gray-400 uppercase mr-3 ">
                   {dataProduct?.brand}
@@ -605,7 +641,7 @@ function DetailProduct() {
                 className={
                   ingredients.status === true
                     ? "lg:px-6 px-4 py-2"
-                    : "lg:px-6 px-4 py-2 bg-red-200"
+                    : "lg:px-6 px-4 py-2 "
                 }
               >
                 <div className="flex">
@@ -654,21 +690,23 @@ function DetailProduct() {
                         />
                       </svg>
                     ) : (
-                      <svg
-                        className="w-6 h-6 text-red-500 dark:text-white"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <>
+                        <svg
+                          className="w-6 h-6 text-red-500 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </>
                     )}
                   </div>
                 </div>
@@ -863,13 +901,11 @@ function DetailProduct() {
                     key={index}
                     className="relative border p-3 w-[49%] flex-shrink-0 mb-2 bg-white"
                   >
-                    {item.statusRecommend && (
-                      <div className="absolute top-0 left-3  text-white py-3 w-[48%]">
-                        <img
-                          src={Recomended}
-                          className="object-contain"
-                          style={{ width: "100%", height: "100%" }}
-                        />
+                    {/^normal$/i.test(item.priceType) === false && (
+                      <div className="absolute top-0 left-0 font-semibold  text-white py-3 w-[30%]">
+                        <div className="bg-[#4ABFA1]  px-2 text-md ">
+                          <p className="">{item.discountRate}%</p>
+                        </div>
                       </div>
                     )}
                     {item.bpom && (
@@ -918,14 +954,36 @@ function DetailProduct() {
                       >
                         {item.brand} - {item.name}
                       </div>
-                      <div className="text-left font-bold text-lg">
-                        Rp{" "}
-                        {item.price
-                          .toLocaleString("id-ID", {
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0,
-                          })
-                          .replace(",", ".")}
+                      <div className="flex items-center">
+                        <div className="text-left font-bold text-lg">
+                          Rp{""}
+                          {item.price
+                            .toLocaleString("id-ID", {
+                              minimumFractionDigits: 0,
+                              maximumFractionDigits: 0,
+                            })
+                            .replace(",", ".")}
+                        </div>
+                        {item.originalPrice !== item.price &&
+                          item.originalPrice !== 0 && (
+                            <div
+                              className="text-left text-xs pl-1 line-through text-gray-400"
+                              style={{
+                                display: "-webkit-box",
+                                WebkitLineClamp: 1,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                              }}
+                            >
+                              Rp
+                              {item.originalPrice
+                                .toLocaleString("id-ID", {
+                                  minimumFractionDigits: 0,
+                                  maximumFractionDigits: 0,
+                                })
+                                .replace(",", ".")}
+                            </div>
+                          )}
                       </div>
                       <div className="flex justify-between pt-1">
                         <div className="truncate text-center w-full flex justify-left items-center">
