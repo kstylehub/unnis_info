@@ -54,6 +54,7 @@ import FavoriteTypeSkincare from "../Components/MobilePage/Components/Subscribe/
 import DetailProductReview from "../Components/MobilePage/Components/ModalHomepage/DetailProductReview";
 import DetailProductPostReview from "../Components/MobilePage/Components/ModalHomepage/DetailProductPostReview";
 import Page404 from "../Components/MobilePage/Components/ErrorPage/Page404";
+import CommunityProduct from "../Components/MobilePage/Components/ModalHomepage/CommunityProduct";
 
 const router = createBrowserRouter([
   {
@@ -226,6 +227,9 @@ const router = createBrowserRouter([
           {
             path: "/community/postthread",
             element: <CommunityPostThread />,
+          },{
+            path: "/community/product/:id",
+            element: <CommunityProduct/>,
           },
 
           // SKIN ANALYSIS TEST ==============================================

@@ -39,7 +39,12 @@ import {
   ReducerVideoByIdMemberYoutube,
   ReducerVideoInfluencer,
 } from "./Reducers/ReducerVideo";
-import { ReducerAllCommunity, ReducerCommunityById, ReducerDislikeReplyCommunity, ReducerDislikeThreadCommunity, ReducerLikeReplyCommunity, ReducerLikeThreadCommunity, ReducerReportReply, ReducerReportThread } from "./Reducers/ReducerCommunity";
+import { ReducerAllCommunity, 
+  ReducerCommunityById, 
+  ReducerDislikeReplyCommunity, 
+  ReducerDislikeThreadCommunity, 
+  ReducerLikeReplyCommunity, 
+  ReducerLikeThreadCommunity, ReducerProductCommunity, ReducerReportReply, ReducerReportThread } from "./Reducers/ReducerCommunity";
 import {
   ReducerRecycleHistory,
   ReducerRecycleLeaderboard,
@@ -89,6 +94,7 @@ const rootReducer = combineReducers({
   ReducerDislikeReplyCommunity,
   ReducerLikeProductReview,
   ReducerDislikeProductReview,
+  ReducerProductCommunity
 });
 
 const persistConfig = {

@@ -227,7 +227,7 @@ export const getProductCategory = () => async (dispatch) => {
 export const getListProduct = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT.GET_LIST_PRODUCT_START });
-    const response = await fetch(`${BASE_URL}/product/listProductByLogin/0_`, {
+    const response = await fetch(`${BASE_URL}/product/productCategory`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -986,6 +986,35 @@ export const getCommunityById = (id) => async (dispatch) => {
   }
 };
 
+export const getProductCommunity = (product) => async (dispatch) => {
+  // console.log("product", product);
+  try {
+    dispatch({ type: COMMUNITY.GET_PRODUCT_COMMUNITY_START });
+    const response = await fetch(`${BASE_URL}/product/filterProduct/${product}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("internal Server error");
+    }
+    const data = await response.json();
+    dispatch({
+      type: COMMUNITY.GET_PRODUCT_COMMUNITY_SUCCESS,
+      payload: data,
+    });
+    // console.log("data", data);
+    return data;
+  } catch (error) {
+    console.log("error get data", error);
+    dispatch({
+      type: COMMUNITY.GET_PRODUCT_COMMUNITY_FAILED,
+      payload: error,
+    });
+  }
+};
+
 export const postThread = (body) => async (dispatch) => {
   try {
     dispatch({ type: COMMUNITY.POST_COMMUNITY_THREAD_START });
@@ -999,7 +1028,6 @@ export const postThread = (body) => async (dispatch) => {
     if (!response.ok) {
       throw new Error("Internal server error");
     }
-
     const data = await response.json();
     dispatch({
       type: COMMUNITY.POST_COMMUNITY_THREAD_SUCCESS,
@@ -1028,7 +1056,6 @@ export const postReply = (body) => async (dispatch) => {
     if (!response.ok) {
       throw new Error("Internal server error");
     }
-
     const data = await response.json();
     dispatch({
       type: COMMUNITY.POST_COMMUNITY_REPLY_SUCCESS,

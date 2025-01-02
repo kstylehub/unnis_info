@@ -12,8 +12,12 @@ import {
 import back from "../../../../assets/previous.svg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useLocation } from "react-router-dom";
 function CommunityDetail() {
+  const location = useLocation();
+  const [selectedProducts, setSelectedProducts] = useState(
+    location.state?.selectedProducts || []
+  );
   const { id } = useParams();
   const [reply, setReply] = useState("");
   const dispatch = useDispatch();
@@ -39,6 +43,14 @@ function CommunityDetail() {
   const [showChooseModal, setShowChooseModal] = useState(false);
   const [idMember, setIdMember] = useState(0);
   const [idMemberReply, setIdMemberReply] = useState(0);
+  const [showProduct, setShowProduct] = useState(false);
+
+  const handleRemoveProduct = (productId) => {
+  // console.log("Removing Product with ID:", productId);
+  setSelectedProducts((prevProducts) =>
+    prevProducts.filter((product) => product.id !== productId)
+  );
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,12 +59,12 @@ function CommunityDetail() {
         idThread: +dataComment.id,
         idMember: +memberId,
         reply: reply,
+        id_products: selectedProducts.map((product) => product.id),
       };
       dispatch(postReply(dataReply));
       setReply("");
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+      setSelectedProducts([]);
+      dispatch(getCommunityById(id));
     }
   };
   const handleAction = (e) => {
@@ -81,13 +93,14 @@ function CommunityDetail() {
       try {
         dispatch(deleteReply(idMember));
         setShowDeleteConfirmModal(false);
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
         toast.success("Delete Reply successfully!");
       } catch (error) {
         toast.error("Failed to submit report. Please try again.");
       }
+      setTimeout(() => {
+        dispatch(getCommunityById(id));
+        window.location.reload();
+      }, 500);
     } else {
       toast.warn("Id Reply Not Defined");
     }
@@ -135,6 +148,11 @@ function CommunityDetail() {
         toast.error("Failed to dislike thread. Please try again.");
       }
     }
+  };
+
+  // Fungsi toggle
+  const handleToggleProduct = () => {
+    setShowProduct((prev) => !prev); // Toggle state
   };
 
   const handleChoose = () => {
@@ -209,6 +227,9 @@ function CommunityDetail() {
                 </div>
                 <div className="flex justify-center text-sm items-center pl-4 font-bold">
                   {dataComment?.user}
+                  {dataComment?.isAdmin && (
+                    <span className="pl-2 text-green-500">✓</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -258,30 +279,13 @@ function CommunityDetail() {
                   </svg>
                   {dataComment?.reply}
                 </div>
-                <svg
-                  className="w-6 h-6 text-gray-800 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  onClick={handleWhatsAppShare}
-                  style={{ cursor: "pointer" }}
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    d="M7.926 10.898 15 7.727m-7.074 5.39L15 16.29M8 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm12 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm0-11a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
-                  />
-                </svg>
               </div>
             </div>
           </div>
         </div>
+        {/* Map Reply Thread */}
         {dataComment?.reply_thread?.map((reply) => (
-          <div key={reply.id} className="bg-white flex flex-col">
+          <div key={reply.idReply} className="bg-white flex flex-col">
             <div className="px-5 py-4 border-t">
               <div className="flex justify-between">
                 <div className="flex">
@@ -289,18 +293,34 @@ function CommunityDetail() {
                     {reply.photo_profile ? (
                       <img
                         src={reply.photo_profile}
-                        className="rounded-full w-8 h-8 object-cover"
+                        className="rounded-full w-6 h-6 object-cover"
                         alt="Profile"
                       />
                     ) : (
-                      <div className="w-8 h-8 bg-[#4ABFA1] rounded-full"></div>
+                      <div className="w-6 h-6 bg-[#4ABFA1] rounded-full"></div>
                     )}
                   </div>
-                  <div className="flex justify-center text-sm items-center pl-4 font-bold">
+                  <div className="flex justify-center text-sm items-center pl-3 font-bold">
                     {reply.user}
+                    {reply.isAdmin && (
+                      <svg
+                        className="w-4 h-4 ms-1 text-[#4ABFA1] dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width=""
+                        height=""
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    )}
                   </div>
                 </div>
-
                 <div
                   className=""
                   onClick={() => {
@@ -327,9 +347,66 @@ function CommunityDetail() {
                   </svg>
                 </div>
               </div>
-              <div className="py-3 text-sm">{reply.thread}</div>
-              <div className="flex justify-between  text-sm">
-                <div className="text-gray-400 text-xs">
+              <div className="py-2 text-sm ps-9">{reply.thread}</div>
+
+              <div className="flex flex-col flex-wrap gap-2 pb-2">
+                {reply?.product_suggests?.map((product, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-100 rounded-md px-3 py-1 text-xs text-gray-700 ms-9"
+                  >
+                    <div className="flex gap-2 py-1 items-center">
+                      <div className="w-2/12">
+                        {product.imageUrl ? (
+                          <div className="">
+                            <img
+                              className=" w-11 h-11"
+                              src={product.imageUrl}
+                            ></img>
+                          </div>
+                        ) : (
+                          <div className="">
+                            <img
+                              className="objext-contain bg-black"
+                              src={product.imageUrl}
+                            ></img>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex flex-col w-9/12 gap-0.5">
+                        <div className="uppercase text-gray-400">
+                          {product.brandName}
+                        </div>
+                        <div className="">{product.productName}</div>
+                      </div>
+                      <div className="w-1/12 flex items-center">
+                        <Link to={`/newProduct/detailproduct/${product.id}`}>
+                          <svg
+                            className="w-6 h-6 text-gray-500 dark:text-white"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="m9 5 7 7-7 7"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-between text-sm">
+                <div className="text-gray-400 text-xs ps-9">
                   {calculateDaysAgo(reply?.createdDate) > 0
                     ? calculateDaysAgo(reply?.createdDate) + " hari yang lalu"
                     : "hari ini"}
@@ -384,21 +461,61 @@ function CommunityDetail() {
           </div>
         ))}
       </div>
-      <div className="bg-white p-1.5 sticky bottom-0 w-full border-t">
+
+      <div className="bg-white sticky bottom-0 w-full border-t">
         <form onSubmit={handleSubmit}>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center gap-2 p-1.5">
+            {/* Icon Plus/Cross */}
+            <div
+              className="w-1/12 flex justify-center"
+              onClick={handleToggleProduct}
+            >
+              {showProduct ? (
+                <svg
+                  className="w-7 h-7 text-[#4ABFA1] cursor-pointer rotate-45"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-7 h-7 text-[#4ABFA1] cursor-pointer"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              )}
+            </div>
+
+            {/* Input komentar */}
             <input
-              className="w-10/12 h-12 px-4 focus:outline-none"
+              className="w-10/12 h-12 px-4 focus:outline-none border text-sm rounded-full"
               placeholder="Write a comment"
               value={reply}
               onChange={(e) => setReply(e.target.value)}
             />
+
+            {/* Tombol submit */}
             <button
               type="submit"
-              className="rotate-90 w-2/12 flex items-center justify-center"
+              className="rotate-90 w-1/12 flex items-center justify-center"
             >
               <svg
-                className=" w-[50%] text-[#4ABFA1] dark:text-white"
+                className="text-[#4ABFA1] dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -412,6 +529,78 @@ function CommunityDetail() {
               </svg>
             </button>
           </div>
+
+          {/* Render Selected Products */}
+          {selectedProducts.length > 0 && (
+            <div className="bg-gray-100 p-3  rounded-lg w-full">
+              <div className="flex flex-wrap w-full gap-2">
+                {selectedProducts.map((product) => (
+                  <div
+                    key={product.id}
+                    className="flex items-center gap-2 bg-white p-2 rounded w-full shadow-sm justify-between"
+                  >
+                    <img
+                      src={product.images}
+                      alt={product.name}
+                      className="w-10 h-10 rounded"
+                    />
+                    <div className="w-8/12">
+                      <div className="text-xs font-medium">{product.brand}</div>
+                      <div className="text-xs text-gray-500">
+                        {product.name}
+                      </div>
+                    </div>
+                    {/* Remove Icon */}
+                    <div
+                      className="text-red-500 cursor-pointer flex justify-start"
+                      onClick={() => handleRemoveProduct(product.id)}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M6.293 6.293a1 1 0 0 1 1.414 0L12 9.586l4.293-4.293a1 1 0 0 1 1.414 1.414L13.414 11l4.293 4.293a1 1 0 0 1-1.414 1.414L12 12.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L10.586 11 6.293 6.707a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* "Choose Product" section */}
+          {selectedProducts.length < 3 && (
+            <div className="bg-gray-100 p-2 border-t">
+              <Link to={`/community/product/${id}`}>
+                <div className="bg-white rounded-lg p-2 justify-center flex">
+                  <div className="flex flex-col justify-center items-center">
+                    <svg
+                      className="w-8 h-8 text-gray-500 dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1"
+                        d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z"
+                      />
+                    </svg>
+                    <div className="text-gray-500 text-sm">Choose Product</div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          )}
         </form>
       </div>
       {showReportModal && <ReportModal />}

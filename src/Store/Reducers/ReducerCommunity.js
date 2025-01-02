@@ -23,6 +23,27 @@ export function ReducerAllCommunity(
     }
 }
 
+const productCommunity ={
+    communitypro:[],
+    error:null,
+    loading:true,
+}
+export function ReducerProductCommunity(
+    state=productCommunity,
+    action,
+){
+    switch (action.type) {
+        case COMMUNITY.GET_PRODUCT_COMMUNITY_START:
+            return {...state, loading: true }
+        case COMMUNITY.GET_PRODUCT_COMMUNITY_FAILED:
+            return {...state, error: action.payload, loading:false }
+        case COMMUNITY.GET_PRODUCT_COMMUNITY_SUCCESS:
+            return {...state, communitypro: action.payload, loading:false }
+        default:
+            return state;
+    }
+}
+
 const defaultValue2 ={
     communityById:[],
     error:null,
