@@ -24,6 +24,7 @@ function CommunityDetail() {
   const dataComment = useSelector(
     (state) => state.ReducerCommunityById?.communityById
   );
+  console.log(dataComment)
   const user = useSelector((state) => state.ReducerUser?.dataUser);
   const dataToMap = Array.isArray(user?.dataMember)
     ? user?.dataMember
@@ -531,7 +532,7 @@ function CommunityDetail() {
           </div>
 
           {/* Render Selected Products */}
-          {selectedProducts.length > 0 && (
+          {selectedProducts.length > 0 && showProduct && (
             <div className="bg-gray-100 p-3  rounded-lg w-full">
               <div className="flex flex-wrap w-full gap-2">
                 {selectedProducts.map((product) => (
@@ -575,7 +576,7 @@ function CommunityDetail() {
           )}
 
           {/* "Choose Product" section */}
-          {selectedProducts.length < 3 && (
+          {selectedProducts.length < 3 && showProduct &&(
             <div className="bg-gray-100 p-2 border-t">
               <Link to={`/community/product/${id}`}>
                 <div className="bg-white rounded-lg p-2 justify-center flex">

@@ -12,11 +12,13 @@ import { useEffect, useState } from "react";
 import CommunityTopBar from "../TopBar/CommunityTopBar";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { a } from "@react-spring/web";
 
 function Community() {
   const AllCommunity = useSelector(
     (state) => state.ReducerAllCommunity.Community
   );
+  console.log(AllCommunity)
   const getUser = useSelector((state) => state.ReducerUser.dataUser);
   const dataToMap = Array.isArray(getUser?.dataMember)
     ? getUser?.dataMember
@@ -181,7 +183,10 @@ function Community() {
                       )}
                     </div>
                     <div className="flex justify-center text-sm items-center pl-4 font-bold">
-                      {com.user}
+                      {com?.user}
+                      {com?.isAdmin && (
+                        <span className="pl-2 text-green-500">✓</span>
+                      )}
                     </div>
                   </div>
                   <div

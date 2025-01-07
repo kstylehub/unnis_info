@@ -121,22 +121,22 @@ function LoginPage() {
               <p>Forgot Your Password?</p>
             </div>
           </div>
-          <div className="flex justify-center mt-8">
+          {/* <div className="flex justify-center mt-8">
             <div className=""></div>
             <div>
               <p className="text-slate-400">Login dengan akun medsos</p>
             </div>
             <div className=""></div>
-          </div>
-          <div className="flex justify-center mt-5 gap-x-16">
+          </div> */}
+          {/* <div className="flex justify-center mt-5 gap-x-16">
             <div className="border rounded-lg">
               <img src={Google} className="w-30 h-30 m-5" />
             </div>
             <div className="border rounded-lg">
               <img src={Google} className="w-30 h-30 m-5" />
             </div>
-          </div>
-          <div className="flex justify-center mt-8 gap-x-4">
+          </div> */}
+          <div className="flex flex-col justify-center items-center mt-8 gap-x-4">
             <div>
               <p className="text-slate-400">Don't have an account</p>
             </div>

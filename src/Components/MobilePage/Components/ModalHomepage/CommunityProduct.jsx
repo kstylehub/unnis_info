@@ -19,12 +19,12 @@ function CommunityProduct() {
     dispatch(getProductCommunity(test));
   }, [dispatch, dataProduct1]); // Added dataProduct1 to dependency array to trigger effect properly
 
-  console.log(product);
+  // console.log(product);
 
   const dataToMap = Array.isArray(product?.dataProduct)
     ? product?.dataProduct
     : [product?.dataProduct];
-  console.log(dataToMap);
+  // console.log(dataToMap);
 
   // Track whether a product is selected
   const isProductSelected = (item) => {
@@ -108,27 +108,33 @@ function CommunityProduct() {
         </div>
       </div>
       <div className="flex-grow overflow-y-auto pb-5 px-5">
-        {dataToMap?.map((item) => (
-          <div
-            key={item.id}
-            className="flex justify-center items-center w-full border-b py-2"
-          >
-            <div className="w-1/12">
-              <input
-                type="checkbox"
-                checked={isProductSelected(item)}
-                onChange={() => handleProductSelection(item)}
-              />
+        {dataToMap
+          ?.filter((item) => item && item.images) // Filter hanya yang memiliki images
+          .map((item) => (
+            <div
+              key={item.id}
+              className="flex justify-center items-center w-full border-b py-2"
+            >
+              <div className="w-1/12">
+                <input
+                  type="checkbox"
+                  checked={isProductSelected(item)}
+                  onChange={() => handleProductSelection(item)}
+                />
+              </div>
+              <div className="w-2/12">
+                <img
+                  src={item.images}
+                  alt={item.name || "No Image"}
+                  className="w-16 h-16"
+                />
+              </div>
+              <div className="w-8/12 flex flex-col text-left text-xs">
+                <div>{item.brand}</div>
+                <div>{item.name}</div>
+              </div>
             </div>
-            <div className="w-2/12">
-              <img src={item.images} alt="" className="w-16 h-16" />
-            </div>
-            <div className="w-8/12 flex flex-col text-left text-xs">
-              <div className="">{item.brand}</div>
-              <div className="">{item.name}</div>
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       <div className="bg-white sticky bottom-0 w-full border-t p-2 px-4">
