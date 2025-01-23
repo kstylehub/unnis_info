@@ -47,7 +47,7 @@ function FavoriteTypeSkincare() {
     ]
 
     function handleType(id) {
-      console.log(id);
+      // console.log(id);
       setBtnActive(id)
     }
   return (

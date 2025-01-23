@@ -47,7 +47,7 @@ function CommunityProduct() {
     e.preventDefault();
     if (dataProduct1) {
       const test = dataProduct1;
-      console.log("ini data", test);
+      // console.log("ini data", test);
       dispatch(getProductCommunity(test));
       setDataProduct1("");
     }
@@ -55,7 +55,7 @@ function CommunityProduct() {
 
   const handleFinalizeSelection = () => {
     if (selectedProducts.length > 0) {
-      console.log("Produk dipilih sebelum navigasi:", selectedProducts);
+      // console.log("Produk dipilih sebelum navigasi:", selectedProducts);
       // Passing selectedProducts to next page using navigate
       navigate(`/community/thread/${id}`, { state: { selectedProducts } });
     }

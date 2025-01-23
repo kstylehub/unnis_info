@@ -585,7 +585,7 @@ export const getFeedReview = (id) => async (dispatch) => {
       type: FEED.GET_REVIEW_FEED_BY_ID_SUCCESS,
       payload: data,
     });
-    console.log(data);
+    (data);
     return data;
   } catch (error) {
     console.log("error get data", error);
@@ -918,7 +918,7 @@ export const getVideoInfluencer = (name) => async (dispatch) => {
       type: VIDEO.GET_DATA_VIDEO_INFLUENCER_SUCCESS,
       payload: data.data,
     });
-    console.log("Data INFLUENCER >>> ", data);
+    // console.log("Data INFLUENCER >>> ", data);
     return data;
   } catch (error) {
     console.log("error get data", error);

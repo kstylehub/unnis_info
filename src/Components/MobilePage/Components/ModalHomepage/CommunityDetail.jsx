@@ -24,7 +24,7 @@ function CommunityDetail() {
   const dataComment = useSelector(
     (state) => state.ReducerCommunityById?.communityById
   );
-  console.log(dataComment)
+  // console.log(dataComment)
   const user = useSelector((state) => state.ReducerUser?.dataUser);
   const dataToMap = Array.isArray(user?.dataMember)
     ? user?.dataMember

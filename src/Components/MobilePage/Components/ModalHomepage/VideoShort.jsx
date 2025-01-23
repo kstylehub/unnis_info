@@ -84,7 +84,7 @@ function VideoShort() {
 
     if (fileId) {
       const viewLink = `https://drive.google.com/thumbnail?id=${fileId}`;
-      console.log("Converted View Link:", viewLink);  // Debugging log
+      // console.log("Converted View Link:", viewLink);  // Debugging log
       return viewLink;
     }
 

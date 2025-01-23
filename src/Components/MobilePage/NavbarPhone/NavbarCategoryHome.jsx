@@ -54,7 +54,7 @@ export default function NavbarCategoryHome() {
 
   function handleCategory(el) {
     if (!allProduct || Object.keys(allProduct).length === 0) {
-      console.log("allProduct belum terisi");
+      // console.log("allProduct belum terisi");
       return;
     }
   

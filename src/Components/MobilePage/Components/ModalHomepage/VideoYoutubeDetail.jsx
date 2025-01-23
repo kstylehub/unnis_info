@@ -33,14 +33,14 @@ function VideoYoutubeDetail() {
     : null;
 
   const convertToViewLink = (downloadLink) => {
-    console.log("download link",downloadLink);
+    // console.log("download link",downloadLink);
     const fileIdMatch = downloadLink.match(/(?:file\/d\/|id=)([^\/\&]+)/);
     const fileId = fileIdMatch ? fileIdMatch[1] : null;
-    console.log("id yang ketangkep",fileId);
+    // console.log("id yang ketangkep",fileId);
     if (fileId) {
-      console.log(fileId);
+      // console.log(fileId);
       const viewLink = `https://drive.google.com/thumbnail?id=${fileId}`;
-      console.log("link hasilnya", viewLink);
+      // console.log("link hasilnya", viewLink);
       return viewLink;
     }
     // https://drive.google.com/thumbnail?id=1PjbVKFz0F6A1b-Y2wdekeCaFMdGJdE_4

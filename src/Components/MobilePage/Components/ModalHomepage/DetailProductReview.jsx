@@ -357,8 +357,8 @@ function DetailProductReview() {
   }
 
   const handleLike = (comId) => {
-    console.log(comId);
-    console.log(memberId+"memberid");
+    // console.log(comId);
+    // console.log(memberId+"memberid");
     if (comId && memberId) {
       let data = {
         idReview: +comId,

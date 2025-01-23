@@ -20,7 +20,7 @@ function Recycle() {
   const recycleHistory = useSelector(
     (state) => state.ReducerRecycleHistory.recycleHistory
   );
-  console.log("data recycle >> ", recycleHistory);
+  // console.log("data recycle >> ", recycleHistory);
   const dispatch = useDispatch();
 
   useEffect(() => {

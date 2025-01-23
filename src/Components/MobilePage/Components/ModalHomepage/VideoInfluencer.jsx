@@ -19,7 +19,7 @@ function VideoInfluencer() {
     (state) => state.ReducerVideoInfluencer.videoInfluencer
   );
 
-  console.log("data influ", dataInfluencer);
+  // console.log("data influ", dataInfluencer);
 
   const getYouTubeVideoId = (url) => {
     if (typeof url !== "string") return null;

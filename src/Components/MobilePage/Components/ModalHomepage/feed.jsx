@@ -44,7 +44,7 @@ function Feed() {
     const sortedData = dataFeed
     ?.slice()
     .sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
-    console.log(sortedData);
+    // console.log(sortedData);
     
     let filterData;
     if (clickedButton === "All") {
